@@ -65,11 +65,15 @@ class Update extends Command
         $tasks = $client->tasks->findByProject($project->id);
 
         foreach ($tasks as $task) {
-            Task::create([
-                'id' => $task->id,
-                'name' => $task->name,
-                'project_id' => $project->id,
-            ]);
+            $count = \App\Task::where('id', $task->id)->count();
+
+            if ($count === 0) {
+                Task::create([
+                    'id' => $task->id,
+                    'name' => $task->name,
+                    'project_id' => $project->id,
+                ]);
+            }
         }
     }
 
