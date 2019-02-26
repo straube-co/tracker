@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Project;
 use App\Task;
 
@@ -26,22 +27,28 @@ class WebhooksController extends Controller
             $event = (object) $event;
 
             if ($event->type === "project") {
+                $count = \App\Project::where('id', $event->resource)->count();
                 $project = $client->projects->findById($event->resource);
 
-                Project::create([
-                    'id' => $project->id,
-                    'name' => $project->name,
-                ]);
+                if ($count === 0) {
+                    Project::create([
+                        'id' => $project->id,
+                        'name' => $project->name,
+                    ]);
+                }
             }
             elseif ($event->type === "task") {
+                $count = \App\Task::where('id', $event->resource)->count();
                 $task = $client->tasks->findById($event->resource);
                 $project = $client->tasks->projects($task->id)[0];
 
-                Task::create([
-                    'id' => $task->id,
-                    'name' => $task->name,
-                    'project_id' => $project->id,
-                ]);
+                if ($count === 0) {
+                    Task::create([
+                        'id' => $task->id,
+                        'name' => $task->name,
+                        'project_id' => $project->id,
+                    ]);
+                }
             }
         }
     }

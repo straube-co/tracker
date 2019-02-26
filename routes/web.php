@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/auth', 'Auth\\OAuthController@auth')->name('auth.auth');
+Route::get('/auth/handle', 'Auth\\OAuthController@handle')->name('auth.handle');
