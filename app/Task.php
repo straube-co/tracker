@@ -10,4 +10,9 @@ class Task extends Model
     'id', 'name', 'project_id',
 
   ];
+
+  public function project()
+  {
+      return $this->belongsTo('App\Project');
+    }
 }

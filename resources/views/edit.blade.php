@@ -1,12 +1,12 @@
 <div class="container">
-    <form action="{{ route('time.store') }}" method="post">
+    <form action="{{ route('time.update', $time->id )}}" method="post">
     {{ csrf_field() }}
+    {{ method_field('put') }}
         <div>
             <label for="project">Project: </label>
             <select name="projectselect">
-                <option>Select</option>
                 @foreach ($projects as $project)
-                <option value="{{ $project->id }}">{{ $project->name }}</option>
+                <option value="{{ $project->id }}" @if ($project->id === $time->task->project->id) selected @endif> {{ $project->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -14,21 +14,20 @@
         <div>
             <label for="task">Task: </label>
             <select name="taskselect">
-                <option>Select</option>
                 @foreach ($tasks as $task)
-                <option value="{{ $task->id }}">{{ $task->name }}</option>
+                <option value="{{ $task->id }}" @if ($task->id === $time->task_id) selected @endif> {{ $task->name }}</option>
                 @endforeach
             </select>
         </div>
         <br>
         <div>
             <label>I started my work: </label>
-            <input type="time" id="hms" name="hms" min="00:00" max="24:00" required>
+            <input type="time" id="hms" name="hms" min="00:00" max="24:00" value="{{ $time->started }}" required>
         </div>
         <br>
         <div>
             <label>I finished my work: </label>
-            <input type="time" id="hmf" name="hmf" min="00:00" max="24:00" required>
+            <input type="time" id="hmf" name="hmf" min="00:00" max="24:00" value="{{ $time->finished }}"  required>
         </div>
         <br>
         <div>

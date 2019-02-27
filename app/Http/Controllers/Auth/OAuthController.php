@@ -45,6 +45,7 @@ class OAuthController extends Controller
         $token = $this->client->dispatcher->fetchToken($code);
         $request->session()->put('auth.token', $token);
         $me = $this->client->users->me();
+        $request->session()->put('auth.id', $me->id);
         $count = \App\User::where('id', $me->id)->count();
 
         if ($count === 0){

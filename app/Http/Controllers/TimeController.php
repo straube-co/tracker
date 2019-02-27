@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Time;
+use App\Project;
+use App\Task;
+
 class TimeController extends Controller
 {
 
@@ -12,25 +17,39 @@ class TimeController extends Controller
 
     public function create()
     {
-        return view('create');
+        $projects = Project::get();
+        $tasks = Task::get();
+
+        $data = [
+            'projects' => $projects,
+            'tasks' => $tasks,
+        ];
+        return view('create', $data);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-
-
+        Time::create([
+            'task_id' => $request->taskselect,
+            'user_id' => $request->session()->get('auth.id'),
+            'started' => $request->hms,
+            'finished' => $request->hmf,
+        ]);
+        return redirect()->route('time.index');
     }
 
-    public function show()
+    public function edit($id)
     {
+        $projects = Project::get();
+        $tasks = Task::get();
+        $time = Time::find($id);
 
-
-    }
-
-    public function edit()
-    {
-
-
+        $data = [
+            'projects' => $projects,
+            'tasks' => $tasks,
+            'time' => $time,
+        ];
+        return view('edit', $data);
     }
 
     public function update()
