@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Time;
 use App\Project;
+use App\Activities;
 use App\Task;
 
 class TimeController extends Controller
@@ -25,10 +26,12 @@ class TimeController extends Controller
     {
         $projects = Project::get();
         $tasks = Task::get();
+        $activities = Activity::get();
 
         $data = [
             'projects' => $projects,
             'tasks' => $tasks,
+            'activities' => $activities,
         ];
         return view('time.create', $data);
     }
@@ -42,8 +45,9 @@ class TimeController extends Controller
         ]);
 
         Time::create([
-            'task_id' => $request->task_id,     // pegando dados do create select
+            'task_id' => $request->task_id,     //pegando dados da viewcreate select
             'user_id' => $request->session()->get('auth.id'),
+            'activity_id' => $request->activity_id,
             'started' => $request->started,
             'finished' => $request->finished,
         ]);
@@ -75,7 +79,7 @@ class TimeController extends Controller
         $time = Time::find($id);
 
         $time->update([
-            'task_id' => $request->task_id,     // pegando dados do edit select
+            'task_id' => $request->task_id,     //pegando dados da viewedit select
             'started' => $request->started,
             'finished' => $request->finished,
         ]);
