@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('/auth', 'Auth\\OAuthController@auth')->name('auth.auth');
-Route::get('/auth/handle', 'Auth\\OAuthController@handle')->name('auth.handle'); //
+Route::get('/auth/handle', 'Auth\\OAuthController@handle')->name('auth.handle'); 
 Route::resource('/time', 'TimeController');
