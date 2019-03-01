@@ -17,9 +17,9 @@ class CreateTimes extends Migration
             $table->increments('id');
             $table->bigInteger('task_id');
             $table->bigInteger('user_id');
-            $table->bigInteger('activity_id');
-            $table->time('started');
-            $table->time('finished');
+            $table->unsignedInteger('activity_id');
+            $table->dateTime('started');
+            $table->dateTime('finished');
             $table->timestamps();
             $table->foreign('activity_id')->references('id')->on('activities');
             $table->foreign('task_id')->references('id')->on('tasks');

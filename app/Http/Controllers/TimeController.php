@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Time;
 use App\Project;
-use App\Activities;
+use App\Activity;
 use App\Task;
 
 class TimeController extends Controller
@@ -40,8 +40,8 @@ class TimeController extends Controller
     {
         $validatedData = $request->validate([
             'task_id' => 'exists:tasks,id',
-            'started' => 'date_format:H:i',
-            'finished' => 'date_format:H:i|after:started',
+            'started' => 'date_format:Y-m-d H:i:s',
+            'finished' => 'date_format:Y-m-d H:i:s|after_or_equal:started',
         ]);
 
         Time::create([
@@ -59,11 +59,13 @@ class TimeController extends Controller
         $projects = Project::get();
         $tasks = Task::get();
         $time = Time::find($id);
+        $activities = Activity::get();
 
         $data = [
             'projects' => $projects,
             'tasks' => $tasks,
             'time' => $time,
+            'activities' => $activities
         ];
         return view('time.edit', $data);
     }
@@ -72,14 +74,15 @@ class TimeController extends Controller
     {
         $validatedData = $request->validate([
             'task_id' => 'exists:tasks,id',
-            'started' => 'date_format:H:i',
-            'finished' => 'date_format:H:i|after:started',
+            'started' => 'date_format:Y-m-d H:i:s',
+            'finished' => 'date_format:Y-m-d H:i:s|after_or_equal:started',
         ]);
 
         $time = Time::find($id);
 
         $time->update([
-            'task_id' => $request->task_id,     //pegando dados da viewedit select
+            'task_id' => $request->task_id, //pegando dados da viewedit select
+            'activity_id' => $request->activity_id,
             'started' => $request->started,
             'finished' => $request->finished,
         ]);

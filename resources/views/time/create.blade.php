@@ -1,3 +1,6 @@
+@extends('layouts.header')
+
+@section('content')
 <div class="container">
     <form action="{{ route('time.store') }}" method="post">
     {{ csrf_field() }}
@@ -35,18 +38,20 @@
         <br>
         <div>
             <label>I started my work: </label>
-            <input type="time" id="hms" name="started" min="00:00" max="24:59" required>
+            <input type="datetime" name="started" required>
             {{ $errors->first('started') }}
         </div>
         <br>
         <div>
             <label>I finished my work: </label>
-            <input type="time" id="hmf" name="finished" min="00:00" max="24:59" required>
+            <input type="datetime" name="finished" required>
             {{ $errors->first('finished') }}
         </div>
         <br>
         <div>
             <button type="submit">Create </button>
+            <a href="{{ route('time.index')}}">Cancel</a>
         </div>
     </form>
 </div>
+@endsection

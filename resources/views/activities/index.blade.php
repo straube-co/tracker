@@ -1,3 +1,6 @@
+@extends('layouts.header')
+
+@section('content')
 <ul>
     <a href="{{ route('activity.create') }}">Create new activity</a><br><br>
     @foreach ($activities as $activity)
@@ -9,7 +12,9 @@
             <div>
                 <button type="submit">Delete </button>
             </div>
+            <br><br>
         </form>
     </li>
 @endforeach
 </ul>
+@endsection
