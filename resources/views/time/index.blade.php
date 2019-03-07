@@ -14,6 +14,7 @@
             <div>
                 <button type="submit">Delete </button>
             </div>
+            <br>
         </form>
     </li>
 @endforeach

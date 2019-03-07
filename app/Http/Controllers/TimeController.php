@@ -24,9 +24,9 @@ class TimeController extends Controller
 
     public function create()
     {
+        $activities = Activity::get();
         $projects = Project::get();
         $tasks = Task::get();
-        $activities = Activity::get();
 
         $data = [
             'projects' => $projects,
@@ -56,10 +56,10 @@ class TimeController extends Controller
 
     public function edit($id)
     {
+        $activities = Activity::get();
         $projects = Project::get();
         $tasks = Task::get();
         $time = Time::find($id);
-        $activities = Activity::get();
 
         $data = [
             'projects' => $projects,

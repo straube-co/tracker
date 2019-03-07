@@ -12,7 +12,7 @@
             <div>
                 <button type="submit">Delete </button>
             </div>
-            <br><br>
+            <br>
         </form>
     </li>
 @endforeach

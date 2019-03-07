@@ -26,6 +26,10 @@ class ActivityController extends Controller
 
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|string|min:3|max:35',
+        ]);
+
         Activity::create([
             'id' => $request->id,
             'name' => $request->name,
@@ -46,6 +50,10 @@ class ActivityController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|string|min:3|max:35',
+        ]);
+
         $activity = Activity::find($id);
 
         $activity->update([

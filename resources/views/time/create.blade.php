@@ -6,7 +6,7 @@
     {{ csrf_field() }}
         <div>
             <label for="project">Project: </label>
-            <select id="project" name="projectselect">
+            <select id="project" name="project_id">
                 <option>Select</option>
                 @foreach ($projects as $project)
                 <option value="{{ $project->id }}">{{ $project->name }}</option>
@@ -26,7 +26,7 @@
         </div>
         <br>
         <div>
-            <label for="Activity">Activity Name: </label>
+            <label for="Activity">Activity: </label>
             <select id="Activity" name="activity_id">
                 <option>Select</option>
                 @foreach ($activities as $activity)

@@ -49,7 +49,7 @@
         <br>
         <div>
             <button type="submit">Edit </button>
-            <a type="button" href="{{ route('time.index')}}">Cancel</a>
+            <a href="{{ route('time.index')}}">Cancel</a>
         </div>
     </form>
 </div>

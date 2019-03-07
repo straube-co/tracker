@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
             return \Asana\Client::oauth(array(
                 'client_id' => '1111563149030062',
                 'client_secret' => 'f4d57c9680875e8c00516d261846c6b5',
-                'redirect_uri' => 'https://4db5a358.ngrok.io/auth/handle',
+                'redirect_uri' => 'https://646b99c5.ngrok.io/auth/handle',
             ));
         });
     }
