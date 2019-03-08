@@ -8,7 +8,7 @@
             <select id="project" name="project_id">
                 <option value="">Select</option>
                 @foreach ($projects as $project)
-                    <option value="{{ $project->id }}">{{ $project->name }}</option>
+                    <option value="{{ $project->id }}" @if ($project->id == request('project_id')) selected @endif>{{ $project->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -18,7 +18,7 @@
             <select id="task" name="task_id">
                 <option value="">Select</option>
                 @foreach ($tasks as $task)
-                    <option value="{{ $task->id }}">{{ $task->name }}</option>
+                    <option value="{{ $task->id }}" @if ($task->id == request('task_id')) selected @endif>{{ $task->name }}</option>
                 @endforeach
             </select>
             {{ $errors->first('task_id') }}
@@ -29,24 +29,35 @@
             <select id="user" name="user_id">
                 <option value="">Select</option>
                 @foreach ($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    <option value="{{ $user->id }}" @if ($user->id == request('user_id')) selected @endif>{{ $user->name }}</option>
                 @endforeach
             </select>
             {{ $errors->first('name') }}
         </div>
         <br>
         <div>
-            <label for="Activity">Activity: </label>
-            <select id="Activity" name="activity_id">
+            <label for="activity">Activity: </label>
+            <select id="activity" name="activity_id">
                 <option value="">Select</option>
                 @foreach ($activities as $activity)
-                    <option value="{{ $activity->id }}">{{ $activity->name }}</option>
+                    <option value="{{ $activity->id }}" @if ($activity->id == request('activity_id')) selected @endif>{{ $activity->name }}</option>
                 @endforeach
             </select>
             {{ $errors->first('name') }}
         </div>
         <br>
+        <div>
+            <label for="started">Initial date:</label>
+            <input id="started" name="started" type="text" value="{{ $started }}">
+        </div>
+        <br>
+        <div>
+            <label for="finished">Final date:</label>
+            <input id="finished" name="finished" type="text" value="{{ $finished }}">
+        </div>
+        <br>
         <button class="btn btn-primary">Filter</button>
+        <a href="{{ route('report.index') }}">Cancel</a>
     </form>
     <br>
     <table class="table">

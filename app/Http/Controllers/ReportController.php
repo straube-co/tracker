@@ -36,6 +36,12 @@ class ReportController extends Controller
         if (($user = $request->user_id)) {
             $query->where('user_id', $user);
         }
+        if (($started = $request->started)) {
+            $query->where('started','>=', $started);
+        }
+         if (($finished = $request->finished)) {
+             $query->where('finished','>=', $finished);
+         }
 
         $times = $query->get();
 
@@ -43,8 +49,10 @@ class ReportController extends Controller
             'activities' => $activities,
             'projects' => $projects,
             'tasks' => $tasks,
-            'times' => $times,
             'users' => $users,
+            'started' => $started,
+            'finished' => $finished,
+            'times' => $times,
         ];
 
         return view('report.index', $data);
