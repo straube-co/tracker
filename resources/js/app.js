@@ -31,3 +31,13 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app'
 });
+
+function showTasks(projectId) {
+    $('[name=task_id]').find('option').hide().filter('[data-project_id="' + projectId + '"]').show();
+}
+
+$('[name=project_id]').on('change', function () {
+    showTasks($(this).val());
+});
+
+showTasks($('[name=project_id]').val());

@@ -4,7 +4,8 @@
 <ul>
     <a href="{{ route('time.create') }}">Add Manual Time Entry</a><br><br>
     <a href="{{ route('time.index') }}">Start Automatic Time Counting</a><br><br>
-
+    <h1>Activities</h1>
+    <br>
     @foreach ($times as $time)
     <li>
     {{ $time->task->project->name }}/ {{ $time->task->name }}/ {{ $time->activity->name }}/ {{ $time->started }}/ {{ $time->finished }}/ <a href="{{ route('time.edit', $time->id) }}">Edit</a>

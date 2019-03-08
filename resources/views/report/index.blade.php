@@ -60,6 +60,8 @@
         <a href="{{ route('report.index') }}">Cancel</a>
     </form>
     <br>
+    <h1>Reports</h1>
+    <br>
     <table class="table">
         <thead>
             <tr>
