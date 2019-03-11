@@ -21,3 +21,4 @@ Route::resource('/activity', 'ActivityController');
 Route::resource('/report', 'ReportController');
 Route::resource('/time', 'TimeController');
 Route::resource('/home', 'HomeController');
+Route::resource('/import', 'ImportController');
