@@ -7,6 +7,9 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~tempusdominus-bootstrap-4/src/sass/tempusdominus-bootstrap-4-build';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
 
 .navbar-laravel {
   background-color: #fff;
@@ -22,4 +25,11 @@
 }
 li {
     list-style: none;
+}
+
+.fa {
+    @extend .fas;
+}
+.fa-clock-o {
+    @extend .fa-clock;
 }

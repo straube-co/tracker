@@ -38,17 +38,26 @@
             {{ $errors->first('activity_id') }}
         </div>
         <br>
-        <div>
-            <label>I started my work: </label>
-            <input type="datetime" name="started" value="{{old('started', $time->started)}}">
+        <label>I started my work: </label>
+        <div class="form-group">
+            <div class="input-group date" id="datepickerstarted" data-target-input="nearest">
+                <input type="text" class="form-control datetimepicker-input" data-target="#datepickerstarted" name="started" value="{{old('started', $time->started)}}"/>
+                <div class="input-group-append" data-target="#datepickerstarted" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
             {{ $errors->first('started') }}
         </div>
-        <br>
-        <div>
-            <label>I finished my work: </label>
-            <input type="datetime" name="finished" value="{{old('finished', $time->finished)}}">
-            {{ $errors->first('finished') }}
+        <label>I finished my work: </label>
+        <div class="form-group">
+            <div class="input-group date" id="datepickerfinished" data-target-input="nearest">
+                <input type="text" class="form-control datetimepicker-input" data-target="#datepickerfinished" name="finished" value="{{old('finished', $time->finished)}}"/>
+                <div class="input-group-append" data-target="#datepickerfinished" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
         </div>
+        {{ $errors->first('finished') }}
         <br>
         <div>
             <button type="submit">Edit </button>

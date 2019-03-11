@@ -46,15 +46,26 @@
             {{ $errors->first('name') }}
         </div>
         <br>
-        <div>
-            <label for="started">Initial date:</label>
-            <input id="started" name="started" type="text" value="{{ $started }}">
+        <label>I started my work: </label>
+        <div class="form-group">
+            <div class="input-group date" id="datepickerstarted" data-target-input="nearest">
+                <input type="text" class="form-control datetimepicker-input" data-target="#datepickerstarted" name="started" value="{{ $started }}"/>
+                <div class="input-group-append" data-target="#datepickerstarted" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+            {{ $errors->first('started') }}
         </div>
-        <br>
-        <div>
-            <label for="finished">Final date:</label>
-            <input id="finished" name="finished" type="text" value="{{ $finished }}">
+        <label>I finished my work: </label>
+        <div class="form-group">
+            <div class="input-group date" id="datepickerfinished" data-target-input="nearest">
+                <input type="text" class="form-control datetimepicker-input" data-target="#datepickerfinished" name="finished" value="{{ $finished }}"/>
+                <div class="input-group-append" data-target="#datepickerfinished" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
         </div>
+        {{ $errors->first('finished') }}
         <br>
         <button class="btn btn-primary">Filter</button>
         <a href="{{ route('report.index') }}">Cancel</a>

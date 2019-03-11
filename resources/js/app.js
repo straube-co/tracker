@@ -6,6 +6,8 @@
  */
 
 require('./bootstrap');
+window.moment = require('moment');
+require('tempusdominus-bootstrap-4');
 
 window.Vue = require('vue');
 
@@ -45,3 +47,19 @@ $('[name=project_id]').on('change', function () {
 });
 
 showTasks($('[name=project_id]').val());
+
+$(function () {
+    $('#datepickerstarted').datetimepicker({
+        format:"Y-MM-DD HH:mm:ss"
+    });
+    $('#datepickerfinished').datetimepicker({
+        useCurrent: false,
+        format:"Y-MM-DD HH:mm:ss"
+    });
+    $("#datepickerstarted").on("change.datetimepicker", function (e) {
+        $('#datepickerfinished').datetimepicker('minDate', e.date);
+    });
+    $("#datepickerfinished").on("change.datetimepicker", function (e) {
+        $('#datepickerstarted').datetimepicker('maxDate', e.date);
+    });
+});
