@@ -49002,7 +49002,12 @@ var app = new Vue({
 });
 
 function showTasks(projectId) {
-  $('[name=task_id]').find('option').hide().filter('[data-project_id="' + projectId + '"]').show();
+  $('[name=task_id]').find('option[data-project_id]').hide().filter('[data-project_id="' + projectId + '"]').show();
+  var $selected = $('[name=task_id]').find('option:selected');
+
+  if ($selected.css('display') === 'none') {
+    $selected.removeAttr('selected');
+  }
 }
 
 $('[name=project_id]').on('change', function () {
