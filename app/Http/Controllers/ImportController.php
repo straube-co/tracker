@@ -12,6 +12,7 @@ use App\User;
 
 class ImportController extends Controller
 {
+
     public function index()
     {
         $projects = Project::get();
@@ -25,29 +26,48 @@ class ImportController extends Controller
 
     public function store(Request $request)
     {
-        $file = $request->file('import_file')->openFile();                      //abrindo arquivo que está sendo importado.
+        $activities = Activity::get();
+        $project = Project::find($request->project_id);     //buscando project por project_id do request.
+        $tasks = Task::where('project_id', $project->id)->get();    //buscando apenas as tarefas que estão relacionadas a um projeto expecifico.
+
+        $file = $request->file('import_file')->openFile();
         $first = true;
+        $lines =[];     //declarando array vazio para colocar as lines dentro.
 
         while (!$file->eof()) {
-            $line = $file->fgetcsv();                                           //exibindo o arquivo uma linha por vez dentro do while.
+            $line = $file->fgetcsv();
 
-            if ($first) {
-                $first = false;                                                 //ignorando a primeira linha e continuando.
+            if ($first) {   //remove first line.
+                $first = false;
                 continue;
             }
-
-            $count = \App\Task::where('name', $file[0])->count();
-
-            if($count ===  0){
-
-                Time::create([
-                    'project_id' => $request->project_id,                          //recebendo project_id do select.
-                    'user_id' => $request->session()->get('auth.id'),
-                    'activity_id' => 5,                                            //associando activit_id com o id de "OUTRAS" nas atividades.
-                    'started' => Carbon\Carbon::parse($line[6]),
-                    'finished' => Carbon\Carbon::parse($line[7]),                  //acesando a linha [5]e[6] do array e passando o formato esperado de data.
-             ]);
+            if (count(array_filter($line)) === 0) {     //removendo o array vazio para tirar select sobrando na view.
+                continue;
             }
+            $lines[] = $line;   //inserindo lines no array vazio.
+        }
+
+        $data = [
+            'activities' => $activities,
+            'project' => $project,
+            'tasks' => $tasks,
+            'lines' => $lines,
+        ];
+
+        return view('import.taskselect', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        foreach($request->time as $time) {
+
+            Time::create([
+                'project_id' => $id,
+                'task_id' => $time["task_id"],
+                'activity_id' => $time["activity_id"],
+                'started' => Carbon\Carbon::parse(),
+                'finished' => Carbon\Carbon::parse(),
+            ]);
         }
     }
 }

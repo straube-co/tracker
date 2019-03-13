@@ -10,9 +10,10 @@
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
-        <a href="{{ route('time.index') }}">Time Tracking</a><br><br>
-        <a href="{{ route('activity.index') }}">Activities</a><br><br>
-        <a href="{{ route('report.index') }}">Reports</a><br><br>
+        <a href="{{ route('time.index') }}">Time Tracking</a>
+        <a href="{{ route('activity.index') }}">Activities</a>
+        <a href="{{ route('report.index') }}">Reports</a>
+        <a href="{{ route('import.index') }}">Import</a>
     </nav>
     <div id="app" class="container-fluid mt-5">
         @yield('content')

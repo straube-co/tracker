@@ -45,7 +45,7 @@ class TimeController extends Controller
         ]);
 
         Time::create([
-            'task_id' => $request->task_id,     //pegando dados da viewcreate select
+            'task_id' => $request->task_id,
             'user_id' => $request->session()->get('auth.id'),
             'activity_id' => $request->activity_id,
             'started' => $request->started,
@@ -81,7 +81,7 @@ class TimeController extends Controller
         $time = Time::find($id);
 
         $time->update([
-            'task_id' => $request->task_id, //pegando dados da viewedit select
+            'task_id' => $request->task_id,
             'activity_id' => $request->activity_id,
             'started' => $request->started,
             'finished' => $request->finished,
