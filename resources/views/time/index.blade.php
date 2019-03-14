@@ -6,18 +6,39 @@
     <a href="{{ route('time.index') }}">Start Automatic Time Counting</a><br><br>
     <h1>Activities</h1>
     <br>
-    @foreach ($times as $time)
     <li>
-    {{ $time->task->project->name }}/ {{ $time->task->name }}/ {{ $time->activity->name }}/ {{ $time->started }}/ {{ $time->finished }}/ <a href="{{ route('time.edit', $time->id) }}">Edit</a>
-        <form action="{{ route('time.destroy', $time->id) }}" method="post">
-        {{ method_field('delete') }}
-        {{ csrf_field() }}
-            <div>
-                <button type="submit">Delete </button>
-            </div>
-            <br>
-        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Task</th>
+                    <th>Activity</th>
+                    <th>Started</th>
+                    <th>Finished</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($times as $time)
+                    <tr>
+                        <td>{{ $time->task->project->name }}</td>
+                        <td>{{ $time->task->name }}</td>
+                        <td>{{ $time->activity->name }}</td>
+                        <td>{{ $time->started }}</td>
+                        <td>{{ $time->finished }}</td>
+                        <td><a href="{{ route('time.edit', $time->id) }}">Edit</a></td>
+                        <td>
+                            <form action="{{ route('time.destroy', $time->id) }}" method="post">
+                            {{ method_field('delete') }}
+                            {{ csrf_field() }}
+                                <button type="submit">Delete </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </li>
-@endforeach
 </ul>
 @endsection

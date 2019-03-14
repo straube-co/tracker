@@ -11,14 +11,13 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 
+// Home
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
-
 .navbar {
     justify-content: left;
-    padding: 0;
 }
 .navbar a {
     margin-left: 20px
@@ -26,7 +25,12 @@
 li {
     list-style: none;
 }
+.straube {
+    padding-left: 100px;
+    padding-top: 50px;
+}
 
+//Reports
 .fa {
     @extend .fas;
 }

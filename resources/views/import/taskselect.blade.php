@@ -19,9 +19,11 @@
                     <tr>
                         <td>
                             {{ $line[0] }}
+                            {{-- creating JSON with line --}}
                             <input type="hidden" name="time[{{ $loop->index }}][line]" value="{{ json_encode($line) }}"/>
                         </td>
                         <td>
+                            {{-- $loop / help in organizing the array $time[] --}}
                             <select id="task" name="time[{{ $loop->index }}][task_id]">
                                 <option value="">Select</option>
                                 @foreach ($tasks as $task)

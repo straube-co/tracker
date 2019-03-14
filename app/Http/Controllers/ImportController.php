@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Carbon;
+use Carbon\Carbon;
 use App\Activity;
 use App\Project;
 use App\Task;
@@ -27,24 +27,33 @@ class ImportController extends Controller
     public function store(Request $request)
     {
         $activities = Activity::get();
-        $project = Project::find($request->project_id);     //buscando project por project_id do request.
-        $tasks = Task::where('project_id', $project->id)->get();    //buscando apenas as tarefas que estão relacionadas a um projeto expecifico.
+
+        //seeking out project per project_id(request).
+        $project = Project::find($request->project_id);
+
+        //search on tasks, the project_id equal project->id.
+        $tasks = Task::where('project_id', $project->id)->get();
 
         $file = $request->file('import_file')->openFile();
         $first = true;
-        $lines =[];     //declarando array vazio para colocar as lines dentro.
+        $lines =[];
 
         while (!$file->eof()) {
             $line = $file->fgetcsv();
 
-            if ($first) {   //remove first line.
+            if ($first) {
+                //removing first line in the array.
                 $first = false;
                 continue;
             }
-            if (count(array_filter($line)) === 0) {     //removendo o array vazio para tirar select sobrando na view.
+
+            //removing last position in the array void(NULL).
+            if (count(array_filter($line)) === 0) {
                 continue;
             }
-            $lines[] = $line;   //inserindo lines no array vazio.
+
+            //inserting lines at the array.
+            $lines[] = $line;
         }
 
         $data = [
@@ -61,13 +70,24 @@ class ImportController extends Controller
     {
         foreach($request->time as $time) {
 
-            Time::create([
-                'project_id' => $id,
-                'task_id' => $time["task_id"],
-                'activity_id' => $time["activity_id"],
-                'started' => Carbon\Carbon::parse(),
-                'finished' => Carbon\Carbon::parse(),
-            ]);
+            //decode line to access the schedules.
+            $jsonarr = json_decode($time["line"], true);
+
+            //search on User, the name equal the position[2] in the array.
+            $user = User::where('name', $jsonarr[2])->first();
+
+             Time::create([
+                 'project_id' => $id,
+                 'task_id' => $time["task_id"],
+                 'user_id' => $user->id,
+                 'activity_id' => $time["activity_id"],
+
+                 //using Carbon for specific date format.
+                 'started' => Carbon::parse($jsonarr[6]),
+                 //entering in json to access the specifield position in the array[].
+                 'finished' => Carbon::parse($jsonarr[7]),
+             ]);
         }
+        return view('report.index', $data);
     }
 }

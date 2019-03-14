@@ -1,8 +1,8 @@
 @extends('layouts.header')
 
 @section('content')
-    <br>
-    <br>
-    <h1>TRACKER</h1>
+<div class="straube">
+    <h1>Straube Time Tracker.</h1>
+</div>
 
 @endsection

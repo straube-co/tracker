@@ -16697,7 +16697,6 @@ readers do not read off random characters that represent icons */
 
 .navbar {
   justify-content: left;
-  padding: 0;
 }
 
 .navbar a {
@@ -16706,5 +16705,10 @@ readers do not read off random characters that represent icons */
 
 li {
   list-style: none;
+}
+
+.straube {
+  padding-left: 100px;
+  padding-top: 50px;
 }
 
