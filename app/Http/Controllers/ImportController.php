@@ -76,18 +76,26 @@ class ImportController extends Controller
             //search on User, the name equal the position[2] in the array.
             $user = User::where('name', $jsonarr[2])->first();
 
-             Time::create([
-                 'project_id' => $id,
-                 'task_id' => $time["task_id"],
-                 'user_id' => $user->id,
-                 'activity_id' => $time["activity_id"],
+            //search on Time, the informations the user_id equal $user->id. Search per 'started' equal $jsonarr[6].
+             $usertime = Time::where('user_id', $user->id)->where('started', Carbon::parse($jsonarr[6]))->count();  //count return 0 or 1.
 
-                 //using Carbon for specific date format.
-                 'started' => Carbon::parse($jsonarr[6]),
-                 //entering in json to access the specifield position in the array[].
-                 'finished' => Carbon::parse($jsonarr[7]),
-             ]);
+             if($usertime > 0){
+                 continue;
+             }
+             else {
+                 Time::create([
+                     'project_id' => $id,
+                     'task_id' => $time["task_id"],
+                     'user_id' => $user->id,
+                     'activity_id' => $time["activity_id"],
+
+                     //using Carbon for specific date format.
+                     'started' => Carbon::parse($jsonarr[6]),
+                     //entering in json to access the specifield position in the array[].
+                     'finished' => Carbon::parse($jsonarr[7]),
+                 ]);
+             }
         }
-        return view('report.index', $data);
+        return view('layouts.home');
     }
 }

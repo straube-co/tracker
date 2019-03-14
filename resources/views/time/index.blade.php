@@ -3,7 +3,7 @@
 @section('content')
 <ul>
     <a href="{{ route('time.create') }}">Add Manual Time Entry</a><br><br>
-    <a href="{{ route('time.index') }}">Start Automatic Time Counting</a><br><br>
+    <a href="{{ view('timeauto.index') }}">Start Automatic Time Counting</a><br><br>
     <h1>Activities</h1>
     <br>
     <li>
