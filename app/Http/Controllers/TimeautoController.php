@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Time;
 use App\Project;
 use App\Activity;
@@ -10,7 +11,7 @@ use App\Task;
 
 class TimeautoController extends Controller
 {
-    
+
     public function create()
     {
         $activities = Activity::get();
@@ -31,19 +32,22 @@ class TimeautoController extends Controller
             'task_id' => $request->task_id,
             'user_id' => $request->session()->get('auth.id'),
             'activity_id' => $request->activity_id,
-
+            'started' => Carbon::now(),
+            'finished' => NULL,
         ]);
         return redirect()->route('time.index');
     }
 
-    public function edit($id)
+    public function update($id)
     {
+        $time = Time::find($id);
 
-    }
+        $time->update([
+            'finished' => Carbon::now(),
+        ]);
+        $time->save();
 
-    public function update(Request $request, $id)
-    {
-
+        return redirect()->route('time.index');
     }
 
     public function destroy($id)

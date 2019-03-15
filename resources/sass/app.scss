@@ -11,7 +11,7 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 
-// Home
+// Home, Nav
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -28,6 +28,11 @@ li {
 .straube {
     padding-left: 100px;
     padding-top: 50px;
+}
+
+//Time Tracking
+.stop {
+    background-color: red;
 }
 
 //Activity

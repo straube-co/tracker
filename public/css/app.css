@@ -16712,6 +16712,10 @@ li {
   padding-top: 50px;
 }
 
+.stop {
+  background-color: red;
+}
+
 .activity {
   width: 90%;
 }

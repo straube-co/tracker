@@ -13,7 +13,8 @@ class TimeController extends Controller
 
     public function index()
     {
-        $times = Time::get();
+        // 
+        $times = Time::orderBy('started', 'desc')->get();
 
         $data = [
             'times' => $times,

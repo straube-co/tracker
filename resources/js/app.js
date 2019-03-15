@@ -34,6 +34,7 @@ const app = new Vue({
     el: '#app'
 });
 
+//
 function showTasks(projectId) {
     $('[name=task_id]').find('option[data-project_id]').hide().filter('[data-project_id="' + projectId + '"]').show();
     var $selected = $('[name=task_id]').find('option:selected');
@@ -48,6 +49,7 @@ $('[name=project_id]').on('change', function () {
 
 showTasks($('[name=project_id]').val());
 
+//
 $(function () {
     $('#datepickerstarted').datetimepicker({
         format:"Y-MM-DD HH:mm:ss"

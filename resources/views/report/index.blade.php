@@ -18,7 +18,7 @@
             <select id="task" name="task_id">
                 <option value="">Select</option>
                 @foreach ($tasks as $task)
-                    <option value="{{ $task->id }}" @if ($task->id == request('task_id')) selected @endif>{{ $task->name }}</option>
+                    <option value="{{ $task->id }}" data-project_id="{{ $task->project_id }}" @if ($task->id == request('task_id')) selected @endif>{{ $task->name }}</option>
                 @endforeach
             </select>
             {{ $errors->first('task_id') }}
