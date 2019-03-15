@@ -63,7 +63,7 @@ class ImportController extends Controller
             'lines' => $lines,
         ];
 
-        return view('import.taskselect', $data);
+        return view('import.select', $data);
     }
 
     public function update(Request $request, $id)
@@ -96,6 +96,6 @@ class ImportController extends Controller
                  ]);
              }
         }
-        return view('layouts.home');
+        return redirect()->route('layouts.home');;
     }
 }

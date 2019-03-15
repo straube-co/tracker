@@ -23,7 +23,7 @@ class AutoController extends Controller
             'tasks' => $tasks,
             'activities' => $activities,
         ];
-        return view('timeauto.index', $data);
+        return view('auto.index', $data);
     }
 
     public function store(Request $request)
