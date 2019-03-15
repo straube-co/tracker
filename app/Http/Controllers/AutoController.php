@@ -9,7 +9,7 @@ use App\Project;
 use App\Activity;
 use App\Task;
 
-class TimeautoController extends Controller
+class AutoController extends Controller
 {
 
     public function create()
