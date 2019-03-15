@@ -2,7 +2,7 @@
 
 @section('content')
 <ul>
-    <a href="{{ route('activity.create') }}">Create new activity</a><br>
+    <a href="{{ route('activity.create') }}">Create new activity</a><br><br>
     <h1>Activity</h1>
     <br>
     <li>
