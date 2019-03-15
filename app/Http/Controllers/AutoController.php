@@ -28,14 +28,20 @@ class AutoController extends Controller
 
     public function store(Request $request)
     {
-        Time::create([
-            'task_id' => $request->task_id,
-            'user_id' => $request->session()->get('auth.id'),
-            'activity_id' => $request->activity_id,
-            'started' => Carbon::now(),
-            'finished' => NULL,
-        ]);
-        return redirect()->route('time.index');
+        $time = Time::where('finished', NULL)->count();
+
+        if($time == 0){
+            Time::create([
+                'task_id' => $request->task_id,
+                'user_id' => $request->session()->get('auth.id'),
+                'activity_id' => $request->activity_id,
+                'started' => Carbon::now(),
+                'finished' => NULL,
+            ]);
+            return redirect()->route('time.index');
+        }else {
+            return redirect()->route('time.index');
+         }
     }
 
     public function update($id)
@@ -48,10 +54,5 @@ class AutoController extends Controller
         $time->save();
 
         return redirect()->route('time.index');
-    }
-
-    public function destroy($id)
-    {
-
     }
 }
