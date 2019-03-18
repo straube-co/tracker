@@ -68,7 +68,7 @@
         {{ $errors->first('finished') }}
         <br>
         <button class="btn btn-primary">Filter</button>
-        <a href="{{ route('report.index') }}">Cancel</a>
+        <a href="{{ route('report.index') }}">Clean</a>
     </form>
     <br>
     <h1>Reports</h1>

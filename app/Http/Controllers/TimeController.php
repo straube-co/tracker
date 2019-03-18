@@ -13,8 +13,8 @@ class TimeController extends Controller
 
     public function index()
     {
-        // 
-        $times = Time::orderBy('started', 'desc')->get();
+        //
+        $times = Time::where('user_id', session('auth.id'))->orderBy('started', 'desc')->get();
 
         $data = [
             'times' => $times,

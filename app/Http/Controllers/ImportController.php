@@ -96,6 +96,6 @@ class ImportController extends Controller
                  ]);
              }
         }
-        return redirect()->route('layouts.home');;
+        return view('layouts.home');;
     }
 }

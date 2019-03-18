@@ -45,5 +45,6 @@
         </table>
         <br>
         <button type="submit">Salvar </button>
+        <a href="{{ route('report.index')}}">Cancel</a>
     </form>
 @endsection
