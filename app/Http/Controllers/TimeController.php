@@ -46,11 +46,11 @@ class TimeController extends Controller
         ]);
 
         Time::create([
-            'task_id' => $request->task_id,
+            'task_id' => $validatedData->task_id,
             'user_id' => $request->session()->get('auth.id'),
             'activity_id' => $request->activity_id,
-            'started' => $request->started,
-            'finished' => $request->finished,
+            'started' => $validatedData->started,
+            'finished' => $validatedData->finished,
         ]);
         return redirect()->route('time.index');
     }
@@ -82,10 +82,10 @@ class TimeController extends Controller
         $time = Time::find($id);
 
         $time->update([
-            'task_id' => $request->task_id,
+            'task_id' => $validatedData->task_id,
             'activity_id' => $request->activity_id,
-            'started' => $request->started,
-            'finished' => $request->finished,
+            'started' => $validatedData->started,
+            'finished' => $validatedData->finished,
         ]);
         $time->save();
 
