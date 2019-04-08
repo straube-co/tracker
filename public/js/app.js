@@ -69428,7 +69428,7 @@ $(function () {
   $("#datepickerfinished").on("change.datetimepicker", function (e) {
     $('#datepickerstarted').datetimepicker('maxDate', e.date);
   });
-});
+}); //
 
 /***/ }),
 

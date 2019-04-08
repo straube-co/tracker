@@ -16,6 +16,6 @@
             </select>
         </div>
         <br>
-        <button type="submit" style="background-color: lightsteelblue;" class="btn btn-primário">Importar arquivo </button>
+        <button type="submit" class="btn btn-primary btn-sm">Importar arquivo </button>
     </form>
 @endsection

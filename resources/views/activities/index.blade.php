@@ -2,7 +2,7 @@
 
 @section('content')
 <ul>
-    <a href="{{ route('activity.create') }}">Create new activity</a><br><br>
+    <a class ="btn btn-outline-dark btn-sm" href="{{ route('activity.create') }}">Create new activity</a><br><br>
     <h1>Activity</h1>
     <br>
     <li>
@@ -18,12 +18,12 @@
                 @foreach ($activities as $activity)
                     <tr>
                         <td class="activity">{{ $activity->name }}</td>
-                        <td><a href="{{ route('activity.edit', $activity->id) }}">Edit</a></td>
+                        <td><a class="btn btn-secondary btn-sm" href="{{ route('activity.edit', $activity->id) }}">Edit</a></td>
                         <td>
                             <form action="{{ route('activity.destroy', $activity->id) }}" method="post">
                             {{ method_field('delete') }}
                             {{ csrf_field() }}
-                                <button type="submit">Delete </button>
+                                <button class="btn btn-danger btn-sm" type="submit">Delete </button>
                             </form>
                         </td>
                     </tr>

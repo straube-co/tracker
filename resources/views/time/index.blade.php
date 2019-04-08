@@ -3,11 +3,11 @@
 @section('content')
 <ul>
     @foreach ($times as $time)
-        <a href="{{ route('time.create') }}">Add Manual Time Entry</a><br><br>
+        <a class ="btn btn-outline-dark btn-sm" href="{{ route('time.create') }}">Add Manual Time Entry</a><br><br>
         @if($time->finished == NULL)    {{-- validation automatic time counting  --}}
             <p style="color:red">Stop your time for start automatic Time Counting</p>
         @else
-            <a href="{{ route('auto.create') }}">Start Automatic Time Counting</a><br><br>
+            <a class ="btn btn-outline-dark btn-sm" href="{{ route('auto.create') }}">Start Automatic Time Counting</a><br><br>
         @endif
         @break;
     @endforeach
@@ -39,17 +39,17 @@
                                 <form action="{{ route('auto.update', $time->id) }}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('put') }}
-                                    <button type="submit" class="stop">Stop </button>
+                                    <button type="submit" class="btn btn-danger btn-sm stop">Stop </button>
                                 </form>
                             </td>
                         @else
-                            <td><a href="{{ route('time.edit', $time->id) }}">Edit</a></td>
+                            <td><a class="btn btn-secondary btn-sm" href="{{ route('time.edit', $time->id) }}">Edit</a></td>
                         @endif
                         <td>
                             <form action="{{ route('time.destroy', $time->id) }}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('delete') }}
-                                <button type="submit">Delete </button>
+                                <button class="btn btn-danger btn-sm" type="submit">Delete </button>
                             </form>
                         </td>
                     </tr>

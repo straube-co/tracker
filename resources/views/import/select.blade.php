@@ -6,9 +6,26 @@
     {{ method_field('put') }}
         <h1>Project: {{ $project->name }}</h1>
         <br>
+        <div>
+            <h6>Múltipla seleção:</h6>
+            <select id="task" name="task_id">
+                <option value="">Select</option>
+                @foreach ($tasks as $task)
+                    <option value="{{ $task->id }}"> {{ $task->name }}</option>
+                @endforeach
+            </select>
+            <select id="activity" name="activity_id">
+                <option value="">Select</option>
+                @foreach ($activities as $activity)
+                    <option value="{{ $activity->id }}"> {{ $activity->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <br>
         <table class="table">
             <thead>
                 <tr>
+                    <th>Select</th>
                     <th>Name</th>
                     <th>Tasks</th>
                     <th>Activities</th>
@@ -17,6 +34,9 @@
             <tbody>
                 @foreach ($lines as $line)
                     <tr>
+                        <td>
+                            <input type="checkbox">
+                        </td>
                         <td>
                             {{ $line[0] }}
                             {{-- creating JSON with line --}}
@@ -44,7 +64,7 @@
             </tbody>
         </table>
         <br>
-        <button type="submit">Salvar </button>
-        <a href="{{ route('report.index')}}">Cancel</a>
+        <button class="btn btn-success btn-sm" type="submit">Salvar </button>
+        <a class="btn btn-danger btn-sm" href="{{ route('report.index')}}">Cancel</a>
     </form>
 @endsection

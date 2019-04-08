@@ -58,8 +58,8 @@
         {{ $errors->first('finished') }}
         <br>
         <div>
-            <button type="submit">Create </button>
-            <a href="{{ route('time.index')}}">Cancel</a>
+            <button class="btn btn-success btn-sm" type="submit">Create </button>
+            <a class="btn btn-danger btn-sm" href="{{ route('time.index')}}">Cancel</a>
         </div>
     </form>
 </div>
