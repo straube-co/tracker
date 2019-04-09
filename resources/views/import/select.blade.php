@@ -20,12 +20,13 @@
                     <option value="{{ $activity->id }}"> {{ $activity->name }}</option>
                 @endforeach
             </select>
+            <button class="btn btn-success btn-sm" name="apply" type="button">Aplicar </button>
         </div>
         <br>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Select</th>
+                    <th><input type="checkbox" class="select-all"></th>
                     <th>Name</th>
                     <th>Tasks</th>
                     <th>Activities</th>
@@ -35,7 +36,7 @@
                 @foreach ($lines as $line)
                     <tr>
                         <td>
-                            <input type="checkbox">
+                            <input type="checkbox" name="check" class="list-item-checkbox" data-index="{{ $loop->index }}">
                         </td>
                         <td>
                             {{ $line[0] }}

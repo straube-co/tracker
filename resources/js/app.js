@@ -34,7 +34,7 @@ const app = new Vue({
     el: '#app'
 });
 
-//
+// {
 function showTasks(projectId) {
     $('[name=task_id]').find('option[data-project_id]').hide().filter('[data-project_id="' + projectId + '"]').show();
     var $selected = $('[name=task_id]').find('option:selected');
@@ -49,7 +49,9 @@ $('[name=project_id]').on('change', function () {
 
 showTasks($('[name=project_id]').val());
 
-//
+//end }
+
+//quando carrega a pagina ele executa a função {
 $(function () {
     $('#datepickerstarted').datetimepicker({
         format:"Y-MM-DD HH:mm:ss"
@@ -66,4 +68,68 @@ $(function () {
     });
 });
 
-//
+//end }
+
+//function toApply, fill multiple tasks and activities {
+function toApply() {
+    //
+    var valuetask = $('[name=task_id]').val();
+    var valueactivity = $('[name=activity_id]').val();
+
+    //
+     $(':checked').each(function() {
+         //
+         var index = $(this).data('index');
+         //
+         var name = 'time[' + index + '][task_id]';
+         $('[name="' + name + '"]').val(valuetask);
+         //
+         var name = 'time[' + index + '][activity_id]';
+         $('[name="' + name + '"]').val(valueactivity);
+     })
+}
+
+$('[name=apply]').on('click', function () {
+    toApply();
+});
+
+//end }
+
+//function select all, with shift and alt {
+$('.select-all').click(function(e){
+  var checked = e.currentTarget.checked;
+  $('.list-item-checkbox').prop('checked', checked);
+});
+
+var lastChecked = null;
+
+$('.list-item-checkbox').click(function(e){
+
+    //
+  if(e.shiftKey) {
+    var from = $('.list-item-checkbox').index(this);
+    var to = $('.list-item-checkbox').index(lastChecked);
+
+    var start = Math.min(from, to);
+    var end = Math.max(from, to) + 1;
+
+    $('.list-item-checkbox').slice(start, end)
+      .filter(':not(:disabled)')
+      .prop('checked', lastChecked.checked);
+  }
+
+  lastChecked = this;
+
+  //
+  if(e.altKey){
+
+    $('.list-item-checkbox')
+      .filter(':not(:disabled)')
+      .each(function () {
+      var $checkbox = $(this);
+      $checkbox.prop('checked', !$checkbox.is(':checked'));
+    });
+  }
+});
+
+//end }
