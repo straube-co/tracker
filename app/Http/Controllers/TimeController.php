@@ -14,7 +14,7 @@ class TimeController extends Controller
     public function index()
     {
         //
-        $times = Time::where('user_id', session('auth.id'))->orderBy('started', 'desc')->get();
+        $times = Time::with('task', 'task.project', 'activity')->where('user_id', session('auth.id'))->orderBy('started', 'desc')->paginate();
 
         $data = [
             'times' => $times,

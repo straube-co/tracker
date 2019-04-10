@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Activity;
 use App\Project;
 use App\Task;
@@ -13,14 +14,23 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $activities = Activity::get();
-        $projects = Project::get();
-        $tasks = Task::get();
-        $users = User::get();
+        $activities = Cache::remember('activities', 1, function () {
+            return Activity::get();
+        });
+        $projects = Cache::remember('projects', 1, function () {
+            return Project::get();
+        });
+        $tasks = Cache::remember('tasks', 1, function () {
+            return Task::get();
+        });
+        $users = Cache::remember('users', 1, function () {
+            return User::get();
+        });
 
         $request = request();
 
-        $query = Time::select('times.*');
+        $query = Time::with('task', 'task.project', 'user', 'activity')->select('times.*');
+
         if (($activity = $request->activity_id)) {
             $query->where('activity_id', $activity);
         }
