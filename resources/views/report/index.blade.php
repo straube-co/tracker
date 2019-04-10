@@ -97,5 +97,6 @@
             @endforeach
         </tbody>
     </table>
+    {{ $times->links() }}
 </div>
 @endsection

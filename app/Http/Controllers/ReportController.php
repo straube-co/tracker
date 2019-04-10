@@ -53,7 +53,7 @@ class ReportController extends Controller
              $query->where('finished','>=', $finished);
          }
 
-        $times = $query->get();
+        $times = $query->paginate();
 
         $data = [
             'activities' => $activities,

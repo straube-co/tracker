@@ -25,7 +25,7 @@ class TimeController extends Controller
 
     public function create()
     {
-        $activities = Activity::get();
+        $activities = Activity::get(); // ARRUMAR CACHE
         $projects = Project::get();
         $tasks = Task::get();
 
