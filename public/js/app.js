@@ -69479,6 +69479,32 @@ $('.list-item-checkbox').click(function (e) {
   }
 }); //end }
 
+function updateTime() {
+  var time = $('[name=update_time]').text(); //map executa uma função em todos as posicoes do array: Nesse caso em cada "part/parte" ele faz um parseInt com base10 e retorna para o array.
+
+  var hms = time.split(":").map(function (part) {
+    return parseInt(part, 10);
+  });
+  hms[2]++;
+
+  if (hms[2] === 60) {
+    hms[2] = 0;
+    hms[1]++;
+  }
+
+  if (hms[1] === 60) {
+    hms[1] = 0;
+    hms[0]++;
+  }
+
+  var result = hms.map(function (part) {
+    return part < 10 ? '0' + part : part;
+  }).join(':');
+  $('[name=update_time]').text(result);
+}
+
+setInterval(updateTime, 1000);
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

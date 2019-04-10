@@ -1,7 +1,5 @@
 @extends('layouts.header')
-<?php
-use Carbon\Carbon;
-?>
+
 @section('content')
 <ul>
     @foreach ($times as $time)
@@ -41,10 +39,9 @@ use Carbon\Carbon;
                                 <form action="{{ route('auto.update', $time->id) }}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('put') }}
-                                    <?php
-                                    echo Carbon::now()->diffInSeconds($time->started);
-                                    ?>
-                                    <button type="submit" class="btn btn-danger btn-sm stop">Stop </button>
+                                    <button type="submit" class="btn btn-outline-danger btn-sm" name="update_time">
+                                        {{Carbon\Carbon::now()->diff($time->started)->format('%H:%I:%S')}}
+                                    </button>
                                 </form>
                             </td>
                         @else
@@ -61,6 +58,7 @@ use Carbon\Carbon;
                 @endforeach
             </tbody>
         </table>
+        {{ $times->links() }}
     </li>
 </ul>
 @endsection
