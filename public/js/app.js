@@ -69441,14 +69441,19 @@ function toApply() {
     //
     var index = $(this).data('index'); //
 
-    var name = 'time[' + index + '][task_id]';
-    $('[name="' + name + '"]').val(valuetask); //
+    if (valuetask !== 'select') {
+      var name = 'time[' + index + '][task_id]';
+      $('[name="' + name + '"]').val(valuetask);
+    }
 
-    var name = 'time[' + index + '][activity_id]';
-    $('[name="' + name + '"]').val(valueactivity);
+    if (valueactivity !== 'select') {
+      var name = 'time[' + index + '][activity_id]';
+      $('[name="' + name + '"]').val(valueactivity);
+    }
   });
 }
 
+;
 $('[name=apply]').on('click', function () {
   toApply();
 }); //end }
@@ -69478,6 +69483,7 @@ $('.list-item-checkbox').click(function (e) {
     });
   }
 }); //end }
+//function time tracker {
 
 function updateTime() {
   var time = $('[name=update_time]').text(); //map executa uma função em todos as posicoes do array: Nesse caso em cada "part/parte" ele faz um parseInt com base10 e retorna para o array.
@@ -69503,7 +69509,7 @@ function updateTime() {
   $('[name=update_time]').text(result);
 }
 
-setInterval(updateTime, 1000);
+setInterval(updateTime, 1000); //end }
 
 /***/ }),
 

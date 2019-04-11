@@ -81,13 +81,17 @@ function toApply() {
          //
          var index = $(this).data('index');
          //
-         var name = 'time[' + index + '][task_id]';
-         $('[name="' + name + '"]').val(valuetask);
-         //
-         var name = 'time[' + index + '][activity_id]';
-         $('[name="' + name + '"]').val(valueactivity);
-     })
-}
+         if(valuetask !== 'select'){
+             var name = 'time[' + index + '][task_id]';
+             $('[name="' + name + '"]').val(valuetask);
+
+         }if(valueactivity !== 'select'){
+             var name = 'time[' + index + '][activity_id]';
+             $('[name="' + name + '"]').val(valueactivity);
+
+         }
+     });
+};
 
 $('[name=apply]').on('click', function () {
     toApply();
@@ -134,6 +138,7 @@ $('.list-item-checkbox').click(function(e){
 
 //end }
 
+//function time tracker {
 function updateTime(){
 
     var time = $('[name=update_time]').text();
@@ -158,3 +163,5 @@ function updateTime(){
 }
 
 setInterval(updateTime, 1000);
+
+//end }
