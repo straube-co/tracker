@@ -69398,7 +69398,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 var app = new Vue({
   el: '#app'
-}); // {
+}); //show tasks per project{
 
 function showTasks(projectId) {
   $('[name=task_id]').find('option[data-project_id]').hide().filter('[data-project_id="' + projectId + '"]').show();
@@ -69430,7 +69430,7 @@ $(function () {
     $('#datepickerstarted').datetimepicker('maxDate', e.date);
   });
 }); //end }
-//function toApply, fill multiple tasks and activities {
+//function toApply {
 
 function toApply() {
   //
@@ -69438,22 +69438,25 @@ function toApply() {
   var valueactivity = $('[name=activity_id]').val(); //
 
   $(':checked').each(function () {
-    //
     var index = $(this).data('index'); //
 
     if (valuetask !== 'select') {
       var name = 'time[' + index + '][task_id]';
-      $('[name="' + name + '"]').val(valuetask);
+      $('[name="' + name + '"]').val(valuetask); //
+
+      $('[name=task_id]').val('select');
     }
 
     if (valueactivity !== 'select') {
       var name = 'time[' + index + '][activity_id]';
       $('[name="' + name + '"]').val(valueactivity);
+      $('[name=activity_id]').val('select');
     }
   });
 }
 
-;
+; // click of button
+
 $('[name=apply]').on('click', function () {
   toApply();
 }); //end }
@@ -69501,12 +69504,19 @@ function updateTime() {
   if (hms[1] === 60) {
     hms[1] = 0;
     hms[0]++;
-  }
+  } //
+
 
   var result = hms.map(function (part) {
     return part < 10 ? '0' + part : part;
   }).join(':');
-  $('[name=update_time]').text(result);
+  $('[name=update_time]').text(result); //
+
+  var stop = $('.update_time').text();
+
+  if (!stop) {
+    $('.stop_time').text('Stop');
+  }
 }
 
 setInterval(updateTime, 1000); //end }

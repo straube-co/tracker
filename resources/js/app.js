@@ -34,7 +34,7 @@ const app = new Vue({
     el: '#app'
 });
 
-// {
+//show tasks per project{
 function showTasks(projectId) {
     $('[name=task_id]').find('option[data-project_id]').hide().filter('[data-project_id="' + projectId + '"]').show();
     var $selected = $('[name=task_id]').find('option:selected');
@@ -70,7 +70,7 @@ $(function () {
 
 //end }
 
-//function toApply, fill multiple tasks and activities {
+//function toApply {
 function toApply() {
     //
     var valuetask = $('[name=task_id]').val();
@@ -78,21 +78,24 @@ function toApply() {
 
     //
      $(':checked').each(function() {
-         //
          var index = $(this).data('index');
+
          //
-         if(valuetask !== 'select'){
+         if(valuetask !== 'select') {
              var name = 'time[' + index + '][task_id]';
              $('[name="' + name + '"]').val(valuetask);
 
-         }if(valueactivity !== 'select'){
+             //
+             $('[name=task_id]').val('select');
+
+         }if(valueactivity !== 'select') {
              var name = 'time[' + index + '][activity_id]';
              $('[name="' + name + '"]').val(valueactivity);
-
+             $('[name=activity_id]').val('select');
          }
      });
 };
-
+// click of button
 $('[name=apply]').on('click', function () {
     toApply();
 });
@@ -100,14 +103,14 @@ $('[name=apply]').on('click', function () {
 //end }
 
 //function select all, with shift and alt {
-$('.select-all').click(function(e){
+$('.select-all').click(function(e) {
   var checked = e.currentTarget.checked;
   $('.list-item-checkbox').prop('checked', checked);
 });
 
 var lastChecked = null;
 
-$('.list-item-checkbox').click(function(e){
+$('.list-item-checkbox').click(function(e) {
 
     //
   if(e.shiftKey) {
@@ -139,7 +142,7 @@ $('.list-item-checkbox').click(function(e){
 //end }
 
 //function time tracker {
-function updateTime(){
+function updateTime() {
 
     var time = $('[name=update_time]').text();
     //map executa uma função em todos as posicoes do array: Nesse caso em cada "part/parte" ele faz um parseInt com base10 e retorna para o array.
@@ -147,19 +150,25 @@ function updateTime(){
 
     hms[2]++;
 
-    if(hms[2] === 60){
+    if(hms[2] === 60) {
         hms[2] = 0;
         hms[1]++;
 
-    }if(hms[1] === 60){
+    }if(hms[1] === 60) {
         hms[1] = 0;
         hms[0]++;
 
     }
-
+    //
     var result = hms.map(part => part < 10 ? '0' + part : part).join(':');
-
     $('[name=update_time]').text(result);
+
+    //
+    var stop = $('.update_time').text();
+
+    if(!stop) {
+        $('.stop_time').text('Stop');
+    }
 }
 
 setInterval(updateTime, 1000);

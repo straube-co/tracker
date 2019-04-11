@@ -22,7 +22,7 @@
                     <th>Activity</th>
                     <th>Started</th>
                     <th>Finished</th>
-                    <th>Edit</th>
+                    <th class="stop_time">Edit</th>
                     <th>Delete</th>
                 </tr>
             </thead>
