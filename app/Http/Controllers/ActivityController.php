@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Time;
 use App\Activity;
@@ -10,7 +11,9 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        $activities = Activity::get();
+        $activities = Cache::remember('activities', 1, function () {
+            return Activity::get();
+        });
 
         $data = [
             'activities' => $activities,

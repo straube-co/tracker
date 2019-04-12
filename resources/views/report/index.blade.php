@@ -68,7 +68,7 @@
         {{ $errors->first('finished') }}
         <br>
         <button class="btn btn-primary btn-sm" class="btn btn-primary">Filter</button>
-        <a class="btn btn-outline-primary btn-sm" href="{{ route('report.index') }}">Clean</a>
+        <a class="btn btn-outline-primary btn-sm" name="clean">Clean</a>
     </form>
     <br>
     <h1>Reports</h1>

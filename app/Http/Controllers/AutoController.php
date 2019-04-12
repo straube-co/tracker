@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Time;
@@ -14,9 +15,15 @@ class AutoController extends Controller
 
     public function create()
     {
-        $activities = Activity::get();
-        $projects = Project::get();
-        $tasks = Task::get();
+        $activities = Cache::remember('activities', 1, function ()  use ($id) {
+            return Activity::get();
+        });
+        $projects = Cache::remember('projects', 1, function () {
+            return Project::get();
+        });
+        $tasks = Cache::remember('tasks', 1, function () {
+            return Task::get();
+        });
 
         $data = [
             'projects' => $projects,

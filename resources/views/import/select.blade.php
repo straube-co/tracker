@@ -9,13 +9,13 @@
         <div>
             <h6>Múltipla seleção:</h6>
             <select id="task" name="task_id">
-                <option value="select">Select</option>
+                <option value="">Select</option>
                 @foreach ($tasks as $task)
                     <option value="{{ $task->id }}"> {{ $task->name }}</option>
                 @endforeach
             </select>
             <select id="activity" name="activity_id">
-                <option value="select">Select</option>
+                <option value="">Select</option>
                 @foreach ($activities as $activity)
                     <option value="{{ $activity->id }}"> {{ $activity->name }}</option>
                 @endforeach

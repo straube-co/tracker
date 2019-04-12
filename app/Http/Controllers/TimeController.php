@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Time;
 use App\Project;
@@ -25,9 +26,16 @@ class TimeController extends Controller
 
     public function create()
     {
-        $activities = Activity::get();
-        $projects = Project::get();
-        $tasks = Task::get();
+        //
+        $activities = Cache::remember('activities', 1, function () {
+            return Activity::get();
+        });
+        $projects = Cache::remember('projects', 1, function () {
+            return Project::get();
+        });
+        $tasks = Cache::remember('tasks', 1, function () {
+            return Task::get();
+        });
 
         $data = [
             'projects' => $projects,
@@ -57,9 +65,15 @@ class TimeController extends Controller
 
     public function edit($id)
     {
-        $activities = Activity::get();
-        $projects = Project::get();
-        $tasks = Task::get();
+        $activities = Cache::remember('activities', 1, function () {
+            return Activity::get();
+        });
+        $projects = Cache::remember('projects', 1, function () {
+            return Project::get();
+        });
+        $tasks = Cache::remember('tasks', 1, function () {
+            return Task::get();
+        });
         $time = Time::find($id);
 
         $data = [

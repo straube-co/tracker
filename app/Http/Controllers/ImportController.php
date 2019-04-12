@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Activity;
@@ -15,7 +16,9 @@ class ImportController extends Controller
 
     public function index()
     {
-        $projects = Project::get();
+        $projects = Cache::remember('projects', 1, function () {
+            return Project::get();
+        });
 
         $data = [
             'projects' => $projects,
@@ -26,7 +29,9 @@ class ImportController extends Controller
 
     public function store(Request $request)
     {
-        $activities = Activity::get();
+        $activities = Cache::remember('activities', 1, function () {
+            return Activity::get();
+        });
 
         //seeking out project per project_id(request).
         $project = Project::find($request->project_id);

@@ -12,7 +12,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $times = Time::get();
+        $times =  Cache::remember('activities', 1, function () {
+            return Time::get();
+        });
 
         $data = [
             'times' => $times,
