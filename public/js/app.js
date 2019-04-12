@@ -69485,23 +69485,6 @@ function updateTime() {
 
 
 counter = setInterval(updateTime, 1000); //end }
-//function is performed by loading the page {
-
-$(function () {
-  $('#datepickerstarted').datetimepicker({
-    format: "Y-MM-DD HH:mm:ss"
-  });
-  $('#datepickerfinished').datetimepicker({
-    useCurrent: false,
-    format: "Y-MM-DD HH:mm:ss"
-  });
-  $("#datepickerstarted").on("change.datetimepicker", function (e) {
-    $('#datepickerfinished').datetimepicker('minDate', e.date);
-  });
-  $("#datepickerfinished").on("change.datetimepicker", function (e) {
-    $('#datepickerstarted').datetimepicker('maxDate', e.date);
-  });
-}); //end }
 //function select all, with shift and alt {
 
 $('.select-all').click(function (e) {
@@ -69527,6 +69510,23 @@ $('.list-item-checkbox').click(function (e) {
       $checkbox.prop('checked', !$checkbox.is(':checked'));
     });
   }
+}); //end }
+//function is performed by loading the page {
+
+$(function () {
+  $('#datepickerstarted').datetimepicker({
+    format: "Y-MM-DD HH:mm:ss"
+  });
+  $('#datepickerfinished').datetimepicker({
+    useCurrent: false,
+    format: "Y-MM-DD HH:mm:ss"
+  });
+  $("#datepickerstarted").on("change.datetimepicker", function (e) {
+    $('#datepickerfinished').datetimepicker('minDate', e.date);
+  });
+  $("#datepickerfinished").on("change.datetimepicker", function (e) {
+    $('#datepickerstarted').datetimepicker('maxDate', e.date);
+  });
 }); //end }
 //back to the default text "select" {
 

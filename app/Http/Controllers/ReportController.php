@@ -29,7 +29,7 @@ class ReportController extends Controller
 
         $request = request();
 
-        $query = Time::with('task', 'task.project', 'user', 'activity')->select('times.*');
+        $query = Time::select('times.*');
 
         if (($activity = $request->activity_id)) {
             $query->where('activity_id', $activity);
@@ -50,7 +50,7 @@ class ReportController extends Controller
             $query->where('started','>=', $started);
         }
          if (($finished = $request->finished)) {
-             $query->where('finished','>=', $finished);
+             $query->where('finished','<=', $finished);
          }
 
         $times = $query->paginate();
