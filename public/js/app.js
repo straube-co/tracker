@@ -69398,7 +69398,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 var app = new Vue({
   el: '#app'
-}); //show tasks per project{
+}); //show tasks per project {
 
 function showTasks(projectId) {
   $('[name=task_id]').find('option[data-project_id]').hide().filter('[data-project_id="' + projectId + '"]').show();
@@ -69413,44 +69413,27 @@ $('[name=project_id]').on('change', function () {
   showTasks($(this).val());
 });
 showTasks($('[name=project_id]').val()); //end }
-//quando carrega a pagina ele executa a função {
-
-$(function () {
-  $('#datepickerstarted').datetimepicker({
-    format: "Y-MM-DD HH:mm:ss"
-  });
-  $('#datepickerfinished').datetimepicker({
-    useCurrent: false,
-    format: "Y-MM-DD HH:mm:ss"
-  });
-  $("#datepickerstarted").on("change.datetimepicker", function (e) {
-    $('#datepickerfinished').datetimepicker('minDate', e.date);
-  });
-  $("#datepickerfinished").on("change.datetimepicker", function (e) {
-    $('#datepickerstarted').datetimepicker('maxDate', e.date);
-  });
-}); //end }
 //function toApply {
 
 function toApply() {
   //
   var valuetask = $('[name=task_id]').val();
-  var valueactivity = $('[name=activity_id]').val(); //
+  var valueactivity = $('[name=activity_id]').val(); //loop with all the checked
 
   $(':checked').each(function () {
-    var index = $(this).data('index'); //
+    var index = $(this).data('index'); //if the value is not empty
 
-    if (valuetask !== 'select') {
+    if (valuetask !== '') {
       var name = 'time[' + index + '][task_id]';
-      $('[name="' + name + '"]').val(valuetask); //
+      $('[name="' + name + '"]').val(valuetask); //back to the default text "select"
 
-      $('[name=task_id]').val('select');
+      $('[name=task_id]').val('');
     }
 
-    if (valueactivity !== 'select') {
+    if (valueactivity !== '') {
       var name = 'time[' + index + '][activity_id]';
       $('[name="' + name + '"]').val(valueactivity);
-      $('[name=activity_id]').val('select');
+      $('[name=activity_id]').val('');
     }
   });
 }
@@ -69460,36 +69443,17 @@ function toApply() {
 $('[name=apply]').on('click', function () {
   toApply();
 }); //end }
-//function select all, with shift and alt {
 
-$('.select-all').click(function (e) {
-  var checked = e.currentTarget.checked;
-  $('.list-item-checkbox').prop('checked', checked);
-});
-var lastChecked = null;
-$('.list-item-checkbox').click(function (e) {
-  //
-  if (e.shiftKey) {
-    var from = $('.list-item-checkbox').index(this);
-    var to = $('.list-item-checkbox').index(lastChecked);
-    var start = Math.min(from, to);
-    var end = Math.max(from, to) + 1;
-    $('.list-item-checkbox').slice(start, end).filter(':not(:disabled)').prop('checked', lastChecked.checked);
-  }
-
-  lastChecked = this; //
-
-  if (e.altKey) {
-    $('.list-item-checkbox').filter(':not(:disabled)').each(function () {
-      var $checkbox = $(this);
-      $checkbox.prop('checked', !$checkbox.is(':checked'));
-    });
-  }
-}); //end }
-//function time tracker {
+var counter; //function time tracker {
 
 function updateTime() {
-  var time = $('[name=update_time]').text(); //map executa uma função em todos as posicoes do array: Nesse caso em cada "part/parte" ele faz um parseInt com base10 e retorna para o array.
+  var time = $('[name=update_time]').text(); //stop the function every 1 second if you have no start time
+
+  if (!time) {
+    clearInterval(counter);
+    return;
+  } //map executa uma função em todos as posicoes do array: Nesse caso, em cada "part/parte" ele faz um parseInt com base10 e retorna para o array.
+
 
   var hms = time.split(":").map(function (part) {
     return parseInt(part, 10);
@@ -69510,16 +69474,76 @@ function updateTime() {
   var result = hms.map(function (part) {
     return part < 10 ? '0' + part : part;
   }).join(':');
-  $('[name=update_time]').text(result); //
+  $('[name=update_time]').text(result); //receive the value of class
 
-  var stop = $('.update_time').text();
+  var stop = $('.update_time').text(); //if a time is started, it edits the text of the edit table to stop
 
   if (!stop) {
     $('.stop_time').text('Stop');
   }
-}
+} //calls the function in a time interval
 
-setInterval(updateTime, 1000); //end }
+
+counter = setInterval(updateTime, 1000); //end }
+//function is performed by loading the page {
+
+$(function () {
+  $('#datepickerstarted').datetimepicker({
+    format: "Y-MM-DD HH:mm:ss"
+  });
+  $('#datepickerfinished').datetimepicker({
+    useCurrent: false,
+    format: "Y-MM-DD HH:mm:ss"
+  });
+  $("#datepickerstarted").on("change.datetimepicker", function (e) {
+    $('#datepickerfinished').datetimepicker('minDate', e.date);
+  });
+  $("#datepickerfinished").on("change.datetimepicker", function (e) {
+    $('#datepickerstarted').datetimepicker('maxDate', e.date);
+  });
+}); //end }
+//function select all, with shift and alt {
+
+$('.select-all').click(function (e) {
+  var checked = e.currentTarget.checked;
+  $('.list-item-checkbox').prop('checked', checked);
+});
+var lastChecked = null;
+$('.list-item-checkbox').click(function (e) {
+  //select with shift
+  if (e.shiftKey) {
+    var from = $('.list-item-checkbox').index(this);
+    var to = $('.list-item-checkbox').index(lastChecked);
+    var start = Math.min(from, to);
+    var end = Math.max(from, to) + 1;
+    $('.list-item-checkbox').slice(start, end).filter(':not(:disabled)').prop('checked', lastChecked.checked);
+  }
+
+  lastChecked = this; //select with alt
+
+  if (e.altKey) {
+    $('.list-item-checkbox').filter(':not(:disabled)').each(function () {
+      var $checkbox = $(this);
+      $checkbox.prop('checked', !$checkbox.is(':checked'));
+    });
+  }
+}); //end }
+//back to the default text "select" {
+
+function clean() {
+  $('[name=project_id]').val('');
+  $('[name=task_id]').val('');
+  $('[name=user_id]').val('');
+  $('[name=activity_id]').val('');
+  $('[name=started]').val('');
+  $('[name=finished]').val('');
+} // end }
+// click of button
+
+
+$('[name=clean]').on('click', function () {
+  clean();
+});
 
 /***/ }),
 

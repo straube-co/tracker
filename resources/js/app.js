@@ -34,7 +34,7 @@ const app = new Vue({
     el: '#app'
 });
 
-//show tasks per project{
+//show tasks per project {
 function showTasks(projectId) {
     $('[name=task_id]').find('option[data-project_id]').hide().filter('[data-project_id="' + projectId + '"]').show();
     var $selected = $('[name=task_id]').find('option:selected');
@@ -51,7 +51,82 @@ showTasks($('[name=project_id]').val());
 
 //end }
 
-//quando carrega a pagina ele executa a função {
+//function toApply {
+function toApply() {
+    //
+    var valuetask = $('[name=task_id]').val();
+    var valueactivity = $('[name=activity_id]').val();
+
+    //loop with all the checked
+     $(':checked').each(function() {
+         var index = $(this).data('index');
+
+         //if the value is not empty
+         if(valuetask !== '') {
+             var name = 'time[' + index + '][task_id]';
+             $('[name="' + name + '"]').val(valuetask);
+
+             //back to the default text "select"
+             $('[name=task_id]').val('');
+
+         }if(valueactivity !== '') {
+             var name = 'time[' + index + '][activity_id]';
+             $('[name="' + name + '"]').val(valueactivity);
+             $('[name=activity_id]').val('');
+         }
+     });
+};
+// click of button
+$('[name=apply]').on('click', function () {
+    toApply();
+});
+
+//end }
+
+var counter;
+//function time tracker {
+function updateTime() {
+
+    var time = $('[name=update_time]').text();
+
+    //stop the function every 1 second if you have no start time
+    if(!time) {
+        clearInterval(counter);
+        return;
+    }
+
+    //map executa uma função em todos as posicoes do array: Nesse caso, em cada "part/parte" ele faz um parseInt com base10 e retorna para o array.
+    var hms = time.split(":").map(part => parseInt(part, 10));
+
+    hms[2]++;
+
+    if(hms[2] === 60) {
+        hms[2] = 0;
+        hms[1]++;
+
+    }if(hms[1] === 60) {
+        hms[1] = 0;
+        hms[0]++;
+
+    }
+    //
+    var result = hms.map(part => part < 10 ? '0' + part : part).join(':');
+    $('[name=update_time]').text(result);
+
+    //receive the value of class
+    var stop = $('.update_time').text();
+
+    //if a time is started, it edits the text of the edit table to stop
+    if(!stop) {
+        $('.stop_time').text('Stop');
+    }
+}
+//calls the function in a time interval
+counter = setInterval(updateTime, 1000);
+
+//end }
+
+//function is performed by loading the page {
 $(function () {
     $('#datepickerstarted').datetimepicker({
         format:"Y-MM-DD HH:mm:ss"
@@ -70,38 +145,6 @@ $(function () {
 
 //end }
 
-//function toApply {
-function toApply() {
-    //
-    var valuetask = $('[name=task_id]').val();
-    var valueactivity = $('[name=activity_id]').val();
-
-    //
-     $(':checked').each(function() {
-         var index = $(this).data('index');
-
-         //
-         if(valuetask !== 'select') {
-             var name = 'time[' + index + '][task_id]';
-             $('[name="' + name + '"]').val(valuetask);
-
-             //
-             $('[name=task_id]').val('select');
-
-         }if(valueactivity !== 'select') {
-             var name = 'time[' + index + '][activity_id]';
-             $('[name="' + name + '"]').val(valueactivity);
-             $('[name=activity_id]').val('select');
-         }
-     });
-};
-// click of button
-$('[name=apply]').on('click', function () {
-    toApply();
-});
-
-//end }
-
 //function select all, with shift and alt {
 $('.select-all').click(function(e) {
   var checked = e.currentTarget.checked;
@@ -112,13 +155,13 @@ var lastChecked = null;
 
 $('.list-item-checkbox').click(function(e) {
 
-    //
-  if(e.shiftKey) {
-    var from = $('.list-item-checkbox').index(this);
-    var to = $('.list-item-checkbox').index(lastChecked);
+    //select with shift
+    if(e.shiftKey) {
+        var from = $('.list-item-checkbox').index(this);
+        var to = $('.list-item-checkbox').index(lastChecked);
 
-    var start = Math.min(from, to);
-    var end = Math.max(from, to) + 1;
+        var start = Math.min(from, to);
+        var end = Math.max(from, to) + 1;
 
     $('.list-item-checkbox').slice(start, end)
       .filter(':not(:disabled)')
@@ -127,7 +170,7 @@ $('.list-item-checkbox').click(function(e) {
 
   lastChecked = this;
 
-  //
+  //select with alt
   if(e.altKey){
 
     $('.list-item-checkbox')
@@ -138,39 +181,21 @@ $('.list-item-checkbox').click(function(e) {
     });
   }
 });
-
 //end }
 
-//function time tracker {
-function updateTime() {
+//back to the default text "select" {
+function clean() {
 
-    var time = $('[name=update_time]').text();
-    //map executa uma função em todos as posicoes do array: Nesse caso em cada "part/parte" ele faz um parseInt com base10 e retorna para o array.
-    var hms = time.split(":").map(part => parseInt(part, 10));
-
-    hms[2]++;
-
-    if(hms[2] === 60) {
-        hms[2] = 0;
-        hms[1]++;
-
-    }if(hms[1] === 60) {
-        hms[1] = 0;
-        hms[0]++;
-
-    }
-    //
-    var result = hms.map(part => part < 10 ? '0' + part : part).join(':');
-    $('[name=update_time]').text(result);
-
-    //
-    var stop = $('.update_time').text();
-
-    if(!stop) {
-        $('.stop_time').text('Stop');
-    }
+    $('[name=project_id]').val('');
+    $('[name=task_id]').val('');
+    $('[name=user_id]').val('');
+    $('[name=activity_id]').val('');
+    $('[name=started]').val('');
+    $('[name=finished]').val('');
 }
+// end }
 
-setInterval(updateTime, 1000);
-
-//end }
+// click of button
+$('[name=clean]').on('click', function () {
+    clean();
+});
