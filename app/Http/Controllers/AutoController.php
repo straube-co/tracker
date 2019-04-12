@@ -15,7 +15,7 @@ class AutoController extends Controller
 
     public function create()
     {
-        $activities = Cache::remember('activities', 1, function ()  use ($id) {
+        $activities = Cache::remember('activities', 1, function () {
             return Activity::get();
         });
         $projects = Cache::remember('projects', 1, function () {
