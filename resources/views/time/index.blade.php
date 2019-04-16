@@ -2,15 +2,12 @@
 
 @section('content')
 <ul>
-    @foreach ($times as $time)
-        <a class ="btn btn-outline-dark btn-sm" href="{{ route('time.create') }}">Add Manual Time Entry</a><br><br>
-        @if($time->finished == NULL)    {{-- validation automatic time counting  --}}
-            <p style="color:red">Stop your time for start automatic Time Counting</p>
-        @else
-            <a class ="btn btn-outline-dark btn-sm" href="{{ route('auto.create') }}">Start Automatic Time Counting</a><br><br>
-        @endif
-        @break;
-    @endforeach
+    <a class ="btn btn-outline-dark btn-sm" href="{{ route('time.create') }}">Add Manual Time Entry</a><br><br>
+    @if($notFinishedTime === 1){{-- validation automatic time counting  --}}
+        <p style="color:red">Stop your time for start automatic Time Counting</p>
+    @else
+        <a class ="btn btn-outline-dark btn-sm" href="{{ route('auto.create') }}">Start Automatic Time Counting</a><br><br>
+    @endif
     <h1>Activities</h1>
     <br>
     <li>
