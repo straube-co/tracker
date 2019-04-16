@@ -45,9 +45,9 @@ class Authenticate
         if (empty($id)) {
             return false;
         }
-        // Verificar se o usuário existe no banco
+        //Verificar se o usuário existe no banco
         $user = User::where('user_id', $id)->count();
-        dump($user);
+        //return boolean
         return $user === 1;
     }
 
