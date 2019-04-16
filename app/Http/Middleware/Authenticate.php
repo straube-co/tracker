@@ -6,6 +6,7 @@ use Closure;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\User;
 
 /**
  * Authenticate middleware.
@@ -46,7 +47,7 @@ class Authenticate
             return false;
         }
         //Verificar se o usuário existe no banco
-        $user = User::where('user_id', $id)->count();
+        $user = User::where('id', $id)->count();
         //return boolean
         return $user === 1;
     }
