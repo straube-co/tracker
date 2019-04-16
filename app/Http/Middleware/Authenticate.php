@@ -47,6 +47,7 @@ class Authenticate
         }
         // Verificar se o usuário existe no banco
         $user = User::where('user_id', $id)->count();
+        dump($user);
         return $user === 1;
     }
 
