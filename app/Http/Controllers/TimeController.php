@@ -28,7 +28,6 @@ class TimeController extends Controller
 
     public function create()
     {
-        //
         $activities = Cache::remember('activities', 1, function() {
             return Activity::get();
         });
