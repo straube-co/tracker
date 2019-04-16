@@ -68,6 +68,9 @@ class ActivityController extends Controller
         ]);
         $activity->save();
 
+        //removing items from the cache
+        Cache::forget('activities');
+
         return redirect()->route('activity.index');
     }
 
@@ -75,6 +78,9 @@ class ActivityController extends Controller
     {
         $activity = Activity::find($id);
         $activity->delete();
+
+        //removing items from the cache
+        Cache::forget('activities');
 
         return redirect()->route('activity.index');
     }
