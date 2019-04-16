@@ -37,6 +37,10 @@ class ActivityController extends Controller
             'id' => $request->id,
             'name' => $validatedData['name'],
         ]);
+
+        //removing items from the cache
+        Cache::forget('activities');
+
         return redirect()->route('activity.index');
     }
 
