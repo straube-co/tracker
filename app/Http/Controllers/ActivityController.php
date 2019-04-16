@@ -35,7 +35,7 @@ class ActivityController extends Controller
 
         Activity::create([
             'id' => $request->id,
-            'name' => $validatedData->name,
+            'name' => $validatedData['name'],
         ]);
         return redirect()->route('activity.index');
     }
@@ -60,7 +60,7 @@ class ActivityController extends Controller
         $activity = Activity::find($id);
 
         $activity->update([
-            'name' => $validatedData->name,
+            'name' => $validatedData['name'],
         ]);
         $activity->save();
 
