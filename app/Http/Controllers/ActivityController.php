@@ -22,11 +22,6 @@ class ActivityController extends Controller
         return view('activities.index', $data);
     }
 
-    public function create()
-    {
-        return view('activities.create');
-    }
-
     public function store(Request $request)
     {
         $validatedData = $request->validate([
