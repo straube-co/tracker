@@ -2,10 +2,14 @@
 
 @section('content')
 <div class="container">
+    <button class="btn btn-outline-info btn-sm mb-3" type="button" data-toggle="collapse" data-target="#collapseReport" aria-expanded="false" aria-controls="collapseExample">
+        Search filter
+    </button>
+    <div class="collapse" id="collapseReport">
     <form action="{{ route('report.index') }}" method="get">
         <div>
             <label for="project">Project: </label>
-            <select id="project" name="project_id">
+            <select class="custom-select" id="project" name="project_id">
                 <option value="">Select</option>
                 @foreach ($projects as $project)
                     <option value="{{ $project->id }}" @if ($project->id == request('project_id')) selected @endif>{{ $project->name }}</option>
@@ -15,7 +19,7 @@
         <br>
         <div>
             <label for="task">Task: </label>
-            <select id="task" name="task_id">
+            <select class="custom-select" id="task" name="task_id">
                 <option value="">Select</option>
                 @foreach ($tasks as $task)
                     <option value="{{ $task->id }}" data-project_id="{{ $task->project_id }}" @if ($task->id == request('task_id')) selected @endif>{{ $task->name }}</option>
@@ -26,7 +30,7 @@
         <br>
         <div>
             <label for="user">User: </label>
-            <select id="user" name="user_id">
+            <select class="custom-select" id="user" name="user_id">
                 <option value="">Select</option>
                 @foreach ($users as $user)
                     <option value="{{ $user->id }}" @if ($user->id == request('user_id')) selected @endif>{{ $user->name }}</option>
@@ -37,7 +41,7 @@
         <br>
         <div>
             <label for="activity">Activity: </label>
-            <select id="activity" name="activity_id">
+            <select class="custom-select" id="activity" name="activity_id">
                 <option value="">Select</option>
                 @foreach ($activities as $activity)
                     <option value="{{ $activity->id }}" @if ($activity->id == request('activity_id')) selected @endif>{{ $activity->name }}</option>
@@ -70,6 +74,7 @@
         <button class="btn btn-primary btn-sm" class="btn btn-primary">Filter</button>
         <a class="btn btn-outline-primary btn-sm" name="clean">Clean</a>
     </form>
+</div>
     <br>
     <h1>Reports</h1>
     <br>

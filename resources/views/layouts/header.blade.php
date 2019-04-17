@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
         <a href="{{ route('home.index') }}">Home</a>
         <a href="{{ route('time.index') }}">Time Tracking</a>
         <a href="{{ route('activity.index') }}">Activity</a>
         <a href="{{ route('report.index') }}">Reports</a>
         <a href="{{ route('import.index') }}">Import</a>
     </nav>
-    <div id="app" class="container-fluid mt-5">
+    <div id="app" class="container-fluid mt-3">
         @yield('content')
     </div>
     <script src="{{ asset('js/app.js') }}"></script>

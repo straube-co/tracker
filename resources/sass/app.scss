@@ -11,6 +11,10 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 
+body {
+    padding-top: 39px;
+}
+
 //nav
 .navbar-laravel {
   background-color: #fff;
@@ -24,6 +28,12 @@
 }
 li {
     list-style: none;
+}
+
+//home
+.straube {
+    margin-left: 65px;
+    margin-top: 50px;
 }
 
 //time Tracking

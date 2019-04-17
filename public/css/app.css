@@ -16690,6 +16690,10 @@ readers do not read off random characters that represent icons */
   font-weight: 900;
 }
 
+body {
+  padding-top: 39px;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -16708,8 +16712,8 @@ li {
 }
 
 .straube {
-  padding-left: 100px;
-  padding-top: 50px;
+  margin-left: 65px;
+  margin-top: 50px;
 }
 
 .stop {

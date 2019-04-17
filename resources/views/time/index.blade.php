@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-outline-success btn-sm pr-3" data-toggle="modal" data-target="#manual">
+    <button type="button" class="btn btn-outline-success btn-sm mr-2" data-toggle="modal" data-target="#manual">
         Add Manual Time Entry
     </button>
     <!-- Modal -->
