@@ -87,19 +87,16 @@ class ImportController extends Controller
              if($usertime){
                  continue;
              }
-             else {
-                 Time::create([
-                     'project_id' => $id,
-                     'task_id' => $time["task_id"],
-                     'user_id' => $user->id,
-                     'activity_id' => $time["activity_id"],
-
-                     //using Carbon for specific date format.
-                     'started' => Carbon::parse($jsonarr[6]),
-                     //entering in json to access the specifield position in the array[].
-                     'finished' => Carbon::parse($jsonarr[7]),
-                 ]);
-             }
+             Time::create([
+                 'project_id' => $id,
+                 'task_id' => $time["task_id"],
+                 'user_id' => $user->id,
+                 'activity_id' => $time["activity_id"],
+                 //using Carbon for specific date format.
+                 'started' => Carbon::parse($jsonarr[6]),
+                 //entering in json to access the specifield position in the array[].
+                 'finished' => Carbon::parse($jsonarr[7]),
+            ]);
         }
         return view('layouts.home');;
     }

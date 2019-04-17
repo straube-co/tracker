@@ -16,7 +16,7 @@ class TimeController extends Controller
     {
         //
         $times = Time::with('task', 'task.project', 'activity')->where('user_id', session('auth.id'))->orderBy('started', 'desc')->paginate();
-        $notFinishedTime = Time::where('finished', NULL)->count();
+        $notFinishedTime = Time::where('finished', NULL)->count() > 0;
 
         $data = [
             'times' => $times,
