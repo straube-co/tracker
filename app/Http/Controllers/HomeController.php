@@ -13,7 +13,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $times =  Cache::remember('activities', 1, function () {
+        $times =  Cache::remember('times', 1, function () {
             return Time::get();
         });
 

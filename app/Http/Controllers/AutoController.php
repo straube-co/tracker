@@ -24,11 +24,13 @@ class AutoController extends Controller
         $tasks = Cache::remember('tasks', 1, function () {
             return Task::get();
         });
+        $notFinishedTime = Time::where('finished', NULL)->count();
 
         $data = [
             'projects' => $projects,
             'tasks' => $tasks,
             'activities' => $activities,
+            'notFinishedTime' => $notFinishedTime,
         ];
         return view('auto.index', $data);
     }
