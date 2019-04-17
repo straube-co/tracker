@@ -37,7 +37,7 @@
         <br>
         <br>
         <div>
-            @if($notFinishedTime == 1){{-- validation automatic time counting  --}}
+            @if($notFinishedTime === 1){{-- validation automatic time counting  --}}
                 <p style="color:red">Stop your time for start automatic Time Counting</p>
             @else
                 <button class="btn btn-success btn-sm" type="submit">Start </button>
