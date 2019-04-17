@@ -82,9 +82,9 @@ class ImportController extends Controller
             $user = User::where('name', $jsonarr[2])->first();
 
             //search on Time, the informations the user_id equal $user->id. Search per 'started' equal $jsonarr[6].
-             $usertime = Time::where('user_id', $user->id)->where('started', Carbon::parse($jsonarr[6]))->count();  //count return 0 or 1.
+             $usertime = Time::where('user_id', $user->id)->where('started', Carbon::parse($jsonarr[6]))->count() > 0;
 
-             if($usertime > 0){
+             if($usertime){
                  continue;
              }
              else {
