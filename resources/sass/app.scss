@@ -1,17 +1,17 @@
 
-// Fonts
+//fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
+//variables
 @import 'variables';
 
-// Bootstrap
+//bootstrap
 @import '~bootstrap/scss/bootstrap';
 @import '~tempusdominus-bootstrap-4/src/sass/tempusdominus-bootstrap-4-build';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 
-// Home, Nav
+//nav
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -25,22 +25,24 @@
 li {
     list-style: none;
 }
+
+//home
 .straube {
-    padding-left: 100px;
-    padding-top: 50px;
+    margin-left: 100px;
+    margin-top: 50px;
 }
 
-//Time Tracking
+//time Tracking
 .stop {
     background-color: red;
 }
 
-//Activity
+//activity
 .activity {
     width: 90%;
 }
 
-//Reports
+//reports
 .fa {
     @extend .fas;
 }
