@@ -37,7 +37,7 @@ class AutoController extends Controller
 
     public function store(Request $request)
     {
-        $time = Time::where('user_id', $request->id)->where('finished', NULL)->count() > 0;
+        $time = Time::where('user_id', $request->id)->where('finished', NULL)->count() == 0;
 
          if($time){
              Time::create([
@@ -47,7 +47,6 @@ class AutoController extends Controller
                  'started' => Carbon::now(),
                  'finished' => NULL,
              ]);
-             return redirect()->route('time.index');
          }
              return redirect()->route('time.index');
     }

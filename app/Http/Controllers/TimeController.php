@@ -16,18 +16,7 @@ class TimeController extends Controller
     {
         //
         $times = Time::with('task', 'task.project', 'activity')->where('user_id', session('auth.id'))->orderBy('started', 'desc')->paginate();
-        $notFinishedTime = Time::where('finished', NULL)->count() > 0;
 
-        $data = [
-            'times' => $times,
-            'notFinishedTime' => $notFinishedTime,
-        ];
-
-        return view('time.index', $data);
-    }
-
-    public function create()
-    {
         $activities = Cache::remember('activities', 1, function() {
             return Activity::get();
         });
@@ -39,12 +28,17 @@ class TimeController extends Controller
             return Task::get();
         });
 
+        $notFinishedTime = Time::where('finished', NULL)->count() > 0;
+
         $data = [
+            'times' => $times,
+            'notFinishedTime' => $notFinishedTime,
             'projects' => $projects,
             'tasks' => $tasks,
             'activities' => $activities,
         ];
-        return view('time.create', $data);
+
+        return view('time.index', $data);
     }
 
     public function store(Request $request)
