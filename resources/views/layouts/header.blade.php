@@ -12,7 +12,7 @@
     <nav class="navbar navbar-dark bg-dark">
         <a href="{{ route('home.index') }}">Home</a>
         <a href="{{ route('time.index') }}">Time Tracking</a>
-        <a href="{{ route('activity.index') }}">Activities</a>
+        <a href="{{ route('activity.index') }}">Activity</a>
         <a href="{{ route('report.index') }}">Reports</a>
         <a href="{{ route('import.index') }}">Import</a>
     </nav>
