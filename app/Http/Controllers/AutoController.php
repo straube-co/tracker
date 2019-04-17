@@ -24,7 +24,7 @@ class AutoController extends Controller
         $tasks = Cache::remember('tasks', 1, function () {
             return Task::get();
         });
-        $notFinishedTime = Time::where('finished', NULL)->count();
+        $notFinishedTime = Time::where('finished', NULL)->count() > 0;
 
         $data = [
             'projects' => $projects,
@@ -37,9 +37,9 @@ class AutoController extends Controller
 
     public function store(Request $request)
     {
-        $time = Time::where('user_id', $request->id)->where('finished', NULL)->count();
+        $time = Time::where('user_id', $request->id)->where('finished', NULL)->count() > 0;
 
-         if($time == 0){
+         if($time){
              Time::create([
                  'task_id' => $request->task_id,
                  'user_id' => $request->session()->get('auth.id'),
@@ -48,9 +48,8 @@ class AutoController extends Controller
                  'finished' => NULL,
              ]);
              return redirect()->route('time.index');
-         }else {
+         }
              return redirect()->route('time.index');
-          }
     }
 
     public function update($id)
