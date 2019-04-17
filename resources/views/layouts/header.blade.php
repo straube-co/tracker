@@ -14,7 +14,6 @@
         <a href="{{ route('time.index') }}">Time Tracking</a>
         <a href="{{ route('activity.index') }}">Activity</a>
         <a href="{{ route('report.index') }}">Reports</a>
-        <a href="{{ route('import.index') }}">Import</a>
     </nav>
     <div id="app" class="container-fluid mt-3">
         @yield('content')
