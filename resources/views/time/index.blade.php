@@ -15,70 +15,64 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <form action="{{ route('time.store') }}" method="post">
-                            {{ csrf_field() }}
-                            <div>
-                                <label for="project">Project: </label>
-                                <select class="custom-select" id="project" name="project_id">
-                                    <option value="">Select</option>
-                                    @foreach ($projects as $project)
-                                        <option value="{{ $project->id }}" @if ($project->id == old('project_id')) selected @endif>{{ $project->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <br>
-                            <div>
-                                <label for="task">Task: </label>
-                                <select class="custom-select" id="task" name="task_id">
-                                    <option value="">Select</option>
-                                    @foreach ($tasks as $task)
-                                        <option value="{{ $task->id }}" data-project_id="{{ $task->project_id }}" @if ($task->id == old('task_id')) selected @endif>{{ $task->name }}</option>
-                                    @endforeach
-                                </select>
-                                {{ $errors->first('task_id') }}
-                            </div>
-                            <br>
-                            <div>
-                                <label for="Activity">Activity: </label>
-                                <select class="custom-select" id="Activity" name="activity_id">
-                                    <option value="">Select</option>
-                                    @foreach ($activities as $activity)
-                                        <option value="{{ $activity->id }}" @if ($activity->id == old('activity_id')) selected @endif>{{ $activity->name }}</option>
-                                    @endforeach
-                                </select>
-                                {{ $errors->first('name') }}
-                            </div>
-                            <br>
+                <form action="{{ route('time.store') }}" method="post">
+                    <div class="modal-body">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="project">Project: </label>
+                            <select class="custom-select" id="project" name="project_id">
+                                <option value="">Select</option>
+                                @foreach ($projects as $project)
+                                    <option value="{{ $project->id }}" @if ($project->id == old('project_id')) selected @endif>{{ $project->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="task">Task: </label>
+                            <select class="custom-select" id="task" name="task_id">
+                                <option value="">Select</option>
+                                @foreach ($tasks as $task)
+                                    <option value="{{ $task->id }}" data-project_id="{{ $task->project_id }}" @if ($task->id == old('task_id')) selected @endif>{{ $task->name }}</option>
+                                @endforeach
+                            </select>
+                            {{ $errors->first('task_id') }}
+                        </div>
+                        <div class="form-group">
+                            <label for="Activity">Activity: </label>
+                            <select class="custom-select" id="Activity" name="activity_id">
+                                <option value="">Select</option>
+                                @foreach ($activities as $activity)
+                                    <option value="{{ $activity->id }}" @if ($activity->id == old('activity_id')) selected @endif>{{ $activity->name }}</option>
+                                @endforeach
+                            </select>
+                            {{ $errors->first('name') }}
+                        </div>
+                        <div class="form-group">
                             <label>I started my work: </label>
-                            <div class="form-group">
-                                <div class="input-group date" id="datepickerstarted" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#datepickerstarted" name="started"/>
-                                    <div class="input-group-append" data-target="#datepickerstarted" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
+                            <div class="input-group date" id="datepickerstarted" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#datepickerstarted" name="started"/>
+                                <div class="input-group-append" data-target="#datepickerstarted" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
-                                {{ $errors->first('started') }}
                             </div>
+                            {{ $errors->first('started') }}
+                        </div>
+                        <div class="form-group">
                             <label>I finished my work: </label>
-                            <div class="form-group">
-                                <div class="input-group date" id="datepickerfinished" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#datepickerfinished" name="finished"/>
-                                    <div class="input-group-append" data-target="#datepickerfinished" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
+                            <div class="input-group date" id="datepickerfinished" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#datepickerfinished" name="finished"/>
+                                <div class="input-group-append" data-target="#datepickerfinished" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
-                            {{ $errors->first('finished') }}
-                            <br>
-                        </form>
+                        </div>
+                        {{ $errors->first('finished') }}
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success btn-sm">Save</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success btn-sm">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -102,7 +96,7 @@
                     <form action="{{ route('auto.store') }}" method="post">
                         <div class="modal-body">
                             {{ csrf_field() }}
-                            <div>
+                            <div class="form-group">
                                 <label for="autoproject">Project: </label>
                                 <select class="custom-select" id="autoproject" name="project_id">
                                     <option value="">Select</option>
@@ -111,8 +105,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <br>
-                            <div>
+                            <div class="form-group">
                                 <label for="autotask">Task: </label>
                                 <select class="custom-select" id="autotask" name="task_id">
                                     <option value="">Select</option>
@@ -122,8 +115,7 @@
                                 </select>
                                 {{ $errors->first('task_id') }}
                             </div>
-                            <br>
-                            <div>
+                            <div class="form-group">
                                 <label for="autoactivity">Activity: </label>
                                 <select class="custom-select" id="autoactivity" name="activity_id">
                                     <option value="">Select</option>

@@ -18,14 +18,14 @@
                 <form action="{{ route('activity.store') }}" method="post">
                     <div class="modal-body">
                         {{ csrf_field() }}
-                        <div>
+                        <div class="form-group">
                             <label for="name">Name: </label>
-                            <input type="text" name="name" required>
+                            <input class="form-control" type="text" name="name" required>
                             {{ $errors->first('name') }}
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-success btn-sm">Create</button>
                     </div>
                 </form>

@@ -5,7 +5,7 @@
     <button type="button" class="btn btn-outline-info btn-sm mb-3 mr-2" data-toggle="modal" data-target="#import">
         Import
     </button>
-    <!-- Modal -->
+    <!-- Modal import-->
     <div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="modalImport" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -15,13 +15,13 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ route('import.store') }}" enctype="multipart/form-data" method="post">
+                <form action="{{ route('import.store') }}" enctype="multipart/form-data" method="post">
+                    <div class="modal-body">
                         {{ csrf_field() }}
-                            <div class="form-group">
-                                <input type="file" name="import_file"/>
-                            </div>
-                            <div class="form-group">
+                        <div class="form-group">
+                            <input type="file" name="import_file"/>
+                        </div>
+                        <div class="form-group">
                             <label for="importproject">Project: </label>
                             <select class="custom-select" id="importproject" name="project_id">
                                 <option value="">Select</option>
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-success btn-sm">Import file</button>
                     </div>
                 </form>
@@ -50,87 +50,87 @@
                     <option value="">Select</option>
                     @foreach ($projects as $project)
                         <option value="{{ $project->id }}" @if ($project->id == request('project_id')) selected @endif>{{ $project->name }}</option>
-                        @endforeach
-                    </select>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group pt-3">
+                <label for="task">Task: </label>
+                <select class="custom-select" id="task" name="task_id">
+                    <option value="">Select</option>
+                    @foreach ($tasks as $task)
+                        <option value="{{ $task->id }}" data-project_id="{{ $task->project_id }}" @if ($task->id == request('task_id')) selected @endif>{{ $task->name }}</option>
+                    @endforeach
+                </select>
+                {{ $errors->first('task_id') }}
+            </div>
+            <div class="form-group pt-3">
+                <label for="user">User: </label>
+                <select class="custom-select" id="user" name="user_id">
+                    <option value="">Select</option>
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}" @if ($user->id == request('user_id')) selected @endif>{{ $user->name }}</option>
+                    @endforeach
+                </select>
+                {{ $errors->first('name') }}
+            </div>
+            <div class="form-group pt-3">
+                <label for="activity">Activity: </label>
+                <select class="custom-select" id="activity" name="activity_id">
+                    <option value="">Select</option>
+                    @foreach ($activities as $activity)
+                        <option value="{{ $activity->id }}" @if ($activity->id == request('activity_id')) selected @endif>{{ $activity->name }}</option>
+                    @endforeach
+                </select>
+                {{ $errors->first('name') }}
+            </div>
+            <div class="pt-3 form-group">
+                <label>I started my work: </label>
+                <div class="input-group date" id="datepickerstarted" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#datepickerstarted" name="started" value="{{ $started }}"/>
+                    <div class="input-group-append" data-target="#datepickerstarted" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
                 </div>
-                <div class="pt-3">
-                    <label for="task">Task: </label>
-                    <select class="custom-select" id="task" name="task_id">
-                        <option value="">Select</option>
-                        @foreach ($tasks as $task)
-                            <option value="{{ $task->id }}" data-project_id="{{ $task->project_id }}" @if ($task->id == request('task_id')) selected @endif>{{ $task->name }}</option>
-                            @endforeach
-                        </select>
-                        {{ $errors->first('task_id') }}
+                {{ $errors->first('started') }}
+            </div>
+            <div class="pt-3 form-group">
+                <label>I finished my work: </label>
+                <div class="input-group date" id="datepickerfinished" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#datepickerfinished" name="finished" value="{{ $finished }}"/>
+                    <div class="input-group-append" data-target="#datepickerfinished" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
-                    <div class="pt-3">
-                        <label for="user">User: </label>
-                        <select class="custom-select" id="user" name="user_id">
-                            <option value="">Select</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}" @if ($user->id == request('user_id')) selected @endif>{{ $user->name }}</option>
-                                @endforeach
-                            </select>
-                            {{ $errors->first('name') }}
-                        </div>
-                        <div class="pt-3">
-                            <label for="activity">Activity: </label>
-                            <select class="custom-select" id="activity" name="activity_id">
-                                <option value="">Select</option>
-                                @foreach ($activities as $activity)
-                                    <option value="{{ $activity->id }}" @if ($activity->id == request('activity_id')) selected @endif>{{ $activity->name }}</option>
-                                    @endforeach
-                                </select>
-                                {{ $errors->first('name') }}
-                            </div>
-                            <label>I started my work: </label>
-                            <div class="pt-3 form-group">
-                                <div class="input-group date" id="datepickerstarted" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#datepickerstarted" name="started" value="{{ $started }}"/>
-                                    <div class="input-group-append" data-target="#datepickerstarted" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                                {{ $errors->first('started') }}
-                            </div>
-                            <label>I finished my work: </label>
-                            <div class="pt-3 form-group">
-                                <div class="input-group date" id="datepickerfinished" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#datepickerfinished" name="finished" value="{{ $finished }}"/>
-                                    <div class="input-group-append" data-target="#datepickerfinished" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{ $errors->first('finished') }}
-                            <button class="btn btn-primary btn-sm" class="btn btn-primary">Filter</button>
-                            <a class="btn btn-outline-primary btn-sm" name="clean">Clean</a>
-                        </form>
-                    </div>
-                    <h1 class="mt-3">Reports</h1>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Projects</th>
-                                <th>Tasks</th>
-                                <th>Activities</th>
-                                <th>Started</th>
-                                <th>Finished</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($times as $time)
-                                <tr>
-                                    <td>{{ $time->user->name }}</td>
-                                    <td>{{ $time->task->project->name }}</td>
-                                    <td>{{ $time->task->name }}</td>
-                                    <td>{{ $time->activity->name }}</td>
-                                    <td>{{ $time->started }}</td>
-                                    <td>{{ $time->finished }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    {{ $times->links() }}
-                @endsection
+                </div>
+            </div>
+            {{ $errors->first('finished') }}
+            <button class="btn btn-primary btn-sm" class="btn btn-primary">Filter</button>
+            <button type="button" class="btn btn-outline-info btn-sm" name="clean">Clean</button>
+        </form>
+    </div>
+    <h1 class="mt-3">Reports</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Projects</th>
+                <th>Tasks</th>
+                <th>Activities</th>
+                <th>Started</th>
+                <th>Finished</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($times as $time)
+                <tr>
+                    <td>{{ $time->user->name }}</td>
+                    <td>{{ $time->task->project->name }}</td>
+                    <td>{{ $time->task->name }}</td>
+                    <td>{{ $time->activity->name }}</td>
+                    <td>{{ $time->started }}</td>
+                    <td>{{ $time->finished }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    {{ $times->links() }}
+@endsection
