@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts/home');
 });
 
 Route::get('/auth', 'Auth\\OAuthController@auth')->name('auth.auth');
