@@ -23,9 +23,14 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
+
+        //
+        Route::bind('report', function ($value) {
+
+            return \App\Report::where('code', $value)->first() ?? abort(404);
+
+        });
     }
 
     /**

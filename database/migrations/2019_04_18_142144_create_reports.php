@@ -16,6 +16,7 @@ class CreateReports extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('code');
             $table->json('filter');
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ class CreateReports extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('reports');
     }
 }

@@ -51,6 +51,30 @@ showTasks($('[name=project_id]').val());
 
 //end }
 
+//action {
+function action() {
+    //
+    let token = document.head.querySelector('meta[name="csrf-token"]');
+
+    //
+    const $form = $('#form_action');
+
+    //
+    $form.attr('action', '/report');
+    $form.attr('method', 'post');
+
+    //
+    $form.prepend('<input type="hidden" name="_token" value="' + token.content + '">');
+
+    $form.submit();
+}
+// click of button
+$('#btn_share').on('click', function () {
+    action();
+});
+
+// end }
+
 //function toApply {
 function toApply() {
     //

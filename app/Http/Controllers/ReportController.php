@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\Request;
 use App\Activity;
 use App\Project;
 use App\Task;
 use App\Time;
 use App\User;
+use App\Report;
 
 class ReportController extends Controller
 {
@@ -68,4 +69,23 @@ class ReportController extends Controller
         return view('report.index', $data);
     }
 
+    public function store(Request $request)
+    {
+
+        $report = Report::create([
+            'name' => $request->name,
+            'code' => str_random(20),
+            //criando um array json
+            'filter' => [
+                'project_id' => $request->project_id,
+                'task_id' => $request->task_id,
+                'user_id' => $request->user_id,
+                'activity_id' => $request->activity_id,
+                'started' => $request->started,
+                'finished' => $request->finished,
+            ]
+        ]);
+
+        return redirect()->route('share.show', ($report->code));
+    }
 }

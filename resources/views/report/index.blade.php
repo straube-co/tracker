@@ -43,7 +43,7 @@
         Search filter
     </button>
     <div class="collapse" id="collapseReport">
-        <form action="{{ route('report.index') }}" method="get">
+        <form id="form_action" action="{{ route('report.index') }}" method="get">
             <div>
                 <label for="project">Project: </label>
                 <select class="custom-select" id="project" name="project_id">
@@ -105,6 +105,34 @@
             {{ $errors->first('finished') }}
             <button class="btn btn-primary btn-sm" class="btn btn-primary">Filter</button>
             <button type="button" class="btn btn-outline-info btn-sm" name="clean">Clean</button>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#share">
+              Share
+            </button>
+            <!-- Modal share -->
+            <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="modalShare" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalShare">Share</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="form-group">
+                          <label for="name">Name: </label>
+                          <input class="form-control" type="text" name="name" required>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="btn_share" class="btn btn-success btn-sm">Share</button>
+                  </div>
+                </div>
+              </div>
+            </div>
         </form>
     </div>
     <h1 class="mt-3">Reports</h1>

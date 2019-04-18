@@ -28,3 +28,7 @@ Route::group([
     Route::resource('/import', 'ImportController');
     Route::resource('/auto', 'AutoController');
 });
+
+Route::resource('/share', 'ShareController', ['parameters' => [
+    'share' => 'report',
+]]);

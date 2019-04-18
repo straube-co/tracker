@@ -7,7 +7,7 @@
         <h1>Project: {{ $project->name }}</h1>
         <br>
         <div>
-            <h6>Múltipla seleção:</h6>
+            <h6>Select:</h6>
             <select id="task" name="task_id">
                 <option value="">Select</option>
                 @foreach ($tasks as $task)
