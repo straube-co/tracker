@@ -103,7 +103,7 @@
                 </div>
             </div>
             {{ $errors->first('finished') }}
-            <button type:"submit" class="btn btn-primary btn-sm" class="btn btn-primary">Filter</button>
+            <button type="submit" class="btn btn-primary btn-sm" class="btn btn-primary">Filter</button>
             <button type="button" class="btn btn-outline-info btn-sm" name="clean">Clean</button>
 
             <!-- Button trigger modal -->
