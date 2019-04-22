@@ -42,9 +42,9 @@
     <button class="btn btn-outline-info btn-sm mb-3" type="button" data-toggle="collapse" data-target="#collapseReport" aria-expanded="false" aria-controls="collapseExample">
         Search filter
     </button>
+    <form id="form_action" action="{{ route('report.index') }}" method="get">
     <div class="collapse" id="collapseReport">
-        <form id="form_action" action="{{ route('report.index') }}" method="get">
-            <div>
+            <div class="form-group pt-3">
                 <label for="project">Project: </label>
                 <select class="custom-select" id="project" name="project_id">
                     <option value="">Select</option>
@@ -71,7 +71,6 @@
                         <option value="{{ $user->id }}" @if ($user->id == request('user_id')) selected @endif>{{ $user->name }}</option>
                     @endforeach
                 </select>
-                {{ $errors->first('name') }}
             </div>
             <div class="form-group pt-3">
                 <label for="activity">Activity: </label>
@@ -81,7 +80,6 @@
                         <option value="{{ $activity->id }}" @if ($activity->id == request('activity_id')) selected @endif>{{ $activity->name }}</option>
                     @endforeach
                 </select>
-                {{ $errors->first('name') }}
             </div>
             <div class="pt-3 form-group">
                 <label>I started my work: </label>
@@ -91,7 +89,6 @@
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
                 </div>
-                {{ $errors->first('started') }}
             </div>
             <div class="pt-3 form-group">
                 <label>I finished my work: </label>
@@ -102,9 +99,10 @@
                     </div>
                 </div>
             </div>
-            {{ $errors->first('finished') }}
-            <button type="submit" class="btn btn-primary btn-sm" class="btn btn-primary">Filter</button>
+            <button type="submit" class="btn btn-primary btn-sm">Filter</button>
             <button type="button" class="btn btn-outline-info btn-sm" name="clean">Clean</button>
+        </form>
+    </div>
 
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#share">
@@ -133,8 +131,6 @@
                 </div>
               </div>
             </div>
-        </form>
-    </div>
     <h1 class="mt-3">Reports</h1>
     <table class="table">
         <thead>
