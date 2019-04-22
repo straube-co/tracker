@@ -71,7 +71,6 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
-
         $report = Report::create([
             'name' => $request->name,
             'code' => str_random(20),

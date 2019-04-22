@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark fixed-top">
-        <a href="{{ route('home.index') }}">Home</a>
-        <a href="{{ route('time.index') }}">Time Tracking</a>
-        <a href="{{ route('activity.index') }}">Activity</a>
-        <a href="{{ route('report.index') }}">Reports</a>
-    </nav>
+    @if (session('auth.id'))
+        <nav class="navbar navbar-dark bg-dark fixed-top">
+            <a href="{{ route('home.index') }}">Home</a>
+            <a href="{{ route('time.index') }}">Time Tracking</a>
+            <a href="{{ route('activity.index') }}">Activity</a>
+            <a href="{{ route('report.index') }}">Reports</a>
+        </nav>
+    @endif
     <div id="app" class="container-fluid mt-3">
         @yield('content')
     </div>

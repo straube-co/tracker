@@ -1,5 +1,4 @@
 @extends('layouts.header')
-
 @section('content')
 
 <h1>Share Name: {{ $report->name }}</h1>
