@@ -101,13 +101,11 @@
             </div>
             <button type="submit" class="btn btn-primary btn-sm">Filter</button>
             <button type="button" class="btn btn-outline-info btn-sm" name="clean">Clean</button>
-        </form>
-    </div>
-
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#share">
               Share
             </button>
+            
             <!-- Modal share -->
             <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="modalShare" aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -131,6 +129,8 @@
                 </div>
               </div>
             </div>
+        </form>
+    </div>
     <h1 class="mt-3">Reports</h1>
     <table class="table">
         <thead>
