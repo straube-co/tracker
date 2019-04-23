@@ -11,16 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('layouts/home');
-});
-
 Route::get('/auth', 'Auth\\OAuthController@auth')->name('auth.auth');
 Route::get('/auth/handle', 'Auth\\OAuthController@handle')->name('auth.handle');
 
 Route::group([
     'middleware' => [ 'auth' ],
 ], function () {
+    Route::get('/', function () {
+        return view('layouts/home');
+    });
     Route::resource('/activity', 'ActivityController');
     Route::resource('/report', 'ReportController');
     Route::resource('/time', 'TimeController');

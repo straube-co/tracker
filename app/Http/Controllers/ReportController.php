@@ -30,7 +30,7 @@ class ReportController extends Controller
 
         $request = request();
 
-        $query = Time::select('times.*');
+        $query = Time::select('times.*')->orderBy('started', 'desc');
 
         if (($activity = $request->activity_id)) {
             $query->where('activity_id', $activity);

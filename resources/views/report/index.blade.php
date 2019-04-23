@@ -105,7 +105,7 @@
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#share">
               Share
             </button>
-            
+
             <!-- Modal share -->
             <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="modalShare" aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -119,7 +119,7 @@
                   <div class="modal-body">
                       <div class="form-group">
                           <label for="name">Name: </label>
-                          <input class="form-control" type="text" name="name" required>
+                          <input class="form-control" type="text" name="name">
                     </div>
                   </div>
                   <div class="modal-footer">
