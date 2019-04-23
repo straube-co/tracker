@@ -120,19 +120,23 @@ function updateTime() {
     }
 
     //map executa uma função em todos as posicoes do array: Nesse caso, em cada "part/parte" ele faz um parseInt com base10 e retorna para o array.
-    var hms = time.split(":").map(part => parseInt(part, 10));
+    var hms = time.split(/[ :]/).map(part => parseInt(part, 10));
 
-    hms[2]++;
+    hms[3]++;
 
-    if(hms[2] === 60) {
+    if(hms[3] === 60) {
+        hms[3] = 0;
+        hms[2]++;
+
+    }if(hms[2] === 60) {
         hms[2] = 0;
         hms[1]++;
 
-    }if(hms[1] === 60) {
+    }if(hms[1] === 24) {
         hms[1] = 0;
         hms[0]++;
-
     }
+
     //
     var result = hms.map(part => part < 10 ? '0' + part : part).join(':');
     $('[name=update_time]').text(result);
@@ -146,7 +150,7 @@ function updateTime() {
     }
 }
 //calls the function in a time interval
-counter = setInterval(updateTime, 1000);
+counter = setInterval(updateTime, 100);
 
 //end }
 

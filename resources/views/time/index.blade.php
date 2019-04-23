@@ -127,12 +127,13 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+
                             @if($notFinishedTime){{-- validation automatic time counting  --}}
                                 <p style="color:red">Stop your time for start automatic Time Counting</p>
                             @else
                                 <button type="submit" class="btn btn-success btn-sm">Start</button>
                             @endif
-                            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -166,7 +167,7 @@
                                 {{ csrf_field() }}
                                 {{ method_field('put') }}
                                 <button type="submit" class="btn btn-outline-danger btn-sm" name="update_time">
-                                    {{Carbon\Carbon::now()->diff($time->started)->format('%H:%I:%S')}}
+                                    {{Carbon\Carbon::now()->diff($time->started)->format('%D %H:%I:%S')}}
                                 </button>
                             </form>
                         </td>
