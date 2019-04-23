@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Time;
 use App\Project;
@@ -30,14 +32,17 @@ class TimeController extends Controller
 
         $notFinishedTime = Time::where('finished', NULL)->count() > 0;
 
+        //
+        $stop = Time::where('finished', NULL)->where('started', '<', DB::raw('NOW() - INTERVAL 8 HOUR'))->count() > 0;
+
         $data = [
             'times' => $times,
             'notFinishedTime' => $notFinishedTime,
+            'stop' => $stop,
             'projects' => $projects,
             'tasks' => $tasks,
             'activities' => $activities,
         ];
-
         return view('time.index', $data);
     }
 

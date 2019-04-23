@@ -69474,20 +69474,27 @@ function updateTime() {
   } //map executa uma função em todos as posicoes do array: Nesse caso, em cada "part/parte" ele faz um parseInt com base10 e retorna para o array.
 
 
-  var hms = time.split(":").map(function (part) {
+  var hms = time.trim().split(/[ :]/g).map(function (part) {
     return parseInt(part, 10);
-  });
-  hms[2]++;
+  }); // console.log(hms);
+
+  hms[3]++;
+
+  if (hms[3] === 60) {
+    hms[3] = 0;
+    hms[2]++;
+  }
 
   if (hms[2] === 60) {
     hms[2] = 0;
     hms[1]++;
   }
 
-  if (hms[1] === 60) {
+  if (hms[1] === 24) {
     hms[1] = 0;
     hms[0]++;
-  } //
+  } // console.log(hms);
+  //
 
 
   var result = hms.map(function (part) {
@@ -69711,8 +69718,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/lucascardoso/Projetos/tracker/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/lucascardoso/Projetos/tracker/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/lucascardoso/Projects/tracker/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/lucascardoso/Projects/tracker/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

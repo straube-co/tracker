@@ -1,6 +1,11 @@
 @extends('layouts.header')
 
 @section('content')
+    @if($stop)
+        <div class="alert alert-danger" role="alert">
+            This is a danger alert—check it out!
+        </div>
+    @endif
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-outline-success btn-sm mr-2" data-toggle="modal" data-target="#manual">
         Add Manual Time Entry
@@ -77,7 +82,7 @@
         </div>
     </div>
     @if($notFinishedTime){{-- validation automatic time counting  --}}
-        <p class="pt-3" style="color:red">Stop your time for start automatic Time Counting</p>
+        <button type="button" class="btn btn-outline-danger btn-sm"> Stop your time for start automatic Time Counting</button>
     @else
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#automatic">
@@ -130,7 +135,7 @@
                             <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
 
                             @if($notFinishedTime){{-- validation automatic time counting  --}}
-                                <p style="color:red">Stop your time for start automatic Time Counting</p>
+                                <button type="button" class="btn btn-outline-danger btn-sm"> Stop your time for start automatic Time Counting</button>
                             @else
                                 <button type="submit" class="btn btn-success btn-sm">Start</button>
                             @endif
