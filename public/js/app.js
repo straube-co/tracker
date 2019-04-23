@@ -69476,8 +69476,7 @@ function updateTime() {
 
   var hms = time.trim().split(/[ :]/g).map(function (part) {
     return parseInt(part, 10);
-  }); // console.log(hms);
-
+  });
   hms[3]++;
 
   if (hms[3] === 60) {
@@ -69493,9 +69492,7 @@ function updateTime() {
   if (hms[1] === 24) {
     hms[1] = 0;
     hms[0]++;
-  } // console.log(hms);
-  //
-
+  }
 
   var result = hms.map(function (part) {
     return part < 10 ? '0' + part : part;

@@ -121,7 +121,7 @@ function updateTime() {
 
     //map executa uma função em todos as posicoes do array: Nesse caso, em cada "part/parte" ele faz um parseInt com base10 e retorna para o array.
     var hms = time.trim().split(/[ :]/g).map(part => parseInt(part, 10));
-     // console.log(hms);
+
     hms[3]++;
 
     if(hms[3] === 60) {
@@ -136,8 +136,7 @@ function updateTime() {
         hms[1] = 0;
         hms[0]++;
     }
-    // console.log(hms);
-    //
+
     var result = hms.map(part => part < 10 ? '0' + part : part).join(':');
 
     $('[name=update_time]').text(result);
