@@ -69503,6 +69503,7 @@ function updateTime() {
 
   if (!stop) {
     $('.stop_time').text('Stop');
+    $('.time_stop').text('-');
   }
 } //calls the function in a time interval
 

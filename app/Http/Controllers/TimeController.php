@@ -16,8 +16,6 @@ class TimeController extends Controller
 
     public function index()
     {
-        //
-        $times = Time::with('task', 'task.project', 'activity')->where('user_id', session('auth.id'))->orderBy('started', 'desc')->paginate();
 
         $activities = Cache::remember('activities', 1, function() {
             return Activity::get();
@@ -30,15 +28,7 @@ class TimeController extends Controller
             return Task::get();
         });
 
-        $notFinishedTime = Time::where('finished', NULL)->count() > 0;
-
-        //
-        $stop = Time::where('finished', NULL)->where('started', '<', DB::raw('NOW() - INTERVAL 8 HOUR'))->count() > 0;
-
         $data = [
-            'times' => $times,
-            'notFinishedTime' => $notFinishedTime,
-            'stop' => $stop,
             'projects' => $projects,
             'tasks' => $tasks,
             'activities' => $activities,
@@ -61,57 +51,6 @@ class TimeController extends Controller
             'started' => $validatedData['started'],
             'finished' => $validatedData['finished'],
         ]);
-        return redirect()->route('time.index');
-    }
-
-    public function edit($id)
-    {
-        $activities = Cache::remember('activities', 1, function () {
-            return Activity::get();
-        });
-        $projects = Cache::remember('projects', 1, function () {
-            return Project::get();
-        });
-        $tasks = Cache::remember('tasks', 1, function () {
-            return Task::get();
-        });
-        $time = Time::find($id);
-
-        $data = [
-            'projects' => $projects,
-            'tasks' => $tasks,
-            'time' => $time,
-            'activities' => $activities
-        ];
-        return view('time.edit', $data);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'task_id' => 'exists:tasks,id',
-            'started' => 'date_format:Y-m-d H:i:s',
-            'finished' => 'date_format:Y-m-d H:i:s|after_or_equal:started',
-        ]);
-
-        $time = Time::find($id);
-
-        $time->update([
-            'task_id' => $validatedData['task_id'],
-            'activity_id' => $request->activity_id,
-            'started' => $validatedData['started'],
-            'finished' => $validatedData['finished'],
-        ]);
-        $time->save();
-
-        return redirect()->route('time.index');
-    }
-
-    public function destroy($id)
-    {
-        $time = Time::find($id);
-        $time->delete();
-
         return redirect()->route('time.index');
     }
 }

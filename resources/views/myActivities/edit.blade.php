@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form action="{{ route('time.update', $time->id )}}" method="post">
+    <form action="{{ route('my.update', $time->id )}}" method="post">
     {{ csrf_field() }}
     {{ method_field('put') }}
         <div>
@@ -61,7 +61,7 @@
         <br>
         <div>
             <button class="btn btn-success btn-sm" type="submit">Save </button>
-            <a class="btn btn-danger btn-sm" href="{{ route('time.index')}}">Cancel</a>
+            <a class="btn btn-danger btn-sm" href="{{ route('my.index')}}">Cancel</a>
         </div>
     </form>
 </div>

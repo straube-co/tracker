@@ -147,6 +147,7 @@ function updateTime() {
     //if a time is started, it edits the text of the edit table to stop
     if(!stop) {
         $('.stop_time').text('Stop');
+        $('.time_stop').text('-');
     }
 }
 //calls the function in a time interval

@@ -141,6 +141,7 @@
                 <th>Activities</th>
                 <th>Started</th>
                 <th>Finished</th>
+                <th>Total</th>
             </tr>
         </thead>
         <tbody>
@@ -152,6 +153,7 @@
                     <td>{{ $time->activity->name }}</td>
                     <td>{{ $time->started }}</td>
                     <td>{{ $time->finished }}</td>
+                    <td>{{ $time->finished ? $time->finished->diff($time->started)->format('%D %H:%I:%S') : '-' }}</td>
                 </tr>
             @endforeach
         </tbody>

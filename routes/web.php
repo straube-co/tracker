@@ -23,6 +23,7 @@ Route::group([
     Route::resource('/activity', 'ActivityController');
     Route::resource('/report', 'ReportController');
     Route::resource('/time', 'TimeController');
+    Route::resource('/my', 'MyActivitiesController');
     Route::resource('/home', 'HomeController');
     Route::resource('/import', 'ImportController');
     Route::resource('/auto', 'AutoController');
@@ -31,3 +32,7 @@ Route::group([
 Route::resource('/share', 'ShareController', ['parameters' => [
     'share' => 'report',
 ]]);
+
+Route::get('/api/projects', function () {
+    return App\Project::get();
+});
