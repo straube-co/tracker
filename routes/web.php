@@ -32,7 +32,3 @@ Route::group([
 Route::resource('/share', 'ShareController', ['parameters' => [
     'share' => 'report',
 ]]);
-
-Route::get('/api/projects', function () {
-    return App\Project::get();
-});
