@@ -1,44 +1,6 @@
 @extends('layouts.header')
 
 @section('content')
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-outline-info btn-sm mb-3 mr-2" data-toggle="modal" data-target="#import">
-        Import
-    </button>
-    <!-- Modal import-->
-    <div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="modalImport" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalImport">Import</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="{{ route('import.store') }}" enctype="multipart/form-data" method="post">
-                    <div class="modal-body">
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <input type="file" name="import_file"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="importproject">Project: </label>
-                            <select class="custom-select" id="importproject" name="project_id">
-                                <option value="">Select</option>
-                                @foreach ($projects as $project)
-                                    <option value="{{ $project->id }}">{{ $project->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success btn-sm">Import file</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <button class="btn btn-outline-info btn-sm mb-3" type="button" data-toggle="collapse" data-target="#collapseReport" aria-expanded="false" aria-controls="collapseExample">
         Search filter
     </button>
@@ -99,13 +61,12 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-sm">Filter</button>
-            <button type="button" class="btn btn-outline-info btn-sm" name="clean">Clean</button>
+            <button type="submit" class="btn btn-primary btn-sm mr-1">Filter</button>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#share">
+            <button type="button" class="btn btn-primary btn-sm mr-1" data-toggle="modal" data-target="#share">
               Share
             </button>
-
+            <button type="button" class="btn btn-outline-info btn-sm" name="clean">Clean</button>
             <!-- Modal share -->
             <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="modalShare" aria-hidden="true">
               <div class="modal-dialog" role="document">

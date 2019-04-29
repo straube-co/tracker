@@ -98,6 +98,6 @@ class ImportController extends Controller
                  'finished' => Carbon::parse($jsonarr[7]),
             ]);
         }
-        return view('layouts.home');;
+        return view('myActivities.index');;
     }
 }

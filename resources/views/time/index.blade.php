@@ -28,11 +28,11 @@
                         @else
                             <td class="time_stop">
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#automatic">
+                                <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#automatic-{{ $project->id }}">
                                     Let's work!
                                 </button>
                                 <!-- Modal -->
-                                <div class="modal fade" id="automatic" tabindex="-1" role="dialog" aria-labelledby="modalautomatic" aria-hidden="true">
+                                <div class="modal fade" id="automatic-{{ $project->id }}" tabindex="-1" role="dialog" aria-labelledby="modalautomatic" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
