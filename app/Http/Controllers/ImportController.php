@@ -41,7 +41,7 @@ class ImportController extends Controller
 
         $file = $request->file('import_file')->openFile();
         $first = true;
-        $lines =[];
+        $lines = [];
 
         while (!$file->eof()) {
             $line = $file->fgetcsv();
@@ -73,8 +73,7 @@ class ImportController extends Controller
 
     public function update(Request $request, $id)
     {
-        foreach($request->time as $time) {
-
+        foreach ($request->time as $time) {
             //decode line to access the schedules.
             $jsonarr = json_decode($time["line"], true);
 
@@ -82,22 +81,22 @@ class ImportController extends Controller
             $user = User::where('name', $jsonarr[2])->first();
 
             //search on Time, the informations the user_id equal $user->id. Search per 'started' equal $jsonarr[6].
-             $usertime = Time::where('user_id', $user->id)->where('started', Carbon::parse($jsonarr[6]))->count() > 0;
+            $usertime = Time::where('user_id', $user->id)->where('started', Carbon::parse($jsonarr[6]))->count() > 0;
 
-             if($usertime){
-                 continue;
-             }
-             Time::create([
-                 'project_id' => $id,
-                 'task_id' => $time["task_id"],
-                 'user_id' => $user->id,
-                 'activity_id' => $time["activity_id"],
-                 //using Carbon for specific date format.
-                 'started' => Carbon::parse($jsonarr[6]),
-                 //entering in json to access the specifield position in the array[].
-                 'finished' => Carbon::parse($jsonarr[7]),
+            if ($usertime) {
+                continue;
+            }
+            Time::create([
+                'project_id' => $id,
+                'task_id' => $time["task_id"],
+                'user_id' => $user->id,
+                'activity_id' => $time["activity_id"],
+                //using Carbon for specific date format.
+                'started' => Carbon::parse($jsonarr[6]),
+                //entering in json to access the specifield position in the array[].
+                'finished' => Carbon::parse($jsonarr[7]),
             ]);
         }
-        return view('myActivities.index');;
+        return view('myActivities.index');
     }
 }

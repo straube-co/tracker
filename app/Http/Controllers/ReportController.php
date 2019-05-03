@@ -48,11 +48,11 @@ class ReportController extends Controller
             $query->where('user_id', $user);
         }
         if (($started = $request->started)) {
-            $query->where('started','>=', $started);
+            $query->where('started', '>=', $started);
         }
-         if (($finished = $request->finished)) {
-             $query->where('finished','<=', $finished);
-         }
+        if (($finished = $request->finished)) {
+            $query->where('finished', '<=', $finished);
+        }
 
         $times = $query->paginate();
 

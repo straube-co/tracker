@@ -16,9 +16,12 @@ class MyActivitiesController extends Controller
     public function index()
     {
         //
-        $times = Time::with('task', 'task.project', 'activity')->where('user_id', session('auth.id'))->orderBy('started', 'desc')->paginate();
+        $times = Time::with('task', 'task.project', 'activity')
+            ->where('user_id', session('auth.id'))
+            ->orderBy('started', 'desc')
+            ->paginate();
 
-        $activities = Cache::remember('activities', 1, function() {
+        $activities = Cache::remember('activities', 1, function () {
             return Activity::get();
         });
 

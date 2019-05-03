@@ -16,8 +16,7 @@ class TimeController extends Controller
 
     public function index()
     {
-
-        $activities = Cache::remember('activities', 1, function() {
+        $activities = Cache::remember('activities', 1, function () {
             return Activity::get();
         });
 

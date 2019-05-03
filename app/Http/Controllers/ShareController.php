@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Report;
 use App\Time;
 
-
 class ShareController extends Controller
 {
     public function show(Report $report)
@@ -30,11 +29,11 @@ class ShareController extends Controller
             $query->where('user_id', $user);
         }
         if (($started = $report->filter['started'])) {
-            $query->where('started','>=', $started);
+            $query->where('started', '>=', $started);
         }
-         if (($finished = $report->filter['finished'])) {
-             $query->where('finished','<=', $finished);
-         }
+        if (($finished = $report->filter['finished'])) {
+            $query->where('finished', '<=', $finished);
+        }
 
         $times = $query->paginate();
 
@@ -48,5 +47,4 @@ class ShareController extends Controller
 
         return view('report.share', $data);
     }
-
 }

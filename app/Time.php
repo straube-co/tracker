@@ -13,7 +13,7 @@ class Time extends Model
     public function task()
     {
         return $this->belongsTo('App\Task');
-      }
+    }
 
     public function activity()
     {

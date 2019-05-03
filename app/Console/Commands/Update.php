@@ -8,12 +8,14 @@ use App\Task;
 
 class Update extends Command
 {
+
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
     protected $signature = 'update';
+
     /**
      * The console command description.
      *
@@ -40,23 +42,23 @@ class Update extends Command
      */
     public function handle()
     {
-         $this->info("Building!");
+        $this->info("Building!");
 
-         $client = $this->getClient();
-         $projects = $client->projects->findByWorkspace(870874468980849);
+        $client = $this->getClient();
+        $projects = $client->projects->findByWorkspace(870874468980849);
 
-         foreach ($projects as $project) {
-             $count = \App\Project::where('id', $project->id)->count();
+        foreach ($projects as $project) {
+            $count = \App\Project::where('id', $project->id)->count();
 
-             if ($count === 0) {
-                 Project::create([
-                     'id' => $project->id,
-                     'name' => $project->name,
-                 ]);
-             }
+            if ($count === 0) {
+                Project::create([
+                    'id' => $project->id,
+                    'name' => $project->name,
+                ]);
+            }
 
-             $this->importTasks($project);
-         }
+            $this->importTasks($project);
+        }
     }
 
     public function importTasks($project)

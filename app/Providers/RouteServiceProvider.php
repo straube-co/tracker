@@ -25,11 +25,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
         Route::bind('report', function ($value) {
-
             return \App\Report::where('code', $value)->first() ?? abort(404);
-
         });
     }
 

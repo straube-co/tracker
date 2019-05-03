@@ -15,9 +15,7 @@ class Project extends Model
         $id = $this->id;
 
         return Time::whereHas('task', function ($query) use ($id) {
-
-          $query->where('project_id', $id);
-
-        })->where('finished', NULL)->first();
+            $query->where('project_id', $id);
+        })->where('finished', null)->first();
     }
 }

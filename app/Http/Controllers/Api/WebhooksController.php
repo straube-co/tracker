@@ -10,7 +10,8 @@ class WebhooksController extends Controller
 {
     private $client;
 
-    public function receiving() {
+    public function receiving()
+    {
         $request = request();
 
         $handshake = $request->header('X-Hook-Secret');
@@ -36,8 +37,7 @@ class WebhooksController extends Controller
                         'name' => $project->name,
                     ]);
                 }
-            }
-            elseif ($event->type === "task") {
+            } elseif ($event->type === "task") {
                 $count = \App\Task::where('id', $event->resource)->count();
                 $task = $client->tasks->findById($event->resource);
                 $project = $client->tasks->projects($task->id)[0];
