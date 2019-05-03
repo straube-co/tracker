@@ -23,12 +23,26 @@ Route::group([
     Route::resource('/activity', 'ActivityController');
     Route::resource('/report', 'ReportController');
     Route::resource('/time', 'TimeController');
-    Route::resource('/my', 'MyActivitiesController');
+    Route::resource('/my', 'MyActivitiesController', [
+        'parameters' => [
+            'my' => 'time',
+        ]
+    ]);
     Route::resource('/home', 'HomeController');
-    Route::resource('/import', 'ImportController');
-    Route::resource('/auto', 'AutoController');
+    Route::resource('/import', 'ImportController', [
+        'parameters' => [
+            'import' => 'project',
+        ]
+    ]);
+    Route::resource('/auto', 'AutoController', [
+        'parameters' => [
+            'auto' => 'time',
+        ]
+    ]);
 });
 
-Route::resource('/share', 'ShareController', ['parameters' => [
-    'share' => 'report',
-]]);
+Route::resource('/share', 'ShareController', [
+    'parameters' => [
+        'share' => 'report',
+    ]
+]);
