@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Report;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -30,7 +31,10 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('report', function ($value) {
-            return \App\Report::where('code', $value)->first() ?? abort(404);
+            if (!($report = Report::where('code', $value)->first())) {
+                abort(404);
+            }
+            return $report;
         });
     }
 
