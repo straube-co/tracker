@@ -10,6 +10,10 @@ use App\Project;
 use App\Activity;
 use App\Task;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class AutoController extends Controller
 {
 
@@ -51,10 +55,8 @@ class AutoController extends Controller
         return redirect()->route('time.index');
     }
 
-    public function update($id)
+    public function update(Time $time)
     {
-        $time = Time::find($id);
-
         $time->update([
             'finished' => Carbon::now(),
         ]);

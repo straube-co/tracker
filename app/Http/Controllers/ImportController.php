@@ -11,6 +11,10 @@ use App\Task;
 use App\Time;
 use App\User;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class ImportController extends Controller
 {
 
@@ -71,7 +75,7 @@ class ImportController extends Controller
         return view('import.select', $data);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
         foreach ($request->time as $time) {
             //decode line to access the schedules.
@@ -87,7 +91,7 @@ class ImportController extends Controller
                 continue;
             }
             Time::create([
-                'project_id' => $id,
+                'project_id' => $project->id,
                 'task_id' => $time["task_id"],
                 'user_id' => $user->id,
                 'activity_id' => $time["activity_id"],

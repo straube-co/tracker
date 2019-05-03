@@ -26,9 +26,9 @@ class Authenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        $id = $request->session()->get('auth.id');
+        $userId = $request->session()->get('auth.id');
 
-        if ($this->isIdValid($id)) {
+        if ($this->isIdValid($userId)) {
             return $next($request);
         }
 
@@ -38,16 +38,16 @@ class Authenticate
     /**
      * Check whether the given ID is valid.
      *
-     * @param  string|null $id
+     * @param  string|null $userId
      * @return bool
      */
-    private function isIdValid(?string $id): bool
+    private function isIdValid(?string $userId): bool
     {
-        if (empty($id)) {
+        if (empty($userId)) {
             return false;
         }
         //Verificar se o usuário existe no banco
-        $user = User::where('id', $id)->count();
+        $user = User::where('id', $userId)->count();
         //return boolean
         return $user === 1;
     }

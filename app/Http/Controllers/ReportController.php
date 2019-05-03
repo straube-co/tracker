@@ -11,6 +11,10 @@ use App\Time;
 use App\User;
 use App\Report;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class ReportController extends Controller
 {
     public function index()

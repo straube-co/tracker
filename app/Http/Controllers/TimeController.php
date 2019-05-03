@@ -11,6 +11,10 @@ use App\Project;
 use App\Activity;
 use App\Task;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class TimeController extends Controller
 {
 

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Time;
 use App\Activity;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class ActivityController extends Controller
 {
     public function index()
@@ -39,10 +43,8 @@ class ActivityController extends Controller
         return redirect()->route('activity.index');
     }
 
-    public function edit($id)
+    public function edit(Activity $activity)
     {
-        $activity = Activity::find($id);
-
         $data = [
             'activity' => $activity,
         ];
@@ -50,13 +52,11 @@ class ActivityController extends Controller
         return view('activities.edit', $data);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Activity $activity)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|min:3|max:35',
         ]);
-
-        $activity = Activity::find($id);
 
         $activity->update([
             'name' => $validatedData['name'],
@@ -69,9 +69,8 @@ class ActivityController extends Controller
         return redirect()->route('activity.index');
     }
 
-    public function destroy($id)
+    public function destroy(Activity $activity)
     {
-        $activity = Activity::find($id);
         $activity->delete();
 
         //removing items from the cache

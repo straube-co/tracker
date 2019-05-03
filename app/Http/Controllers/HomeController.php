@@ -9,6 +9,10 @@ use App\Project;
 use App\Task;
 use App\Time;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class HomeController extends Controller
 {
     public function index()

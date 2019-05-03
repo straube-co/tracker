@@ -11,6 +11,10 @@ use App\Time;
 use App\User;
 use App\Report;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class MyActivitiesController extends Controller
 {
     public function index()
@@ -59,7 +63,7 @@ class MyActivitiesController extends Controller
         return redirect()->route('my.index');
     }
 
-    public function edit($id)
+    public function edit(Time $time)
     {
         $activities = Cache::remember('activities', 1, function () {
             return Activity::get();
@@ -70,7 +74,6 @@ class MyActivitiesController extends Controller
         $tasks = Cache::remember('tasks', 1, function () {
             return Task::get();
         });
-        $time = Time::find($id);
 
         $data = [
             'projects' => $projects,
@@ -81,15 +84,13 @@ class MyActivitiesController extends Controller
         return view('myActivities.edit', $data);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Time $time)
     {
         $validatedData = $request->validate([
             'task_id' => 'exists:tasks,id',
             'started' => 'date_format:Y-m-d H:i:s',
             'finished' => 'date_format:Y-m-d H:i:s|after_or_equal:started',
         ]);
-
-        $time = Time::find($id);
 
         $time->update([
             'task_id' => $validatedData['task_id'],
@@ -102,9 +103,8 @@ class MyActivitiesController extends Controller
         return redirect()->route('my.index');
     }
 
-    public function destroy($id)
+    public function destroy(Time $time)
     {
-        $time = Time::find($id);
         $time->delete();
 
         return redirect()->route('my.index');

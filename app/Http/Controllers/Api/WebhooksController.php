@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Project;
 use App\Task;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class WebhooksController extends Controller
 {
     private $client;

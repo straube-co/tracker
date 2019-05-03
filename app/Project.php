@@ -12,10 +12,8 @@ class Project extends Model
 
     public function getUnfinishedTime(): ?Time
     {
-        $id = $this->id;
-
-        return Time::whereHas('task', function ($query) use ($id) {
-            $query->where('project_id', $id);
+        return Time::whereHas('task', function ($query) {
+            $query->where('project_id', $this->id);
         })->where('finished', null)->first();
     }
 }

@@ -7,6 +7,10 @@ use Asana\Client;
 use App\User;
 use Exception;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class OAuthController extends Controller
 {
 
@@ -44,15 +48,15 @@ class OAuthController extends Controller
 
         $token = $this->client->dispatcher->fetchToken($code);
         $request->session()->put('auth.token', $token);
-        $me = $this->client->users->me();
-        $request->session()->put('auth.id', $me->id);
-        $count = \App\User::where('id', $me->id)->count();
+        $user = $this->client->users->me();
+        $request->session()->put('auth.id', $user->id);
+        $count = \App\User::where('id', $user->id)->count();
 
         if ($count === 0) {
             User::create([
-                'id' => $me->id,
-                'name' => $me->name,
-                'email' => $me->email,
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
             ]);
         }
         return redirect('/');

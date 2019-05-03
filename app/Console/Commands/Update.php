@@ -6,6 +6,10 @@ use Illuminate\Console\Command;
 use App\Project;
 use App\Task;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class Update extends Command
 {
 
