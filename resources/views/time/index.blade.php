@@ -14,7 +14,7 @@
                 @foreach ($projects as $project)
                     <tr>
                         <td>{{ $project->name }}</td>
-                        <td>Total hours</td>
+                        <td>{{$project->projectTimes() ? $project->projectTimes()->format('%D %H:%I:%S') : '-'}}</td>
                         @if($time = $project->getUnfinishedTime())
                             <td>
                                 <form action="{{ route('auto.update', $time->id) }}" method="post">

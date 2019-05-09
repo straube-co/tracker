@@ -119,16 +119,18 @@
             @endforeach
         </tbody>
         </table>
-        <h1 class="mt-3">Total</h1>
-        <table>
-            <tbody>
-                @foreach ($grouped as $activity_id => $interval)
-                    <tr>
-                        <th>{{App\Activity::find($activity_id)->name}}</th>
-                        <td>{{$interval->format('%D %H:%I:%S')}}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="border-top pl-2">
+            <table>
+                <h4 class="mt-3">Total of hours per Activity</h4>
+                <tbody>
+                    @foreach ($grouped as $activity_id => $interval)
+                        <tr>
+                            <th>{{App\Activity::find($activity_id)->name}}</th>
+                            <td>{{$interval->format('%D %H:%I:%S')}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     {{ $times->links() }}
 @endsection

@@ -67,9 +67,10 @@ class ReportController extends Controller
             $start = clone $now;
 
             return $times->reduce(function($diff, $time) {
-
-                return $diff->add($time->finished->diff($time->started));
-
+                if($time->finished !== NULL) {
+                    return $diff->add($time->finished->diff($time->started));
+                }
+                return $diff;
             }, $now)->diff($start);
         });
 
