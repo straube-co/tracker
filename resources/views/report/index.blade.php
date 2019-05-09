@@ -93,7 +93,7 @@
         </form>
     </div>
     <h1 class="mt-3">Reports</h1>
-    <div class="pl-2">
+    <div class="pl-2 pb-2">
         <table>
             <h5 class="mt-3">Total of hours per Activity</h5>
             <tbody>
