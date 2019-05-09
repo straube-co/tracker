@@ -99,7 +99,7 @@
             <tbody>
                 @foreach ($grouped as $activity_id => $interval)
                     <tr>
-                        <th>{{App\Activity::find($activity_id)->name}}</th>
+                        <th>{{App\Activity::find($activity_id)->name}} - </th>
                         <td>{{$interval->format('%D %H:%I:%S')}}</td>
                     </tr>
                 @endforeach
