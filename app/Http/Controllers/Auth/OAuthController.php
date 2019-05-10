@@ -50,7 +50,7 @@ class OAuthController extends Controller
         $request->session()->put('auth.token', $token);
         $user = $this->client->users->me();
         $request->session()->put('auth.id', $user->id);
-        $count = \App\User::where('id', $user->id)->count();
+        $count = User::where('id', $user->id)->count();
 
         if ($count === 0) {
             User::create([
