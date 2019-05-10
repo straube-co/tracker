@@ -25,6 +25,6 @@ class HomeController extends Controller
             'times' => $times,
         ];
 
-        return view('layouts.home', $data);
+        return view('home', $data);
     }
 }
