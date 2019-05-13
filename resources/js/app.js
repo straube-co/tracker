@@ -22,7 +22,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -107,54 +107,6 @@ $('[name=apply]').on('click', function () {
 
 //end }
 
-var counter;
-//function time tracker {
-function updateTime() {
-
-    var time = $('[name=update_time]').text();
-
-    //stop the function every 1 second if you have no start time
-    if(!time) {
-        clearInterval(counter);
-        return;
-    }
-
-    //map executa uma função em todos as posicoes do array: Nesse caso, em cada "part/parte" ele faz um parseInt com base10 e retorna para o array.
-    var hms = time.trim().split(/[ :]/g).map(part => parseInt(part, 10));
-
-    hms[3]++;
-
-    if(hms[3] === 60) {
-        hms[3] = 0;
-        hms[2]++;
-
-    }if(hms[2] === 60) {
-        hms[2] = 0;
-        hms[1]++;
-
-    }if(hms[1] === 24) {
-        hms[1] = 0;
-        hms[0]++;
-    }
-
-    var result = hms.map(part => part < 10 ? '0' + part : part).join(':');
-
-    $('[name=update_time]').text(result);
-
-    //receive the value of class
-    var stop = $('.update_time').text();
-
-    //if a time is started, it edits the text of the edit table to stop
-    if(!stop) {
-        $('.stop_time').text('Stop');
-        $('.time_stop').text('-');
-    }
-}
-//calls the function in a time interval
-counter = setInterval(updateTime, 1000);
-
-//end }
-
 //function select all, with shift and alt {
 $('.select-all').click(function(e) {
   var checked = e.currentTarget.checked;
@@ -228,3 +180,132 @@ function clean() {
 $('[name=clean]').on('click', function () {
     clean();
 });
+
+
+/**
+ * Attach a function to update the time counter in the time tracking view.
+ *
+ * The counter is only applied to a time that is running. In this case, all the
+ * buttons to start a time for other projects are replaced with a `-` (dash) to
+ * avoid two times running in parallel.
+ *
+ * This functions exits if there is no time running.
+ *
+ * This is a self invoked function.
+ *
+ * @param  {Function}
+ * @return {void}
+ * @author Lucas Cardoso <lucas@straube.co>
+ * @author Gustavo Straube <gustavo@straube.co>
+ */
+(() => {
+
+    /**
+     * A jQuery object containing a reference to the form used to stop a current
+     * time.
+     *
+     * @type {jQuery}
+     */
+    const $form = $('.time-stop');
+
+    /*
+     * There is no time to stop, so we simply return without even setting the
+     * interval.
+     */
+    if ($form.length === 0) {
+        return;
+    }
+
+    /**
+     * A jQuery object containing a reference to the button inside `$form`.
+     *
+     * @type {jQuery}
+     */
+    const $button = $form.find('button');
+
+    /*
+     * Update heading of time column and remove start time buttons.
+     */
+    $('.stop_time').text('Stop');
+    $('.time_stop').text('-');
+
+    /**
+     * Convert a time string in the `d h:m:s` format to seconds.
+     *
+     * @param  {String} time
+     * @return {Number}
+     */
+    const timeToSecs = (time) => {
+        const parts = time.replace(' day(s) and ', ' ').trim().split(/[ :]+/g).map(part => parseInt(part, 10));
+        parts.reverse();
+
+        // Seconds
+        let secs = parts[0];
+
+        // Minutes
+        let multiplier = 60;
+        if (parts[1]) {
+            secs += parts[1] * multiplier;
+        }
+
+        // Hours
+        multiplier *= 60;
+        if (parts[2]) {
+            secs += parts[2] * multiplier;
+        }
+
+        // Days
+        multiplier *= 24;
+        if (parts[3]) {
+            secs += parts[3] * multiplier;
+        }
+
+        return secs;
+    };
+
+    /**
+     * Format the given interval (seconds) in the `d h:m:s` format.
+     *
+     * @param  {Number} secs
+     * @return {String}
+     */
+    const secsToTime = (secs) => {
+        let divider = 86400; // 60 * 60 * 24
+
+        const days = Math.floor(secs / divider);
+        secs = secs % divider;
+
+        divider /= 24;
+        const hours = Math.floor(secs / divider);
+        secs = secs % divider;
+
+        divider /= 60;
+        const minutes = Math.floor(secs / divider);
+        secs = secs % divider;
+
+        divider /= 60;
+        const seconds = Math.floor(secs / divider);
+
+        let time = [ hours, minutes, seconds ].map(part => part < 10 ? '0' + part : part).join(':');
+
+        if (days > 0) {
+            time = days + ' day(s) and ' + time;
+        }
+
+        return time;
+    };
+
+    /**
+     * The interval callback to update the time.
+     *
+     * @return {void}
+     */
+    const updater = () => {
+        const diff = Math.round((Date.now() - CURRENT_TIMESTAMP) / 1000);
+        const started = $button.data('started');
+        $button.text(secsToTime(timeToSecs(started) + diff));
+    };
+
+    setInterval(updater, 1000);
+
+})();

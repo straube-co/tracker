@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <title></title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @stack('head')
 </head>
 <body>
     @if (session('auth.id'))
@@ -22,5 +23,6 @@
         @yield('content')
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
+    @stack('foot')
 </body>
 </html>

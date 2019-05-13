@@ -1,5 +1,11 @@
 @extends('layouts.header')
 
+@push('head')
+    <script>
+        var CURRENT_TIMESTAMP = Date.now();
+    </script>
+@endpush
+
 @section('content')
     <h1 class="pt-3">Time Tracking</h1>
     <table class="table pt-3">
@@ -14,14 +20,21 @@
                 @foreach ($projects as $project)
                     <tr>
                         <td>{{ $project->name }}</td>
-                        <td>{{$project->projectTimes() ? $project->projectTimes()->format('%D %H:%I:%S') : '-'}}</td>
-                        @if($time = $project->getUnfinishedTime())
+                        <td>{{ ($total = $project->getTrackedTime()) ? App\Support\Formatter::interval($total) : '-' }}</td>
+                        @if ($time = $project->getUnfinishedTime())
                             <td>
-                                <form action="{{ route('auto.update', $time->id) }}" method="post">
+                                <form action="{{ route('auto.update', $time->id) }}" method="post" class="time-stop">
+                                    @php
+                                        $diff = App\Support\Formatter::interval($time->started->diffAsCarbonInterval());
+                                    @endphp
                                     {{ csrf_field() }}
                                     {{ method_field('put') }}
-                                    <button type="submit" class="btn btn-outline-danger btn-sm" name="update_time">
-                                        {{Carbon\Carbon::now()->diff($time->started)->format('%D %H:%I:%S')}}
+                                    <button
+                                        type="submit"
+                                        class="btn btn-outline-danger btn-sm"
+                                        data-started="{{ $diff }}"
+                                    >
+                                        {{ $diff }}
                                     </button>
                                 </form>
                             </td>

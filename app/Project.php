@@ -6,24 +6,35 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\CarbonInterval;
 use Illuminate\Support\Facades\DB;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class Project extends Model
 {
     protected $fillable = [
         'id', 'name',
     ];
 
-    public function projectTimes(): ? CarbonInterval
+    /**
+     * Get the total tracked time for this project.
+     *
+     * @return \Carbon\CarbonInterval|null
+     */
+    public function getTrackedTime(): ?CarbonInterval
     {
-        $carbon = DB::select('select
-                                sec_to_time(sum(time_to_sec(timediff(finished, started)))) as total
-                                FROM times INNER JOIN tasks ON times.task_id = tasks.id where tasks.project_id = ? and times.finished is not NULL', [$this->id]) [0]->total;
+        $total = DB::select(
+            'SELECT SUM(TIME_TO_SEC(TIMEDIFF(finished, started))) AS total
+                FROM times INNER JOIN tasks ON times.task_id = tasks.id
+                WHERE tasks.project_id = ? AND times.finished IS NOT NULL',
+            [ $this->id ]
+        )[0]->total;
 
-        if($carbon == null ) {
+        if ($total === null) {
             return null;
         }
-        list($hours, $minutes, $seconds) = sscanf($carbon, '%d:%d:%d');
-        return CarbonInterval::create(sprintf('PT%dH%dM%dS', $hours, $minutes, $seconds));
 
+        return CarbonInterval::seconds((int) $total)->cascade();
     }
 
     public function getUnfinishedTime(): ?Time
