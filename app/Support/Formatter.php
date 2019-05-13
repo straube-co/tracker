@@ -26,7 +26,7 @@ class Formatter
             return null;
         }
 
-        $format = $interval->totalDays > 0 ? '%d day(s) and %H:%I:%S' : '%H:%I:%S';
+        $format = $interval->totalDays >= 1 ? '%d day(s) and %H:%I:%S' : '%H:%I:%S';
         return $interval->format($format);
     }
 
