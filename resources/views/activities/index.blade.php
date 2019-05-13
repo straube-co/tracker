@@ -20,8 +20,10 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="name">Name: </label>
-                            <input class="form-control" type="text" name="name" required>
-                            {{ $errors->first('name') }}
+                            <input class="form-control @if ($errors->has('name')) is-invalid @endif" type="text" name="name">
+                            <div class="invalid-feedback">
+                                {{ $errors->first('name') }}
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

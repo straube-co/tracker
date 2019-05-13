@@ -41,13 +41,18 @@ class AutoController extends Controller
 
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'task_id' => 'required|exists:tasks,id',
+            'activity_id' => 'required',
+        ]);
+
         $time = Time::where('user_id', $request->id)->where('finished', null)->count() == 0;
 
         if ($time) {
             Time::create([
-                'task_id' => $request->task_id,
+                'task_id' => $validatedData['task_id'],
                 'user_id' => $request->session()->get('auth.id'),
-                'activity_id' => $request->activity_id,
+                'activity_id' => $validatedData['activity_id'],
                 'started' => Carbon::now(),
                 'finished' => null,
             ]);
@@ -56,7 +61,7 @@ class AutoController extends Controller
     }
 
     public function update(Time $time)
-    {
+    {    
         $time->update([
             'finished' => Carbon::now(),
         ]);
