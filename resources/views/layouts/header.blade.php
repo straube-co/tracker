@@ -12,7 +12,7 @@
 <body>
     @if (session('auth.id'))
         <nav class="navbar navbar-dark bg-dark fixed-top">
-            <a href="{{ route('index') }}">Time Tracking</a>
+            <a href="{{ route('time.index') }}">Time Tracking</a>
             <a href="{{ route('my.index') }}">My Activities</a>
             <a href="{{ route('report.index') }}">Reports</a>
             <div class="dropdown drop">
