@@ -20,8 +20,8 @@ Route::group([
     'middleware' => [ 'auth' ],
 ], function () {
     Route::get('/', function () {
-        return view('layouts/home');
-    });
+        return view('home');
+    })->name('home.index');
     Route::resource('/activity', 'ActivityController');
     Route::resource('/report', 'ReportController');
     Route::resource('/time', 'TimeController');
@@ -30,7 +30,6 @@ Route::group([
             'my' => 'time',
         ]
     ]);
-    Route::resource('/home', 'HomeController');
     Route::resource('/import', 'ImportController', [
         'parameters' => [
             'import' => 'project',
