@@ -29,4 +29,12 @@ class Formatter
         $format = $interval->totalDays > 0 ? '%d day(s) and %H:%I:%S' : '%H:%I:%S';
         return $interval->format($format);
     }
+
+    public static function intervalTime(CarbonInterval $interval = null): ?string
+    {
+        if ($interval === null) {
+            return null;
+        }
+        return str_pad((int)$interval->totalHours, 2, '0', STR_PAD_LEFT ) . ':' . $interval->format('%I:%S');
+    }
 }

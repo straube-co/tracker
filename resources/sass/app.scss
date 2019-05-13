@@ -24,10 +24,14 @@ body {
     justify-content: left;
 }
 .navbar a {
-    margin-left: 20px
+    margin-right: 20px
 }
 li {
     list-style: none;
+}
+.drop {
+    display: flex;
+    margin-left: auto;
 }
 
 //home

@@ -100,7 +100,7 @@
                 @foreach ($grouped as $activity_id => $interval)
                     <tr>
                         <th>{{App\Activity::find($activity_id)->name}} - </th>
-                        <td>{{$interval->format('%D %H:%I:%S')}}</td>
+                        <td>{{App\Support\Formatter::intervalTime($interval)}}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -127,7 +127,7 @@
                     <td>{{ $time->activity->name }}</td>
                     <td>{{ $time->started }}</td>
                     <td>{{ $time->finished }}</td>
-                    <td>{{ $time->finished ? $time->finished->diff($time->started)->format('%D %H:%I:%S') : '-' }}</td>
+                    <td>{{ $time->finished ? App\Support\Formatter::intervalTime($time->finished->diffAsCarbonInterval($time->started)) : '-' }}</td>
                 </tr>
             @endforeach
         </tbody>

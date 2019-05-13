@@ -34,14 +34,18 @@ const app = new Vue({
     el: '#app'
 });
 
-//show tasks per project {
+/**
+ * Function show tasks per project.
+ */
 function showTasks(projectId) {
     $('[name=task_id]').find('option[data-project_id]').hide().filter('[data-project_id="' + projectId + '"]').show();
+
     var $selected = $('[name=task_id]').find('option:selected');
+
     if ($selected.css('display') === 'none') {
         $selected.removeAttr('selected');
-    }
-}
+    };
+};
 
 $('[name=project_id]').on('change', function () {
     showTasks($(this).val());
@@ -49,65 +53,67 @@ $('[name=project_id]').on('change', function () {
 
 showTasks($('[name=project_id]').val());
 
-//end }
 
-//action {
+/**
+ * Function action.
+ */
 function action() {
-    //
+
     let token = document.head.querySelector('meta[name="csrf-token"]');
 
-    //
     const $form = $('#form_action');
 
-    //
     $form.attr('action', '/report');
     $form.attr('method', 'post');
 
-    //
     $form.prepend('<input type="hidden" name="_token" value="' + token.content + '">');
 
     $form.submit();
 }
-// click of button
 $('#btn_share').on('click', function () {
     action();
 });
 
-// end }
-
-//function toApply {
+/**
+ * Function toApply.
+ */
 function toApply() {
-    //
+
     var valuetask = $('[name=task_id]').val();
     var valueactivity = $('[name=activity_id]').val();
 
-    //loop with all the checked
+    /**
+     * Loop with all the checked.
+     */
      $(':checked').each(function() {
          var index = $(this).data('index');
 
-         //if the value is not empty
-         if(valuetask !== '') {
+         /**
+          * If the value is not empty.
+          */
+         if (valuetask !== '') {
              var name = 'time[' + index + '][task_id]';
              $('[name="' + name + '"]').val(valuetask);
 
-             //back to the default text "select"
+             /**
+              * Back to the default text "select".
+              */
              $('[name=task_id]').val('');
 
-         }if(valueactivity !== '') {
+         }if (valueactivity !== '') {
              var name = 'time[' + index + '][activity_id]';
              $('[name="' + name + '"]').val(valueactivity);
              $('[name=activity_id]').val('');
          }
      });
 };
-// click of button
 $('[name=apply]').on('click', function () {
     toApply();
 });
 
-//end }
-
-//function select all, with shift and alt {
+/**
+ * Function select all, with shift and alt.
+ */
 $('.select-all').click(function(e) {
   var checked = e.currentTarget.checked;
   $('.list-item-checkbox').prop('checked', checked);
@@ -116,8 +122,9 @@ $('.select-all').click(function(e) {
 var lastChecked = null;
 
 $('.list-item-checkbox').click(function(e) {
-
-    //select with shift
+    /**
+     * Select with shift.
+     */
     if(e.shiftKey) {
         var from = $('.list-item-checkbox').index(this);
         var to = $('.list-item-checkbox').index(lastChecked);
@@ -131,8 +138,9 @@ $('.list-item-checkbox').click(function(e) {
   }
 
   lastChecked = this;
-
-  //select with alt
+  /**
+   * Select with alt.
+   */
   if(e.altKey){
 
     $('.list-item-checkbox')
@@ -143,9 +151,9 @@ $('.list-item-checkbox').click(function(e) {
     });
   }
 });
-//end }
-
-//function is performed by loading the page {
+/**
+ * Function is performed by loading the page.
+ */
 $(function () {
     $('#datepickerstarted').datetimepicker({
         format:"Y-MM-DD HH:mm:ss"
@@ -162,9 +170,9 @@ $(function () {
     });
 });
 
-//end }
-
-//back to the default text "select" {
+/**
+ * Back to the default text "select".
+ */
 function clean() {
 
     $('[name=project_id]').val('');
@@ -174,13 +182,17 @@ function clean() {
     $('[name=started]').val('');
     $('[name=finished]').val('');
 }
-// end }
-
-// click of button
 $('[name=clean]').on('click', function () {
     clean();
 });
 
+/**
+ * Modal with error
+ */
+function modalError() {
+    $('.modal:has(.is-invalid)').modal('show');
+};
+modalError();
 
 /**
  * Attach a function to update the time counter in the time tracking view.

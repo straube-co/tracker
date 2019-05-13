@@ -19,12 +19,9 @@ Route::get('/auth/handle', 'Auth\\OAuthController@handle')->name('auth.handle');
 Route::group([
     'middleware' => [ 'auth' ],
 ], function () {
-    Route::get('/', function () {
-        return view('home');
-    })->name('home.index');
     Route::resource('/activity', 'ActivityController');
     Route::resource('/report', 'ReportController');
-    Route::resource('/time', 'TimeController');
+    Route::resource('/', 'TimeController');
     Route::resource('/my', 'MyActivitiesController', [
         'parameters' => [
             'my' => 'time',

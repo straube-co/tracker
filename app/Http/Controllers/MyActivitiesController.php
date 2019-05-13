@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Activity;
 use App\Project;
+use Carbon\Carbon;
 use App\Task;
 use App\Time;
 use App\User;
@@ -48,15 +49,17 @@ class MyActivitiesController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'task_id' => 'exists:tasks,id',
-            'started' => 'date_format:Y-m-d H:i:s',
-            'finished' => 'date_format:Y-m-d H:i:s|after_or_equal:started',
+            'project_id' => 'required',
+            'task_id' => 'required|exists:tasks,id',
+            'activity_id' => 'required',
+            'started' => 'required|date_format:Y-m-d H:i:s',
+            'finished' => 'required|date_format:Y-m-d H:i:s|after_or_equal:started|before:' . Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         Time::create([
             'task_id' => $validatedData['task_id'],
             'user_id' => $request->session()->get('auth.id'),
-            'activity_id' => $request->activity_id,
+            'activity_id' => $validatedData['activity_id'],
             'started' => $validatedData['started'],
             'finished' => $validatedData['finished'],
         ]);
@@ -87,14 +90,17 @@ class MyActivitiesController extends Controller
     public function update(Request $request, Time $time)
     {
         $validatedData = $request->validate([
-            'task_id' => 'exists:tasks,id',
-            'started' => 'date_format:Y-m-d H:i:s',
-            'finished' => 'date_format:Y-m-d H:i:s|after_or_equal:started',
+            'project_id' => 'required',
+            'task_id' => 'required|exists:tasks,id',
+            'activity_id' => 'required',
+            'started' => 'required|date_format:Y-m-d H:i:s',
+            'finished' => 'required|date_format:Y-m-d H:i:s|after_or_equal:started|before:' . Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         $time->update([
             'task_id' => $validatedData['task_id'],
-            'activity_id' => $request->activity_id,
+            'user_id' => $request->session()->get('auth.id'),
+            'activity_id' => $validatedData['activity_id'],
             'started' => $validatedData['started'],
             'finished' => $validatedData['finished'],
         ]);

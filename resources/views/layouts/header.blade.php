@@ -12,11 +12,17 @@
 <body>
     @if (session('auth.id'))
         <nav class="navbar navbar-dark bg-dark fixed-top">
-            <a href="{{ route('home.index') }}">Home</a>
-            <a href="{{ route('time.index') }}">Time Tracking</a>
+            <a href="{{ route('index') }}">Time Tracking</a>
             <a href="{{ route('my.index') }}">My Activities</a>
-            <a href="{{ route('activity.index') }}">Activity</a>
             <a href="{{ route('report.index') }}">Reports</a>
+            <div class="dropdown drop">
+                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Menu
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                    <a class="dropdown-item" href="{{ route('activity.index') }}">Type of activities</a>
+                </div>
+            </div>
         </nav>
     @endif
     <div id="app" class="container-fluid mt-3">

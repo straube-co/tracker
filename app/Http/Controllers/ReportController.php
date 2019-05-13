@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
-use DateTime;
+use Carbon\Carbon;
 use App\Activity;
 use App\Project;
 use App\Task;
@@ -63,7 +63,7 @@ class ReportController extends Controller
 
         $grouped = $query->get()->groupBy('activity_id')->map(function($times, $activity_id) {
 
-            $now = new DateTime('00:00');
+            $now = new Carbon('00:00');
             $start = clone $now;
 
             return $times->reduce(function($diff, $time) {
@@ -71,7 +71,7 @@ class ReportController extends Controller
                     return $diff->add($time->finished->diff($time->started));
                 }
                 return $diff;
-            }, $now)->diff($start);
+            }, $now)->diffAsCarbonInterval($start);
         });
 
         $data = [
