@@ -39,6 +39,9 @@
                                 </form>
                             </td>
                         @else
+                            @php
+                                $showError = $project->id == old('project_id');
+                            @endphp
                             <td class="time_stop">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#automatic-{{ $project->id }}">
@@ -59,16 +62,18 @@
                                                     {{ csrf_field() }}
                                                     <div class="form-group">
                                                         <label for="autoproject">Project: </label>
-                                                        <select class="custom-select @if ($errors->has('project_id')) is-invalid @endif" id="autoproject" name="project_id">
+                                                        <select class="custom-select @if ($showError && $errors->has('project_id')) is-invalid @endif" id="autoproject" name="project_id">
                                                             <option value="{{ $project->id }}">{{ $project->name }}</option>
                                                         </select>
-                                                        <div class="invalid-feedback">
-                                                            {{ $errors->first('project_id') }}
-                                                        </div>
+                                                        @if ($showError)
+                                                            <div class="invalid-feedback">
+                                                                {{ $errors->first('project_id') }}
+                                                            </div>
+                                                        @endif
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="autotask">Task: </label>
-                                                        <select class="custom-select @if ($errors->has('task_id')) is-invalid @endif" id="autotask" name="task_id">
+                                                        <select class="custom-select @if ($showError && $errors->has('task_id')) is-invalid @endif" id="autotask" name="task_id">
                                                             <option value="">Select</option>
                                                             @foreach ($tasks as $task)
                                                                 @if($project->id === $task->project_id)
@@ -76,21 +81,25 @@
                                                                 @endif
                                                             @endforeach
                                                         </select>
-                                                        <div class="invalid-feedback">
-                                                            {{ $errors->first('task_id') }}
-                                                        </div>
+                                                        @if ($showError)
+                                                            <div class="invalid-feedback">
+                                                                {{ $errors->first('task_id') }}
+                                                            </div>
+                                                        @endif
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="autoactivity">Activity: </label>
-                                                        <select class="custom-select @if ($errors->has('activity_id')) is-invalid @endif" id="autoactivity" name="activity_id">
+                                                        <select class="custom-select @if ($showError && $errors->has('activity_id')) is-invalid @endif" id="autoactivity" name="activity_id">
                                                             <option value="">Select</option>
                                                             @foreach ($activities as $activity)
                                                                 <option value="{{ $activity->id }}">{{ $activity->name }}</option>
                                                             @endforeach
                                                         </select>
-                                                        <div class="invalid-feedback">
-                                                            {{ $errors->first('activity_id') }}
-                                                        </div>
+                                                        @if ($showError)
+                                                            <div class="invalid-feedback">
+                                                                {{ $errors->first('activity_id') }}
+                                                            </div>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
