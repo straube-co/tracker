@@ -1,7 +1,4 @@
-@extends('layouts.header')
 
-@section('content')
-<div class="container">
     <form action="{{ route('my.update', $time->id )}}" method="post">
         {{ csrf_field() }}
         {{ method_field('put') }}
@@ -70,5 +67,3 @@
             <a class="btn btn-danger btn-sm" href="{{ route('my.index')}}">Cancel</a>
         </div>
     </form>
-</div>
-@endsection
