@@ -102,9 +102,9 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+                                                <div class="modal-footer justify-content-start">
                                                     <button type="submit" class="btn btn-success btn-sm">Start</button>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
                                                 </div>
                                             </form>
                                         </div>

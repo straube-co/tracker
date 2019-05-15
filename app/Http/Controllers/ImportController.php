@@ -28,7 +28,7 @@ class ImportController extends Controller
             'projects' => $projects,
         ];
 
-        return view('import.import', $data);
+        return view('import.index', $data);
     }
 
     public function store(Request $request)
