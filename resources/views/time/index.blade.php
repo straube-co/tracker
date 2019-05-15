@@ -44,7 +44,7 @@
                             @endphp
                             <td class="time_stop">
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#automatic-{{ $project->id }}">
+                                <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#automatic-{{ $project->id }}">
                                     Let's work!
                                 </button>
                                 <!-- Modal -->
@@ -103,8 +103,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer justify-content-start">
-                                                    <button type="submit" class="btn btn-success btn-sm">Start</button>
-                                                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-outline-success btn-sm">Start</button>
+                                                    <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
                                                 </div>
                                             </form>
                                         </div>

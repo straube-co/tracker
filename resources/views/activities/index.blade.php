@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#activity">
+    <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#activity">
         Create new activity
     </button>
     <!-- Modal -->
@@ -27,8 +27,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success btn-sm">Create</button>
+                        <button type="submit" class="btn btn-outline-success btn-sm">Save</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>
@@ -40,20 +40,51 @@
             <tr>
                 <th>Name</th>
                 <th>Edit</th>
-                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($activities as $activity)
                 <tr>
                     <td class="activity">{{ $activity->name }}</td>
-                    <td><a class="btn btn-secondary btn-sm" href="{{ route('activity.edit', $activity->id) }}">Edit</a></td>
                     <td>
-                        <form action="{{ route('activity.destroy', $activity->id) }}" method="post">
-                            {{ method_field('delete') }}
-                            {{ csrf_field() }}
-                            <button class="btn btn-danger btn-sm" type="submit">Delete </button>
-                        </form>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#edit_activity">
+                            Edit
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="edit_activity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="{{ route('activity.update', $activity->id )}}" method="post">
+                                        <div class="modal-body">
+                                            {{ csrf_field() }}
+                                            {{ method_field('put') }}
+                                            <div>
+                                                <label>Name: </label>
+                                                <input type="text" name="name" value="{{ $activity->name }}">
+                                                {{ $errors->first('name') }}
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer justify-content-start">
+                                            <button class="btn btn-outline-success btn-sm" type="submit">Save </button>
+                                            <a class="btn btn-outline-danger btn-sm" href="{{ route('activity.index')}}">Cancel</a>
+                                            <button class="btn btn-danger btn-sm ml-auto" type="button" onclick="$('#activity_delete-{{ $activity->id }}').submit()">Delete </button>
+                                        </div>
+                                    </form>
+                                    <form action="{{ route('activity.destroy', $activity->id) }}" method="post" id="activity_delete-{{ $activity->id }}">
+                                        {{ method_field('delete') }}
+                                        {{ csrf_field() }}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @endforeach
