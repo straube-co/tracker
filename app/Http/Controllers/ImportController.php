@@ -101,6 +101,6 @@ class ImportController extends Controller
                 'finished' => Carbon::parse($jsonarr[7]),
             ]);
         }
-        return view('myActivities.index');
+        return redirect()->route('my.index');
     }
 }
