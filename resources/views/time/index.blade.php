@@ -44,7 +44,7 @@
                             @endphp
                             <td class="time_stop">
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#automatic-{{ $project->id }}">
+                                <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#automatic-{{ $project->id }}">
                                     Let's work!
                                 </button>
                                 <!-- Modal -->
