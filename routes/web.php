@@ -24,6 +24,7 @@ Route::group([
     });
     Route::resource('/activity', 'ActivityController');
     Route::resource('/report', 'ReportController');
+    Route::resource('/export', 'ExportController');
     Route::resource('/time', 'TimeController');
     Route::resource('/my', 'MyActivitiesController', [
         'parameters' => [

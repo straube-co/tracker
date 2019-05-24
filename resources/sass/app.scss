@@ -16,33 +16,24 @@ body {
 }
 
 //nav
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
-.navbar {
-    justify-content: left;
-}
-.navbar a {
-    margin-right: 20px
-}
-li {
-    list-style: none;
+.navigation {
+    a {
+        justify-content: left;
+        margin-right: 25px;
+        text-decoration: none;
+    }
 }
 .drop {
     display: flex;
     margin-left: auto;
 }
 
-//home
-.straube {
-    margin-left: 65px;
-    margin-top: 50px;
-}
-
-//time Tracking
+//time tracking
 .stop {
     background-color: red;
+}
+.start {
+    width: 10%;
 }
 
 //activity

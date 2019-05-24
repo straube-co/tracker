@@ -16694,21 +16694,10 @@ body {
   padding-top: 39px;
 }
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
-
-.navbar {
+.navigation a {
   justify-content: left;
-}
-
-.navbar a {
-  margin-right: 20px;
-}
-
-li {
-  list-style: none;
+  margin-right: 25px;
+  text-decoration: none;
 }
 
 .drop {
@@ -16716,13 +16705,12 @@ li {
   margin-left: auto;
 }
 
-.straube {
-  margin-left: 65px;
-  margin-top: 50px;
-}
-
 .stop {
   background-color: red;
+}
+
+.start {
+  width: 10%;
 }
 
 .activity {

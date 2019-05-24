@@ -69236,17 +69236,20 @@ showTasks($('[name=project_id]').val());
  * Function action.
  */
 
-function action() {
+function action(url) {
   var token = document.head.querySelector('meta[name="csrf-token"]');
   var $form = $('#form_action');
-  $form.attr('action', '/report');
+  $form.attr('action', url);
   $form.attr('method', 'post');
   $form.prepend('<input type="hidden" name="_token" value="' + token.content + '">');
   $form.submit();
 }
 
 $('#btn_share').on('click', function () {
-  action();
+  action('/report');
+});
+$('#btn_export').on('click', function () {
+  action('/export');
 });
 /**
  * Function toApply.

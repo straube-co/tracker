@@ -1,7 +1,7 @@
 @extends('layouts.header')
 
 @section('content')
-    <button class="btn btn-outline-info btn-sm mb-3" type="button" data-toggle="collapse" data-target="#collapseReport" aria-expanded="false" aria-controls="collapseExample">
+    <button class="btn btn-outline-dark btn-sm mb-3" type="button" data-toggle="collapse" data-target="#collapseReport" aria-expanded="false" aria-controls="collapseExample">
         Search filter
     </button>
     <form id="form_action" action="{{ route('report.index') }}" method="get">
@@ -61,12 +61,12 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-sm mr-1">Filter</button>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-sm mr-1" data-toggle="modal" data-target="#share">
-              Share
+            <button type="submit" class="btn btn-outline-secondary btn-sm mr-1">Search options</button>
+            {{-- <button type="button" id="btn_export" class="btn btn-outline-info btn-sm">Export CSV</button> --}}
+            <!-- Button share modal -->
+            <button type="button" class="btn btn-outline-info btn-sm mr-1" data-toggle="modal" data-target="#share">
+              Share hours
             </button>
-            <button type="button" class="btn btn-outline-info btn-sm" name="clean">Clean</button>
             <!-- Modal share -->
             <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="modalShare" aria-hidden="true">
               <div class="modal-dialog" role="document">

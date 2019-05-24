@@ -6,7 +6,7 @@
         $showError = "create" == old('time_id');
     @endphp
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#manual">
+    <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#manual">
         Add Manual Time Entry
     </button>
     <!-- Modal addManual-->

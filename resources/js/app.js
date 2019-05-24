@@ -1,4 +1,4 @@
- 
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -57,13 +57,13 @@ showTasks($('[name=project_id]').val());
 /**
  * Function action.
  */
-function action() {
+function action(url) {
 
     let token = document.head.querySelector('meta[name="csrf-token"]');
 
     const $form = $('#form_action');
 
-    $form.attr('action', '/report');
+    $form.attr('action', url);
     $form.attr('method', 'post');
 
     $form.prepend('<input type="hidden" name="_token" value="' + token.content + '">');
@@ -71,7 +71,10 @@ function action() {
     $form.submit();
 }
 $('#btn_share').on('click', function () {
-    action();
+    action('/report');
+});
+$('#btn_export').on('click', function () {
+    action('/export');
 });
 
 /**

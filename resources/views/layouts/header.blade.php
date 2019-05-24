@@ -11,12 +11,12 @@
 </head>
 <body>
     @if (session('auth.id'))
-        <nav class="navbar navbar-dark bg-dark fixed-top">
+        <nav class="navbar navigation bg-dark fixed-top">
             <a href="{{ route('time.index') }}">Time Tracking</a>
             <a href="{{ route('my.index') }}">My Activities</a>
             <a href="{{ route('report.index') }}">Reports</a>
             <div class="dropdown drop">
-                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-secondary btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Menu
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
