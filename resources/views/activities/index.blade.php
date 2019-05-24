@@ -78,10 +78,12 @@
                                             <button class="btn btn-danger btn-sm ml-auto" type="button" onclick="$('#activity_delete-{{ $activity->id }}').submit()">Delete </button>
                                         </div>
                                     </form>
-                                    <form action="{{ route('activity.destroy', $activity->id) }}" method="post" id="activity_delete-{{ $activity->id }}">
-                                        {{ method_field('delete') }}
-                                        {{ csrf_field() }}
-                                    </form>
+                                    @if (!$activity->activityUsed())
+                                        <form action="{{ route('activity.destroy', $activity->id) }}" method="post" id="activity_delete-{{ $activity->id }}">
+                                            {{ method_field('delete') }}
+                                            {{ csrf_field() }}
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>

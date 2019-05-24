@@ -59,9 +59,11 @@ class ReportController extends Controller
             $query->where('finished', '<=', $finished);
         }
 
-        $times = $query->paginate();
+        $summaryQuery = clone $query;
 
-        $grouped = $query->get()->groupBy('activity_id')->map(function($times, $activity_id) {
+        $times = $query->paginate()->appends($request->all());
+
+        $grouped = $summaryQuery->get()->groupBy('activity_id')->map(function($times, $activity_id) {
 
             $now = new Carbon('00:00');
             $start = clone $now;
