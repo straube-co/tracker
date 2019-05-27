@@ -62,7 +62,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-outline-secondary btn-sm mr-1">Search options</button>
-            {{-- <button type="button" id="btn_export" class="btn btn-outline-info btn-sm">Export CSV</button> --}}
+            <button type="button" id="btn_export" class="btn btn-outline-info btn-sm">Export CSV</button> 
             <!-- Button share modal -->
             <button type="button" class="btn btn-outline-info btn-sm mr-1" data-toggle="modal" data-target="#share">
               Share hours
