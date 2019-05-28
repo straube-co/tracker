@@ -7,35 +7,35 @@ use Illuminate\Http\Request;
 use App\Support\Formatter;
 
 use Carbon\Carbon;
-use App\Report;
 use App\Time;
 
 class ExportController extends Controller {
 
-     public function store(Report $report)
+     public function store()
      {
+         $request = request();
 
          $query = Time::orderBy('started', 'desc');
 
-         if (($activity = $report->filter['activity_id'])) {
+         if (($activity = $request->activity_id)) {
              $query->where('activity_id', $activity);
          }
-         if (($project = $report->filter['project_id'])) {
+         if (($project = $request->project_id)) {
              $query->whereHas('task', function ($query) use ($project) {
 
                  $query->where('project_id', $project);
              });
          }
-         if (($task = $report->filter['task_id'])) {
+         if (($task = $request->task_id)) {
              $query->where('task_id', $task);
          }
-         if (($user = $report->filter['user_id'])) {
+         if (($user = $request->user_id)) {
              $query->where('user_id', $user);
          }
-         if (($started = $report->filter['started'])) {
+         if (($started = $request->started)) {
              $query->where('started', '>=', $started);
          }
-         if (($finished = $report->filter['finished'])) {
+         if (($finished = $request->finished)) {
              $query->where('finished', '<=', $finished);
          }
 
