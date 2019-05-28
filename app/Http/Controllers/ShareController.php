@@ -11,7 +11,7 @@ class ShareController extends Controller
     public function show(Report $report)
     {
         //
-        $query = Time::select('times.*')->orderBy('started', 'desc');
+        $query = Time::orderBy('started', 'desc');
 
         if (($activity = $report->filter['activity_id'])) {
             $query->where('activity_id', $activity);
