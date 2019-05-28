@@ -75,7 +75,9 @@
                                         <div class="modal-footer justify-content-start">
                                             <button class="btn btn-outline-success btn-sm" type="submit">Save </button>
                                             <a class="btn btn-outline-danger btn-sm" href="{{ route('activity.index')}}">Cancel</a>
-                                            <button class="btn btn-danger btn-sm ml-auto" type="button" onclick="$('#activity_delete-{{ $activity->id }}').submit()">Delete </button>
+                                            @if (!$activity->activityUsed())
+                                                <button class="btn btn-danger btn-sm ml-auto" type="button" onclick="$('#activity_delete-{{ $activity->id }}').submit()">Delete </button>
+                                            @endif
                                         </div>
                                     </form>
                                     @if (!$activity->activityUsed())
