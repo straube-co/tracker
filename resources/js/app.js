@@ -69,6 +69,11 @@ function action(url) {
     $form.prepend('<input type="hidden" name="_token" value="' + token.content + '">');
 
     $form.submit();
+
+    setTimeout(() => {
+        $form.attr('action', '/report');
+        $form.attr('method', 'get');
+    }, 1000);
 }
 $('#btn_share').on('click', function () {
     action('/report');
