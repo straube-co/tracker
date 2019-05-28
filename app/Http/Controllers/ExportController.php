@@ -8,6 +8,7 @@ use App\Support\Formatter;
 
 use Carbon\Carbon;
 use App\Time;
+use App\Project;
 
 class ExportController extends Controller {
 
@@ -43,10 +44,13 @@ class ExportController extends Controller {
 
          $tmpfname = tempnam ("/tmp", "times.csv");
 
-         foreach ($times as $time) {
-             $name = Carbon::now()->format('Y-m-d') . ' - ' . $time->task->project->name . '.csv';
+         $name = 'report-' . Carbon::now()->format('Y-m-d');
+
+         if ($project) {
+             $name .= '-' . Project::find($project)->name;
          }
 
+         $name .= '.csv';
 
          $out = fopen($tmpfname, 'w');
 
