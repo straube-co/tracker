@@ -1,5 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap);@charset "UTF-8";
 
+/**
+/ Fonts
+**/
+
+/**
+/ Variables
+**/
+
+/**
+/ Bootstrap
+**/
+
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -16690,10 +16702,18 @@ readers do not read off random characters that represent icons */
   font-weight: 900;
 }
 
+/**
+/Body
+**/
+
 body {
   font-family: "Montserrat", sans-serif;
   padding-top: 39px;
 }
+
+/**
+/ Nav
+**/
 
 .navigation a {
   color: #ffffff;
@@ -16712,7 +16732,23 @@ body {
   color: black;
 }
 
+/**
+/ Time
+**/
+
 .start {
   width: 8%;
 }
+
+/**
+/ Activity
+**/
+
+.activity {
+  width: 95%;
+}
+
+/**
+/ Reports
+**/
 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="shortcut icon" href="/img/time.png" type="image/x-icon" />
     <title></title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @stack('head')

@@ -1,9 +1,9 @@
 @extends('layouts.header')
 @section('content')
 
-<h1>Share Name: {{ $report->name }}</h1>
+<h1 class="mt-4 mb-4">Share Name: {{ $report->name }}</h1>
 
-<table class="table pt-3">
+<table class="table">
     <thead>
         <tr>
             <th>Project</th>

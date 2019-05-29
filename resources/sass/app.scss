@@ -1,22 +1,32 @@
-
-//fonts
+/**
+/ Fonts
+**/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap');
 
-//variables
+/**
+/ Variables
+**/
 @import 'variables';
 
-//bootstrap
+/**
+/ Bootstrap
+**/
 @import '~bootstrap/scss/bootstrap';
 @import '~tempusdominus-bootstrap-4/src/sass/tempusdominus-bootstrap-4-build';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 
+/**
+/Body
+**/
 body {
     font-family: 'Montserrat', sans-serif;
     padding-top: 39px;
 }
 
-//nav
+/**
+/ Nav
+**/
 .navigation {
     a {
         color: #ffffff;
@@ -35,12 +45,23 @@ body {
     }
 }
 
-//time tracking
+/**
+/ Time
+**/
 .start {
     width: 8%;
 }
 
-//reports
+/**
+/ Activity
+**/
+.activity {
+    width: 95%;
+}
+
+/**
+/ Reports
+**/
 .fa {
     @extend .fas;
 }

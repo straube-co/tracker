@@ -83,9 +83,9 @@
                           <input class="form-control" type="text" name="name">
                     </div>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
-                    <button type="button" id="btn_share" class="btn btn-success btn-sm">Share</button>
+                  <div class="modal-footer justify-content-start">
+                      <button type="button" id="btn_share" class="btn btn-outline-success btn-sm">Share</button>
+                    <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
                   </div>
                 </div>
               </div>
