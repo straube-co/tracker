@@ -50,12 +50,10 @@ class OAuthController extends Controller
         $request->session()->put('auth.token', $token);
         $user = $this->client->users->me();
 
-        //
-        $straube_ws_id = 870874468980849;
         $inWorkspaces = false;
 
         foreach ($user->workspaces as $workspace) {
-            if ($workspace->id === $straube_ws_id ) {
+            if ($workspace->gid === '870874468980849') {
                 $inWorkspaces = true;
                 break;
             }
