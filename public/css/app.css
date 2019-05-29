@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -16691,10 +16691,13 @@ readers do not read off random characters that represent icons */
 }
 
 body {
+  font-family: "Montserrat", sans-serif;
   padding-top: 39px;
 }
 
 .navigation a {
+  color: #ffffff;
+  font-weight: 300;
   justify-content: left;
   margin-right: 25px;
   text-decoration: none;
@@ -16705,15 +16708,11 @@ body {
   margin-left: auto;
 }
 
-.stop {
-  background-color: red;
+.drop a {
+  color: black;
 }
 
 .start {
-  width: 10%;
-}
-
-.activity {
-  width: 90%;
+  width: 8%;
 }
 

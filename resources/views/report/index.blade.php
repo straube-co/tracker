@@ -1,12 +1,12 @@
 @extends('layouts.header')
 
 @section('content')
-    <button class="btn btn-outline-dark btn-sm mb-3" type="button" data-toggle="collapse" data-target="#collapseReport" aria-expanded="false" aria-controls="collapseExample">
+    <button class="btn btn-outline-dark btn-sm mt-2 mb-2" type="button" data-toggle="collapse" data-target="#collapseReport" aria-expanded="false" aria-controls="collapseExample">
         Search filter
     </button>
     <form id="form_action" action="{{ route('report.index') }}" method="get">
     <div class="collapse" id="collapseReport">
-            <div class="form-group pt-3">
+            <div class="form-group">
                 <label for="project">Project: </label>
                 <select class="custom-select" id="project" name="project_id">
                     <option value="">Select</option>
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-outline-secondary btn-sm mr-1">Search options</button>
-            <button type="button" id="btn_export" class="btn btn-outline-info btn-sm">Export CSV</button> 
+            <button type="button" id="btn_export" class="btn btn-outline-info btn-sm">Export CSV</button>
             <!-- Button share modal -->
             <button type="button" class="btn btn-outline-info btn-sm mr-1" data-toggle="modal" data-target="#share">
               Share hours

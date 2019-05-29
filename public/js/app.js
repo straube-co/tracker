@@ -69216,9 +69216,11 @@ var app = new Vue({
  * Function show tasks per project.
  */
 
-function showTasks(projectId) {
-  $('[name=task_id]').find('option[data-project_id]').hide().filter('[data-project_id="' + projectId + '"]').show();
-  var $selected = $('[name=task_id]').find('option:selected');
+function showTasks($select) {
+  var projectId = $select.val();
+  var $form = $select.parents('form');
+  $('[name=task_id]', $form).find('option[data-project_id]').hide().filter('[data-project_id="' + projectId + '"]').show();
+  var $selected = $('[name=task_id]', $form).find('option:selected');
 
   if ($selected.css('display') === 'none') {
     $selected.removeAttr('selected');
@@ -69229,9 +69231,11 @@ function showTasks(projectId) {
 
 ;
 $('[name=project_id]').on('change', function () {
-  showTasks($(this).val());
+  showTasks($(this));
 });
-showTasks($('[name=project_id]').val());
+$('[name=project_id]').each(function () {
+  showTasks($(this));
+});
 /**
  * Function action.
  */

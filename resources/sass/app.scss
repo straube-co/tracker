@@ -1,6 +1,6 @@
 
 //fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap');
 
 //variables
 @import 'variables';
@@ -12,12 +12,15 @@
 @import '~@fortawesome/fontawesome-free/scss/solid';
 
 body {
+    font-family: 'Montserrat', sans-serif;
     padding-top: 39px;
 }
 
 //nav
 .navigation {
     a {
+        color: #ffffff;
+        font-weight: 300;
         justify-content: left;
         margin-right: 25px;
         text-decoration: none;
@@ -26,19 +29,15 @@ body {
 .drop {
     display: flex;
     margin-left: auto;
+
+    a {
+        color: black;
+    }
 }
 
 //time tracking
-.stop {
-    background-color: red;
-}
 .start {
-    width: 10%;
-}
-
-//activity
-.activity {
-    width: 90%;
+    width: 8%;
 }
 
 //reports

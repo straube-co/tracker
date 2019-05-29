@@ -7,7 +7,7 @@
 @endpush
 
 @section('content')
-    <h1 class="pt-3 mb-5">Time Tracking</h1>
+    <h1 class="mt-4 mb-4">Time Tracking</h1>
     <table class="table pt-3">
         <thead>
             <tr>

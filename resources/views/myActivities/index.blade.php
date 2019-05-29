@@ -1,11 +1,12 @@
 @extends('layouts.header')
 
 @section('content')
-    <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#manual">
-        Add Manual Time Entry
-    </button>
     @include('myActivities.modal', [ 'time' => null ])
-    <h1 class="pt-3">My Activities</h1>
+    <h1 class="mt-4 mb-4">My Activities
+        <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#manual">
+            Add Manual Time Entry
+        </button>
+    </h1>
     <table class="table pt-3">
         <thead>
             <tr>

@@ -5,7 +5,6 @@
     $old = $submitted ? old() : [];
     $default = $time ?? new App\Time();
 @endphp
-
 <div class="modal fade" id="{{ $edit ? 'edit-' . $id : 'manual' }}" tabindex="-1" role="dialog" aria-labelledby="modalmanual" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -15,9 +14,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('my.store') }}" method="post">
+            <form action="{{ $edit ? route('my.update', $id) : route('my.store') }}" method="post">
+                {{ csrf_field() }}
+                @if ($edit)
+                    {{ method_field('put') }}
+                @endif
                 <div class="modal-body">
-                    {{ csrf_field() }}
                     <div class="form-group">
                         <label for="project">Project: </label>
                         <select class="custom-select @if ($submitted && $errors->has('project_id')) is-invalid @endif" id="project" name="project_id">
