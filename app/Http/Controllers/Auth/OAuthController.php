@@ -49,6 +49,21 @@ class OAuthController extends Controller
         $token = $this->client->dispatcher->fetchToken($code);
         $request->session()->put('auth.token', $token);
         $user = $this->client->users->me();
+
+        //
+        $straube_ws_id = 870874468980849;
+        $inWorkspaces = false;
+
+        foreach ($user->workspaces as $workspace) {
+            if ($workspace->id === $straube_ws_id ) {
+                $inWorkspaces = true;
+                break;
+            }
+        }
+        if ($inWorkspaces == false) {
+            abort(403, 'Acesso negado!');
+        }
+
         $request->session()->put('auth.id', $user->id);
         $count = User::where('id', $user->id)->count();
 
