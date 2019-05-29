@@ -48,3 +48,4 @@ Route::resource('/share', 'ShareController', [
         'share' => 'report',
     ]
 ]);
+Route::resource('/user', 'UserController');
