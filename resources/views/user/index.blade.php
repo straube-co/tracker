@@ -13,10 +13,16 @@
             @foreach ($users as $user)
                 <tr>
                     <td>{{$user->name}}</td>
-                    <td><input type="checkbox"></td>
-                    <td><input type="checkbox"></td>
+                    <td><input value="1" type="checkbox"></td>
+                    <td><input value="2" type="checkbox"></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <form action="{{route('user.store')}}" method="post">
+        {{ csrf_field() }}
+        <div>
+            <button type="submit" name="button">Save</button>
+        </div>
+    </form>
 @endsection

@@ -20,4 +20,15 @@ class UserController extends Controller
 
         return view('user.index', $data);
     }
+
+    // public function boot()
+    // {
+    //     $this->registerPolicies();
+    //
+    //     Gate::define('access-page', 'App\Policies\PostPolicy@access');
+    //
+    //     if (Gate::forUser($user)->denies('update-post', $post)) {
+    //         // The user can't update the post...
+    //     }
+    // }
 }
