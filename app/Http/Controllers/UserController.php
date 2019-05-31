@@ -24,25 +24,21 @@ class UserController extends Controller
 
         return view('user.index', $data);
     }
+
     public function store(Request $request) {
 
-        $access = $request->get('access');
+        $access = $request->get('access', []);
 
+        User::update([
+            'access' => 0,
+        ]);
 
-        dump($access);
+        foreach ($access as $userId => $arr){
+            User::where('id', $userId)->update([
+                'access' => array_sum($arr),
+            ]);
+        }
 
-
-
+        return redirect()->route('user.index');
     }
-
-    // public function boot()
-    // {
-    //     $this->registerPolicies();
-    //
-    //     Gate::define('access-page', 'App\Policies\PostPolicy@access');
-    //
-    //     if (Gate::forUser($user)->denies('update-post', $post)) {
-    //         // The user can't update the post...
-    //     }
-    // }
 }

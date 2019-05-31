@@ -14,7 +14,7 @@ class UpdatingUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->number('access')->default();
+            $table->integer('access')->default();
         });
     }
 

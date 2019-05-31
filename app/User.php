@@ -27,4 +27,22 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // public function access() {
+    //     $access = [];
+    //
+    //     $query = DB::table('users')->select('access')->get();
+    //
+    //     // $bin = array_map('intval', explode(',', $query));
+    //
+    //     $bitmask = strrev(decbin($bin));
+    //
+    //     for ($i = 0, $s = strlen($bitmask); $i < $s; $i++) {
+    //         if ($bitmask{$i}) {
+    //             $access[] = pow(2, $i);
+    //         }
+    //     }
+    //
+    //     return $access;
+    // }
 }
