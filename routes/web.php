@@ -25,6 +25,7 @@ Route::group([
     Route::resource('/activity', 'ActivityController')->middleware('can:settings');
     Route::resource('/report', 'ReportController')->middleware('can:report');
     Route::resource('/user', 'UserController')->middleware('can:settings');
+    Route::get('/out', 'OutController@index')->name('out');
     Route::resource('/export', 'ExportController');
     Route::resource('/time', 'TimeController');
     Route::resource('/my', 'MyActivitiesController', [

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Asana\Client;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Exception;
 
 /**
@@ -48,11 +49,11 @@ class OAuthController extends Controller
 
         $token = $this->client->dispatcher->fetchToken($code);
         $request->session()->put('auth.token', $token);
-        $user = $this->client->users->me();
+        $me_user = $this->client->users->me();
 
         $inWorkspaces = false;
 
-        foreach ($user->workspaces as $workspace) {
+        foreach ($me_user->workspaces as $workspace) {
             if ($workspace->gid === '870874468980849') {
                 $inWorkspaces = true;
                 break;
@@ -62,10 +63,11 @@ class OAuthController extends Controller
             abort(403, 'Acesso negado!');
         }
 
-        $request->session()->put('auth.id', $user->id);
-        $count = User::where('id', $user->id)->count();
+        $user = User::find($me_user->id);
 
-        if ($count === 0) {
+        Auth::login($user);
+
+        if (!$user) {
             User::create([
                 'id' => $user->id,
                 'name' => $user->name,

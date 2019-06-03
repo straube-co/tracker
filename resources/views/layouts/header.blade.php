@@ -11,7 +11,10 @@
     @stack('head')
 </head>
 <body>
-    @if (session('auth.id'))
+    @php
+    $user = Illuminate\Support\Facades\Auth::user();
+    @endphp
+    @if ($user)
         <nav class="navbar navigation bg-dark fixed-top">
             <a href="{{ route('time.index') }}">Time Tracking</a>
             <a href="{{ route('my.index') }}">My Activities</a>
@@ -24,6 +27,7 @@
                     <a class="dropdown-item" href="{{ route('activity.index') }}">Type of activities</a>
                     <a class="dropdown-item" href="{{ route('import.index') }}">Time import</a>
                     <a class="dropdown-item" href="{{ route('user.index') }}">Users</a>
+                    <a class="dropdown-item" href="{{ route('out') }}">Logging Out</a>
                 </div>
             </div>
         </nav>

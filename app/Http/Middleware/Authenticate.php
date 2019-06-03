@@ -6,6 +6,7 @@ use Closure;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 /**
@@ -26,9 +27,9 @@ class Authenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        $userId = $request->session()->get('auth.id');
+        $user = Auth::user();
 
-        if ($this->isIdValid($userId)) {
+        if ($user) {
             return $next($request);
         }
 
