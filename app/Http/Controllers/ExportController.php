@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\Request;
-use App\Support\Formatter;
-
-use Carbon\Carbon;
-use App\Time;
 use App\Project;
+use App\Support\Formatter;
+use App\Time;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class ExportController extends Controller {
 
@@ -47,7 +47,7 @@ class ExportController extends Controller {
          $name = 'report-' . Carbon::now()->format('Y-m-d');
 
          if ($project) {
-             $name .= '-' . Project::find($project)->name;
+             $name .= '-' . Str::slug(Project::find($project)->name);
          }
 
          $name .= '.csv';
