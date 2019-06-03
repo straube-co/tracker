@@ -12,10 +12,7 @@ class UserController extends Controller
 {
     public function index() {
 
-        $users = Cache::remember('users', 1, function () {
-            return User::get();
-        });
-
+        $users = User::get();
 
         $data = [
             'users' => $users,
@@ -29,7 +26,7 @@ class UserController extends Controller
 
         $access = $request->get('access', []);
 
-        User::update([
+        User::where('id', '>', 0)->update([
             'access' => 0,
         ]);
 

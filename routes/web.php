@@ -22,8 +22,9 @@ Route::group([
     Route::get('/', function () {
         return redirect()->route('time.index');
     });
-    Route::resource('/activity', 'ActivityController');
-    Route::resource('/report', 'ReportController');
+    Route::resource('/activity', 'ActivityController')->middleware('can:settings');
+    Route::resource('/report', 'ReportController')->middleware('can:report');
+    Route::resource('/user', 'UserController')->middleware('can:settings');
     Route::resource('/export', 'ExportController');
     Route::resource('/time', 'TimeController');
     Route::resource('/my', 'MyActivitiesController', [
@@ -48,4 +49,3 @@ Route::resource('/share', 'ShareController', [
         'share' => 'report',
     ]
 ]);
-Route::resource('/user', 'UserController');

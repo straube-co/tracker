@@ -15,8 +15,8 @@
                 @foreach ($users as $user)
                     <tr>
                         <td>{{$user->name}}</td>
-                        <td><input name="access[{{ $user->id }}][]" type="checkbox" value="1"></td>
-                        <td><input name="access[{{ $user->id }}][]" type="checkbox" value="2"></td>
+                        <td><input name="access[{{ $user->id }}][]" type="checkbox" value="1" @if (in_array(1, $user->access())) checked @endif></td>
+                        <td><input name="access[{{ $user->id }}][]" type="checkbox" value="2" @if (in_array(2, $user->access())) checked @endif></td>
                     </tr>
                 @endforeach
             </tbody>
