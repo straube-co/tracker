@@ -26,20 +26,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('report', function (?User $user) {
-            $user_ = request()->session()->get('auth.id');
+        Gate::define('report', function (User $user) {
 
-            $userId = User::find($user_);
-
-            return in_array(2, $userId->access());
+            return in_array(2, $user->access());
         });
 
-        Gate::define('settings', function (?User $user) {
-            $user_ = request()->session()->get('auth.id');
+        Gate::define('settings', function (User $user) {
 
-            $userId = User::find($user_);
-
-            return in_array(1, $userId->access());
+            return in_array(1, $user->access());
         });
     }
 }
