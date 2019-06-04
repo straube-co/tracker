@@ -11,6 +11,6 @@ class OutController extends Controller
 
         Auth::logout();
 
-        return redirect()->route('time.index');
+        return redirect('/');
     }
 }

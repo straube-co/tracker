@@ -37,23 +37,6 @@ class Authenticate
     }
 
     /**
-     * Check whether the given ID is valid.
-     *
-     * @param  string|null $userId
-     * @return bool
-     */
-    private function isIdValid(?string $userId): bool
-    {
-        if (empty($userId)) {
-            return false;
-        }
-        //Verificar se o usuário existe no banco
-        $user = User::where('id', $userId)->count();
-        //return boolean
-        return $user === 1;
-    }
-
-    /**
      * Log out the current user and redirect it to login.
      *
      * @param  \Illuminate\Http\Request $request
@@ -63,6 +46,6 @@ class Authenticate
     {
         $request->session()->flush();
 
-        return redirect()->route('auth.auth');
+        abort(403);
     }
 }

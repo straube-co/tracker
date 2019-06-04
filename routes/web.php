@@ -16,12 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/auth', 'Auth\\OAuthController@auth')->name('auth.auth');
 Route::get('/auth/handle', 'Auth\\OAuthController@handle')->name('auth.handle');
 
+Route::get('/', function () {
+    return view('layouts.home');
+});
+
 Route::group([
     'middleware' => [ 'auth' ],
 ], function () {
-    Route::get('/', function () {
-        return redirect()->route('time.index');
-    });
     Route::resource('/activity', 'ActivityController')->middleware('can:settings');
     Route::resource('/report', 'ReportController')->middleware('can:report');
     Route::resource('/user', 'UserController')->middleware('can:settings');

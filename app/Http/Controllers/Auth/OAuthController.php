@@ -65,15 +65,16 @@ class OAuthController extends Controller
 
         $user = User::find($me_user->id);
 
-        Auth::login($user);
-
         if (!$user) {
-            User::create([
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
+            $user = User::create([
+                        'id' => $me_user->id,
+                        'name' => $me_user->name,
+                        'email' => $me_user->email,
             ]);
         }
-        return redirect('/');
+
+        Auth::login($user);
+
+        return redirect('/time');
     }
 }

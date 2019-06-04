@@ -16733,6 +16733,18 @@ body {
 }
 
 /**
+/ Login
+**/
+
+.login a {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  width: 200px;
+}
+
+/**
 / Time
 **/
 
