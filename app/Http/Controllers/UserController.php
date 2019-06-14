@@ -11,7 +11,8 @@ use App\User;
 
 class UserController extends Controller
 {
-    public function index() {
+    public function index()
+    {
 
         $users = User::get();
 
@@ -23,7 +24,8 @@ class UserController extends Controller
         return view('user.index', $data);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
 
         $access = $request->get('access', []);
 
@@ -31,7 +33,7 @@ class UserController extends Controller
             'access' => 0,
         ]);
 
-        foreach ($access as $userId => $arr){
+        foreach ($access as $userId => $arr) {
             User::where('id', $userId)->update([
                 'access' => array_sum($arr),
             ]);

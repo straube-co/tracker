@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+
 use App\Time;
 use Illuminate\Database\Eloquent\Model;
 

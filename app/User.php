@@ -31,7 +31,8 @@ class User extends Authenticatable
 
     protected $rememberTokenName = false;
 
-    public function access() {
+    public function access()
+    {
         $access = [];
 
         $bitmask = strrev(decbin($this->access));

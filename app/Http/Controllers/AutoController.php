@@ -61,7 +61,7 @@ class AutoController extends Controller
     }
 
     public function update(Time $time)
-    {    
+    {
         $time->update([
             'finished' => Carbon::now(),
         ]);

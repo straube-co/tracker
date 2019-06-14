@@ -53,7 +53,12 @@ class MyActivitiesController extends Controller
             'task_id' => 'required|exists:tasks,id',
             'activity_id' => 'required',
             'started' => 'required|date_format:Y-m-d H:i:s',
-            'finished' => 'required|date_format:Y-m-d H:i:s|after_or_equal:started|before:' . Carbon::now()->format('Y-m-d H:i:s'),
+            'finished' => [
+                'required',
+                'date_format:Y-m-d H:i:s',
+                'after_or_equal:started',
+                'before:' . Carbon::now()->format('Y-m-d H:i:s'),
+            ],
         ]);
 
         Time::create([
@@ -94,7 +99,12 @@ class MyActivitiesController extends Controller
             'task_id' => 'required|exists:tasks,id',
             'activity_id' => 'required',
             'started' => 'required|date_format:Y-m-d H:i:s',
-            'finished' => 'required|date_format:Y-m-d H:i:s|after_or_equal:started|before:' . Carbon::now()->format('Y-m-d H:i:s'),
+            'finished' => [
+                'required',
+                'date_format:Y-m-d H:i:s',
+                'after_or_equal:started',
+                'before:' . Carbon::now()->format('Y-m-d H:i:s'),
+            ],
         ]);
 
         $time->update([

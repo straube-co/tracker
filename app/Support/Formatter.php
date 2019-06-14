@@ -35,6 +35,6 @@ class Formatter
         if ($interval === null) {
             return null;
         }
-        return str_pad((int)$interval->totalHours, 2, '0', STR_PAD_LEFT ) . ':' . $interval->format('%I:%S');
+        return str_pad((int)$interval->totalHours, 2, '0', STR_PAD_LEFT) . ':' . $interval->format('%I:%S');
     }
 }

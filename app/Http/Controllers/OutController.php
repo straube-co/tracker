@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class OutController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
 
         Auth::logout();
 
