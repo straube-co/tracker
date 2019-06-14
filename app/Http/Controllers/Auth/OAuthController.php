@@ -49,11 +49,11 @@ class OAuthController extends Controller
 
         $token = $this->client->dispatcher->fetchToken($code);
         $request->session()->put('auth.token', $token);
-        $me_user = $this->client->users->me();
+        $userMe = $this->client->users->me();
 
         $inWorkspaces = false;
 
-        foreach ($me_user->workspaces as $workspace) {
+        foreach ($userMe->workspaces as $workspace) {
             if ($workspace->gid === '870874468980849') {
                 $inWorkspaces = true;
                 break;
@@ -63,13 +63,13 @@ class OAuthController extends Controller
             abort(403, 'Acesso negado!');
         }
 
-        $user = User::find($me_user->id);
+        $user = User::find($userMe->id);
 
         if (!$user) {
             $user = User::create([
-                        'id' => $me_user->id,
-                        'name' => $me_user->name,
-                        'email' => $me_user->email,
+                        'id' => $userMe->id,
+                        'name' => $userMe->name,
+                        'email' => $userMe->email,
             ]);
         }
 

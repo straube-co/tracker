@@ -35,35 +35,13 @@ class ReportController extends Controller
 
         $request = request();
 
-        $query = Time::select('times.*')->orderBy('started', 'desc');
-
-        if (($activity = $request->activity_id)) {
-            $query->where('activity_id', $activity);
-        }
-        if (($project = $request->project_id)) {
-            $query->whereHas('task', function ($query) use ($project) {
-
-                $query->where('project_id', $project);
-            });
-        }
-        if (($task = $request->task_id)) {
-            $query->where('task_id', $task);
-        }
-        if (($user = $request->user_id)) {
-            $query->where('user_id', $user);
-        }
-        if (($started = $request->started)) {
-            $query->where('started', '>=', $started);
-        }
-        if (($finished = $request->finished)) {
-            $query->where('finished', '<=', $finished);
-        }
+        $query = Time::reportFromRequest($request);
 
         $summaryQuery = clone $query;
 
         $times = $query->paginate()->appends($request->all());
 
-        $grouped = $summaryQuery->get()->groupBy('activity_id')->map(function ($times, $activity_id) {
+        $grouped = $summaryQuery->get()->groupBy('activity_id')->map(function ($times) {
 
             $now = new Carbon('00:00');
             $start = clone $now;
@@ -81,8 +59,8 @@ class ReportController extends Controller
             'projects' => $projects,
             'tasks' => $tasks,
             'users' => $users,
-            'started' => $started,
-            'finished' => $finished,
+            'started' => $request->started,
+            'finished' => $request->finished,
             'times' => $times,
             'grouped' => $grouped,
         ];

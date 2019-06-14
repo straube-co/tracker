@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 use App\User;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class UserController extends Controller
 {
     public function index()

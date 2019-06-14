@@ -11,6 +11,8 @@ use App\User;
 
 /**
  * Authenticate middleware.
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class Authenticate
 {
