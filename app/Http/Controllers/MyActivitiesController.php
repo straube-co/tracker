@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Activity;
 use App\Project;
@@ -22,7 +23,7 @@ class MyActivitiesController extends Controller
     {
         //
         $times = Time::with('task', 'task.project', 'activity')
-            ->where('user_id', session('auth.id'))
+            ->where('user_id', Auth::id())
             ->orderBy('started', 'desc')
             ->paginate();
 
@@ -58,7 +59,7 @@ class MyActivitiesController extends Controller
 
         Time::create([
             'task_id' => $validatedData['task_id'],
-            'user_id' => $request->session()->get('auth.id'),
+            'user_id' => Auth::id(),
             'activity_id' => $validatedData['activity_id'],
             'started' => $validatedData['started'],
             'finished' => $validatedData['finished'],
@@ -99,7 +100,7 @@ class MyActivitiesController extends Controller
 
         $time->update([
             'task_id' => $validatedData['task_id'],
-            'user_id' => $request->session()->get('auth.id'),
+            'user_id' => Auth::id(),
             'activity_id' => $validatedData['activity_id'],
             'started' => $validatedData['started'],
             'finished' => $validatedData['finished'],

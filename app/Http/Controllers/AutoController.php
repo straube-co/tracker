@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Time;
@@ -46,12 +47,12 @@ class AutoController extends Controller
             'activity_id' => 'required',
         ]);
 
-        $time = Time::where('user_id', $request->id)->where('finished', null)->count() == 0;
+        $time = Time::where('user_id', Auth::id())->where('finished', null)->count() == 0;
 
         if ($time) {
             Time::create([
                 'task_id' => $validatedData['task_id'],
-                'user_id' => $request->session()->get('auth.id'),
+                'user_id' => Auth::id(),
                 'activity_id' => $validatedData['activity_id'],
                 'started' => Carbon::now(),
                 'finished' => null,
@@ -61,7 +62,7 @@ class AutoController extends Controller
     }
 
     public function update(Time $time)
-    {    
+    {
         $time->update([
             'finished' => Carbon::now(),
         ]);

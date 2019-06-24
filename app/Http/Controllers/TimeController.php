@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
@@ -49,7 +50,7 @@ class TimeController extends Controller
 
         Time::create([
             'task_id' => $validatedData['task_id'],
-            'user_id' => $request->session()->get('auth.id'),
+            'user_id' => Auth::id(),
             'activity_id' => $request->activity_id,
             'started' => $validatedData['started'],
             'finished' => $validatedData['finished'],
