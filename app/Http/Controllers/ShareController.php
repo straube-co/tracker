@@ -7,6 +7,10 @@ use Carbon\Carbon;
 use App\Report;
 use App\Time;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class ShareController extends Controller
 {
     public function show(Report $report)

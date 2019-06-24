@@ -10,74 +10,57 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
-class ExportController extends Controller {
+/**
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
+class ExportController extends Controller
+{
 
-     public function store()
-     {
-         $request = request();
+    public function store()
+    {
+        $request = request();
 
-         $query = Time::orderBy('started', 'desc');
+        $query = Time::reportFromRequest($request);
 
-         if (($activity = $request->activity_id)) {
-             $query->where('activity_id', $activity);
-         }
-         if (($project = $request->project_id)) {
-             $query->whereHas('task', function ($query) use ($project) {
+        $times = $query->get();
 
-                 $query->where('project_id', $project);
-             });
-         }
-         if (($task = $request->task_id)) {
-             $query->where('task_id', $task);
-         }
-         if (($user = $request->user_id)) {
-             $query->where('user_id', $user);
-         }
-         if (($started = $request->started)) {
-             $query->where('started', '>=', $started);
-         }
-         if (($finished = $request->finished)) {
-             $query->where('finished', '<=', $finished);
-         }
+        $tmpfname = tempnam("/tmp", "times.csv");
 
-         $times = $query->get();
+        $name = 'report-' . Carbon::now()->format('Y-m-d');
 
-         $tmpfname = tempnam ("/tmp", "times.csv");
+        if ($request->project_id) {
+            $name .= '-' . Str::slug(Project::find($request->project_id)->name);
+        }
 
-         $name = 'report-' . Carbon::now()->format('Y-m-d');
+        $name .= '.csv';
 
-         if ($project) {
-             $name .= '-' . Str::slug(Project::find($project)->name);
-         }
+        $out = fopen($tmpfname, 'w');
 
-         $name .= '.csv';
+        fputcsv($out, [
+            'Project',
+            'Task',
+            'Activity',
+            'User',
+            'Started',
+            'Finished',
+            'Total',
+        ]);
 
-         $out = fopen($tmpfname, 'w');
+        foreach ($times as $time) {
+            fputcsv($out, [
+                $time->task->project->name,
+                $time->task->name,
+                $time->activity->name,
+                $time->user->name,
+                $time->started,
+                $time->finished,
+                $time->finished ? Formatter::intervalTime($time->finished->diffAsCarbonInterval($time->started)) : '-',
+            ]);
+        }
 
-         fputcsv($out, [
-             'Project',
-             'Task',
-             'Activity',
-             'User',
-             'Started',
-             'Finished',
-             'Total',
-         ]);
+        fclose($out);
 
-         foreach ($times as $time) {
-             fputcsv($out, [
-                 $time->task->project->name,
-                 $time->task->name,
-                 $time->activity->name,
-                 $time->user->name,
-                 $time->started,
-                 $time->finished,
-                 $time->finished ? Formatter::intervalTime($time->finished->diffAsCarbonInterval($time->started)) : '-',
-             ]);
-         }
-
-         fclose($out);
-
-         return response()->download($tmpfname, $name);
-     }
+        return response()->download($tmpfname, $name);
+    }
 }
