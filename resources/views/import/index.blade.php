@@ -16,9 +16,9 @@
                     @endforeach
                 </select>
             </div>
-            <div class="modal-footer justify-content-start">
-                <button type="submit" class="btn btn-outline-success btn-sm">Import file</button>
+            <div class="modal-footer">
                 <a class="btn btn-outline-danger btn-sm" href="{{ route('time.index')}}">Cancel</a>
+                <button type="submit" class="btn btn-outline-success btn-sm">Import file</button>
             </div>
         </form>
     </div>

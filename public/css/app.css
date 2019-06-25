@@ -1,16 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap);@charset "UTF-8";
 
-/**
-/ Fonts
-**/
+/* Fonts */
 
-/**
-/ Variables
-**/
+/* Variables */
 
-/**
-/ Bootstrap
-**/
+/* Bootstrap */
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -16702,24 +16696,20 @@ readers do not read off random characters that represent icons */
   font-weight: 900;
 }
 
-/**
-/Body
-**/
+/* body */
 
 body {
   font-family: "Montserrat", sans-serif;
   padding-top: 39px;
 }
 
-/**
-/ Nav
-**/
+/* nav */
 
 .navigation a {
   color: #ffffff;
   font-weight: 300;
   justify-content: left;
-  margin-right: 25px;
+  margin-right: 18px;
   text-decoration: none;
 }
 
@@ -16732,9 +16722,7 @@ body {
   color: black;
 }
 
-/**
-/ Login
-**/
+/* login */
 
 .login a {
   display: block;
@@ -16744,23 +16732,23 @@ body {
   width: 200px;
 }
 
-/**
-/ Time
-**/
+/* time auto */
+
+.lets {
+  white-space: nowrap;
+}
+
+/* time */
 
 .start {
   width: 8%;
 }
 
-/**
-/ Activity
-**/
+/* activity */
 
 .activity {
   width: 95%;
 }
 
-/**
-/ Reports
-**/
+/* reports */
 

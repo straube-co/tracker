@@ -30,14 +30,14 @@
                         @endif
                     </div>
                 </div>
-                <div class="modal-footer justify-content-start">
+                <div class="modal-footer">
                     <input type="hidden" name="activity_id" value="activity_{{ $id }}">
 
-                    <button class="btn btn-outline-success btn-sm" type="submit">Save </button>
-                    <a class="btn btn-outline-danger btn-sm" href="{{ route('activity.index')}}">Cancel</a>
                     @if ($edit && !$activity->activityUsed())
-                        <button class="btn btn-danger btn-sm ml-auto" type="button" onclick="$('#activity_delete-{{ $id }}').submit()">Delete </button>
+                        <button class="btn btn-danger btn-sm mr-auto" id="btn_delete" type="button" onclick="$('#activity_delete-{{ $id }}').submit()">Delete </button>
                     @endif
+                    <a class="btn btn-outline-danger btn-sm" href="{{ route('activity.index')}}">Cancel</a>
+                    <button class="btn btn-outline-success btn-sm" type="submit">Save </button>
                 </div>
             </form>
             <form action="{{ route('activity.destroy', $id) }}" method="post" id="activity_delete-{{ $id }}">

@@ -106,31 +106,33 @@
             </tbody>
         </table>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Projects</th>
-                <th>Tasks</th>
-                <th>Activities</th>
-                <th>Started</th>
-                <th>Finished</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($times as $time)
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>{{ $time->user->name }}</td>
-                    <td>{{ $time->task->project->name }}</td>
-                    <td>{{ $time->task->name }}</td>
-                    <td>{{ $time->activity->name }}</td>
-                    <td>{{ $time->started }}</td>
-                    <td>{{ $time->finished }}</td>
-                    <td>{{ $time->finished ? App\Support\Formatter::intervalTime($time->finished->diffAsCarbonInterval($time->started)) : '-' }}</td>
+                    <th>Name</th>
+                    <th>Projects</th>
+                    <th>Tasks</th>
+                    <th>Activities</th>
+                    <th>Started</th>
+                    <th>Finished</th>
+                    <th>Total</th>
                 </tr>
-            @endforeach
-        </tbody>
+            </thead>
+            <tbody>
+                @foreach ($times as $time)
+                    <tr>
+                        <td>{{ $time->user->name }}</td>
+                        <td>{{ $time->task->project->name }}</td>
+                        <td>{{ $time->task->name }}</td>
+                        <td>{{ $time->activity->name }}</td>
+                        <td>{{ $time->started }}</td>
+                        <td>{{ $time->finished }}</td>
+                        <td>{{ $time->finished ? App\Support\Formatter::intervalTime($time->finished->diffAsCarbonInterval($time->started)) : '-' }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
+    </div>
     {{ $times->links() }}
 @endsection

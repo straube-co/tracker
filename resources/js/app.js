@@ -34,9 +34,7 @@ const app = new Vue({
     el: '#app'
 });
 
-/**
- * Function show tasks per project.
- */
+/* Function show tasks per project */
 function showTasks($select) {
     var projectId = $select.val();
     var $form = $select.parents('form');
@@ -58,10 +56,7 @@ $('[name=project_id]').each(function () {
     showTasks($(this));
 });
 
-
-/**
- * Function action.
- */
+/* Function action */
 function action(url) {
 
     let token = document.head.querySelector('meta[name="csrf-token"]');
@@ -87,30 +82,22 @@ $('#btn_export').on('click', function () {
     action('/export');
 });
 
-/**
- * Function toApply.
- */
+/* Function toApply */
 function toApply() {
 
     var valuetask = $('[name=task_id]').val();
     var valueactivity = $('[name=activity_id]').val();
 
-    /**
-     * Loop with all the checked.
-     */
+    /* Loop with all the checked */
      $(':checked').each(function() {
          var index = $(this).data('index');
 
-         /**
-          * If the value is not empty.
-          */
+         /* If the value is not empty */
          if (valuetask !== '') {
              var name = 'time[' + index + '][task_id]';
              $('[name="' + name + '"]').val(valuetask);
 
-             /**
-              * Back to the default text "select".
-              */
+             /* Back to the default text "select" */
              $('[name=task_id]').val('');
 
          }if (valueactivity !== '') {
@@ -124,9 +111,7 @@ $('[name=apply]').on('click', function () {
     toApply();
 });
 
-/**
- * Function select all, with shift and alt.
- */
+/* Function select all, with shift and alt */
 $('.select-all').click(function(e) {
   var checked = e.currentTarget.checked;
   $('.list-item-checkbox').prop('checked', checked);
@@ -135,9 +120,8 @@ $('.select-all').click(function(e) {
 var lastChecked = null;
 
 $('.list-item-checkbox').click(function(e) {
-    /**
-     * Select with shift.
-     */
+
+    /* Select with shift */
     if(e.shiftKey) {
         var from = $('.list-item-checkbox').index(this);
         var to = $('.list-item-checkbox').index(lastChecked);
@@ -151,9 +135,7 @@ $('.list-item-checkbox').click(function(e) {
   }
 
   lastChecked = this;
-  /**
-   * Select with alt.
-   */
+  /* Select with alt */
   if(e.altKey){
 
     $('.list-item-checkbox')
@@ -164,9 +146,18 @@ $('.list-item-checkbox').click(function(e) {
     });
   }
 });
-/**
- * Function is performed by loading the page.
- */
+
+/* Confirmation to delete */
+function DeleteTime() {
+    if (window.confirm("Do you want to delete this time?")) {
+        //
+    }
+};
+$('#btn_delete').on('click', function () {
+    DeleteTime();
+});
+
+/* Function is performed by loading the page */
 $(function () {
     $('#datepickerstarted').datetimepicker({
         format:"Y-MM-DD HH:mm:ss"
@@ -183,9 +174,7 @@ $(function () {
     });
 });
 
-/**
- * Back to the default text "select".
- */
+/* Back to the default text "select" */
 function clean() {
 
     $('[name=project_id]').val('');
@@ -199,13 +188,13 @@ $('[name=clean]').on('click', function () {
     clean();
 });
 
-/**
- * Modal with error
- */
+/* Modal with error */
 function modalError() {
     $('.modal:has(.is-invalid)').modal('show');
 };
 modalError();
+
+
 
 /**
  * Attach a function to update the time counter in the time tracking view.

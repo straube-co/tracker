@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Time;
@@ -47,9 +48,14 @@ class AutoController extends Controller
             'activity_id' => 'required',
         ]);
 
-        $time = Time::where('user_id', Auth::id())->where('finished', null)->count() == 0;
+        DB::transaction(function () use ($validatedData) {
 
-        if ($time) {
+            $time = Time::where('user_id', Auth::id())->where('finished', null)->count() == 0;
+
+            if (!$time) {
+                return;
+            }
+
             Time::create([
                 'task_id' => $validatedData['task_id'],
                 'user_id' => Auth::id(),
@@ -57,7 +63,8 @@ class AutoController extends Controller
                 'started' => Carbon::now(),
                 'finished' => null,
             ]);
-        }
+        });
+
         return redirect()->route('time.index');
     }
 
