@@ -165,6 +165,7 @@ $('.btn-delete-activity').on('click', function () {
 /* Function is performed by loading the page */
 $(function () {
     $('#datepickerstarted').datetimepicker({
+        useCurrent: false,
         format:"Y-MM-DD HH:mm:ss"
     });
     $('#datepickerfinished').datetimepicker({
