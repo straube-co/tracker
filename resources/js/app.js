@@ -34,6 +34,12 @@ const app = new Vue({
     el: '#app'
 });
 
+
+// setTimeout(function(){
+//     location.reload();
+// },3000);
+
+
 /* Function show tasks per project */
 function showTasks($select) {
     var projectId = $select.val();

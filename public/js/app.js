@@ -69211,7 +69211,10 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 var app = new Vue({
   el: '#app'
-});
+}); // setTimeout(function(){
+//     location.reload();
+// },3000);
+
 /* Function show tasks per project */
 
 function showTasks($select) {
