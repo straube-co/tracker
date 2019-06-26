@@ -148,14 +148,18 @@ $('.list-item-checkbox').click(function(e) {
 });
 
 /* Confirmation to delete */
-function DeleteTime(id) {
-    if (window.confirm("Do you want to delete this time?")) {
-        $('#time_delete-' + id).submit();
+function Delete(selector) {
+    if (window.confirm("Do you want to delete this item?")) {
+        $(selector).submit();
     }
 };
 $('.btn-delete-time').on('click', function () {
     var id = $(this).data('time');
-    DeleteTime(id);
+    Delete('#time_delete-' + id);
+});
+$('.btn-delete-activity').on('click', function () {
+    var id = $(this).data('activity');
+    Delete('#activity_delete-' + id);
 });
 
 /* Function is performed by loading the page */

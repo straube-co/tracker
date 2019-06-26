@@ -34,7 +34,7 @@
                     <input type="hidden" name="activity_id" value="activity_{{ $id }}">
 
                     @if ($edit && !$activity->activityUsed())
-                        <button class="btn btn-danger btn-sm mr-auto" id="btn_delete" type="button" onclick="$('#activity_delete-{{ $id }}').submit()">Delete </button>
+                        <button class="btn btn-danger btn-sm mr-auto btn-delete-activity" type="button" data-activity="{{ $id }}">Delete </button>
                     @endif
                     <a class="btn btn-outline-danger btn-sm" href="{{ route('activity.index')}}">Cancel</a>
                     <button class="btn btn-outline-success btn-sm" type="submit">Save </button>
