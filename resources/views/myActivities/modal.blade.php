@@ -96,7 +96,7 @@
                     <input type="hidden" name="time_id" value="time_{{ $id }}">
 
                     @if ($edit)
-                        <button class="btn btn-danger btn-sm mr-auto" id="btn_delete" type="button" onclick="$('#time_delete-{{ $id }}').submit()">Delete </button>
+                        <button class="btn btn-danger btn-sm mr-auto btn-delete-time" type="button" data-time="{{ $id }}">Delete</button>
                     @endif
                     <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-outline-success btn-sm">Save</button>

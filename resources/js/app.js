@@ -148,13 +148,14 @@ $('.list-item-checkbox').click(function(e) {
 });
 
 /* Confirmation to delete */
-function DeleteTime() {
+function DeleteTime(id) {
     if (window.confirm("Do you want to delete this time?")) {
-        //
+        $('#time_delete-' + id).submit();
     }
 };
-$('#btn_delete').on('click', function () {
-    DeleteTime();
+$('.btn-delete-time').on('click', function () {
+    var id = $(this).data('time');
+    DeleteTime(id);
 });
 
 /* Function is performed by loading the page */
