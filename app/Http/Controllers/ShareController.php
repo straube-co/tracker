@@ -44,13 +44,13 @@ class ShareController extends Controller
 
         $times = $query->paginate();
 
-        $grouped = $summaryQuery->get()->groupBy('activity_id')->map(function($times, $activity_id) {
+        $grouped = $summaryQuery->get()->groupBy('activity_id')->map(function ($times) {
 
             $now = new Carbon('00:00');
             $start = clone $now;
 
-            return $times->reduce(function($diff, $time) {
-                if($time->finished !== NULL) {
+            return $times->reduce(function ($diff, $time) {
+                if ($time->finished !== null) {
                     return $diff->add($time->finished->diff($time->started));
                 }
                 return $diff;
