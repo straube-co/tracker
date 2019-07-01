@@ -63,9 +63,6 @@ class ShareController extends Controller
             'grouped' => $grouped,
         ];
 
-        // $report->name;
-        // $report->filter['project_id'];
-
         return view('report.share', $data);
     }
 }
