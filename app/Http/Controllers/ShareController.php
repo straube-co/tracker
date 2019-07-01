@@ -107,8 +107,8 @@ class ShareController extends Controller
                 $time->task->name,
                 $time->activity->name,
                 $time->user->name,
-                $time->started_at,
-                $time->finished_at,
+                $time->started,
+                $time->finished,
                 $ellapsed,
             ];
         }
