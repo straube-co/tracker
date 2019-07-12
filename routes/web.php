@@ -46,8 +46,4 @@ Route::group([
     ]);
 });
 
-Route::resource('/share', 'ShareController', [
-    'parameters' => [
-        'share' => 'report',
-    ]
-]);
+Route::get('/share/{report}/{format?}', 'ShareController@show')->name('share.show');

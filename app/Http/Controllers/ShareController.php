@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Report;
+use App\Support\Formatter;
 use App\Time;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 /**
  *
@@ -13,10 +14,45 @@ use App\Time;
  */
 class ShareController extends Controller
 {
-    public function show(Report $report)
+    public function show(Report $report, string $format = null)
     {
-        //
-        $query = Time::orderBy('started', 'desc');
+        $format = in_array($format, [ 'html', 'csv' ]) ? $format : 'html';
+
+        $query = $this->buildQuery($report);
+
+        if ($format === 'csv') {
+            return $this->getCsv($query);
+        }
+
+        $summaryQuery = clone $query;
+
+        $times = $query->paginate();
+
+        $grouped = $summaryQuery->get()->groupBy('activity_id')->map(function ($times) {
+
+            $now = new Carbon('00:00');
+            $start = clone $now;
+
+            return $times->reduce(function ($diff, $time) {
+                if ($time->finished !== null) {
+                    return $diff->add($time->finished->diff($time->started));
+                }
+                return $diff;
+            }, $now)->diffAsCarbonInterval($start);
+        });
+
+        $data = [
+            'report' => $report,
+            'times' => $times,
+            'grouped' => $grouped,
+        ];
+
+        return view('report.share', $data);
+    }
+
+    private function buildQuery(Report $report)
+    {
+        $query = Time::with('activity', 'task', 'task.project')->orderBy('started', 'desc');
 
         if (($activity = $report->filter['activity_id'])) {
             $query->where('activity_id', $activity);
@@ -40,32 +76,48 @@ class ShareController extends Controller
             $query->where('finished', '<=', $finished);
         }
 
-        $summaryQuery = clone $query;
+        return $query;
+    }
 
-        $times = $query->paginate();
-
-        $grouped = $summaryQuery->get()->groupBy('activity_id')->map(function($times, $activity_id) {
-
-            $now = new Carbon('00:00');
-            $start = clone $now;
-
-            return $times->reduce(function($diff, $time) {
-                if($time->finished !== NULL) {
-                    return $diff->add($time->finished->diff($time->started));
-                }
-                return $diff;
-            }, $now)->diffAsCarbonInterval($start);
-        });
-
-        $data = [
-            'report' => $report,
-            'times' => $times,
-            'grouped' => $grouped,
+    private function getCsv($query)
+    {
+        $rows = [
+            [
+                'Project',
+                'Task',
+                'Activity',
+                'User',
+                'Started',
+                'Finished',
+                'Ellapsed time',
+            ]
         ];
 
-        // $report->name;
-        // $report->filter['project_id'];
+        $results = $query->get();
 
-        return view('report.share', $data);
+        foreach ($results as $time) {
+            $ellapsed = null;
+            if ($time->finished) {
+                $ellapsed = Formatter::intervalTime(
+                    $time->finished->diffAsCarbonInterval($time->started)
+                );
+            }
+            $rows[] = [
+                $time->task->project->name,
+                $time->task->name,
+                $time->activity->name,
+                $time->user->name,
+                $time->started,
+                $time->finished,
+                $ellapsed,
+            ];
+        }
+
+        $rows = array_map(function ($row) {
+            return '"' . implode('","', $row) . '"';
+        }, $rows);
+
+        return response(implode("\n", $rows), 200)
+              ->header('Content-Type', 'text/csv');
     }
 }
