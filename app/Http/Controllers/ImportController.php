@@ -41,7 +41,7 @@ class ImportController extends Controller
         $project = Project::find($request->project_id);
 
         //search on tasks, the project_id equal project->id.
-        $tasks = Task::where('project_id', $project->id)->get();
+        $tasks = Task::where('project_id', $request->task->project_id)->get();
 
         $file = $request->file('import_file')->openFile();
         $first = true;
