@@ -5,7 +5,7 @@
         <form action="{{ route('import.store') }}" enctype="multipart/form-data" method="post">
             {{ csrf_field() }}
             <div class="form-group">
-                <input type="file" name="import_file"/>
+                <input type="file" name="import_file" required/>
             </div>
             <div class="form-group">
                 <label for="importproject">Project: </label>
