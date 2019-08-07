@@ -12,6 +12,15 @@ class Time extends Model
         'task_id', 'user_id', 'activity_id', 'started', 'finished',
     ];
 
+    /**
+     * All of the relationships to be touched.
+     *
+     * @var array
+     */
+    protected $touches = [
+        'task',
+    ];
+
     public function task()
     {
         return $this->belongsTo('App\Task');
