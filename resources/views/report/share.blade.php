@@ -7,8 +7,8 @@
         <tbody>
             @foreach ($grouped as $activity_id => $interval)
                 <tr>
-                    <th>{{App\Activity::find($activity_id)->name}} - </th>
-                    <td>{{App\Support\Formatter::intervalTime($interval)}}</td>
+                    <th>{{ App\Activity::find($activity_id)->name}}</th>
+                    <td>- <samp>{{ App\Support\Formatter::intervalTime($interval) }}</samp></td>
                 </tr>
             @endforeach
         </tbody>
@@ -23,6 +23,7 @@
             <th>User</th>
             <th>Started</th>
             <th>Finished</th>
+            <th class="text-right">Total</th>
         </tr>
     </thead>
     <tbody>
@@ -32,8 +33,9 @@
                 <td>{{ $time->task->name }}</td>
                 <td>{{ $time->activity->name }}</td>
                 <td>{{ $time->user->name }}</td>
-                <td>{{ $time->started }}</td>
-                <td>{{ $time->finished }}</td>
+                <td><samp>{{ $time->started }}</samp></td>
+                <td><samp>{{ $time->finished }}</samp></td>
+                <td class="text-right"><samp>{{ $time->finished ? App\Support\Formatter::intervalTime($time->finished->diffAsCarbonInterval($time->started)) : '-' }}</samp></td>
             </tr>
         @endforeach
         </tbody>

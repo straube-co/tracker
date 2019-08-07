@@ -16,7 +16,7 @@
                     <th>Activity</th>
                     <th>Started</th>
                     <th>Finished</th>
-                    <th>Total</th>
+                    <th class="text-right">Total</th>
                     <th>Edit</th>
                 </tr>
             </thead>
@@ -26,9 +26,9 @@
                         <td>{{ $time->task->project->name }}</td>
                         <td>{{ $time->task->name }}</td>
                         <td>{{ $time->activity->name }}</td>
-                        <td>{{ $time->started }}</td>
-                        <td>{{ $time->finished }}</td>
-                        <td>{{ $time->finished ? App\Support\Formatter::intervalTime($time->finished->diffAsCarbonInterval($time->started)) : '-' }}</td>
+                        <td><samp>{{ $time->started }}</samp></td>
+                        <td><samp>{{ $time->finished }}</samp></td>
+                        <td class="text-right"><samp>{{ $time->finished ? App\Support\Formatter::intervalTime($time->finished->diffAsCarbonInterval($time->started)) : '-' }}</samp></td>
                         <td>
                             <button type="button" class="btn btn-outline-dark btn-sm mr-2" data-toggle="modal" data-target="#edit-{{ $time->id }}">
                                 Edit
