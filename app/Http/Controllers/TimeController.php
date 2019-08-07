@@ -24,10 +24,7 @@ class TimeController extends Controller
         $activities = Cache::remember('activities', 1, function () {
             return Activity::get();
         });
-
-        $projects = Cache::remember('projects', 1, function () {
-            return Project::get();
-        });
+        $projects = Project::latest('updated_at')->get();
         $tasks = Cache::remember('tasks', 1, function () {
             return Task::get();
         });
