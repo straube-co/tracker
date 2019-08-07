@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,9 @@ Route::get('/auth', 'Auth\\OAuthController@auth')->name('auth.auth');
 Route::get('/auth/handle', 'Auth\\OAuthController@handle')->name('auth.handle');
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect('/time');
+    }
     return view('layouts.login');
 });
 
