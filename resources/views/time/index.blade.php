@@ -20,7 +20,7 @@
                 @foreach ($projects as $project)
                     <tr>
                         <td>{{ $project->name }}</td>
-                        <td>{{ ($total = $project->getTrackedTime()) ? App\Support\Formatter::interval($total) : '-' }}</td>
+                        <td>{{ ($total = $project->getTrackedTime()) ? App\Support\Formatter::intervalTime($total) : '-' }}</td>
                         @if ($time = $project->getUnfinishedTime())
                             <td>
                                 <form action="{{ route('auto.update', $time->id) }}" method="post" class="time-stop">
