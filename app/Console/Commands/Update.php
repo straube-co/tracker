@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Project;
 use App\Task;
+use Asana\Client;
+use Illuminate\Console\Command;
 
 /**
  *
@@ -46,47 +47,47 @@ class Update extends Command
      */
     public function handle()
     {
-        $this->info("Building!");
+        $this->info('Building!');
 
+        $this->importProjects();
+    }
+
+    private function importProjects()
+    {
         $client = $this->getClient();
+        // Move the workspace ID to a config or wherever it fits better.
         $projects = $client->projects->findByWorkspace(870874468980849);
 
         foreach ($projects as $project) {
-            $count = \App\Project::where('id', $project->id)->count();
-
-            if ($count === 0) {
-                Project::create([
-                    'id' => $project->id,
-                    'name' => $project->name,
-                ]);
-            }
-
+            Project::updateOrCreate([
+                'id' => $project->id,
+            ], [
+                'name' => $project->name,
+            ]);
             $this->importTasks($project);
         }
     }
 
-    public function importTasks($project)
+    private function importTasks($project)
     {
         $client = $this->getClient();
         $tasks = $client->tasks->findByProject($project->id);
 
         foreach ($tasks as $task) {
-            $count = \App\Task::where('id', $task->id)->count();
-
-            if ($count === 0) {
-                Task::create([
-                    'id' => $task->id,
-                    'name' => $task->name,
-                    'project_id' => $project->id,
-                ]);
-            }
+            Task::updateOrCreate([
+                'id' => $task->id,
+            ], [
+                'name' => substr($task->name, 0, 100),
+                'project_id' => $project->id,
+            ]);
         }
     }
 
-    public function getClient()
+    private function getClient()
     {
         if (!isset($this->client)) {
-            $this->client = \Asana\Client::accessToken('0/b41a58e0103d856760d375e247e8dd13');
+            // TODO: Move this token to a config or other place
+            $this->client = Client::accessToken('0/b41a58e0103d856760d375e247e8dd13');
         }
         return $this->client;
     }
