@@ -28,14 +28,14 @@ class MyActivitiesController extends Controller
             ->paginate();
 
         $activities = Cache::remember('activities', 1, function () {
-            return Activity::get();
+            return Activity::orderBy('name')->get();
         });
 
-        $projects = Cache::remember('projects', 1, function () {
-            return Project::get();
+        $projects = Cache::remember('projects', 5, function () {
+            return Project::orderBy('name')->get();
         });
-        $tasks = Cache::remember('tasks', 1, function () {
-            return Task::get();
+        $tasks = Cache::remember('tasks', 5, function () {
+            return Task::orderBy('name')->get();
         });
 
         $data = [
@@ -75,13 +75,13 @@ class MyActivitiesController extends Controller
     public function edit(Time $time)
     {
         $activities = Cache::remember('activities', 1, function () {
-            return Activity::get();
+            return Activity::orderBy('name')->get();
         });
-        $projects = Cache::remember('projects', 1, function () {
-            return Project::get();
+        $projects = Cache::remember('projects', 5, function () {
+            return Project::orderBy('name')->get();
         });
-        $tasks = Cache::remember('tasks', 1, function () {
-            return Task::get();
+        $tasks = Cache::remember('tasks', 5, function () {
+            return Task::orderBy('name')->get();
         });
 
         $data = [
