@@ -2,88 +2,113 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Activity;
 use App\Project;
-use App\Task;
-use App\Time;
-use App\User;
 use App\Report;
+use App\Task;
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
+ * Report controller.
+ *
+ * @author Lucas Cardoso <lucas@straube.co>
  *
  * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class ReportController extends Controller
 {
-    public function index()
+
+    /**
+     * Generate a report.
+     *
+     * Filters may be applied to the report based on current request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\View\View|\Symfony\Component\HttpFoundation\Response
+     */
+    public function index(Request $request, string $format = null)
     {
-        $activities = Cache::remember('activities', 1, function () {
-            return Activity::get();
-        });
-        $projects = Cache::remember('projects', 1, function () {
-            return Project::get();
-        });
-        $tasks = Cache::remember('tasks', 1, function () {
-            return Task::get();
-        });
-        $users = Cache::remember('users', 1, function () {
-            return User::get();
-        });
+        $format = in_array($format, [ 'html', 'csv' ]) ? $format : 'html';
 
-        $request = request();
+        $report = new Report([
+            'filter' => $request->all(),
+        ]);
 
-        $query = Time::reportFromRequest($request);
+        if ($format === 'csv') {
+            $contents = $report->getResultsAsCsvString();
+            $name = 'tracker-' . Carbon::now()->format('Ymd-His') . '.csv';
+            return response()->streamDownload(function () use ($contents) {
+                echo $contents;
+            }, $name);
+        }
 
-        $summaryQuery = clone $query;
+        $summary = $report->getSummary();
+        $times = $report->getPaginatedResults()->appends($request->all());
 
-        $times = $query->paginate()->appends($request->all());
-
-        $grouped = $summaryQuery->get()->groupBy('activity_id')->map(function ($times) {
-
-            $now = new Carbon('00:00');
-            $start = clone $now;
-
-            return $times->reduce(function ($diff, $time) {
-                if ($time->finished !== null) {
-                    return $diff->add($time->finished->diff($time->started));
-                }
-                return $diff;
-            }, $now)->diffAsCarbonInterval($start);
-        });
+        $activities = Activity::orderBy('name')->get();
+        $projects = Project::orderBy('name')->get();
+        $tasks = Task::orderBy('name')->get();
+        $users = User::orderBy('name')->get();
 
         $data = [
             'activities' => $activities,
             'projects' => $projects,
             'tasks' => $tasks,
             'users' => $users,
-            'started' => $request->started,
-            'finished' => $request->finished,
+            'summary' => $summary,
             'times' => $times,
-            'grouped' => $grouped,
         ];
-
         return view('report.index', $data);
     }
 
-    public function store(Request $request)
+    /**
+     * Store a report for sharing.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
     {
         $report = Report::create([
             'name' => $request->name,
             'code' => str_random(20),
-            //criando um array json
-            'filter' => [
-                'project_id' => $request->project_id,
-                'task_id' => $request->task_id,
-                'user_id' => $request->user_id,
-                'activity_id' => $request->activity_id,
-                'started' => $request->started,
-                'finished' => $request->finished,
-            ]
+            'filter' => $request->all(),
         ]);
 
-        return redirect()->route('share.show', ($report->code));
+        return redirect()->route('report.show', $report->code);
+    }
+
+    /**
+     * Show a stored (shared) report.
+     *
+     * @param  \App\Report $report
+     * @param  string $format
+     * @return \Illuminate\View\View|\Symfony\Component\HttpFoundation\Response
+     */
+    public function show(Report $report, string $format = null)
+    {
+        $format = in_array($format, [ 'html', 'csv' ]) ? $format : 'html';
+
+        if ($format === 'csv') {
+            $contents = $report->getResultsAsCsvString();
+            return response($contents, 200)->header('Content-Type', 'text/csv');
+        }
+
+        $summary = $report->getSummary();
+        $times = $report->getPaginatedResults();
+
+        $activities = Activity::orderBy('name')->get();
+
+        $data = [
+            'report' => $report,
+            'activities' => $activities,
+            'summary' => $summary,
+            'times' => $times,
+        ];
+        return view('report.show', $data);
     }
 }

@@ -21,17 +21,14 @@ Route::get('/', function () {
     if (Auth::check()) {
         return redirect('/time');
     }
-    return view('layouts.login');
+    return view('login');
 });
 
 Route::group([
     'middleware' => [ 'auth' ],
 ], function () {
     Route::resource('/activity', 'ActivityController')->middleware('can:settings');
-    Route::resource('/report', 'ReportController')->middleware('can:report');
     Route::resource('/user', 'UserController')->middleware('can:settings');
-    Route::get('/out', 'OutController@index')->name('out');
-    Route::resource('/export', 'ExportController');
     Route::resource('/time', 'TimeController');
     Route::resource('/my', 'MyActivitiesController', [
         'parameters' => [
@@ -48,6 +45,18 @@ Route::group([
             'auto' => 'time',
         ]
     ]);
+
+    Route::get('/report/{format?}', 'ReportController@index')
+        ->name('report.index')
+        ->middleware('can:report')
+        ->where('format', '^(html|csv)$');
+    Route::post('/report', 'ReportController@store')
+        ->name('report.store')
+        ->middleware('can:report');
+
+    Route::get('/out', 'OutController@index')->name('out');
 });
 
-Route::get('/share/{report}/{format?}', 'ShareController@show')->name('share.show');
+Route::get('/report/{report}/{format?}', 'ReportController@show')
+    ->name('report.show')
+    ->where('format', '^(html|csv)$');

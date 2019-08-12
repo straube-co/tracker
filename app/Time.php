@@ -2,14 +2,28 @@
 
 namespace App;
 
+use ArrayAccess;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+use RuntimeException;
 
 class Time extends Model
 {
     protected $fillable = [
-        'task_id', 'user_id', 'activity_id', 'started', 'finished',
+        'task_id',
+        'user_id',
+        'activity_id',
+        'started',
+        'finished',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'started', 'finished'
     ];
 
     /**
@@ -36,46 +50,50 @@ class Time extends Model
     }
 
     /**
+     * Scope a query to apply reporting filters.
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  \Illuminate\Http\Request $request
+     * @param  \ArrayAccess|array $filter
      * @return \Illuminate\Database\Eloquent\Builder
+     * @throws \RuntimeException
      */
-    public function scopeReportFromRequest(Builder $query, Request $request)
+    public function scopeFromReportFilter(Builder $query, $filter)
     {
-        $query->select('times.*')->orderBy('started', 'desc');
-
-        if (($activity = $request->activity_id)) {
-            $query->where('activity_id', $activity);
+        if (!(is_array($filter) || $filter instanceof ArrayAccess)) {
+            throw new RuntimeException(
+                '$filter argument must be an array or an object of a class implementing the ArrayAccess interface.'
+            );
         }
-        if (($project = $request->project_id)) {
-            $query->whereHas('task', function ($query) use ($project) {
 
+        $query->orderBy('started', 'desc');
+
+        if (!empty($filter['activity_id'])) {
+            $query->where('activity_id', $filter['activity_id']);
+        }
+
+        if (!empty($filter['project_id'])) {
+            $project = $filter['project_id'];
+            $query->whereHas('task', function ($query) use ($project) {
                 $query->where('project_id', $project);
             });
         }
-        if (($task = $request->task_id)) {
-            $query->where('task_id', $task);
+
+        if (!empty($filter['task_id'])) {
+            $query->where('task_id', $filter['task_id']);
         }
-        if (($user = $request->user_id)) {
-            $query->where('user_id', $user);
+
+        if (!empty($filter['user_id'])) {
+            $query->where('user_id', $filter['user_id']);
         }
-        if (($started = $request->started)) {
-            $query->where('started', '>=', $started);
+
+        if (!empty($filter['started'])) {
+            $query->where('started', '>=', $filter['started']);
         }
-        if (($finished = $request->finished)) {
-            $query->where('finished', '<=', $finished);
+
+        if (!empty($filter['finished'])) {
+            $query->where('finished', '<=', $filter['finished']);
         }
 
         return $query;
     }
-
-    /**
-    * The attributes that should be mutated to dates.
-    *
-    * @var array
-    */
-    protected $dates = [
-        'started', 'finished'
-    ];
 }
