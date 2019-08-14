@@ -34,6 +34,8 @@ class ReportController extends Controller
     {
         $format = in_array($format, [ 'html', 'csv' ]) ? $format : 'html';
 
+        // TODO: Validate data. Using a form request is probably a good solution.
+
         $report = new Report([
             'filter' => $request->all(),
         ]);
@@ -73,6 +75,9 @@ class ReportController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+        // TODO: Validate data. Using a form request is probably a good solution.
+
         $report = Report::create([
             'name' => $request->name,
             'code' => str_random(20),
