@@ -10,15 +10,15 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Edit</th>
+                <th class="align-middle">Name</th>
+                <th class="align-middle">Edit</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($activities as $activity)
                 <tr>
-                    <td class="activity">{{ $activity->name }}</td>
-                    <td>
+                    <td class="activity align-middle">{{ $activity->name }}</td>
+                    <td class="align-middle">
                         <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#edit-{{ $activity->id }}">
                             Edit
                         </button>

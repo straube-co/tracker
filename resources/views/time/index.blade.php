@@ -11,22 +11,22 @@
     <table class="table pt-3">
         <thead>
             <tr>
-                <th>Project</th>
-                <th class="text-right">Total</th>
-                <th class="stop_time start">Start</th>
+                <th class="align-middle">Project</th>
+                <th class="align-middle text-right">Total</th>
+                <th class="align-middle stop_time start">Start</th>
             </tr>
         </thead>
         <tbody>
                 @foreach ($projects as $project)
                     <tr>
-                        <td>{{ $project->name }}</td>
-                        <td class="text-right">
+                        <td class="align-middle">{{ $project->name }}</td>
+                        <td class="align-middle text-right">
                             <samp>
                                 {{ ($total = $project->getTrackedTime()) ? App\Support\Formatter::intervalTime($total) : '-' }}
                             </samp>
                         </td>
                         @if ($time = $project->getUnfinishedTime())
-                            <td>
+                            <td class="align-middle">
                                 <form action="{{ route('auto.update', $time->id) }}" method="post" class="time-stop">
                                     @php
                                         $diff = App\Support\Formatter::interval($time->started->diffAsCarbonInterval());
@@ -46,7 +46,7 @@
                             @php
                                 $showError = $project->id == old('project_id');
                             @endphp
-                            <td class="time_stop">
+                            <td class="align-middle time_stop">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-outline-success btn-sm lets" data-toggle="modal" data-target="#automatic-{{ $project->id }}">
                                     Let's work!

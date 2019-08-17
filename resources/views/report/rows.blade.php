@@ -16,25 +16,25 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Project</th>
-            <th>Task</th>
-            <th>Activity</th>
-            <th>User</th>
-            <th>Started</th>
-            <th>Finished</th>
-            <th class="text-right">Total</th>
+            <th class="align-middle">Project</th>
+            <th class="align-middle">Task</th>
+            <th class="align-middle">Activity</th>
+            <th class="align-middle">User</th>
+            <th class="align-middle">Started</th>
+            <th class="align-middle">Finished</th>
+            <th class="align-middle text-right">Total</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($times as $time)
             <tr>
-                <td>{{ $time->task->project->name }}</td>
-                <td>{{ $time->task->name }}</td>
-                <td>{{ $time->activity->name }}</td>
-                <td>{{ $time->user->name }}</td>
-                <td><samp>{{ $time->started }}</samp></td>
-                <td><samp>{{ $time->finished }}</samp></td>
-                <td class="text-right"><samp>{{ $time->finished ? App\Support\Formatter::intervalTime($time->finished->diffAsCarbonInterval($time->started)) : '-' }}</samp></td>
+                <td class="align-middle">{{ $time->task->project->name }}</td>
+                <td class="align-middle">{{ $time->task->name }}</td>
+                <td class="align-middle">{{ $time->activity->name }}</td>
+                <td class="align-middle">{{ $time->user->name }}</td>
+                <td class="align-middle"><samp>{{ $time->started }}</samp></td>
+                <td class="align-middle"><samp>{{ $time->finished }}</samp></td>
+                <td class="align-middle text-right"><samp>{{ $time->finished ? App\Support\Formatter::intervalTime($time->finished->diffAsCarbonInterval($time->started)) : '-' }}</samp></td>
             </tr>
         @endforeach
     </tbody>
