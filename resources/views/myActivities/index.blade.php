@@ -2,9 +2,9 @@
 
 @section('content')
     @include('myActivities.modal', [ 'time' => null ])
-    <h1 class="mt-4 mb-4">My Activities
+    <h1 class="mt-4 mb-4">My activities
         <button type="button" class="btn btn-outline-success btn-sm ml-2" data-toggle="modal" data-target="#manual">
-            Add Manual Time Entry
+            Add time entry
         </button>
     </h1>
     <div class="table-responsive">

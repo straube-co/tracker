@@ -9,10 +9,10 @@
             data-target="#filter-advanced"
             aria-expanded="false"
         >
-            Filter
+            Filter results
         </button>
-        <button type="button" id="btn_export" class="btn btn-outline-info btn-sm mr-1">Export CSV</button>
-        <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#share">
+        <button type="button" id="btn_export" class="btn btn-outline-secondary btn-sm mr-1">Export CSV</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#share">
             Save & Share
         </button>
         <div class="collapse" id="filter-advanced">

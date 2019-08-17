@@ -25,9 +25,6 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('out') }}">Log out</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbar-settings" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Settings
@@ -37,6 +34,9 @@
                         <a class="dropdown-item" href="{{ route('user.index') }}">Roles</a>
                         <a class="dropdown-item" href="{{ route('import.index') }}">Import</a>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('out') }}">Log out <i class="fas fa-sign-out-alt"></i></a>
                 </li>
             </ul>
         </nav>

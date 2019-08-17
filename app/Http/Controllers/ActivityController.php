@@ -23,7 +23,7 @@ class ActivityController extends Controller
             'activities' => $activities,
         ];
 
-        return view('activities.index', $data);
+        return view('activity.index', $data);
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class ActivityController extends Controller
             'activity' => $activity,
         ];
 
-        return view('activities.edit', $data);
+        return view('activity.edit', $data);
     }
 
     public function update(Request $request, Activity $activity)

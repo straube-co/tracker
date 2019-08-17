@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('activities.modal', [ 'activity' => null ])
-    <h1 class="mt-4 mb-4">Activity
-        <button type="button" class="btn btn-outline-dark btn-sm ml-2" data-toggle="modal" data-target="#activity">
-            Create new activity
+    @include('activity.modal', [ 'activity' => null ])
+    <h1 class="mt-4 mb-4">Activities
+        <button type="button" class="btn btn-outline-success btn-sm ml-2" data-toggle="modal" data-target="#activity">
+            Add new
         </button>
     </h1>
     <table class="table">
@@ -22,7 +22,7 @@
                         <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#edit-{{ $activity->id }}">
                             Edit
                         </button>
-                        @include('activities.modal')
+                        @include('activity.modal')
                     </td>
                 </tr>
             @endforeach

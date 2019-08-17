@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="mt-4 mb-4">Users</h1>
+    <h1 class="mt-4 mb-4">Roles</h1>
     <form action="{{route('user.store')}}" method="post">
         {{ csrf_field() }}
         <table class="table pt-3">
             <thead>
                 <tr>
-                    <th class="align-middle">Name</th>
+                    <th class="align-middle">User</th>
                     <th class="align-middle">Settings</th>
                     <th class="align-middle">Reports</th>
                 </tr>
@@ -22,7 +22,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div>
+        <div class="text-right">
             <button type="submit" class="btn btn-outline-success btn-sm" name="button">Save</button>
         </div>
     </form>
