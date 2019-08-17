@@ -1,17 +1,10 @@
-<div class="pl-2 pb-2">
-    <table>
-        <h5 class="mt-3">Total of hours per Activity</h5>
-        <tbody>
-            @foreach ($summary as $activity_id => $interval)
-                <tr>
-                    <th>{{ $activities->find($activity_id)->name }}</th>
-                    <td>-</td>
-                    <td><samp>{{ App\Support\Formatter::intervalTime($interval) }}</samp></td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+<h5 class="mt-3">Activity summary</h5>
+<dl>
+    @foreach ($summary as $activity_id => $interval)
+        <dt>{{ $activities->find($activity_id)->name }}</dt>
+        <dd><samp>{{ App\Support\Formatter::intervalTime($interval) }}</samp></dd>
+    @endforeach
+</dl>
 
 <table class="table">
     <thead>
