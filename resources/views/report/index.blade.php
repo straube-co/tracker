@@ -1,4 +1,4 @@
-@extends('layouts.header')
+@extends('layouts.app')
 
 @section('content')
     <form id="form_action" action="{{ route('report.index') }}" method="get">

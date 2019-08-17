@@ -1,4 +1,4 @@
-@extends('layouts.header')
+@extends('layouts.app')
 
 @section('content')
     @include('activities.modal', [ 'activity' => null ])

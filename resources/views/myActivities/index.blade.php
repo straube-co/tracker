@@ -1,4 +1,4 @@
-@extends('layouts.header')
+@extends('layouts.app')
 
 @section('content')
     @include('myActivities.modal', [ 'time' => null ])
