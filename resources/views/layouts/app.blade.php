@@ -11,25 +11,34 @@
     @stack('head')
 </head>
 <body>
-    @php
-    $user = Illuminate\Support\Facades\Auth::user();
-    @endphp
-    @if ($user)
-        <nav class="navbar navigation bg-dark fixed-top">
-            <a href="{{ route('time.index') }}">Time Tracking</a>
-            <a href="{{ route('my.index') }}">My Activities</a>
-            <a href="{{ route('report.index') }}">Reports</a>
-            <div class="dropdown drop">
-                <button class="btn btn-secondary btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Menu
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                    <a class="dropdown-item" href="{{ route('activity.index') }}">Type of activities</a>
-                    <a class="dropdown-item" href="{{ route('import.index') }}">Time import</a>
-                    <a class="dropdown-item" href="{{ route('user.index') }}">Users</a>
-                    <a class="dropdown-item" href="{{ route('out') }}">Logging Out</a>
-                </div>
-            </div>
+    @if (($user = auth()->user()))
+        <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('time.index') }}">Time tracking</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('my.index') }}">My activities</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('report.index') }}">Reports</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('out') }}">Log out</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbar-settings" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Settings
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-settings">
+                        <a class="dropdown-item" href="{{ route('activity.index') }}">Activities</a>
+                        <a class="dropdown-item" href="{{ route('user.index') }}">Roles</a>
+                        <a class="dropdown-item" href="{{ route('import.index') }}">Import</a>
+                    </div>
+                </li>
+            </ul>
         </nav>
     @endif
     <div id="app" class="container-fluid mt-3">
