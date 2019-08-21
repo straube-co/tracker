@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/auth', 'Auth\\OAuthController@auth')->name('auth.auth');
-Route::get('/auth/handle', 'Auth\\OAuthController@handle')->name('auth.handle');
+Route::get('/auth/login', 'AuthController@login')->name('auth.login');
+Route::get('/auth/handle', 'AuthController@handle')->name('auth.handle');
+Route::get('/auth/logout', 'AuthController@logout')->name('auth.logout');
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -53,8 +54,6 @@ Route::group([
     Route::post('/report', 'ReportController@store')
         ->name('report.store')
         ->middleware('can:report');
-
-    Route::get('/out', 'OutController@index')->name('out');
 });
 
 Route::get('/report/{report}/{format?}', 'ReportController@show')
