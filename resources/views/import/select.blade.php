@@ -1,4 +1,4 @@
-@extends('layouts.header')
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -24,24 +24,24 @@
             <table class="table mt-4">
                 <thead>
                     <tr>
-                        <th><input type="checkbox" class="select-all"></th>
-                        <th>Name</th>
-                        <th>Tasks</th>
-                        <th>Activities</th>
+                        <th class="align-middle"><input type="checkbox" class="select-all"></th>
+                        <th class="align-middle">Name</th>
+                        <th class="align-middle">Tasks</th>
+                        <th class="align-middle">Activities</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($lines as $line)
                         <tr>
-                            <td>
+                            <td class="align-middle">
                                 <input type="checkbox" name="check" class="list-item-checkbox" data-index="{{ $loop->index }}">
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 {{ $line[0] }}
                                 {{-- creating JSON with line --}}
                                 <input type="hidden" name="time[{{ $loop->index }}][line]" value="{{ json_encode($line) }}"/>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 {{-- $loop / help in organizing the array $time[] --}}
                                 <select id="task" name="time[{{ $loop->index }}][task_id]">
                                     <option value="">Select</option>
@@ -50,7 +50,7 @@
                                     @endforeach
                                 </select>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <select id="Activity" name="time[{{ $loop->index }}][activity_id]">
                                     <option value="">Select</option>
                                     @foreach ($activities as $activity)

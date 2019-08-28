@@ -48,6 +48,6 @@ class Authenticate
     {
         $request->session()->flush();
 
-        abort(403);
+        return redirect('/');
     }
 }

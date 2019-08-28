@@ -63,16 +63,18 @@ $('[name=project_id]').each(function () {
 });
 
 /* Function action */
-function action(url) {
+function action(url, method) {
 
     let token = document.head.querySelector('meta[name="csrf-token"]');
 
     const $form = $('#form_action');
 
     $form.attr('action', url);
-    $form.attr('method', 'post');
+    $form.attr('method', method);
 
-    $form.prepend('<input type="hidden" name="_token" value="' + token.content + '">');
+    if (method === 'post') {
+        $form.prepend('<input type="hidden" name="_token" value="' + token.content + '">');
+    }
 
     $form.submit();
 
@@ -82,10 +84,10 @@ function action(url) {
     }, 1000);
 }
 $('#btn_share').on('click', function () {
-    action('/report');
+    action('/report', 'post');
 });
 $('#btn_export').on('click', function () {
-    action('/export');
+    action('/report/csv', 'get');
 });
 
 /* Function toApply */

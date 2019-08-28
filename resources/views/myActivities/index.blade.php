@@ -1,35 +1,35 @@
-@extends('layouts.header')
+@extends('layouts.app')
 
 @section('content')
     @include('myActivities.modal', [ 'time' => null ])
-    <h1 class="mt-4 mb-4">My Activities
+    <h1 class="mt-4 mb-4">My activities
         <button type="button" class="btn btn-outline-success btn-sm ml-2" data-toggle="modal" data-target="#manual">
-            Add Manual Time Entry
+            Add time entry
         </button>
     </h1>
     <div class="table-responsive">
         <table class="table pt-3">
             <thead>
                 <tr>
-                    <th>Project</th>
-                    <th>Task</th>
-                    <th>Activity</th>
-                    <th>Started</th>
-                    <th>Finished</th>
-                    <th>Total</th>
-                    <th>Edit</th>
+                    <th class="align-middle">Project</th>
+                    <th class="align-middle">Task</th>
+                    <th class="align-middle">Activity</th>
+                    <th class="align-middle">Started</th>
+                    <th class="align-middle">Finished</th>
+                    <th class="align-middle text-right">Total</th>
+                    <th class="align-middle">Edit</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($times as $time)
                     <tr>
-                        <td>{{ $time->task->project->name }}</td>
-                        <td>{{ $time->task->name }}</td>
-                        <td>{{ $time->activity->name }}</td>
-                        <td>{{ $time->started }}</td>
-                        <td>{{ $time->finished }}</td>
-                        <td>{{ $time->finished ? App\Support\Formatter::intervalTime($time->finished->diffAsCarbonInterval($time->started)) : '-' }}</td>
-                        <td>
+                        <td class="align-middle">{{ $time->task->project->name }}</td>
+                        <td class="align-middle">{{ $time->task->name }}</td>
+                        <td class="align-middle">{{ $time->activity->name }}</td>
+                        <td class="align-middle"><samp>{{ $time->started }}</samp></td>
+                        <td class="align-middle"><samp>{{ $time->finished }}</samp></td>
+                        <td class="align-middle text-right"><samp>{{ $time->finished ? App\Support\Formatter::intervalTime($time->finished->diffAsCarbonInterval($time->started)) : '-' }}</samp></td>
+                        <td class="align-middle">
                             <button type="button" class="btn btn-outline-dark btn-sm mr-2" data-toggle="modal" data-target="#edit-{{ $time->id }}">
                                 Edit
                             </button>

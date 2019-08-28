@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,21 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/auth', 'Auth\\OAuthController@auth')->name('auth.auth');
-Route::get('/auth/handle', 'Auth\\OAuthController@handle')->name('auth.handle');
+Route::get('/auth/login', 'AuthController@login')->name('auth.login');
+Route::get('/auth/handle', 'AuthController@handle')->name('auth.handle');
+Route::get('/auth/logout', 'AuthController@logout')->name('auth.logout');
 
 Route::get('/', function () {
-    return view('layouts.login');
+    if (Auth::check()) {
+        return redirect('/time');
+    }
+    return view('login');
 });
 
 Route::group([
     'middleware' => [ 'auth' ],
 ], function () {
     Route::resource('/activity', 'ActivityController')->middleware('can:settings');
-    Route::resource('/report', 'ReportController')->middleware('can:report');
     Route::resource('/user', 'UserController')->middleware('can:settings');
-    Route::get('/out', 'OutController@index')->name('out');
-    Route::resource('/export', 'ExportController');
     Route::resource('/time', 'TimeController');
     Route::resource('/my', 'MyActivitiesController', [
         'parameters' => [
@@ -44,6 +46,16 @@ Route::group([
             'auto' => 'time',
         ]
     ]);
+
+    Route::get('/report/{format?}', 'ReportController@index')
+        ->name('report.index')
+        ->middleware('can:report')
+        ->where('format', '^(html|csv)$');
+    Route::post('/report', 'ReportController@store')
+        ->name('report.store')
+        ->middleware('can:report');
 });
 
-Route::get('/share/{report}/{format?}', 'ShareController@show')->name('share.show');
+Route::get('/report/{report}/{format?}', 'ReportController@show')
+    ->name('report.show')
+    ->where('format', '^(html|csv)$');

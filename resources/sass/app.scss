@@ -1,5 +1,5 @@
 /* Fonts */
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap');
+// @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap');
 
 /* Variables */
 @import 'variables';
@@ -12,8 +12,8 @@
 
 /* body */
 body {
-    font-family: 'Montserrat', sans-serif;
-    padding-top: 39px;
+    // font-family: 'Montserrat', sans-serif;
+    padding-top: 55px;
 }
 
 /* nav */
@@ -27,9 +27,6 @@ body {
     }
 }
 .drop {
-    display: flex;
-    margin-left: auto;
-
     a {
         color: black;
     }
