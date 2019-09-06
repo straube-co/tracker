@@ -21,13 +21,9 @@ class TimeController extends Controller
 
     public function index()
     {
-        $activities = Cache::remember('activities', 1, function () {
-            return Activity::orderBy('name')->get();
-        });
+        $activities = Activity::orderBy('name')->get();
         $projects = Project::latest('updated_at')->get();
-        $tasks = Cache::remember('tasks', 5, function () {
-            return Task::orderBy('name')->get();
-        });
+        $tasks = Task::orderBy('name')->get();
 
         $data = [
             'projects' => $projects,
