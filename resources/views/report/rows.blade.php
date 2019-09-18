@@ -6,7 +6,7 @@
     @endforeach
 </dl>
 
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th class="align-middle">Project</th>

@@ -8,7 +8,7 @@
 
 @section('content')
     <h1 class="mt-4 mb-4">Time Tracking</h1>
-    <table class="table pt-3">
+    <table class="table table-hover pt-3">
         <thead>
             <tr>
                 <th class="align-middle">Project</th>

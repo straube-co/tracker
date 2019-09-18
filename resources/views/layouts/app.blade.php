@@ -12,7 +12,7 @@
 </head>
 <body>
     @if (($user = auth()->user()))
-        <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+        <nav class="navbar navbar-expand fixed-top">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('time.index') }}">Time tracking</a>

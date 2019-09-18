@@ -7,7 +7,7 @@
             Add time entry
         </button>
     </h1>
-    <div class="table-responsive">
+    <div class="table-responsive table-hover">
         <table class="table pt-3">
             <thead>
                 <tr>
