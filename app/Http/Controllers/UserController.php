@@ -28,6 +28,11 @@ class UserController extends Controller
         return view('user.index', $data);
     }
 
+    public function create()
+    {
+        return view('user.create');
+    }
+
     public function store(Request $request)
     {
 
@@ -43,6 +48,21 @@ class UserController extends Controller
             ]);
         }
 
+        return redirect()->route('user.index');
+    }
+
+    public function edit(User $user)
+    {
+
+        $data = [
+            'user' => $user,
+        ];
+
+        return view('user.edit', $data);
+    }
+
+    public function update(Request $request, User $user)
+    {
         return redirect()->route('user.index');
     }
 }
