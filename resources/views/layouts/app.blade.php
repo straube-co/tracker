@@ -36,9 +36,16 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('auth.logout') }}">Log out <i class="fas fa-sign-out-alt"></i></a>
+                    <a class="nav-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        Log out <i class="fas fa-sign-out-alt"></i>
+                    </a>
                 </li>
             </ul>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
         </nav>
     @endif
     <div id="app" class="container-fluid mt-3">
