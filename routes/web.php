@@ -27,6 +27,7 @@ Route::group([
     'middleware' => [ 'auth' ],
 ], function () {
     Route::resource('/activity', 'ActivityController')->middleware('can:settings');
+    // Route::post('/user/access', 'UserController@access')->name('user.access')->middleware('can:settings');
     Route::resource('/user', 'UserController')->middleware('can:settings');
     Route::resource('/time', 'TimeController');
     Route::resource('/my', 'MyActivitiesController', [
