@@ -53,23 +53,6 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
 
-    // public function access(Request $request)
-    // {
-    //     $access = $request->get('access', []);
-    //
-    //     User::where('id', '>', 0)->update([
-    //         'access' => 0,
-    //     ]);
-    //
-    //     foreach ($access as $userId => $arr) {
-    //         User::where('id', $userId)->update([
-    //             'access' => array_sum($arr),
-    //         ]);
-    //     }
-    //
-    //     return redirect()->route('user.index');
-    // }
-
     public function edit(User $user)
     {
         $data = [
@@ -85,7 +68,8 @@ class UserController extends Controller
             'name' => 'required|string|min:3',
             'email' => [
                 'required',
-                'email', Rule::unique('users', 'email')->ignore($user->id), ],
+                'email', Rule::unique('users', 'email')->ignore($user->id),
+            ],
             'access' => 'required',
             'password' => 'nullable|confirmed|min:5',
         ]);
