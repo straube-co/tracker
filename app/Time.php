@@ -7,8 +7,19 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use RuntimeException;
 
+/**
+ * Time Model.
+ *
+ * @version 1.0.0
+ * @author Lucas Cardoso <lucas@straube.co>
+ */
 class Time extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'task_id',
         'user_id',
@@ -23,7 +34,8 @@ class Time extends Model
      * @var array
      */
     protected $dates = [
-        'started', 'finished'
+        'started',
+        'finished'
     ];
 
     /**
@@ -35,15 +47,28 @@ class Time extends Model
         'task',
     ];
 
+    /*
+    * The relationship with Task.
+    *
+    */
     public function task()
     {
         return $this->belongsTo('App\Task');
     }
 
+    /*
+    * The relationship with Activity.
+    *
+    */
     public function activity()
     {
         return $this->belongsTo('App\Activity');
     }
+
+    /*
+    * The relationship with User.
+    *
+    */
     public function user()
     {
         return $this->belongsTo('App\User');

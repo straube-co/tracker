@@ -12,9 +12,8 @@ use Illuminate\Support\Collection;
 /**
  * Report model.
  *
+ * @version 1.0.0
  * @author Lucas Cardoso <lucas@straube.co>
- *
- * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class Report extends Model
 {
@@ -33,7 +32,6 @@ class Report extends Model
         'code',
     ];
 
-    //para identificar o array da controller
     protected $casts = [
         'filter' => 'array',
     ];

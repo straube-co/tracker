@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * User Model.
+ *
+ * @version 1.0.0
+ * @author Lucas Cardoso <lucas@straube.co>
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -17,7 +23,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'email', 'access', 'password',
+        'id',
+        'name',
+        'email',
+        'access',
+        'password',
     ];
 
     /**
@@ -26,11 +36,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     protected $rememberTokenName = false;
 
+    /**
+     * Determine access.
+     *
+     * @var array
+     */
     public function access()
     {
         $access = [];

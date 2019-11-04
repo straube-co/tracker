@@ -8,13 +8,16 @@ use Carbon\CarbonInterval;
 use Illuminate\Support\Facades\DB;
 
 /**
+ * Project model.
  *
- * @SuppressWarnings(PHPMD.StaticAccess)
+ * @version 1.0.0
+ * @author Lucas Cardoso <lucas@straube.co>
  */
 class Project extends Model
 {
     protected $fillable = [
-        'id', 'name',
+        'id',
+        'name',
     ];
 
     /**
@@ -38,6 +41,11 @@ class Project extends Model
         return CarbonInterval::seconds((int) $total)->cascade();
     }
 
+    /**
+     * Get all the unfinished schedules.
+     *
+     * @return \Carbon\CarbonInterval|null
+     */
     public function getUnfinishedTime(): ?Time
     {
         return Time::where('user_id', Auth::id())->whereHas('task', function ($query) {

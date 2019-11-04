@@ -4,10 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Task Model.
+ *
+ * @version 1.0.0
+ * @author Lucas Cardoso <lucas@straube.co>
+ */
 class Task extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'id', 'name', 'project_id',
+        'id',
+        'name',
+        'project_id',
     ];
 
     /**
@@ -19,6 +32,10 @@ class Task extends Model
         'project',
     ];
 
+    /*
+    * The relationship with Project.
+    *
+    */
     public function project()
     {
         return $this->belongsTo('App\Project');
