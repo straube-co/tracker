@@ -23,6 +23,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('report.index') }}">Reports</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('point.index') }}">Point</a>
+                </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
