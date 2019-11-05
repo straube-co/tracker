@@ -18,6 +18,7 @@ class CreatePointsTable extends Migration
             $table->bigInteger('user_id');
             $table->dateTime('entry');
             $table->dateTime('exit')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

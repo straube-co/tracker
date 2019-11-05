@@ -9,6 +9,7 @@
 @import '~tempusdominus-bootstrap-4/src/sass/tempusdominus-bootstrap-4-build';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
 
 /* body */
 body {
@@ -69,4 +70,12 @@ nav {
 }
 .fa-clock-o {
     @extend .fa-clock;
+}
+
+/* point */
+.exit {
+    i {
+        color: #EB5A46;
+        font-size: 18px;
+    }
 }

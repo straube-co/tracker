@@ -2,10 +2,12 @@
 
 @section('content')
     <div class="container">
-        <h1 class="mt-4 mb-4">My schedules
-            <button type="button" class="btn btn-outline-success btn-sm ml-2" data-toggle="modal" data-target="#point">
-                Entry
-            </button>
+        <h1 class="my-4">My schedules
+            @if(\App\Point::exit())
+                <button type="button" class="btn btn-outline-success btn-sm ml-2" data-toggle="modal" data-target="#point">
+                    Entry
+                </button>
+            @endif
         </h1>
         <!-- Modal -->
         <div class="modal fade" id="point" tabindex="-1" role="dialog" aria-labelledby="ModalPoint" aria-hidden="true">
@@ -17,11 +19,12 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <form action="#" method="post">
+              <form action="{{ route('point.store') }}" method="post">
+                  {{ csrf_field() }}
                   <div class="modal-body">
                       <div class="form-group">
                           <label for="entry">Entry</label>
-                          <div class="input-group date" id="datepickerentry" data-target-input="nearest">
+                          <div class="input-group" id="datepickerentry" data-target-input="nearest">
                               <input type="text" name="entry" class="form-control datetimepicker-input" value="" data-target="#datepickerentry"/>
                               <div class="input-group-append" data-target="#datepickerentry" data-toggle="datetimepicker">
                                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -42,20 +45,30 @@
                 <thead>
                     <tr>
                         <th class="align-middle">Functionary</th>
-                        <th class="align-middle">Entry</th>
-                        <th class="align-middle">Exit</th>
-                        <th class="align-middle">Date</th>
-                        <th class="align-middle text-center">Report</th>
+                        <th class="align-middle text-right">Entry</th>
+                        <th class="align-middle text-right">Exit</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($points as $point)
                         <tr>
-                            <td class="align-middle"></td>
-                            <td class="align-middle"></td>
-                            <td class="align-middle"></td>
-                            <td class="align-middle"></td>
-                            <td class="align-middle text-center"><a href="#">list-icon</a></td>
+                            <td class="align-middle">{{ $point->user->name }}</td>
+                            <td class="align-middle text-right">{{ $point->entry }}</td>
+                            <td class="align-middle text-right">
+                                @if($point->exit)
+                                    {{ $point->exit }}
+                                @else
+                                    <a href="#" class="exit" onclick="event.preventDefault();
+                                        document.getElementById('exit-form').submit();"><i class="far fa-clock"></i>
+                                    </a>
+                                    <form id="exit-form" action="{{ route('point.update', $point->id) }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                        {{ method_field('put') }}
+                                    </form>
+                                @endif
+                            </td>
                         </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -180,6 +180,10 @@ $(function () {
         useCurrent: false,
         format:"Y-MM-DD HH:mm:ss"
     });
+    $('#datepickerentry').datetimepicker({
+        useCurrent: false,
+        format:"Y-MM-DD HH:mm:ss"
+    });
     $("#datepickerstarted").on("change.datetimepicker", function (e) {
         $('#datepickerfinished').datetimepicker('minDate', e.date);
     });
