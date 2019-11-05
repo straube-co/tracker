@@ -8,8 +8,10 @@ use App\Time;
 use App\Activity;
 
 /**
+ * Activity controller.
  *
- * @SuppressWarnings(PHPMD.StaticAccess)
+ * @version 1.0.0
+ * @author Lucas Cardoso <lucas@straube.co>
  */
 class ActivityController extends Controller
 {

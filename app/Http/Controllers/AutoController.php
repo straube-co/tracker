@@ -13,8 +13,10 @@ use App\Activity;
 use App\Task;
 
 /**
+ * Auto controller.
  *
- * @SuppressWarnings(PHPMD.StaticAccess)
+ * @version 1.0.0
+ * @author Lucas Cardoso <lucas@straube.co>
  */
 class AutoController extends Controller
 {

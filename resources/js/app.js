@@ -34,11 +34,29 @@ const app = new Vue({
     el: '#app'
 });
 
+import { getSchedules } from './utils/backend';
 
-// setTimeout(function(){
-//     location.reload();
-// },3000);
+/* Show schedules details */
+$(document).on('click', '.details', function () {
+    var date_entry = $(this).data('date_entry');
+    var user_id = $(this).data('user_id');
 
+    const $field = $('#field');
+
+    if (!date_entry) {
+        return;
+    }
+
+    getSchedules(date_entry, user_id).then((points) => {
+        
+        points.forEach((schedule) => {
+            $field.append('<p>' + 'Entry: ' + schedule.entry + '<br>' + 'Exit ' + schedule.entry + '</p>');
+        });
+
+        $('#teste').modal('show');
+
+    }).catch(console.error);
+});
 
 /* Function show tasks per project */
 function showTasks($select) {
@@ -181,6 +199,10 @@ $(function () {
         format:"Y-MM-DD HH:mm:ss"
     });
     $('#datepickerentry').datetimepicker({
+        useCurrent: false,
+        format:"Y-MM-DD HH:mm:ss"
+    });
+    $('#datepickerexit').datetimepicker({
         useCurrent: false,
         format:"Y-MM-DD HH:mm:ss"
     });

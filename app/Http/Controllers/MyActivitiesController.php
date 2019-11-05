@@ -14,8 +14,10 @@ use App\User;
 use App\Report;
 
 /**
+ * My Activity controller.
  *
- * @SuppressWarnings(PHPMD.StaticAccess)
+ * @version 1.0.0
+ * @author Lucas Cardoso <lucas@straube.co>
  */
 class MyActivitiesController extends Controller
 {

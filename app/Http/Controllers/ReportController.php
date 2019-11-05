@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  *
  * @author Lucas Cardoso <lucas@straube.co>
  *
- * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class ReportController extends Controller
 {

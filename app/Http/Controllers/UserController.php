@@ -12,8 +12,10 @@ use Illuminate\Validation\Rule;
 use App\User;
 
 /**
+ * User controller.
  *
- * @SuppressWarnings(PHPMD.StaticAccess)
+ * @version 1.0.0
+ * @author Lucas Cardoso <lucas@straube.co>
  */
 class UserController extends Controller
 {

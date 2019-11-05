@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/schedules/{date}/{user}', 'SchedulesController@index')->name('schedules.index');

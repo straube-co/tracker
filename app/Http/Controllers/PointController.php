@@ -7,6 +7,12 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Point controller.
+ *
+ * @version 1.0.0
+ * @author Lucas Cardoso <lucas@straube.co>
+ */
 class PointController extends Controller
 {
     public function index()
