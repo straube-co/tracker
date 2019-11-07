@@ -38,23 +38,24 @@ import { getSchedules } from './utils/backend';
 
 /* Show schedules details */
 $(document).on('click', '.details', function () {
-    var date_entry = $(this).data('date_entry');
-    var user_id = $(this).data('user_id');
+
+    $('.temporary').remove();
 
     const $field = $('#field');
+    var date_entry = $(this).data('date_entry');
+    var user_id = $(this).data('user_id');
 
     if (!date_entry) {
         return;
     }
 
     getSchedules(date_entry, user_id).then((points) => {
-        
+
         points.forEach((schedule) => {
-            $field.append('<p>' + 'Entry: ' + schedule.entry + '<br>' + 'Exit ' + schedule.entry + '</p>');
+            $field.append('<p class="temporary">' + schedule.entry + ' / ' + schedule.entry + '</p>');
         });
 
         $('#teste').modal('show');
-
     }).catch(console.error);
 });
 

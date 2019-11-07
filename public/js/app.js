@@ -70011,9 +70011,10 @@ var app = new Vue({
 /* Show schedules details */
 
 $(document).on('click', '.details', function () {
+  $('.temporary').remove();
+  var $field = $('#field');
   var date_entry = $(this).data('date_entry');
   var user_id = $(this).data('user_id');
-  var $field = $('#field');
 
   if (!date_entry) {
     return;
@@ -70021,7 +70022,7 @@ $(document).on('click', '.details', function () {
 
   Object(_utils_backend__WEBPACK_IMPORTED_MODULE_0__["getSchedules"])(date_entry, user_id).then(function (points) {
     points.forEach(function (schedule) {
-      $field.append('<p>' + 'Entry: ' + schedule.entry + '<br>' + 'Exit ' + schedule.entry + '</p>');
+      $field.append('<p class="temporary">' + schedule.entry + ' / ' + schedule.entry + '</p>');
     });
     $('#teste').modal('show');
   }).catch(console.error);
