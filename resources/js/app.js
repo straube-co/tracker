@@ -52,10 +52,10 @@ $(document).on('click', '.details', function () {
     getSchedules(date_entry, user_id).then((points) => {
 
         points.forEach((schedule) => {
-            $field.append('<p class="temporary">' + schedule.entry + ' / ' + schedule.entry + '</p>');
+            $field.append('<p class="temporary">' + schedule.started + ' / ' + schedule.finished + '</p>');
         });
 
-        $('#teste').modal('show');
+        $('#schedules').modal('show');
     }).catch(console.error);
 });
 

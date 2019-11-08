@@ -54,8 +54,7 @@ Route::group([
         ->name('report.store')
         ->middleware('can:report');
 
-    Route::resource('/point', 'PointController');
-    Route::get('/pointReport', 'PointReportController@index')->name('point.report');
+    Route::resource('/point', 'PointReportController');
 });
 
 Route::get('/report/{report}/{format?}', 'ReportController@show')

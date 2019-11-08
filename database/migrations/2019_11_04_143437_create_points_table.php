@@ -16,8 +16,8 @@ class CreatePointsTable extends Migration
         Schema::create('points', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('user_id');
-            $table->dateTime('entry');
-            $table->dateTime('exit')->nullable();
+            $table->dateTime('started');
+            $table->dateTime('finished')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

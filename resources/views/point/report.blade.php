@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('point.report') }}" method="get">
+    <form action="{{ route('point.index') }}" method="get">
         <button
             class="btn btn-outline-dark btn-sm mr-1"
             type="button"
@@ -30,7 +30,7 @@
                     <div class="pt-3 form-group">
                         <label>From:</label>
                         <div class="input-group" id="datepickerentry" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datepickerentry" name="entry" value="{{ request('entry') }}"/>
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datepickerentry" name="started" value="{{ request('entry') }}"/>
                             <div class="input-group-append" data-target="#datepickerentry" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -41,7 +41,7 @@
                     <div class="pt-3 form-group">
                         <label>To:</label>
                         <div class="input-group" id="datepickerexit" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datepickerexit" name="exit" value="{{ request('exit') }}"/>
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datepickerexit" name="finished" value="{{ request('exit') }}"/>
                             <div class="input-group-append" data-target="#datepickerexit" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -55,10 +55,16 @@
         </div>
     </form>
     <h1 class="my-3">Schedules</h1>
-    @if ($points->isEmpty())
+    @if ($schedules->isEmpty())
         <hr>
         <h5 class="text-center">Nenhum registro encontrado</h5>
     @else
+        <div>
+            <dl>
+                <dt>Total hours worked</dt>
+                <dd class="ml-3">{{ str_pad(intval($total / 60), 2, '0', STR_PAD_LEFT) }}:{{ str_pad($total % 60, 2, '0', STR_PAD_RIGHT) }}</dd>
+            </dl>
+        </div>
         <div class="table-responsive table-hover">
             <table class="table pt-3">
                 <thead>
@@ -70,13 +76,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($points as $point)
+                    @foreach ($schedules as $schedule)
                         <tr>
-                            <td class="align-middle">{{ $point->user->name }}</td>
-                            <td class="align-middle text-center">{{ $point->date_entry }}</td>
-                            <td class="align-middle text-center">{{ str_pad(intval($point->date_time / 60), 2, '0', STR_PAD_LEFT) }}:{{ str_pad($point->date_time % 60, 2, '0', STR_PAD_RIGHT) }}</td>
+                            <td class="align-middle">{{ $schedule->user->name }}</td>
+                            <td class="align-middle text-center">{{ $schedule->date_entry }}</td>
+                            <td class="align-middle text-center">{{ str_pad(intval($schedule->date_time / 60), 2, '0', STR_PAD_LEFT) }}:{{ str_pad($schedule->date_time % 60, 2, '0', STR_PAD_RIGHT) }}</td>
                             <td class="align-middle text-center">
-                                <a href="#" class="details" data-date_entry="{{ $point->date_entry }}" data-user_id="{{ $point->user_id }}">Details</a>
+                                <a href="#" class="details" data-date_entry="{{ $schedule->date_entry }}" data-user_id="{{ $schedule->user_id }}">Details</a>
                             </td>
                         </tr>
                     @endforeach
@@ -84,7 +90,7 @@
             </table>
         </div>
     @endif
-    <div class="modal" tabindex="-1" role="dialog" id="teste">
+    <div class="modal" tabindex="-1" role="dialog" id="schedules">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -96,10 +102,10 @@
                 <div class="modal-body" id="field">
 
                 </div>
-                <div class="modal-footer">
+                {{-- <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-outline-success btn-sm">Save</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

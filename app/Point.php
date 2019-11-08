@@ -9,8 +9,8 @@ class Point extends Model
 {
     protected $fillable = [
         'user_id',
-        'entry',
-        'exit',
+        'started',
+        'finished',
     ];
 
     /*
@@ -28,6 +28,6 @@ class Point extends Model
     */
    public static function exit()
    {
-       return self::where('user_id', Auth::id())->where('exit', null)->count() < 1;
+       return self::where('user_id', Auth::id())->where('finished', null)->count() < 1;
    }
 }

@@ -16738,6 +16738,37 @@ nav a:hover {
   color: black;
 }
 
+.navbar-nav {
+  align-items: center;
+}
+
+.nav-link {
+  align-items: center;
+  display: flex;
+}
+
+.nav-link i {
+  margin-left: 5px;
+}
+
+.started {
+  color: #38C172;
+}
+
+.started:hover {
+  color: #38C172;
+  text-decoration: none;
+}
+
+.finished {
+  color: #EB5A46;
+}
+
+.finished:hover {
+  color: #EB5A46;
+  text-decoration: none;
+}
+
 /* login */
 
 .login a {
@@ -16767,11 +16798,4 @@ nav a:hover {
 }
 
 /* reports */
-
-/* point */
-
-.exit i {
-  color: #EB5A46;
-  font-size: 18px;
-}
 

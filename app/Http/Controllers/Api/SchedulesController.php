@@ -16,9 +16,7 @@ class SchedulesController extends Controller
 {
     public function index(string $date_entry, int $user_id)
     {
-        $date = $date_entry;
-
-        $points = Point::whereDate('entry', $date_entry)->where('user_id', $user_id)->get();
+        $points = Point::whereDate('started', $date_entry)->where('user_id', $user_id)->whereNotNull('finished')->get();
 
         return $points;
     }

@@ -37,6 +37,31 @@ nav {
         color: black;
     }
 }
+.navbar-nav {
+    align-items: center;
+}
+.nav-link {
+    align-items: center;
+    display: flex;
+
+    i {
+        margin-left: 5px;
+    }
+}
+.started {
+    color: #38C172;
+    &:hover {
+        color: #38C172;
+        text-decoration: none;
+    }
+}
+.finished {
+    color: #EB5A46;
+    &:hover {
+        color: #EB5A46;
+        text-decoration: none;
+    }
+}
 
 /* login */
 .login {
@@ -70,12 +95,4 @@ nav {
 }
 .fa-clock-o {
     @extend .fa-clock;
-}
-
-/* point */
-.exit {
-    i {
-        color: #EB5A46;
-        font-size: 18px;
-    }
 }

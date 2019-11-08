@@ -70022,9 +70022,9 @@ $(document).on('click', '.details', function () {
 
   Object(_utils_backend__WEBPACK_IMPORTED_MODULE_0__["getSchedules"])(date_entry, user_id).then(function (points) {
     points.forEach(function (schedule) {
-      $field.append('<p class="temporary">' + schedule.entry + ' / ' + schedule.entry + '</p>');
+      $field.append('<p class="temporary">' + schedule.started + ' / ' + schedule.finished + '</p>');
     });
-    $('#teste').modal('show');
+    $('#schedules').modal('show');
   }).catch(console.error);
 });
 /* Function show tasks per project */
