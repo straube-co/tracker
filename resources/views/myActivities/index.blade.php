@@ -40,5 +40,5 @@
             </tbody>
         </table>
     </div>
-    {{ $times->links() }}
+    {{-- {{ $schedules->links() }} --}}
 @endsection

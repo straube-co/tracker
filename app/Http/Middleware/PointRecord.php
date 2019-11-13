@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Point;
+use App\User;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\Auth;
@@ -16,12 +17,18 @@ class PointRecord
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
+     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function handle($request, Closure $next)
     {
-        $points = Point::where('user_id', Auth::id())->whereDate('started', Carbon::now())->orderBy('started', 'DESC')->get();
+        $currentPoint = Point::where('user_id', Auth::id())->whereNull('finished')->first();
 
-        View::share('points', $points);
+        $data = [
+            'currentPoint' => $currentPoint,
+        ];
+
+        View::share('currentPoint', $data);
 
         return $next($request);
     }

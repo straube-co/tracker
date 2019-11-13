@@ -26,22 +26,16 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    @if(\App\Point::exit())
+                    @if(App\Point::exit())
                         <a href="#started" class="started" data-toggle="modal" data-target="#point">Start <i class="far fa-clock"></i></a>
-                    @else
-                        @foreach ($points as $point)
-                            @if($point->finished)
-                                @break
-                            @else
-                                <a href="#finished" class="finished" onclick="event.preventDefault();
-                                    document.getElementById('exit-form').submit();">Sign off <i class="far fa-clock"></i></i>
-                                </a>
-                                <form id="exit-form" action="{{ route('point.update', $point->id) }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                    {{ method_field('put') }}
-                                </form>
-                            @endif
-                        @endforeach
+                    @elseif ($currentPoint)
+                        <a href="#finished" class="finished" onclick="event.preventDefault();
+                            document.getElementById('exit-form').submit();">Sign off <i class="far fa-clock"></i></i>
+                        </a>
+                        <form id="exit-form" action="{{ route('point.update', $currentPoint->id) }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                            {{ method_field('put') }}
+                        </form>
                     @endif
                 </li>
                 <li class="nav-item dropdown">
@@ -84,11 +78,16 @@
                       <div class="form-group">
                           <label for="entry">Entry</label>
                           <div class="input-group" id="datepickerentry" data-target-input="nearest">
-                              <input type="text" name="started" class="form-control datetimepicker-input" value="" data-target="#datepickerentry"/>
+                              <input type="text" name="started" class="form-control datetimepicker-input @if ($errors->has('started')) is-invalid @endif" value="" data-target="#datepickerentry"/>
                               <div class="input-group-append" data-target="#datepickerentry" data-toggle="datetimepicker">
                                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                               </div>
                           </div>
+                          @if($errors->has('started'))
+                              <div class="invalid-feedback d-block">
+                                  {{ $errors->first('started') }}
+                              </div>
+                          @endif
                       </div>
                   </div>
                   <div class="modal-footer">

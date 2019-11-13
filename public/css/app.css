@@ -16716,6 +16716,16 @@ body {
   padding-top: 55px;
 }
 
+/* login */
+
+.login a {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  width: 200px;
+}
+
 /* nav */
 
 nav {
@@ -16769,16 +16779,6 @@ nav a:hover {
   text-decoration: none;
 }
 
-/* login */
-
-.login a {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-  width: 200px;
-}
-
 /* time auto */
 
 .lets {
@@ -16798,4 +16798,10 @@ nav a:hover {
 }
 
 /* reports */
+
+/* point */
+
+.negative {
+  color: #e3342f;
+}
 

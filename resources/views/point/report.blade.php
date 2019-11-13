@@ -11,6 +11,7 @@
         >
             Filter results
         </button>
+        <a class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#date">Monthly report</a>
         <div class="collapse" id="filter-advanced">
             <div class="row">
                 <div class="col-md-6">
@@ -62,7 +63,9 @@
         <div>
             <dl>
                 <dt>Total hours worked</dt>
-                <dd class="ml-3">{{ str_pad(intval($total / 60), 2, '0', STR_PAD_LEFT) }}:{{ str_pad($total % 60, 2, '0', STR_PAD_RIGHT) }}</dd>
+                <dd class="ml-3">{{ App\Point::convertToHours($total) }}</dd>
+                <dt></dt>
+                <dd></dd>
             </dl>
         </div>
         <div class="table-responsive table-hover">
@@ -72,6 +75,7 @@
                         <th class="align-middle">Functionary</th>
                         <th class="align-middle text-center">Date</th>
                         <th class="align-middle text-center">Total</th>
+                        <th class="align-middle text-center">Extra</th>
                         <th class="align-middle text-center">Details</th>
                     </tr>
                 </thead>
@@ -80,7 +84,8 @@
                         <tr>
                             <td class="align-middle">{{ $schedule->user->name }}</td>
                             <td class="align-middle text-center">{{ $schedule->date_entry }}</td>
-                            <td class="align-middle text-center">{{ str_pad(intval($schedule->date_time / 60), 2, '0', STR_PAD_LEFT) }}:{{ str_pad($schedule->date_time % 60, 2, '0', STR_PAD_RIGHT) }}</td>
+                            <td class="align-middle text-center @if($schedule->date_time < 420) negative @endif">{{ $schedule->convertToHours($schedule->date_time) }}</td>
+                            <td class="align-middle text-center">{{ $schedule->extra($schedule->date_time) }}</td>
                             <td class="align-middle text-center">
                                 <a href="#" class="details" data-date_entry="{{ $schedule->date_entry }}" data-user_id="{{ $schedule->user_id }}">Details</a>
                             </td>
@@ -90,6 +95,7 @@
             </table>
         </div>
     @endif
+    <!-- Modal -->
     <div class="modal" tabindex="-1" role="dialog" id="schedules">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -109,4 +115,52 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="date" tabindex="-1" role="dialog" aria-labelledby="ModalDate" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ModalDate">Month</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="{{ route('print.report') }}" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                  <div class="form-group">
+                      <label for="user">User</label>
+                      <select class="custom-select" name="user">
+                          <option value="">Select</option>
+                          @foreach ($users as $user)
+                              <option value="{{ $user->id }}">{{ $user->name }}</option>
+                          @endforeach
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="month">Month</label>
+                      <select class="custom-select" name="month">
+                          <option value="">Select</option>
+                          <option value="11">January</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="month">Year</label>
+                      <select class="custom-select" name="year">
+                          <option value="">Select</option>
+                          @foreach (range(2018, date('Y')) as $y)
+                              <option value="{{ $y }}">{{ $y }}</option>
+                          @endforeach
+                      </select>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-outline-success btn-sm">Save</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    {{-- {{ $schedules->links() }} --}}
 @endsection

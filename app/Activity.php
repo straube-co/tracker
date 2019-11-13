@@ -30,7 +30,7 @@ class Activity extends Model
     /**
      * Checks if activity is used.
      *
-     * @return bollean
+     * @return boolean
      */
     public function activityUsed()
     {

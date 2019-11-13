@@ -17,6 +17,17 @@ body {
     padding-top: 55px;
 }
 
+/* login */
+.login {
+    a {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+        width: 200px;
+    }
+}
+
 /* nav */
 nav {
     background-color: #14283C;
@@ -63,17 +74,6 @@ nav {
     }
 }
 
-/* login */
-.login {
-    a {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 30px;
-        width: 200px;
-    }
-}
-
 /* time auto */
 .lets {
     white-space: nowrap;
@@ -95,4 +95,9 @@ nav {
 }
 .fa-clock-o {
     @extend .fa-clock;
+}
+
+/* point */
+.negative {
+    color: $red;
 }

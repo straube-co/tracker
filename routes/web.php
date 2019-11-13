@@ -55,6 +55,7 @@ Route::group([
         ->middleware('can:report');
 
     Route::resource('/point', 'PointReportController');
+    Route::post('/point/print', 'PointReportController@print')->name('print.report');
 });
 
 Route::get('/report/{report}/{format?}', 'ReportController@show')

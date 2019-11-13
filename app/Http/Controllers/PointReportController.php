@@ -8,20 +8,29 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 /**
  * Point report controller.
  *
  * @version 1.0.0
  * @author Lucas Cardoso <lucas@straube.co>
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class PointReportController extends Controller
 {
     public function index(Request $request)
     {
         $users = User::get();
-        $query = Point::select('user_id', DB::raw('DATE(started) AS date_entry'), DB::raw('SUM(TIMESTAMPDIFF(MINUTE, started, finished)) AS date_time'))
-                                ->whereNotNull('finished')->groupBy('date_entry')->groupBy('user_id');
+        $query = Point::select(
+            'user_id',
+            DB::raw('DATE(started) AS date_entry'),
+            DB::raw('SUM(TIMESTAMPDIFF(MINUTE, started, finished)) AS date_time')
+        )
+            ->whereNotNull('finished')
+            ->groupBy('date_entry')
+            ->groupBy('user_id');
 
         $queryTotal = Point::select(DB::raw('SUM(TIMESTAMPDIFF(MINUTE, started, finished)) AS total'));
 
@@ -52,9 +61,20 @@ class PointReportController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'started' => 'required|date_format:Y-m-d H:i:s',
-        ]);
+        $finished = Point::select('finished')->where('user_id', Auth::id())->orderBy('finished', 'desc')->first();
+
+        $rules = [
+            'started' => [
+                'required',
+                'date_format:Y-m-d H:i:s',
+            ],
+        ];
+
+        if ($finished) {
+            $rules['started'][] = 'after:$finished->finished';
+        }
+
+        $validatedData = $request->validate($rules);
 
         Point::create([
             'user_id' => Auth::id(),
@@ -71,5 +91,22 @@ class PointReportController extends Controller
         ]);
 
         return back();
+    }
+
+    public function print(Request $request)
+    {
+        $schedules = Point::where('user_id', $request->user)->whereMonth('created_at', $request->month)
+            ->whereYear('created_at', $request->year)->get();
+
+        $user = User::where('id', $request->user)->first();
+
+        $data = [
+            'schedules' => $schedules,
+            'user' => $user,
+        ];
+
+        $pdf = PDF::loadView('pdf', $data);
+
+        return $pdf->download('report.pdf');
     }
 }
