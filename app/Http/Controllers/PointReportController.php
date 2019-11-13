@@ -105,8 +105,6 @@ class PointReportController extends Controller
             'user' => $user,
         ];
 
-        $pdf = PDF::loadView('pdf', $data);
-
-        return $pdf->download('report.pdf');
+        return view('point.print', $data);
     }
 }

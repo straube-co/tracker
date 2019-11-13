@@ -32,7 +32,7 @@
                         <a href="#finished" class="finished" onclick="event.preventDefault();
                             document.getElementById('exit-form').submit();">Sign off <i class="far fa-clock"></i></i>
                         </a>
-                        <form id="exit-form" action="{{ route('point.update', $currentPoint->id) }}" method="POST" style="display: none;">
+                        <form id="exit-form" action="{{ route('point.update', $currentPoint) }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                             {{ method_field('put') }}
                         </form>

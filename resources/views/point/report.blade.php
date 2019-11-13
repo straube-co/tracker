@@ -11,7 +11,7 @@
         >
             Filter results
         </button>
-        <a class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#date">Monthly report</a>
+        <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#date">Monthly report</a>
         <div class="collapse" id="filter-advanced">
             <div class="row">
                 <div class="col-md-6">
@@ -84,7 +84,7 @@
                         <tr>
                             <td class="align-middle">{{ $schedule->user->name }}</td>
                             <td class="align-middle text-center">{{ $schedule->date_entry }}</td>
-                            <td class="align-middle text-center @if($schedule->date_time < 420) negative @endif">{{ $schedule->convertToHours($schedule->date_time) }}</td>
+                            <td class="align-middle text-center @if($schedule->date_time < App\Point::MINUTES) negative @endif">{{ $schedule->convertToHours($schedule->date_time) }}</td>
                             <td class="align-middle text-center">{{ $schedule->extra($schedule->date_time) }}</td>
                             <td class="align-middle text-center">
                                 <a href="#" class="details" data-date_entry="{{ $schedule->date_entry }}" data-user_id="{{ $schedule->user_id }}">Details</a>
@@ -105,7 +105,18 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" id="field">
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table pt-3">
+                            <thead>
+                                <tr>
+                                    <th class="align-middle">Entrada</th>
+                                    <th class="align-middle">Saída</th>
+                                </tr>
+                            </thead>
+                            <tbody id="field"></tbody>
+                        </table>
+                    </div>
 
                 </div>
                 {{-- <div class="modal-footer">
@@ -141,7 +152,18 @@
                       <label for="month">Month</label>
                       <select class="custom-select" name="month">
                           <option value="">Select</option>
-                          <option value="11">January</option>
+                          <option value="01">January</option>
+                          <option value="02">February</option>
+                          <option value="03">March</option>
+                          <option value="04">April</option>
+                          <option value="05">May</option>
+                          <option value="06">June</option>
+                          <option value="07">July</option>
+                          <option value="08">August</option>
+                          <option value="09">September</option>
+                          <option value="10">October</option>
+                          <option value="11">November</option>
+                          <option value="12">December</option>
                       </select>
                   </div>
                   <div class="form-group">

@@ -23,6 +23,16 @@ class Point extends Model
         'finished',
     ];
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'started',
+        'finished',
+    ];
+
     /*
     * The relationship with User.
     *
@@ -62,8 +72,8 @@ class Point extends Model
     */
     public static function extra($dateTime)
     {
-        if ($dateTime > MINUTES) {
-            return self::convertToHours($dateTime - MINUTES);
+        if ($dateTime > self::MINUTES) {
+            return self::convertToHours($dateTime - self::MINUTES);
         }
         return '- -';
     }

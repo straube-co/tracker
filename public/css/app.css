@@ -16805,3 +16805,12 @@ nav a:hover {
   color: #e3342f;
 }
 
+.signature {
+  border: none;
+  border-bottom: 1px solid;
+  background-color: #f8fafc;
+  border-radius: 0;
+  height: 0;
+  max-width: 200px;
+}
+

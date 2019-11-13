@@ -52,7 +52,10 @@ $(document).on('click', '.details', function () {
     getSchedules(date_entry, user_id).then((points) => {
 
         points.forEach((schedule) => {
-            $field.append('<p class="temporary">' + schedule.started + ' / ' + schedule.finished + '</p>');
+            const $tr = $('<tr class="temporary" />');
+            $tr.append('<td>' + schedule.started.replace(/^.+ ([\d:]+)$/, '$1') + '</td>')
+            $tr.append('<td>' + schedule.finished.replace(/^.+ ([\d:]+)$/, '$1') + '</td>')
+            $field.append($tr);
         });
 
         $('#schedules').modal('show');
