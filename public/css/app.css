@@ -16718,12 +16718,30 @@ body {
 
 /* login */
 
-.login a {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-  width: 200px;
+.html-login {
+  height: 100%;
+}
+
+.html-login body {
+  align-items: center;
+  background-color: #3E5673;
+  display: flex;
+  min-height: 100%;
+  padding-top: 0;
+}
+
+.html-login body h2,
+.html-login body h3,
+.html-login body a,
+.html-login body label {
+  color: #fff;
+}
+
+.html-login body h2:hover,
+.html-login body h3:hover,
+.html-login body a:hover,
+.html-login body label:hover {
+  color: #fff;
 }
 
 /* nav */

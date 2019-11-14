@@ -56,6 +56,7 @@ Route::group([
 
     Route::resource('/point', 'PointReportController');
     Route::post('/point/print', 'PointReportController@print')->name('print.report');
+    Route::post('/point/save', 'PointReportController@save')->name('save');
 });
 
 Route::get('/report/{report}/{format?}', 'ReportController@show')

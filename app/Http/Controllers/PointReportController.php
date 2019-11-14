@@ -24,25 +24,17 @@ class PointReportController extends Controller
     {
         $users = User::get();
 
-        if (Auth::user()->can('report')) {
-            $query = Point::select(
-                'user_id',
-                DB::raw('DATE(started) AS date_entry'),
-                DB::raw('SUM(TIMESTAMPDIFF(MINUTE, started, finished)) AS date_time')
-            )
-                ->whereNotNull('finished')
-                ->groupBy('date_entry')
-                ->groupBy('user_id');
-        } else {
-            $query = Point::select(
-                'user_id',
-                DB::raw('DATE(started) AS date_entry'),
-                DB::raw('SUM(TIMESTAMPDIFF(MINUTE, started, finished)) AS date_time')
-            )
-                ->whereNotNull('finished')
-                ->where('user_id', Auth::id())
-                ->groupBy('date_entry')
-                ->groupBy('user_id');
+        $query = Point::select(
+            'user_id',
+            DB::raw('DATE(started) AS date_entry'),
+            DB::raw('SUM(TIMESTAMPDIFF(MINUTE, started, finished)) AS date_time')
+        )
+            ->whereNotNull('finished')
+            ->groupBy('date_entry')
+            ->groupBy('user_id');
+
+        if (!Auth::user()->can('report')) {
+            $query->where('user_id', Auth::id());
         }
 
         $queryTotal = Point::select(DB::raw('SUM(TIMESTAMPDIFF(MINUTE, started, finished)) AS total'));
@@ -102,6 +94,20 @@ class PointReportController extends Controller
         $point->update([
             'finished' => Carbon::now(),
         ]);
+
+        return back();
+    }
+
+    public function save(Request $request)
+    {
+        foreach ($request->point as $key => $value) {
+            $point = Point::where('id', $key)->first();
+
+            $point->update([
+                'started' => $point->started->format('Y-m-d') . ' ' . $value['started'],
+                'finished' => $point->finished->format('Y-m-d') . ' ' . $value['finished'],
+            ]);
+        }
 
         return back();
     }

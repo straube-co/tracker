@@ -70023,8 +70023,8 @@ $(document).on('click', '.details', function () {
   Object(_utils_backend__WEBPACK_IMPORTED_MODULE_0__["getSchedules"])(date_entry, user_id).then(function (points) {
     points.forEach(function (schedule) {
       var $tr = $('<tr class="temporary" />');
-      $tr.append('<td>' + schedule.started.replace(/^.+ ([\d:]+)$/, '$1') + '</td>');
-      $tr.append('<td>' + schedule.finished.replace(/^.+ ([\d:]+)$/, '$1') + '</td>');
+      $tr.append('<td><input class="form-control" name="point[' + schedule.id + '][started]" value="' + schedule.started.replace(/^.+ ([\d:]+)$/, '$1') + '"></td>');
+      $tr.append('<td><input class="form-control" name="point[' + schedule.id + '][finished]" value="' + schedule.finished.replace(/^.+ ([\d:]+)$/, '$1') + '"></td>');
       $field.append($tr);
     });
     $('#schedules').modal('show');

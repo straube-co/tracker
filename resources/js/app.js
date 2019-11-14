@@ -53,8 +53,8 @@ $(document).on('click', '.details', function () {
 
         points.forEach((schedule) => {
             const $tr = $('<tr class="temporary" />');
-            $tr.append('<td>' + schedule.started.replace(/^.+ ([\d:]+)$/, '$1') + '</td>')
-            $tr.append('<td>' + schedule.finished.replace(/^.+ ([\d:]+)$/, '$1') + '</td>')
+            $tr.append('<td><input class="form-control" name="point[' + schedule.id + '][started]" value="' + schedule.started.replace(/^.+ ([\d:]+)$/, '$1') + '"></td>')
+            $tr.append('<td><input class="form-control" name="point[' + schedule.id + '][finished]" value="' + schedule.finished.replace(/^.+ ([\d:]+)$/, '$1') + '"></td>')
             $field.append($tr);
         });
 

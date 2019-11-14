@@ -101,30 +101,32 @@
     <div class="modal" tabindex="-1" role="dialog" id="schedules">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-none">
                     <h5 class="modal-title">Details of the day</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="table pt-3">
-                            <thead>
-                                <tr>
-                                    <th class="align-middle">Entrada</th>
-                                    <th class="align-middle">Saída</th>
-                                </tr>
-                            </thead>
-                            <tbody id="field"></tbody>
-                        </table>
-                    </div>
+                <form action="{{ route('save') }}" method="post">
+                    {{ csrf_field() }}
+                    <div class="modal-body px-0 py-0">
+                        <div class="table-responsive">
+                            <table class="table pt-3">
+                                <thead>
+                                    <tr>
+                                        <th class="align-middle">Entrada</th>
+                                        <th class="align-middle">Saída</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="field"></tbody>
+                            </table>
+                        </div>
 
-                </div>
-                {{-- <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-outline-success btn-sm">Save</button>
-                </div> --}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-success btn-sm">Save</button>
+                    </div>
+                 </form>
             </div>
         </div>
     </div>

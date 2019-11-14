@@ -18,30 +18,30 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
+    * Default type of permissions.
     *
-    *
-    * @var
+    * @var int
     */
     const DEFAULT_PERMISSION = 0;
 
     /**
+    * Type of permissions.
     *
-    *
-    * @var
+    * @var int
     */
     const SETTINGS_PERMISSION = 1;
 
     /**
+    * Type of permissions
     *
-    *
-    * @var
+    * @var int
     */
     const REPORTS_PERMISSION = 2;
 
     /**
+    * Type of permissions
     *
-    *
-    * @var
+    * @var int
     */
     const ADMIN_PERMISSION = 4;
 
