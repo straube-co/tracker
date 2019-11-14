@@ -16718,11 +16718,11 @@ body {
 
 /* login */
 
-.html-login {
+.html-guest {
   height: 100%;
 }
 
-.html-login body {
+.html-guest body {
   align-items: center;
   background-color: #3E5673;
   display: flex;
@@ -16730,17 +16730,17 @@ body {
   padding-top: 0;
 }
 
-.html-login body h2,
-.html-login body h3,
-.html-login body a,
-.html-login body label {
+.html-guest body h2,
+.html-guest body h3,
+.html-guest body a,
+.html-guest body label {
   color: #fff;
 }
 
-.html-login body h2:hover,
-.html-login body h3:hover,
-.html-login body a:hover,
-.html-login body label:hover {
+.html-guest body h2:hover,
+.html-guest body h3:hover,
+.html-guest body a:hover,
+.html-guest body label:hover {
   color: #fff;
 }
 
