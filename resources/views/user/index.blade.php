@@ -3,9 +3,11 @@
 @section('content')
     <div class="d-flex my-4 mx-5">
         <h1>Users</h1>
-        <div class="d-flex align-items-center ml-3">
-            <a class="btn btn-outline-success btn-sm" href="{{ route("user.create") }}">Create user</a>
-        </div>
+        @can('admin')
+            <div class="d-flex align-items-center ml-3">
+                <a class="btn btn-outline-success btn-sm" href="{{ route("user.create") }}">Create user</a>
+            </div>
+        @endcan
     </div>
     <div class="mx-5">
         <table class="table pt-3">

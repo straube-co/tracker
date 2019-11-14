@@ -15,15 +15,17 @@
         <div class="collapse" id="filter-advanced">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group pt-3">
-                        <label for="user">User:</label>
-                        <select class="custom-select" id="user" name="user_id">
-                            <option value="">Select</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}" @if ($user->id == request('user_id')) selected @endif>{{ $user->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    @can('report')
+                        <div class="form-group pt-3">
+                            <label for="user">User:</label>
+                            <select class="custom-select" id="user" name="user_id">
+                                <option value="">Select</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" @if ($user->id == request('user_id')) selected @endif>{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endcan
                 </div>
             </div>
             <div class="row">

@@ -23,14 +23,27 @@ class PointReportController extends Controller
     public function index(Request $request)
     {
         $users = User::get();
-        $query = Point::select(
-            'user_id',
-            DB::raw('DATE(started) AS date_entry'),
-            DB::raw('SUM(TIMESTAMPDIFF(MINUTE, started, finished)) AS date_time')
-        )
-            ->whereNotNull('finished')
-            ->groupBy('date_entry')
-            ->groupBy('user_id');
+
+        if (Auth::user()->can('report')) {
+            $query = Point::select(
+                'user_id',
+                DB::raw('DATE(started) AS date_entry'),
+                DB::raw('SUM(TIMESTAMPDIFF(MINUTE, started, finished)) AS date_time')
+            )
+                ->whereNotNull('finished')
+                ->groupBy('date_entry')
+                ->groupBy('user_id');
+        } else {
+            $query = Point::select(
+                'user_id',
+                DB::raw('DATE(started) AS date_entry'),
+                DB::raw('SUM(TIMESTAMPDIFF(MINUTE, started, finished)) AS date_time')
+            )
+                ->whereNotNull('finished')
+                ->where('user_id', Auth::id())
+                ->groupBy('date_entry')
+                ->groupBy('user_id');
+        }
 
         $queryTotal = Point::select(DB::raw('SUM(TIMESTAMPDIFF(MINUTE, started, finished)) AS total'));
 
@@ -71,7 +84,7 @@ class PointReportController extends Controller
         ];
 
         if ($finished) {
-            $rules['started'][] = 'after:$finished->finished';
+            $rules['started'][] = 'after_or_equal:$finished->finished';
         }
 
         $validatedData = $request->validate($rules);

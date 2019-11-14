@@ -45,7 +45,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-settings">
                         <a class="dropdown-item" href="{{ route('point.index') }}">Point report</a>
                         <a class="dropdown-item" href="{{ route('activity.index') }}">Activities</a>
-                        <a class="dropdown-item" href="{{ route('import.index') }}">Import</a>
+                        {{-- <a class="dropdown-item" href="{{ route('import.index') }}">Import</a> --}}
                         <a class="dropdown-item" href="{{ route('user.index') }}">Users</a>
                     </div>
                 </li>

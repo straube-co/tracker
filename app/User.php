@@ -18,6 +18,34 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
+    *
+    *
+    * @var
+    */
+    const DEFAULT_PERMISSION = 0;
+
+    /**
+    *
+    *
+    * @var
+    */
+    const SETTINGS_PERMISSION = 1;
+
+    /**
+    *
+    *
+    * @var
+    */
+    const REPORTS_PERMISSION = 2;
+
+    /**
+    *
+    *
+    * @var
+    */
+    const ADMIN_PERMISSION = 4;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -41,6 +69,31 @@ class User extends Authenticatable
     ];
 
     protected $rememberTokenName = false;
+
+    /**
+    *
+    *
+    * @return
+    */
+    public function getPermissionsName()
+    {
+        $permission = self::getPermissions();
+        return $permission[$this->permission] ?? null;
+    }
+
+    /**
+    * Get all available type of clients.
+    *
+    * @return string[]
+    */
+    public static function getPermissions(): array
+    {
+        return [
+            self::SETTINGS_PERMISSION => 'Settings',
+            self::REPORTS_PERMISSION => 'Reports',
+            self::ADMIN_PERMISSION => 'Admin',
+        ];
+    }
 
     /**
      * Determine access.

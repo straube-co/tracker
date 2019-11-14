@@ -28,7 +28,7 @@ Route::group([
 ], function () {
     Route::resource('/activity', 'ActivityController')->middleware('can:settings');
     // Route::post('/user/access', 'UserController@access')->name('user.access')->middleware('can:settings');
-    Route::resource('/user', 'UserController')->middleware('can:settings');
+    Route::resource('/user', 'UserController');
     Route::resource('/time', 'TimeController');
     Route::resource('/my', 'MyActivitiesController', [
         'parameters' => [
@@ -48,8 +48,8 @@ Route::group([
 
     Route::get('/report/{format?}', 'ReportController@index')
         ->name('report.index')
-        ->middleware('can:report')
         ->where('format', '^(html|csv)$');
+
     Route::post('/report', 'ReportController@store')
         ->name('report.store')
         ->middleware('can:report');

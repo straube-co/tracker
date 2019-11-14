@@ -12,9 +12,11 @@
             Filter results
         </button>
         <button type="button" id="btn_export" class="btn btn-outline-secondary btn-sm mr-1">Export CSV</button>
-        <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#share">
-            Save & Share
-        </button>
+        @can('report')
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#share">
+                Save & Share
+            </button>
+        @endcan
         <div class="collapse" id="filter-advanced">
             <div class="row">
                 <div class="col-md-6">
@@ -42,17 +44,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group pt-3">
-                        <label for="user">User:</label>
-                        <select class="custom-select" id="user" name="user_id">
-                            <option value="">Select</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}" @if ($user->id == request('user_id')) selected @endif>{{ $user->name }}</option>
-                            @endforeach
-                        </select>
+                @can('report')
+                    <div class="col-md-6">
+                        <div class="form-group pt-3">
+                            <label for="user">User:</label>
+                            <select class="custom-select" id="user" name="user_id">
+                                <option value="">Select</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" @if ($user->id == request('user_id')) selected @endif>{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div>
+                @endcan
                 <div class="col-md-6">
                     <div class="form-group pt-3">
                         <label for="activity">Activity:</label>

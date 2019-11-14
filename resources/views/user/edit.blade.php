@@ -25,20 +25,22 @@
                         </div>
                     @endif
                 </div>
-                <div class="form-group">
-                    <label for="access">Access</label>
-                    <select class="custom-select @if($errors->has('access')) is-invalid @endif" name="access">
-                        <option value="">Select</option>
-                        <option value="3" @if ('3' == old('access', $user->access)) selected @endif>All access</option>
-                        <option value="1" @if ('1' == old('access', $user->access)) selected @endif>Settings</option>
-                        <option value="2" @if ('2' == old('access', $user->access)) selected @endif>Reports</option>
-                    </select>
-                    @if ($errors->has('access'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('access') }}
-                        </div>
-                    @endif
-                </div>
+                @can('admin')
+                    <div class="form-group">
+                        <p for="access" class="mb-0">Access:</p>
+                        @foreach (App\User::getPermissions() as $value => $name)
+                            <div class="form-check form-check-inline ml-3">
+                                <input class="form-check-input" type="checkbox" name="access[]" id="checkboxAccess" value="{{ $value }}" @if (in_array($value, (array) old('access', $user->access()))) checked @endif>
+                                <label class="form-check-label" for="checkboxAccess">{{ $name }}</label>
+                            </div>
+                        @endforeach
+                        @if ($errors->has('access'))
+                            <div class="invalid-feedback d-block">
+                                {{ $errors->first('access') }}
+                            </div>
+                        @endif
+                    </div>
+                @endcan
                 <div class="form-group">
                     <label for="password">Password </label>
                     <input class="form-control @if($errors->has('password')) is-invalid @endif" type="password" name="password" id="password">

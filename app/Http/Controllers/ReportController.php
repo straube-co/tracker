@@ -6,9 +6,11 @@ use App\Activity;
 use App\Project;
 use App\Report;
 use App\Task;
+use App\Time;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -48,7 +50,11 @@ class ReportController extends Controller
         }
 
         $summary = $report->getSummary();
-        $times = $report->getPaginatedResults()->appends($request->all());
+        if (Auth::user()->can('report')) {
+            $times = $report->getPaginatedResults()->appends($request->all());
+        } else {
+            $times = Time::where('user_id', Auth::id())->paginate()->appends($request->all());
+        }
 
         $activities = Activity::orderBy('name')->get();
         $projects = Project::orderBy('name')->get();
@@ -74,6 +80,7 @@ class ReportController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $this->authorize('report');
 
         // TODO: Validate data. Using a form request is probably a good solution.
 
