@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12 col-md-6">
-                <h2 class="text-center">Straube Time Trackingr</h2>
+                <h2 class="text-center">Straube Time Tracking</h2>
             </div>
             <div class="col-12 col-md-6">
                 @yield('content')
