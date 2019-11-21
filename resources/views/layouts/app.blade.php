@@ -99,7 +99,7 @@
           </div>
         </div>
     @endif
-    <div id="app" class="container-fluid mt-5">
+    <div id="app" class="container-fluid mt-3">
         @yield('content')
     </div>
     <script src="{{ asset('js/app.js') }}"></script>

@@ -61,7 +61,7 @@ class Point extends Model
     public static function convertToHours($dateTime)
     {
         return str_pad(intval($dateTime / 60), 2, '0', STR_PAD_LEFT) . ':' .
-            str_pad($dateTime % 60, 2, '0', STR_PAD_RIGHT);
+            str_pad($dateTime % 60, 2, '0', STR_PAD_LEFT);
     }
 
     /**

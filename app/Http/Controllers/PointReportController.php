@@ -114,8 +114,8 @@ class PointReportController extends Controller
 
     public function print(Request $request)
     {
-        $schedules = Point::where('user_id', $request->user)->whereMonth('created_at', $request->month)
-            ->whereYear('created_at', $request->year)->get();
+        $schedules = Point::where('user_id', $request->user)->whereMonth('started', $request->month)
+            ->whereYear('started', $request->year)->get();
 
         $user = User::where('id', $request->user)->first();
 
