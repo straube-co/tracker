@@ -76,10 +76,10 @@
                   {{ csrf_field() }}
                   <div class="modal-body">
                       <div class="form-group">
-                          <label for="entry">Entry</label>
-                          <div class="input-group" id="datepickerentry" data-target-input="nearest">
-                              <input type="text" name="started" class="form-control datetimepicker-input @if ($errors->has('started')) is-invalid @endif" value="" data-target="#datepickerentry"/>
-                              <div class="input-group-append" data-target="#datepickerentry" data-toggle="datetimepicker">
+                          <label for="started">Entry</label>
+                          <div class="input-group" id="datepickerstarted" data-target-input="nearest">
+                              <input type="text" name="started" class="form-control datetimepicker-input @if ($errors->has('started')) is-invalid @endif" value="" data-target="#datepickerstarted"/>
+                              <div class="input-group-append" data-target="#datepickerstarted" data-toggle="datetimepicker">
                                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                               </div>
                           </div>

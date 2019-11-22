@@ -31,10 +31,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="pt-3 form-group">
-                        <label>From:</label>
-                        <div class="input-group" id="datepickerentry" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datepickerentry" name="started" value="{{ request('entry') }}"/>
-                            <div class="input-group-append" data-target="#datepickerentry" data-toggle="datetimepicker">
+                        <label for="started">Entry</label>
+                        <div class="input-group" id="datepickerstarted" data-target-input="nearest">
+                            <input type="text" name="started" class="form-control datetimepicker-input @if ($errors->has('started')) is-invalid @endif" value="" data-target="#datepickerstarted"/>
+                            <div class="input-group-append" data-target="#datepickerstarted" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
@@ -43,9 +43,9 @@
                 <div class="col-md-6">
                     <div class="pt-3 form-group">
                         <label>To:</label>
-                        <div class="input-group" id="datepickerexit" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datepickerexit" name="finished" value="{{ request('exit') }}"/>
-                            <div class="input-group-append" data-target="#datepickerexit" data-toggle="datetimepicker">
+                        <div class="input-group" id="datepickerfinished" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datepickerfinished" name="finished" value="{{ request('finished') }}"/>
+                            <div class="input-group-append" data-target="#datepickerfinished" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>

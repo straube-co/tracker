@@ -52,7 +52,7 @@ class PointReportController extends Controller
             $queryTotal->where('finished', '<=', $request->finished);
         }
 
-        $schedules = $query->get();
+        $schedules = $query->orderBy('date_entry', 'DESC')->get();
         $total = $queryTotal->whereNotNull('finished')->value('total');
 
         $data = [
@@ -71,7 +71,7 @@ class PointReportController extends Controller
         $rules = [
             'started' => [
                 'required',
-                'date_format:Y-m-d H:i:s',
+                // 'date_format:Y-m-d H:i:s',
             ],
         ];
 
