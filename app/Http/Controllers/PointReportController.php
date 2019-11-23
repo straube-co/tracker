@@ -117,10 +117,16 @@ class PointReportController extends Controller
         $schedules = Point::where('user_id', $request->user)->whereMonth('started', $request->month)
             ->whereYear('started', $request->year)->get();
 
+        $queryTotal = Point::select(DB::raw('SUM(TIMESTAMPDIFF(MINUTE, started, finished)) AS total'))
+            ->whereMonth('started', $request->month);
+
+        $total = $queryTotal->whereNotNull('finished')->value('total');
+
         $user = User::where('id', $request->user)->first();
 
         $data = [
             'schedules' => $schedules,
+            'total' => $total,
             'user' => $user,
         ];
 

@@ -56,9 +56,14 @@
                 </tbody>
             </table>
         </div>
+        <div>
+            <dl>
+                <dt>Total hours worked {{ App\Point::convertToHours($total) }}.</dt>
+            </dl>
+        </div>
         <hr>
         <footer>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center mb-5">
                 <p class="mr-3 mb-0">Assinatura do empregador:</p>
                 <input class="form-control signature" type="text" name="signature">
             </div>

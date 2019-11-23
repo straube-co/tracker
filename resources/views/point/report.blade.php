@@ -31,9 +31,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="pt-3 form-group">
-                        <label for="started">Entry</label>
+                        <label>Entry</label>
                         <div class="input-group" id="datepickerstarted" data-target-input="nearest">
-                            <input type="text" name="started" class="form-control datetimepicker-input @if ($errors->has('started')) is-invalid @endif" value="" data-target="#datepickerstarted"/>
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datepickerstarted" name="started" value="{{ request('started') }}"/>
                             <div class="input-group-append" data-target="#datepickerstarted" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
