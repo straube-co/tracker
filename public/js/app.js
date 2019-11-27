@@ -70155,6 +70155,10 @@ $('.btn-delete-activity').on('click', function () {
 /* Function is performed by loading the page */
 
 $(function () {
+  $('#pointdatepickerstarted').datetimepicker({
+    useCurrent: false,
+    format: "Y-MM-DD HH:mm:ss"
+  });
   $('#datepickerstarted').datetimepicker({
     useCurrent: false,
     format: "Y-MM-DD HH:mm:ss"
@@ -70162,6 +70166,9 @@ $(function () {
   $('#datepickerfinished').datetimepicker({
     useCurrent: false,
     format: "Y-MM-DD HH:mm:ss"
+  });
+  $("#pointdatepickerstarted").on("change.datetimepicker", function (e) {
+    $('#datepickerstarted').datetimepicker('maxDate', e.date);
   });
   $("#datepickerstarted").on("change.datetimepicker", function (e) {
     $('#datepickerfinished').datetimepicker('minDate', e.date);
