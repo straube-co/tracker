@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PointRequest;
 use App\Point;
 use App\User;
 use Carbon\Carbon;
@@ -64,26 +65,11 @@ class PointReportController extends Controller
         return view('point.report', $data);
     }
 
-    public function store(Request $request)
+    public function store(PointRequest $request)
     {
-        $finished = Point::select('finished')->where('user_id', Auth::id())->orderBy('finished', 'desc')->first();
-
-        $rules = [
-            'started' => [
-                'required',
-                // 'date_format:Y-m-d H:i:s',
-            ],
-        ];
-
-        if ($finished) {
-            $rules['started'][] = 'after_or_equal:$finished->finished';
-        }
-
-        $validatedData = $request->validate($rules);
-
         Point::create([
             'user_id' => Auth::id(),
-            'started' => $validatedData['started'],
+            'started' => $request->started,
         ]);
 
         return back();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Requests\MyActivityRequest;
 use App\Activity;
 use App\Project;
 use Carbon\Carbon;
@@ -18,6 +19,8 @@ use App\Report;
  *
  * @version 1.0.0
  * @author Lucas Cardoso <lucas@straube.co>
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class MyActivitiesController extends Controller
 {
@@ -42,27 +45,14 @@ class MyActivitiesController extends Controller
         return view('myActivities.index', $data);
     }
 
-    public function store(Request $request)
+    public function store(MyActivityRequest $request)
     {
-        $validatedData = $request->validate([
-            'project_id' => 'required',
-            'task_id' => 'required|exists:tasks,id',
-            'activity_id' => 'required',
-            'started' => 'required|date_format:Y-m-d H:i:s',
-            'finished' => [
-                'required',
-                'date_format:Y-m-d H:i:s',
-                'after_or_equal:started',
-                'before:' . Carbon::now()->format('Y-m-d H:i:s'),
-            ],
-        ]);
-
         Time::create([
-            'task_id' => $validatedData['task_id'],
+            'task_id' => $request->task_id,
             'user_id' => Auth::id(),
-            'activity_id' => $validatedData['activity_id'],
-            'started' => $validatedData['started'],
-            'finished' => $validatedData['finished'],
+            'activity_id' => $request->activity_id,
+            'started' => $request->started,
+            'finished' => $request->finished,
         ]);
         return redirect()->route('my.index');
     }
@@ -82,28 +72,16 @@ class MyActivitiesController extends Controller
         return view('myActivities.edit', $data);
     }
 
-    public function update(Request $request, Time $time)
+    public function update(MyActivityRequest $request, Time $time)
     {
-        $validatedData = $request->validate([
-            'project_id' => 'required',
-            'task_id' => 'required|exists:tasks,id',
-            'activity_id' => 'required',
-            'started' => 'required|date_format:Y-m-d H:i:s',
-            'finished' => [
-                'required',
-                'date_format:Y-m-d H:i:s',
-                'after_or_equal:started',
-                'before:' . Carbon::now()->format('Y-m-d H:i:s'),
-            ],
+        $time->update([
+            'task_id' => $request->task_id,
+            'user_id' => Auth::id(),
+            'activity_id' => $request->activity_id,
+            'started' => $request->started,
+            'finished' => $request->finished,
         ]);
 
-        $time->update([
-            'task_id' => $validatedData['task_id'],
-            'user_id' => Auth::id(),
-            'activity_id' => $validatedData['activity_id'],
-            'started' => $validatedData['started'],
-            'finished' => $validatedData['finished'],
-        ]);
         $time->save();
 
         return redirect()->route('my.index');
