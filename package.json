@@ -26,5 +26,8 @@
         "vue": "^2.6.10",
         "vue-template-compiler": "^2.6.8"
     },
-    "dependencies": {}
+    "dependencies": {
+        "select2": "^4.0.12",
+        "select2-bootstrap4-theme": "^1.0.0"
+    }
 }

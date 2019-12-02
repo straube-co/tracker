@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class AuthController extends Controller
 {
-
     /**
      * The Asana workspace ID.
      *

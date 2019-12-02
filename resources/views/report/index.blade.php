@@ -33,7 +33,7 @@
                 <div class="col-md-6">
                     <div class="form-group pt-3">
                         <label for="task">Task:</label>
-                        <select class="custom-select" id="task" name="task_id">
+                        <select class="custom-select select2" id="task" name="task_id">
                             <option value="">Select</option>
                             @foreach ($tasks as $task)
                                 <option value="{{ $task->id }}" data-project_id="{{ $task->project_id }}" @if ($task->id == request('task_id')) selected @endif>{{ $task->name }}</option>

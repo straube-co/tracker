@@ -26,37 +26,40 @@ Auth::routes(['register' => false]);
 Route::group([
     'middleware' => [ 'auth' ],
 ], function () {
-    Route::resource('/activity', 'ActivityController')->middleware('can:settings');
-    // Route::post('/user/access', 'UserController@access')->name('user.access')->middleware('can:settings');
     Route::resource('/user', 'UserController');
+
+    Route::resource('/project', 'ProjectController');
+    Route::resource('/activity', 'ActivityController')->middleware('can:settings');
+
     Route::resource('/time', 'TimeController');
-    Route::resource('/my', 'MyActivitiesController', [
-        'parameters' => [
-            'my' => 'time',
-        ]
-    ]);
-    Route::resource('/import', 'ImportController', [
-        'parameters' => [
-            'import' => 'project',
-        ]
-    ]);
+    Route::resource('/point', 'PointReportController');
+    Route::post('/point/save', 'PointReportController@save')->name('save');
+    Route::post('/report', 'ReportController@store')
+        ->name('report.store')
+        ->middleware('can:report');
+
     Route::resource('/auto', 'AutoController', [
         'parameters' => [
             'auto' => 'time',
+        ]
+    ]);
+    Route::resource('/my', 'MyActivitiesController', [
+        'parameters' => [
+            'my' => 'time',
         ]
     ]);
 
     Route::get('/report/{format?}', 'ReportController@index')
         ->name('report.index')
         ->where('format', '^(html|csv)$');
-
-    Route::post('/report', 'ReportController@store')
-        ->name('report.store')
-        ->middleware('can:report');
-
-    Route::resource('/point', 'PointReportController');
     Route::post('/point/print', 'PointReportController@print')->name('print.report');
-    Route::post('/point/save', 'PointReportController@save')->name('save');
+
+    // Route::post('/user/access', 'UserController@access')->name('user.access')->middleware('can:settings');
+    // Route::resource('/import', 'ImportController', [
+    //     'parameters' => [
+    //         'import' => 'project',
+    //     ]
+    // ]);
 });
 
 Route::get('/report/{report}/{format?}', 'ReportController@show')

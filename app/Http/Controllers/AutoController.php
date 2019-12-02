@@ -17,6 +17,8 @@ use App\Task;
  *
  * @version 1.0.0
  * @author Lucas Cardoso <lucas@straube.co>
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class AutoController extends Controller
 {
@@ -46,11 +48,16 @@ class AutoController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'task_id' => 'required|exists:tasks,id',
+            'task_name' => 'required',
             'activity_id' => 'required',
         ]);
 
-        DB::transaction(function () use ($validatedData) {
+        $task = Task::create([
+            'name' => $validatedData['task_name'],
+            'project_id' => $request->project_id,
+        ]);
+
+        DB::transaction(function () use ($validatedData, $task) {
 
             $time = Time::where('user_id', Auth::id())->where('finished', null)->count() == 0;
 
@@ -59,7 +66,7 @@ class AutoController extends Controller
             }
 
             Time::create([
-                'task_id' => $validatedData['task_id'],
+                'task_id' => $task->id,
                 'user_id' => Auth::id(),
                 'activity_id' => $validatedData['activity_id'],
                 'started' => Carbon::now(),

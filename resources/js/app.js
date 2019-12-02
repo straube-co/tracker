@@ -8,8 +8,8 @@
 require('./bootstrap');
 window.moment = require('moment');
 require('tempusdominus-bootstrap-4');
-
 window.Vue = require('vue');
+require('select2');
 
 /**
  * The following block of code may be used to automatically register your
@@ -35,6 +35,14 @@ const app = new Vue({
 });
 
 import { getSchedules } from './utils/backend';
+
+/* Select2 */
+$(function () {
+    $(".select2").select2({
+        tags: true,
+        theme: "bootstrap4"
+    });
+});
 
 /* Show schedules details */
 $(document).on('click', '.details', function () {
