@@ -1,3 +1,6 @@
+@php
+    $submitted = old('project_id') === 'project_0';
+@endphp
 <div class="modal fade" id="createProjectModal" tabindex="-1" role="dialog" aria-labelledby="createProjectModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -12,10 +15,16 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Project name</label>
-                        <input class="form-control" type="text" name="name" value="">
+                        <input class="form-control @if ($submitted && $errors->has('name')) is-invalid @endif" type="text" name="name" value="">
+                        @if ($submitted)
+                            <div class="invalid-feedback">
+                                {{ $errors->first('name') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" name="project_id" value="project_0">
                     <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-outline-success btn-sm">Create</button>
                 </div>

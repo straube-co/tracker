@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <link rel="shortcut icon" href="/img/time.png" type="image/x-icon" />
-    <title>Straube Time Tracking</title>
+    <title>Time Tracking</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @stack('head')
 </head>
@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12 col-md-6">
-                <h2 class="text-center">Straube Time Tracking</h2>
+                <h2 class="text-center">Time Tracking</h2>
             </div>
             <div class="col-12 col-md-6">
                 @yield('content')

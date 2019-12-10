@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
  *
  * @SuppressWarnings(PHPMD.StaticAccess)
  */
-class MyActivityRequest extends FormRequest
+class ManualTimeRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

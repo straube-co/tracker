@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <link rel="shortcut icon" href="/img/time.png" type="image/x-icon" />
-    <title>Straube Time Tracking</title>
+    <title>Time Tracking</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @stack('head')
 </head>
@@ -16,12 +16,6 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('time.index') }}">Time tracking</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="{{ route('my.index') }}">My activities</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('report.index') }}">Reports</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -63,6 +57,9 @@
         </nav>
 
         <!-- Modal -->
+        @php
+            $submitted = old('started') === 'started_0';
+        @endphp
         <div class="modal fade" id="point" tabindex="-1" role="dialog" aria-labelledby="ModalPoint" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -78,12 +75,12 @@
                       <div class="form-group">
                           <label for="started">Entry</label>
                           <div class="input-group" id="pointdatepickerstarted" data-target-input="nearest">
-                              <input type="text" name="started" class="form-control datetimepicker-input @if ($errors->has('started')) is-invalid @endif" value="" data-target="#pointdatepickerstarted"/>
+                              <input type="text" name="started" class="form-control datetimepicker-input @if ($submitted && $errors->has('started')) is-invalid @endif" value="" data-target="#pointdatepickerstarted"/>
                               <div class="input-group-append" data-target="#pointdatepickerstarted" data-toggle="datetimepicker">
                                   <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                               </div>
                           </div>
-                          @if($errors->has('started'))
+                          @if($submitted)
                               <div class="invalid-feedback d-block">
                                   {{ $errors->first('started') }}
                               </div>

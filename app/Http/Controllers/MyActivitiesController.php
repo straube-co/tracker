@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Http\Requests\MyActivityRequest;
+use App\Http\Requests\ManualTimeRequest;
 use App\Activity;
 use App\Project;
 use Carbon\Carbon;
@@ -45,7 +45,7 @@ class MyActivitiesController extends Controller
         return view('myActivities.index', $data);
     }
 
-    public function store(MyActivityRequest $request)
+    public function store(ManualTimeRequest $request)
     {
         Time::create([
             'task_id' => $request->task_id,
@@ -72,7 +72,7 @@ class MyActivitiesController extends Controller
         return view('myActivities.edit', $data);
     }
 
-    public function update(MyActivityRequest $request, Time $time)
+    public function update(ManualTimeRequest $request, Time $time)
     {
         $time->update([
             'task_id' => $request->task_id,

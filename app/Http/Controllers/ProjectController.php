@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 
+use App\Http\Requests\OnlyNameRequest;
 use Illuminate\Http\Request;
 
 /**
@@ -16,14 +17,10 @@ use Illuminate\Http\Request;
  */
 class ProjectController extends Controller
 {
-    public function store(Request $request)
+    public function store(OnlyNameRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|min:3|unique:projects',
-        ]);
-
         Project::create([
-            'name' => $validatedData['name'],
+            'name' => $request->name,
         ]);
 
         return back();

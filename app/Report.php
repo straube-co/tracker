@@ -14,6 +14,7 @@ use Illuminate\Support\Collection;
  *
  * @version 1.0.0
  * @author Lucas Cardoso <lucas@straube.co>
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
 class Report extends Model
 {
@@ -56,7 +57,7 @@ class Report extends Model
      */
     public function getPaginatedResults(): LengthAwarePaginator
     {
-        return $this->getResultsQuery()->with('user', 'activity', 'task', 'task.project')->paginate();
+        return $this->getResultsQuery()->with('user', 'activity', 'task', 'task.project')->paginate(20);
     }
 
     /**
