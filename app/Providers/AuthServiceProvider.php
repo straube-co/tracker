@@ -2,14 +2,9 @@
 
 namespace App\Providers;
 
-use App\User;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
-/**
- *
- * @SuppressWarnings(PHPMD.StaticAccess)
- */
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -18,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -30,19 +25,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('admin', function (User $user) {
-
-            return in_array(4, $user->access());
-        });
-
-        Gate::define('report', function (User $user) {
-
-            return in_array(2, $user->access());
-        });
-
-        Gate::define('settings', function (User $user) {
-
-            return in_array(1, $user->access());
-        });
+        //
     }
 }

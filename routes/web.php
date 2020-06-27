@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,53 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect('/time');
-    }
-    return redirect('/login');
+    return view('welcome');
 });
-
-Auth::routes(['register' => false]);
-
-Route::group([
-    'middleware' => [ 'auth' ],
-], function () {
-    Route::resource('/user', 'UserController');
-
-    Route::resource('/project', 'ProjectController');
-    Route::resource('/activity', 'ActivityController')->middleware('can:settings');
-
-    Route::resource('/time', 'TimeController');
-    Route::resource('/point', 'PointReportController');
-    Route::post('/point/save', 'PointReportController@save')->name('save');
-    Route::post('/report', 'ReportController@store')
-        ->name('report.store')
-        ->middleware('can:report');
-
-    Route::resource('/auto', 'AutoController', [
-        'parameters' => [
-            'auto' => 'time',
-        ]
-    ]);
-    Route::resource('/my', 'MyActivitiesController', [
-        'parameters' => [
-            'my' => 'time',
-        ]
-    ]);
-
-    Route::get('/report/{format?}', 'ReportController@index')
-        ->name('report.index')
-        ->where('format', '^(html|csv)$');
-    Route::post('/point/print', 'PointReportController@print')->name('print.report');
-
-    // Route::post('/user/access', 'UserController@access')->name('user.access')->middleware('can:settings');
-    // Route::resource('/import', 'ImportController', [
-    //     'parameters' => [
-    //         'import' => 'project',
-    //     ]
-    // ]);
-});
-
-Route::get('/report/{report}/{format?}', 'ReportController@show')
-    ->name('report.show')
-    ->where('format', '^(html|csv)$');
