@@ -29,7 +29,7 @@ class TimesController extends Controller
     {
         $reports = Report::select('id', 'name')->orderBy('name')->pluck('name', 'id');
         $report = $this->getReportFromRequest($request);
-        $times = Time::fromReport($report)->with('project', 'activity', 'user')->get();
+        $times = Time::fromReport($report)->with('project', 'activity', 'user')->paginate(50);
 
         $data = [
             'reports' => $reports,

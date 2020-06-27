@@ -43,5 +43,7 @@
                 @endforeach
             </tbody>
         </table>
+
+        {{ $times->withQueryString()->links() }}
     </div>
 @endsection
