@@ -26,6 +26,15 @@ class Report extends Model
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'filter' => 'array',
+    ];
+
+    /**
      * Get the default report for a given user.
      *
      * @param  \App\User $user

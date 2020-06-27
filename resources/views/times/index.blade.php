@@ -10,7 +10,7 @@
                 <option value="" disabled>--</option>
                 <option value="" disabled>Saved reports</option>
                 @foreach ($reports as $id => $name)
-                    <option value="{{ $id }}">{{ $name }}</option>
+                    <option value="{{ $id }}" @if (request('report_id') == $id) selected @endif>{{ $name }}</option>
                 @endforeach
             </select>
         </form>
