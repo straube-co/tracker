@@ -16,7 +16,9 @@ class UpdatingProjectId extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         DB::statement('ALTER TABLE projects MODIFY id BIGINT AUTO_INCREMENT NOT NULL');
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

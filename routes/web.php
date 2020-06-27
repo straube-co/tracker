@@ -14,9 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('times.index');
 });
 
-Auth::routes();
+Auth::routes([ 'register' => false ]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/times', 'TimesController@index')->name('times.index');
+Route::get('/projects', 'ProjectsController@index')->name('projects.index');
+Route::get('/activities', 'ActivitiesController@index')->name('activities.index');
+Route::get('/users', 'UsersController@index')->name('users.index');
