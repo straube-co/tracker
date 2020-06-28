@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <button class="btn btn-primary">New time entry</button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#add-time-entry">New time entry</button>
 
         <form action="{{ route('times.index') }}" method="get">
             <select class="custom-select" name="report_id" onchange="this.form.submit();">
@@ -47,3 +47,25 @@
         {{ $times->withQueryString()->links() }}
     </div>
 @endsection
+
+@push('modals')
+    <div class="modal fade" id="add-time-entry" tabindex="-1" role="dialog" aria-labelledby="add-time-entry-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="add-time-entry-label">Add Time Entry</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <add-time-entry />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Start</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endpush
