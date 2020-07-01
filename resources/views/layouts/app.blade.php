@@ -83,8 +83,8 @@
             @yield('content')
         </main>
 
-        <footer class="container">
-            <p>&copy; 2019-{{ date('Y') }} Straube.</p>
+        <footer class="container mt-5">
+            <p class="text-muted">&copy; 2019-{{ date('Y') }} Straube.</p>
         </footer>
 
         @stack('modals')

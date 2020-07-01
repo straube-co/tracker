@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group col">
                             <label>Activity</label>
-                            <select class="custom-select" v-model="activity">
+                            <select class="custom-select">
                                 <option>Select</option>
                                 <option disabled>--</option>
                                 @foreach ($activities as $activity)
@@ -79,34 +79,46 @@
 
         <h2 class="pt-4 mb-4">{{ $report->name }}</h2>
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th class="align-top">Project</th>
-                    <th class="align-top">Activity</th>
-                    <th class="align-top">User</th>
-                    <th class="align-top">Description</th>
-                    <th class="align-top">Started</th>
-                    <th class="align-top">Finished</th>
-                    <th class="align-top">Ellapsed</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($times as $time)
+        @if (count($times) === 0)
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">No time tracked yet</h5>
+                    <p class="card-text">
+                        The current report has no time. It's possible to select different
+                        <a href="javascript:return false" class="card-link" type="button" data-toggle="collapse" data-target="#report-options" aria-expanded="false" aria-controls="report-options">report options</a>.
+                    </p>
+                </div>
+            </div>
+        @else
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <td class="align-top">{{ $time->project->name }}</td>
-                        <td class="align-top">{{ $time->activity->name }}</td>
-                        <td class="align-top">{{ $time->user->name }}</td>
-                        <td class="align-top">{{ $time->description }}</td>
-                        <td class="align-top"><samp>{{ $time->started }}</samp></td>
-                        <td class="align-top"><samp>{{ $time->finished }}</samp></td>
-                        <td class="align-top"><samp>{{ $time->finished->longAbsoluteDiffForHumans($time->started) }}</samp></td>
+                        <th class="align-top">Project</th>
+                        <th class="align-top">Activity</th>
+                        <th class="align-top">User</th>
+                        <th class="align-top">Description</th>
+                        <th class="align-top">Started</th>
+                        <th class="align-top">Finished</th>
+                        <th class="align-top">Ellapsed</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($times as $time)
+                        <tr>
+                            <td class="align-top">{{ $time->project->name }}</td>
+                            <td class="align-top">{{ $time->activity->name }}</td>
+                            <td class="align-top">{{ $time->user->name }}</td>
+                            <td class="align-top">{{ $time->description }}</td>
+                            <td class="align-top"><samp>{{ $time->started }}</samp></td>
+                            <td class="align-top"><samp>{{ $time->finished }}</samp></td>
+                            <td class="align-top"><samp>{{ $time->finished->longAbsoluteDiffForHumans($time->started) }}</samp></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
 
-        {{ $times->withQueryString()->links() }}
+            {{ $times->withQueryString()->links() }}
+        @endif
     </div>
 @endsection
 

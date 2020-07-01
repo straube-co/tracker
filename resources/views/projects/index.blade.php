@@ -8,21 +8,26 @@
 
         <h2 class="pt-4 mb-4">Projects</h2>
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th class="align-middle">Name</th>
-                    <th class="align-middle"></th>
-                </tr>
-            </thead>
-            <tbody>
+        @if (count($projects) === 0)
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">No projects created yet</h5>
+                    <p class="card-text">
+                        Go ahead and <a href="#">create the first project</a>.
+                    </p>
+                </div>
+            </div>
+        @else
+            <div class="card-columns">
                 @foreach ($projects as $project)
-                    <tr>
-                        <td class="align-middle">{{ $project->name }}</td>
-                        <td class="align-middle text-right"><a class="btn btn-secondary" href="#">Edit</a></td>
-                    </tr>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $project->name }}</h5>
+                            <a class="card-link" href="#">Edit</a>
+                        </div>
+                    </div>
                 @endforeach
-            </tbody>
-        </table>
+            </div>
+        @endif
     </div>
 @endsection
