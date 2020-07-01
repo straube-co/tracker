@@ -1,8 +1,8 @@
     var Ziggy = {
         namedRoutes: {"api.projects.index":{"uri":"api\/projects","methods":["GET","HEAD"],"domain":null},"api.activities.index":{"uri":"api\/activities","methods":["GET","HEAD"],"domain":null}},
-        baseUrl: 'http://localhost/',
+        baseUrl: 'http://tracker.test/',
         baseProtocol: 'http',
-        baseDomain: 'localhost',
+        baseDomain: 'tracker.test',
         basePort: false,
         defaultParameters: []
     };

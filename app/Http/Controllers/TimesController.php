@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Activity;
+use App\Project;
 use App\Report;
 use App\Time;
+use App\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
@@ -31,10 +34,18 @@ class TimesController extends Controller
         $report = $this->getReportFromRequest($request);
         $times = Time::fromReport($report)->with('project', 'activity', 'user')->paginate(50);
 
+        // Report filters
+        $projects = Project::select('id', 'name')->orderBy('name')->get();
+        $activities = Activity::select('id', 'name')->orderBy('name')->get();
+        $users = User::select('id', 'name')->orderBy('name')->get();
+
         $data = [
             'reports' => $reports,
             'report' => $report,
             'times' => $times,
+            'projects' => $projects,
+            'activities' => $activities,
+            'users' => $users,
         ];
         return view('times.index', $data);
     }

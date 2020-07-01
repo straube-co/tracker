@@ -3,16 +3,16 @@
         <div class="form-row">
             <div class="form-group col">
                 <label>Project</label>
-                <select class="custom-select">
-                    <option>Select</option>
+                <select class="custom-select" v-model="project">
+                    <option :value="null">Select</option>
                     <option disabled>--</option>
                     <option v-for="project in projects" :value="project.id">{{ project.name }}</option>
                 </select>
             </div>
             <div class="form-group col">
                 <label>Activity</label>
-                <select class="custom-select">
-                    <option>Select</option>
+                <select class="custom-select" v-model="activity">
+                    <option :value="null">Select</option>
                     <option disabled>--</option>
                     <option v-for="activity in activities" :value="activity.id">{{ activity.name }}</option>
                 </select>
@@ -55,13 +55,19 @@
 
 <script>
     export default {
+        props: [
+            'modal',
+        ],
         data() {
             return {
-                isPreviousTime: false,
                 projects: [],
                 activities: [],
 
+                // Form
+                project: null,
+                activity: null,
                 description: '',
+                isPreviousTime: false,
                 date: this.formatDate(new Date()),
                 started: '',
                 finished: '',
@@ -77,11 +83,27 @@
                 const day = (date.getDate() + 100).toString().substring(1);
                 return year + '-' + month + '-' + day;
             },
+            reset() {
+                this.project = null;
+                this.activity = null;
+                this.description = '';
+                this.isPreviousTime = false;
+                this.date = this.formatDate(new Date());
+                this.started = '';
+                this.finished = '';
+            },
+            onModalHide(event) {
+                if (!this.modal || event.target.id !== this.modal) {
+                    return;
+                }
+                this.reset();
+            },
         },
         async created() {
+            jQuery(document).on('hidden.bs.modal', this.onModalHide);
             const [ projects, activities ] = await Promise.all([
-                axios.get(route('api.projects.index')),
-                axios.get(route('api.activities.index')),
+                axios.get(this.$root.route('api.projects.index')),
+                axios.get(this.$root.route('api.activities.index')),
             ]);
             if (projects.data) {
                 this.projects = projects.data;
@@ -89,6 +111,9 @@
             if (activities.data) {
                 this.activities = activities.data;
             }
+        },
+        beforeDestroyed() {
+            jQuery(document).off('hidden.bs.modal', this.onModalHide);
         },
     }
 </script>

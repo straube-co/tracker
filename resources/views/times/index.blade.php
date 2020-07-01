@@ -2,20 +2,82 @@
 
 @section('content')
     <div class="container">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#add-time-entry">New time entry</button>
+        <div class="row mb-4">
+            <div class="col">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#add-time-entry">New time entry</button>
+            </div>
+            <div class="col-auto ml-auto">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#report-options" aria-expanded="false" aria-controls="report-options">Report options</button>
+            </div>
+        </div>
 
-        <form action="{{ route('times.index') }}" method="get">
-            <select class="custom-select" name="report_id" onchange="this.form.submit();">
-                <option value="">My week</option>
-                <option value="" disabled>--</option>
-                <option value="" disabled>Saved reports</option>
-                @foreach ($reports as $id => $name)
-                    <option value="{{ $id }}" @if (request('report_id') == $id) selected @endif>{{ $name }}</option>
-                @endforeach
-            </select>
+        <form class="collapse" id="report-options" action="{{ route('times.index') }}" method="get">
+            <div class="row">
+                <div class="col-md-8">
+                    <h5>Custom filter</h5>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label>Project</label>
+                            <select class="custom-select">
+                                <option>Select</option>
+                                <option disabled>--</option>
+                                @foreach ($projects as $project)
+                                    <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col">
+                            <label>Activity</label>
+                            <select class="custom-select" v-model="activity">
+                                <option>Select</option>
+                                <option disabled>--</option>
+                                @foreach ($activities as $activity)
+                                    <option value="{{ $activity->id }}">{{ $activity->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label>User</label>
+                            <select class="custom-select">
+                                <option>Select</option>
+                                <option disabled>--</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col">
+                            <label>From</label>
+                            <input class="form-control" type="text" placeholder="YYYY-MM-DD" />
+                        </div>
+                        <div class="form-group col">
+                            <label>To</label>
+                            <input class="form-control" type="text" placeholder="YYYY-MM-DD" />
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary">Apply</button>
+                    <button class="btn btn-secondary">Apply &amp; Save</button>
+                </div>
+                <div class="col-md-4">
+                    <h5>Load report</h5>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <select class="custom-select" name="report_id" onchange="this.form.submit();">
+                            <option value="">My week</option>
+                            <option value="" disabled>--</option>
+                            <option value="" disabled>Saved reports</option>
+                            @foreach ($reports as $id => $name)
+                                <option value="{{ $id }}" @if (request('report_id') == $id) selected @endif>{{ $name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
         </form>
 
-        <h1>{{ $report->name }}</h1>
+        <h2 class="pt-4 mb-4">{{ $report->name }}</h2>
 
         <table class="table table-hover">
             <thead>
@@ -59,7 +121,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <add-time-entry />
+                    <add-time-entry modal="add-time-entry" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>

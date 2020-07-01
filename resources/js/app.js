@@ -8,7 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import route from 'ziggy-js';
+import route from 'ziggy';
 import { Ziggy } from './ziggy';
 
 Vue.mixin({
@@ -16,6 +16,8 @@ Vue.mixin({
         route: (name, params, absolute) => route(name, params, absolute, Ziggy),
     },
 });
+
+window.route = route;
 
 /**
  * The following block of code may be used to automatically register your
