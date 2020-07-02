@@ -114,7 +114,19 @@
                             </td>
                             <td class="align-middle">{{ $time->user->getFirstName() }}</td>
                             <td class="align-middle text-nowrap text-right">
-                                <h6 title="{{ $time->started }} - {{ $time->finished }}"><samp>{{ $time->getTrackedTime() ?: '-' }}</samp></h6>
+                                @if ($time->finished)
+                                    <h6 title="{{ $time->started }} - {{ $time->finished }}">
+                                        <samp>{{ $time->getTrackedTime() ?: '-' }}</samp>
+                                    </h6>
+                                @else
+                                    <h6 title="{{ __('Started at :time', [ 'time' => $time->started ]) }}">
+                                        <samp>
+                                            <timer time="{{ \Carbon\Carbon::now()->diffInSeconds($time->started) }}">
+                                                {{ \App\Support\Formatter::timeDiff($time->started) }}
+                                            </timer>
+                                        </samp>
+                                    </h6>
+                                @endif
                                 <small class="text-muted">
                                     <samp>{{ $time->started->format('Y-m-d') }}</samp>
                                 </small>

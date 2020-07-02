@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Support\Formatter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -59,8 +60,7 @@ class Time extends Model
             return null;
         }
 
-        $interval = $this->finished->diffAsCarbonInterval($this->started);
-        return str_pad((int) $interval->totalHours, 2, '0', STR_PAD_LEFT) . ':' . $interval->format('%I');
+        return Formatter::timeDiff($this->started, $this->finished);
     }
 
     /**

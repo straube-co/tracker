@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Support\Formatter;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -32,7 +33,7 @@ class Project extends Model
         }
 
         $interval = CarbonInterval::seconds((int) $this->tracked_seconds)->cascade();
-        return str_pad((int) $interval->totalHours, 2, '0', STR_PAD_LEFT) . ':' . $interval->format('%I');
+        return Formatter::timeInterval($interval);
     }
 
     public function scopeSelectTrackedTime(Builder $query): Builder
