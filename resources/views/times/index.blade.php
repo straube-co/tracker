@@ -91,27 +91,29 @@
             </div>
         @else
             <table class="table table-hover">
-                <thead>
+                <thead class="sr-only">
                     <tr>
-                        <th class="align-top">Project</th>
-                        <th class="align-top">Activity</th>
+                        <th class="align-top">Task</th>
                         <th class="align-top">User</th>
-                        <th class="align-top">Description</th>
-                        <th class="align-top">Started</th>
-                        <th class="align-top">Finished</th>
-                        <th class="align-top">Ellapsed</th>
+                        <th class="align-top">Tracked time</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($times as $time)
                         <tr>
-                            <td class="align-top">{{ $time->project->name }}</td>
-                            <td class="align-top">{{ $time->activity->name }}</td>
+                            <td class="align-top">
+                                <h6>{{ $time->project->name }}</h6>
+                                {{ $time->activity->name }} - <span class="text-muted">{{ $time->description }}</span>
+                            </td>
                             <td class="align-top">{{ $time->user->name }}</td>
-                            <td class="align-top">{{ $time->description }}</td>
-                            <td class="align-top"><samp>{{ $time->started }}</samp></td>
-                            <td class="align-top"><samp>{{ $time->finished }}</samp></td>
-                            <td class="align-top"><samp>{{ $time->finished->longAbsoluteDiffForHumans($time->started) }}</samp></td>
+                            <td class="align-top">
+                                <h6><samp>{{ $time->getTrackedTime() ?: '-' }}</samp></h6>
+                                <small class="text-muted">
+                                    <samp>{{ $time->started }}</samp>
+                                    -
+                                    <samp>{{ $time->finished }}</samp>
+                                </small>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

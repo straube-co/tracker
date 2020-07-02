@@ -52,6 +52,16 @@ class Time extends Model
         return $this->belongsTo(Activity::class);
     }
 
+    public function getTrackedTime(): ?string
+    {
+        if (!$this->finished || !$this->started) {
+            return null;
+        }
+
+        $interval = $this->finished->diffAsCarbonInterval($this->started);
+        return str_pad((int) $interval->totalHours, 2, '0', STR_PAD_LEFT) . ':' . $interval->format('%I:%S');
+    }
+
     /**
      * Scope a query to apply reporting filters.
      *
