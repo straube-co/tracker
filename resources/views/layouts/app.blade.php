@@ -23,9 +23,11 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                @if (!request()->is('times'))
-                    <small><a href="{{ route('times.index') }}" class="text-white-50">&#8592; Back to timesheet</a></small>
-                @endif
+                @auth
+                    @if (!request()->is('times'))
+                        <small><a href="{{ route('times.index') }}" class="text-white-50">&#8592; Back to timesheet</a></small>
+                    @endif
+                @endauth
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
