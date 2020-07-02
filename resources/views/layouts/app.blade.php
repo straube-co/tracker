@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="@yield('html-classes')">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,8 +16,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
+<body class="d-flex flex-column">
+    <div id="app" class="flex-shrink-0">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -83,12 +83,12 @@
             @yield('content')
         </main>
 
-        <footer class="container mt-5">
-            <p class="text-muted">&copy; 2019-{{ date('Y') }} Straube.</p>
-        </footer>
-
         @stack('modals')
     </div>
+
+    <footer class="container mt-auto">
+        <p class="text-muted">&copy; 2019-{{ date('Y') }} Straube.</p>
+    </footer>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

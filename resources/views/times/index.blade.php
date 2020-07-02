@@ -4,22 +4,22 @@
     <div class="container">
         <div class="row mb-4">
             <div class="col">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#add-time-entry">New time entry</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#add-time-entry">{{ __('New time entry') }}</button>
             </div>
             <div class="col-auto ml-auto">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#report-options" aria-expanded="false" aria-controls="report-options">Report options</button>
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#report-options" aria-expanded="false" aria-controls="report-options">{{ __('Report options') }}</button>
             </div>
         </div>
 
         <form class="collapse" id="report-options" action="{{ route('times.index') }}" method="get">
             <div class="row">
                 <div class="col-md-8">
-                    <h5>Custom filter</h5>
+                    <h5>{{ __('Custom filter') }}</h5>
                     <div class="form-row">
                         <div class="form-group col">
-                            <label>Project</label>
+                            <label>{{ __('Project') }}</label>
                             <select class="custom-select">
-                                <option>Select</option>
+                                <option>{{ __('Select') }}</option>
                                 <option disabled>--</option>
                                 @foreach ($projects as $project)
                                     <option value="{{ $project->id }}">{{ $project->name }}</option>
@@ -27,9 +27,9 @@
                             </select>
                         </div>
                         <div class="form-group col">
-                            <label>Activity</label>
+                            <label>{{ __('Activity') }}</label>
                             <select class="custom-select">
-                                <option>Select</option>
+                                <option>{{ __('Select') }}</option>
                                 <option disabled>--</option>
                                 @foreach ($activities as $activity)
                                     <option value="{{ $activity->id }}">{{ $activity->name }}</option>
@@ -39,9 +39,9 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col">
-                            <label>User</label>
+                            <label>{{ __('User') }}</label>
                             <select class="custom-select">
-                                <option>Select</option>
+                                <option>{{ __('Select') }}</option>
                                 <option disabled>--</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -49,25 +49,25 @@
                             </select>
                         </div>
                         <div class="form-group col">
-                            <label>From</label>
+                            <label>{{ __('From') }}</label>
                             <input class="form-control" type="text" placeholder="YYYY-MM-DD" />
                         </div>
                         <div class="form-group col">
-                            <label>To</label>
+                            <label>{{ __('To') }}</label>
                             <input class="form-control" type="text" placeholder="YYYY-MM-DD" />
                         </div>
                     </div>
-                    <button class="btn btn-secondary">Apply</button>
-                    <button class="btn btn-secondary">Apply &amp; Save</button>
+                    <button class="btn btn-secondary">{{ __('Apply') }}</button>
+                    <button class="btn btn-secondary">{{ __('Apply & Save') }}</button>
                 </div>
                 <div class="col-md-4">
-                    <h5>Load report</h5>
+                    <h5>{{ __('Load report') }}</h5>
                     <div class="form-group">
-                        <label>Name</label>
+                        <label>{{ __('Name') }}</label>
                         <select class="custom-select" name="report_id" onchange="this.form.submit();">
-                            <option value="">My week</option>
+                            <option value="">{{ __('My week') }}</option>
                             <option value="" disabled>--</option>
-                            <option value="" disabled>Saved reports</option>
+                            <option value="" disabled>{{ __('Saved reports') }}</option>
                             @foreach ($reports as $id => $name)
                                 <option value="{{ $id }}" @if (request('report_id') == $id) selected @endif>{{ $name }}</option>
                             @endforeach
@@ -82,10 +82,9 @@
         @if (count($times) === 0)
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">No time tracked yet</h5>
+                    <h5 class="card-title">{{ __('No time tracked yet') }}</h5>
                     <p class="card-text">
-                        The current report has no time. It's possible to select different
-                        <a href="javascript:return false" class="card-link" type="button" data-toggle="collapse" data-target="#report-options" aria-expanded="false" aria-controls="report-options">report options</a>.
+                        {!! __('The current report has no time. It\'s possible to select different <a :attributes >report options</a>.', [ 'attributes' => 'href="javascript:return false" class="card-link" type="button" data-toggle="collapse" data-target="#report-options" aria-expanded="false" aria-controls="report-options"' ]) !!}
                     </p>
                 </div>
             </div>
@@ -93,9 +92,9 @@
             <table class="table table-hover">
                 <thead class="sr-only">
                     <tr>
-                        <th class="align-top">Task</th>
-                        <th class="align-top">User</th>
-                        <th class="align-top">Tracked time</th>
+                        <th class="align-top">{{ __('Task') }}</th>
+                        <th class="align-top">{{ __('User') }}</th>
+                        <th class="align-top">{{ __('Tracked time') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -129,7 +128,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="add-time-entry-label">Add Time Entry</h5>
+                    <h5 class="modal-title" id="add-time-entry-label">{{ __('Add Time Entry') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -138,8 +137,8 @@
                     <add-time-entry modal="add-time-entry" />
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Start</button>
+                    <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('Cancel') }}</button>
+                    <button type="button" class="btn btn-primary">{{ __('Start') }}</button>
                 </div>
             </div>
         </div>

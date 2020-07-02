@@ -3,17 +3,17 @@
 @section('content')
     <div class="container">
         <div class="mb-4">
-            <button class="btn btn-primary">New project</button>
+            <button class="btn btn-primary">{{ __('New project') }}</button>
         </div>
 
-        <h2 class="pt-4 mb-4">Projects</h2>
+        <h2 class="pt-4 mb-4">{{ __('Projects') }}</h2>
 
         @if (count($projects) === 0)
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">No projects created yet</h5>
+                    <h5 class="card-title">{{ __('No projects created yet') }}</h5>
                     <p class="card-text">
-                        Go ahead and <a href="#">create the first project</a>.
+                        {!! __('Go ahead and <a :attributes >create the first project</a>.', [ 'attributes' => 'href="#"' ]) !!}
                     </p>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $project->name }}</h5>
                             <p class="card-text"><samp>{{ $project->getTrackedTime() ?: '00:00:00' }}</samp></p>
-                            <a class="card-link" href="#">Edit</a>
+                            <a class="card-link" href="#">{{ __('Edit') }}</a>
                         </div>
                     </div>
                 @endforeach
