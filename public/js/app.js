@@ -39291,7 +39291,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "form-row" }, [
       _c("div", { staticClass: "form-group col" }, [
-        _c("label", [_vm._v("Taks description")]),
+        _c("label", [_vm._v("Task description")]),
         _vm._v(" "),
         _c("textarea", {
           directives: [

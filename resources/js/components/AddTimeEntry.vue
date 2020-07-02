@@ -20,7 +20,7 @@
         </div>
         <div class="form-row">
             <div class="form-group col">
-                <label>Taks description</label>
+                <label>Task description</label>
                 <textarea class="form-control" v-model="description" @keyup="filterDescription" @keydown.enter.prevent="() => {}"></textarea>
             </div>
         </div>
