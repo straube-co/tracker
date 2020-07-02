@@ -47,11 +47,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function times()
+    {
+        return $this->hasMany(Time::class);
+    }
+
     public function getFirstName(): ?string
     {
         if (empty($this->name)) {
             return null;
         }
         return explode(' ', trim($this->name))[0];
+    }
+
+    public function hasTimerRunning(): bool
+    {
+        return $this->times()->whereNull('finished')->count() > 0;
     }
 }

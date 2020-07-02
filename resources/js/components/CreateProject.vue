@@ -41,6 +41,9 @@
         },
         methods: {
             reset() {
+                this.isSubmitting = false;
+                this.errors = {};
+
                 this.name = '';
             },
             error(name) {
@@ -60,16 +63,17 @@
                 this.errors = {};
                 (async () => {
                     try {
-                        await axios.post(this.$root.route('api.projects.store'), {
+                        const data = {
                             name: this.name,
-                        });
+                        };
+                        await axios.post(this.$root.route('api.projects.store'), data);
                         this.isSubmitting = false;
                         jQuery(this.$refs.modal).modal('hide');
                         location.reload();
                     } catch (e) {
                         this.isSubmitting = false;
-                        if (e.response && e.response.data) {
-                            this.errors = e.response.data.errors || {};
+                        if (e.response && e.response.data && e.response.data.errors) {
+                            this.errors = e.response.data.errors;
                             return;
                         }
                         this.$root.alert('Something went wrong while saving the project. Please check the info you provided and try again.');

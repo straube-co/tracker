@@ -1,5 +1,5 @@
     var Ziggy = {
-        namedRoutes: {"api.projects.index":{"uri":"api\/projects","methods":["GET","HEAD"],"domain":null},"api.projects.store":{"uri":"api\/projects","methods":["POST"],"domain":null},"api.activities.index":{"uri":"api\/activities","methods":["GET","HEAD"],"domain":null}},
+        namedRoutes: {"api.projects.index":{"uri":"api\/projects","methods":["GET","HEAD"],"domain":null},"api.projects.store":{"uri":"api\/projects","methods":["POST"],"domain":null},"api.activities.index":{"uri":"api\/activities","methods":["GET","HEAD"],"domain":null},"api.times.store":{"uri":"api\/times","methods":["POST"],"domain":null}},
         baseUrl: 'http://tracker.test/',
         baseProtocol: 'http',
         baseDomain: 'tracker.test',

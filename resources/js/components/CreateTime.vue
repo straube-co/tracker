@@ -1,7 +1,7 @@
 <template>
     <div class="modal fade" ref="modal" id="create-time" tabindex="-1" role="dialog" aria-labelledby="create-time-label" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <form class="modal-content" @submit.prevent="onSubmit">
                 <div class="modal-header">
                     <h5 class="modal-title" id="create-time-label">New Time Entry</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -12,25 +12,34 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label>Project</label>
-                            <select class="custom-select" v-model="project">
+                            <select :class="{ 'custom-select': true, 'is-invalid': error('project_id') }" v-model="project_id">
                                 <option :value="null">Select</option>
                                 <option disabled>--</option>
                                 <option v-for="project in projects" :value="project.id">{{ project.name }}</option>
                             </select>
+                            <span v-if="error('project_id')" class="invalid-feedback" role="alert">
+                                {{ error('project_id') }}
+                            </span>
                         </div>
                         <div class="form-group col">
                             <label>Activity</label>
-                            <select class="custom-select" v-model="activity">
+                            <select :class="{ 'custom-select': true, 'is-invalid': error('activity_id') }" v-model="activity_id">
                                 <option :value="null">Select</option>
                                 <option disabled>--</option>
                                 <option v-for="activity in activities" :value="activity.id">{{ activity.name }}</option>
                             </select>
+                            <span v-if="error('activity_id')" class="invalid-feedback" role="alert">
+                                {{ error('activity_id') }}
+                            </span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col">
                             <label>Task description</label>
-                            <textarea class="form-control" v-model="description" @keyup="filterDescription" @keydown.enter.prevent="() => {}"></textarea>
+                            <textarea :class="{ 'form-control': true, 'is-invalid': error('description') }" v-model="description" @keyup="filterDescription" @keydown.enter.prevent="() => {}"></textarea>
+                            <span v-if="error('description')" class="invalid-feedback" role="alert">
+                                {{ error('description') }}
+                            </span>
                         </div>
                     </div>
                     <div class="form-row" v-if="!isPreviousTime">
@@ -45,26 +54,40 @@
                         <div class="form-row">
                             <div class="form-group col">
                                 <label>Date</label>
-                                <input class="form-control" type="text" v-model="date" placeholder="YYYY-MM-DD" />
+                                <input :class="{ 'form-control': true, 'is-invalid': error('date') }" type="text" v-model="date" placeholder="YYYY-MM-DD" />
+                                <span v-if="error('date')" class="invalid-feedback" role="alert">
+                                    {{ error('date') }}
+                                </span>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col">
                                 <label>Started at</label>
-                                <input class="form-control" type="text" v-model="started" placeholder="HH:MM" />
+                                <input :class="{ 'form-control': true, 'is-invalid': error('started') }" type="text" v-model="started" placeholder="HH:MM" />
+                                <span v-if="error('started')" class="invalid-feedback" role="alert">
+                                    {{ error('started') }}
+                                </span>
                             </div>
                             <div class="form-group col">
                                 <label>Finished at</label>
-                                <input class="form-control" type="text" v-model="finished" placeholder="HH:MM" />
+                                <input :class="{ 'form-control': true, 'is-invalid': error('finished') }" type="text" v-model="finished" placeholder="HH:MM" />
+                                <span v-if="error('finished')" class="invalid-feedback" role="alert">
+                                    {{ error('finished') }}
+                                </span>
                             </div>
                         </div>
                     </div>
+                    <span v-if="error('error')" class="invalid-feedback d-block" role="alert">
+                        {{ error('error') }}
+                    </span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">{{ isPreviousTime ? 'Save' : 'Start timer' }}</button>
+                    <button type="submit" class="btn btn-primary" :disabled="isSubmitting">
+                        {{ isPreviousTime ? 'Save' : 'Start timer' }}
+                    </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </template>
@@ -73,12 +96,14 @@
     export default {
         data() {
             return {
+                isSubmitting: false,
+                errors: {},
                 projects: [],
                 activities: [],
 
                 // Form
-                project: null,
-                activity: null,
+                project_id: null,
+                activity_id: null,
                 description: '',
                 isPreviousTime: false,
                 date: this.formatDate(new Date()),
@@ -97,19 +122,59 @@
                 return year + '-' + month + '-' + day;
             },
             reset() {
-                this.project = null;
-                this.activity = null;
+                this.isSubmitting = false;
+                this.errors = {};
+
+                this.project_id = null;
+                this.activity_id = null;
                 this.description = '';
                 this.isPreviousTime = false;
                 this.date = this.formatDate(new Date());
                 this.started = '';
                 this.finished = '';
             },
+            error(name) {
+                if (!this.errors || !this.errors[name]) {
+                    return null;
+                }
+                return this.errors[name].join(' ');
+            },
             onModalHide(event) {
                 if (event.target !== this.$refs.modal) {
                     return;
                 }
                 this.reset();
+            },
+            onSubmit() {
+                this.isSubmitting = true;
+                this.errors = {};
+                (async () => {
+                    try {
+                        const data = {
+                            project_id: this.project_id,
+                            activity_id: this.activity_id,
+                            description: this.description,
+                        };
+                        if (this.isPreviousTime) {
+                            Object.assign(data, {
+                                date: this.date,
+                                started: this.started,
+                                finished: this.finished,
+                            });
+                        }
+                        await axios.post(this.$root.route('api.times.store'), data);
+                        this.isSubmitting = false;
+                        jQuery(this.$refs.modal).modal('hide');
+                        location.reload();
+                    } catch (e) {
+                        this.isSubmitting = false;
+                        if (e.response && e.response.data && e.response.data.errors) {
+                            this.errors = e.response.data.errors;
+                            return;
+                        }
+                        this.$root.alert('Something went wrong while saving the time entry. Please check the info you provided and try again.');
+                    }
+                })();
             },
         },
         async created() {

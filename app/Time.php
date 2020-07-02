@@ -23,6 +23,7 @@ class Time extends Model
         'project_id',
         'user_id',
         'activity_id',
+        'description',
         'started',
         'finished',
     ];
