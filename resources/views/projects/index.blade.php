@@ -2,8 +2,13 @@
 
 @section('content')
     <div class="container">
-        <div class="mb-4">
-            <button class="btn btn-primary">{{ __('New project') }}</button>
+        <div class="row mb-4">
+            <div class="col">
+                <button class="btn btn-primary" type="button">{{ __('New project') }}</button>
+            </div>
+            <div class="col-auto ml-auto">
+                <button class="btn btn-link" type="button">{{ __('Archived projects') }}</button>
+            </div>
         </div>
 
         <h2 class="pt-4 mb-4">{{ __('Projects') }}</h2>
@@ -25,6 +30,7 @@
                             <h5 class="card-title">{{ $project->name }}</h5>
                             <p class="card-text"><samp>{{ $project->getTrackedTime() ?: '00:00:00' }}</samp></p>
                             <a class="card-link" href="#">{{ __('Edit') }}</a>
+                            <a class="card-link" href="#">{{ __('Archive') }}</a>
                         </div>
                     </div>
                 @endforeach
