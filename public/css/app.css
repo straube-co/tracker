@@ -10933,6 +10933,10 @@ body {
   min-height: 100vh;
 }
 
+body > .alert {
+  z-index: 1060;
+}
+
 .table td:first-child,
 .table th:first-child {
   padding-left: 0.25rem;

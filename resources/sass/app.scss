@@ -10,6 +10,10 @@ body {
     min-height: 100vh;
 }
 
+body > .alert {
+    z-index: $zindex-modal + 10; // Above modals
+}
+
 .table {
     td,
     th {

@@ -14,6 +14,15 @@ import { Ziggy } from './ziggy';
 Vue.mixin({
     methods: {
         route: (name, params, absolute) => route(name, params, absolute, Ziggy),
+        alert: (message, type = 'danger') => {
+            const template = `<div class="alert alert-${type} alert-dismissible fade show fixed-bottom rounded-0 m-0" role="alert">
+                    ${message}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>`;
+            jQuery('body').append(template);
+        },
     },
 });
 

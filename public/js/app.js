@@ -2006,7 +2006,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.isSubmitting = false;
                 jQuery(_this.$refs.modal).modal('hide');
                 location.reload();
-                _context.next = 13;
+                _context.next = 15;
                 break;
 
               case 8:
@@ -2014,13 +2014,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.t0 = _context["catch"](0);
                 _this.isSubmitting = false;
 
-                if (_context.t0.response && _context.t0.response.data) {
-                  _this.errors = _context.t0.response.data.errors || {};
+                if (!(_context.t0.response && _context.t0.response.data)) {
+                  _context.next = 14;
+                  break;
                 }
 
-                console.log(_context.t0);
+                _this.errors = _context.t0.response.data.errors || {};
+                return _context.abrupt("return");
 
-              case 13:
+              case 14:
+                _this.$root.alert('Something went wrong while saving the project. Please check the info you provided and try again.');
+
+              case 15:
               case "end":
                 return _context.stop();
             }
@@ -52039,6 +52044,11 @@ Vue.mixin({
   methods: {
     route: function route(name, params, absolute) {
       return Object(ziggy__WEBPACK_IMPORTED_MODULE_0__["default"])(name, params, absolute, _ziggy__WEBPACK_IMPORTED_MODULE_1__["Ziggy"]);
+    },
+    alert: function alert(message) {
+      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'danger';
+      var template = "<div class=\"alert alert-".concat(type, " alert-dismissible fade show fixed-bottom rounded-0 m-0\" role=\"alert\">\n                    ").concat(message, "\n                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                        <span aria-hidden=\"true\">&times;</span>\n                    </button>\n                </div>");
+      jQuery('body').append(template);
     }
   }
 });

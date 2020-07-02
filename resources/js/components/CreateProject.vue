@@ -70,8 +70,9 @@
                         this.isSubmitting = false;
                         if (e.response && e.response.data) {
                             this.errors = e.response.data.errors || {};
+                            return;
                         }
-                        console.log(e);
+                        this.$root.alert('Something went wrong while saving the project. Please check the info you provided and try again.');
                     }
                 })();
             },
