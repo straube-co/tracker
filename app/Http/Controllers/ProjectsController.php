@@ -19,7 +19,7 @@ class ProjectsController extends Controller
 
     public function index(): Renderable
     {
-        $projects = Project::orderBy('name')->get();
+        $projects = Project::selectTrackedTime()->orderBy('name')->get();
         $data = [
             'projects' => $projects,
         ];

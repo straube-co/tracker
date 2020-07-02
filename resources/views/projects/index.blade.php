@@ -23,6 +23,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $project->name }}</h5>
+                            <p class="card-text"><samp>{{ $project->getTrackedTime() ?: '00:00:00' }}</samp></p>
                             <a class="card-link" href="#">Edit</a>
                         </div>
                     </div>
