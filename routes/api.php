@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/projects', 'ProjectsController@index')->name('projects.index');
+Route::post('/projects', 'ProjectsController@store')->name('projects.store');
 
 Route::get('/activities', 'ActivitiesController@index')->name('activities.index');

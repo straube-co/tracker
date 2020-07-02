@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row mb-4">
             <div class="col">
-                <button class="btn btn-primary" type="button">{{ __('New project') }}</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#create-project">{{ __('New project') }}</button>
             </div>
             <div class="col-auto ml-auto">
                 <button class="btn btn-link" type="button">{{ __('Archived projects') }}</button>
@@ -38,3 +38,7 @@
         @endif
     </div>
 @endsection
+
+@push('modals')
+    <create-project />
+@endpush
