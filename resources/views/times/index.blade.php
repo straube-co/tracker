@@ -91,12 +91,18 @@
                 </div>
             </div>
         @else
+            @php
+                $hasMyTime = $times->where('user_id', auth()->user()->id)->count() > 0;
+            @endphp
             <table class="table">
                 <thead class="sr-only">
                     <tr>
                         <th class="align-top">{{ __('Task') }}</th>
                         <th class="align-top">{{ __('User') }}</th>
                         <th class="align-top">{{ __('Tracked time') }}</th>
+                        @if ($hasMyTime)
+                            <th></th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -113,6 +119,17 @@
                                     <samp>{{ $time->started->format('Y-m-d') }}</samp>
                                 </small>
                             </td>
+                            @if ($hasMyTime)
+                                <td class="align-middle text-right">
+                                    @if ($time->user_id === auth()->user()->id)
+                                        @if ($time->finished)
+                                            <a href="#" class="btn btn-link">Edit</a>
+                                        @else
+                                            <a href="#" class="btn btn-danger">Stop</a>
+                                        @endif
+                                    @endif
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>
