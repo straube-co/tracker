@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row mb-4">
             <div class="col">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#add-time-entry">{{ __('New time entry') }}</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#create-time">{{ __('New time entry') }}</button>
             </div>
             <div class="col-auto ml-auto">
                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#report-options" aria-expanded="false" aria-controls="report-options">{{ __('Report options') }}</button>
@@ -124,17 +124,17 @@
 @endsection
 
 @push('modals')
-    <div class="modal fade" id="add-time-entry" tabindex="-1" role="dialog" aria-labelledby="add-time-entry-label" aria-hidden="true">
+    <div class="modal fade" id="create-time" tabindex="-1" role="dialog" aria-labelledby="create-time-label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="add-time-entry-label">{{ __('Add Time Entry') }}</h5>
+                    <h5 class="modal-title" id="create-time-label">{{ __('New Time Entry') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <add-time-entry modal="add-time-entry" />
+                    <create-time modal="create-time" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link" data-dismiss="modal">{{ __('Cancel') }}</button>
