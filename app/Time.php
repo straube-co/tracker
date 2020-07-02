@@ -59,7 +59,7 @@ class Time extends Model
         }
 
         $interval = $this->finished->diffAsCarbonInterval($this->started);
-        return str_pad((int) $interval->totalHours, 2, '0', STR_PAD_LEFT) . ':' . $interval->format('%I:%S');
+        return str_pad((int) $interval->totalHours, 2, '0', STR_PAD_LEFT) . ':' . $interval->format('%I');
     }
 
     /**

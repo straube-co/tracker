@@ -10933,6 +10933,16 @@ body {
   min-height: 100vh;
 }
 
+.table td:first-child,
+.table th:first-child {
+  padding-left: 0.25rem;
+}
+
+.table td:last-child,
+.table th:last-child {
+  padding-right: 0.25rem;
+}
+
 .page-auth body {
   background: linear-gradient(to bottom, #ece9e6, #ffffff);
 }

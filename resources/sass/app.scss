@@ -4,10 +4,22 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-// Reset
+// Custom styles
 html,
 body {
     min-height: 100vh;
+}
+
+.table {
+    td,
+    th {
+        &:first-child {
+            padding-left: 0.25rem;
+        }
+        &:last-child {
+            padding-right: 0.25rem;
+        }
+    }
 }
 
 // Auth pages

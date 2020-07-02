@@ -32,7 +32,7 @@ class Project extends Model
         }
 
         $interval = CarbonInterval::seconds((int) $this->tracked_seconds)->cascade();
-        return str_pad((int) $interval->totalHours, 2, '0', STR_PAD_LEFT) . ':' . $interval->format('%I:%S');
+        return str_pad((int) $interval->totalHours, 2, '0', STR_PAD_LEFT) . ':' . $interval->format('%I');
     }
 
     public function scopeSelectTrackedTime(Builder $query): Builder
