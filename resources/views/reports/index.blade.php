@@ -3,60 +3,60 @@
 @section('content')
     <div class="container">
         <div class="card" id="report-options">
-            <form class="card-body" action="{{ route('reports.index') }}" method="get">
+            <div class="card-body">
                 <div class="row">
-                    <div class="col-md-8">
+                    <form class="col-md-8" action="{{ route('reports.index') }}" method="get">
                         <h5>{{ __('Custom filter') }}</h5>
                         <div class="form-row">
                             <div class="form-group col">
-                                <label>{{ __('Project') }}</label>
-                                <select class="custom-select">
-                                    <option>{{ __('Select') }}</option>
+                                <label for="report-project_id">{{ __('Project') }}</label>
+                                <select class="custom-select" name="filter[project_id]" id="report-project_id">
+                                    <option value="">{{ __('Select') }}</option>
                                     <option disabled>--</option>
                                     @foreach ($projects as $project)
-                                        <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                        <option value="{{ $project->id }}" @if ($project->id == request('filter.project_id')) selected @endif>{{ $project->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col">
-                                <label>{{ __('Activity') }}</label>
-                                <select class="custom-select">
-                                    <option>{{ __('Select') }}</option>
+                                <label for="report-activity_id">{{ __('Activity') }}</label>
+                                <select class="custom-select" name="filter[activity_id]" id="report-activity_id">
+                                    <option value="">{{ __('Select') }}</option>
                                     <option disabled>--</option>
                                     @foreach ($activities as $activity)
-                                        <option value="{{ $activity->id }}">{{ $activity->name }}</option>
+                                        <option value="{{ $activity->id }}" @if ($activity->id == request('filter.activity_id')) selected @endif>{{ $activity->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col">
-                                <label>{{ __('User') }}</label>
-                                <select class="custom-select">
-                                    <option>{{ __('Select') }}</option>
+                                <label for="report-user_id">{{ __('User') }}</label>
+                                <select class="custom-select" name="filter[user_id]" id="report-user_id">
+                                    <option value="">{{ __('Select') }}</option>
                                     <option disabled>--</option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        <option value="{{ $user->id }}" @if ($user->id == request('filter.user_id')) selected @endif>{{ $user->getFirstName() }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col">
-                                <label>{{ __('From') }}</label>
-                                <input class="form-control" type="text" placeholder="YYYY-MM-DD" />
+                                <label for="report-started">{{ __('From') }}</label>
+                                <input class="form-control" type="text" name="filter[started]" id="report-started" value="{{ request('filter.started') }}" placeholder="YYYY-MM-DD" />
                             </div>
                             <div class="form-group col">
-                                <label>{{ __('To') }}</label>
-                                <input class="form-control" type="text" placeholder="YYYY-MM-DD" />
+                                <label for="form-finished">{{ __('To') }}</label>
+                                <input class="form-control" type="text" name="filter[finished]" id="report-finished" value="{{ request('filter.finished') }}" placeholder="YYYY-MM-DD" />
                             </div>
                         </div>
-                        <button class="btn btn-secondary">{{ __('Apply') }}</button>
-                        <button class="btn btn-secondary">{{ __('Apply & Save') }}</button>
-                    </div>
-                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-secondary">{{ __('Apply') }}</button>
+                        <button type="button" class="btn btn-secondary">{{ __('Apply & Save') }}</button>
+                    </form>
+                    <form class="col-md-4" action="{{ route('reports.index') }}" method="get">
                         <h5>{{ __('Load report') }}</h5>
                         <div class="form-group">
-                            <label>{{ __('Name') }}</label>
-                            <select class="custom-select" name="report_id" onchange="this.form.submit();">
+                            <label id="report_id">{{ __('Name') }}</label>
+                            <select class="custom-select" name="report_id" id="report_id" onchange="this.form.submit();">
                                 <option value="">{{ __('My week') }}</option>
                                 <option value="" disabled>--</option>
                                 <option value="" disabled>{{ __('Saved reports') }}</option>
@@ -65,9 +65,9 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
 
         <h2 class="pt-4 mb-4">{{ $report->name }}</h2>

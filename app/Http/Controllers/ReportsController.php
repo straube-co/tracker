@@ -66,7 +66,7 @@ class ReportsController extends Controller
 
         $filter = $request->filter;
         if (!empty($filter)) {
-            return new Report([ 'name' => __('Custom report'), 'filter' => $filter ]);
+            return new Report([ 'name' => __('Custom filter'), 'filter' => $filter ]);
         }
 
         return Report::getDefaultReport($request->user());

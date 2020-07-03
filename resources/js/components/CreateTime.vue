@@ -54,7 +54,7 @@
                         <div class="form-row">
                             <div class="form-group col">
                                 <label>Date</label>
-                                <input :class="{ 'form-control': true, 'is-invalid': error('date') }" type="text" v-model="date" placeholder="YYYY-MM-DD" />
+                                <date-input :class="{ 'form-control': true, 'is-invalid': error('date') }" v-model="date" />
                                 <span v-if="error('date')" class="invalid-feedback" role="alert">
                                     {{ error('date') }}
                                 </span>
@@ -63,14 +63,14 @@
                         <div class="form-row">
                             <div class="form-group col">
                                 <label>Started at</label>
-                                <input :class="{ 'form-control': true, 'is-invalid': error('started') }" type="text" v-model="started" placeholder="HH:MM" />
+                                <time-input :class="{ 'form-control': true, 'is-invalid': error('started') }" v-model="started" />
                                 <span v-if="error('started')" class="invalid-feedback" role="alert">
                                     {{ error('started') }}
                                 </span>
                             </div>
                             <div class="form-group col">
                                 <label>Finished at</label>
-                                <input :class="{ 'form-control': true, 'is-invalid': error('finished') }" type="text" v-model="finished" placeholder="HH:MM" />
+                                <time-input :class="{ 'form-control': true, 'is-invalid': error('finished') }" v-model="finished" />
                                 <span v-if="error('finished')" class="invalid-feedback" role="alert">
                                     {{ error('finished') }}
                                 </span>
