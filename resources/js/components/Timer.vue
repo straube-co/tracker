@@ -18,10 +18,10 @@
         },
         computed: {
             hours() {
-                return this.pad(Math.floor(this.seconds / (60 * 60)));
+                return this.pad(Math.floor(this.seconds / 3600));
             },
             minutes() {
-                return this.pad(Math.floor(this.seconds / 60));
+                return this.pad(Math.floor((this.seconds % 3600) / 60));
             },
         },
         methods: {
@@ -30,8 +30,9 @@
             },
         },
         created() {
+            const now = Date.now();
             this.interval = window.setInterval(() => {
-                this.seconds++;
+                this.seconds = Math.round(parseInt(this.time, 10) + (Date.now() - now) / 1000);
                 window.requestAnimationFrame(() => {
                     this.blink = !this.blink;
                 });

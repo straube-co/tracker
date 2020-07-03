@@ -2354,10 +2354,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     hours: function hours() {
-      return this.pad(Math.floor(this.seconds / (60 * 60)));
+      return this.pad(Math.floor(this.seconds / 3600));
     },
     minutes: function minutes() {
-      return this.pad(Math.floor(this.seconds / 60));
+      return this.pad(Math.floor(this.seconds % 3600 / 60));
     }
   },
   methods: {
@@ -2369,8 +2369,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
+    var now = Date.now();
     this.interval = window.setInterval(function () {
-      _this.seconds++;
+      _this.seconds = Math.round(parseInt(_this.time, 10) + (Date.now() - now) / 1000);
       window.requestAnimationFrame(function () {
         _this.blink = !_this.blink;
       });
