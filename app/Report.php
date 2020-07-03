@@ -51,7 +51,7 @@ class Report extends Model
             'activity_id' => null,
         ];
         return new self([
-            'name' => 'My week',
+            'name' => __('My week'),
             'filter' => $filter,
         ]);
     }

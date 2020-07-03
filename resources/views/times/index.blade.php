@@ -2,82 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row mb-4">
-            <div class="col">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#create-time">{{ __('New time entry') }}</button>
-            </div>
-            <div class="col-auto ml-auto">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#report-options" aria-expanded="false" aria-controls="report-options">{{ __('Report options') }}</button>
-            </div>
-        </div>
-
-        <div class="card collapse" id="report-options">
-            <form class="card-body" action="{{ route('times.index') }}" method="get">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h5>{{ __('Custom filter') }}</h5>
-                        <div class="form-row">
-                            <div class="form-group col">
-                                <label>{{ __('Project') }}</label>
-                                <select class="custom-select">
-                                    <option>{{ __('Select') }}</option>
-                                    <option disabled>--</option>
-                                    @foreach ($projects as $project)
-                                        <option value="{{ $project->id }}">{{ $project->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label>{{ __('Activity') }}</label>
-                                <select class="custom-select">
-                                    <option>{{ __('Select') }}</option>
-                                    <option disabled>--</option>
-                                    @foreach ($activities as $activity)
-                                        <option value="{{ $activity->id }}">{{ $activity->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col">
-                                <label>{{ __('User') }}</label>
-                                <select class="custom-select">
-                                    <option>{{ __('Select') }}</option>
-                                    <option disabled>--</option>
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label>{{ __('From') }}</label>
-                                <input class="form-control" type="text" placeholder="YYYY-MM-DD" />
-                            </div>
-                            <div class="form-group col">
-                                <label>{{ __('To') }}</label>
-                                <input class="form-control" type="text" placeholder="YYYY-MM-DD" />
-                            </div>
-                        </div>
-                        <button class="btn btn-secondary">{{ __('Apply') }}</button>
-                        <button class="btn btn-secondary">{{ __('Apply & Save') }}</button>
-                    </div>
-                    <div class="col-md-4">
-                        <h5>{{ __('Load report') }}</h5>
-                        <div class="form-group">
-                            <label>{{ __('Name') }}</label>
-                            <select class="custom-select" name="report_id" onchange="this.form.submit();">
-                                <option value="">{{ __('My week') }}</option>
-                                <option value="" disabled>--</option>
-                                <option value="" disabled>{{ __('Saved reports') }}</option>
-                                @foreach ($reports as $id => $name)
-                                    <option value="{{ $id }}" @if (request('report_id') == $id) selected @endif>{{ $name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#create-time">{{ __('New time entry') }}</button>
 
         <h2 class="pt-4 mb-4">{{ $report->name }}</h2>
 
@@ -86,8 +11,12 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ __('No time tracked yet') }}</h5>
                     <p class="card-text">
-                        {!! __('The current report has no time. It\'s possible to select different <a :attributes >report options</a>.', [ 'attributes' => 'href="javascript:return false" class="card-link" type="button" data-toggle="collapse" data-target="#report-options" aria-expanded="false" aria-controls="report-options"' ]) !!}
+                        {!! __('You have still not tracked any time this week. Go ahead and <a :attributes >add a time entry</a>.', [ 'attributes' => 'href="javascript:return false" data-toggle="modal" data-target="#create-time"' ]) !!}
                     </p>
+                    <blockquote class="blockquote mb-0 mt-5">
+                        <p class="mb-0">{{ __('It is the time you have wasted for your rose that makes your rose so important.') }}</p>
+                        <footer class="blockquote-footer">{{ __('Antoine de Saint-Exupéry') }}, <cite title="Source Title">{{ __('The Little Prince') }}</cite></footer>
+                    </blockquote>
                 </div>
             </div>
         @else
@@ -137,7 +66,7 @@
                                         @if ($time->finished)
                                             <a href="#" class="btn btn-link">Edit</a>
                                         @else
-                                            <a href="#" class="btn btn-danger btn-stopwatch">Stop</a>
+                                            <a href="{{ route('times.stop', $time) }}" class="btn btn-danger btn-stopwatch">Stop</a>
                                         @endif
                                     @endif
                                 </td>

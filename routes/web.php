@@ -20,6 +20,9 @@ Route::get('/', function () {
 Auth::routes([ 'register' => false ]);
 
 Route::get('/times', 'TimesController@index')->name('times.index');
+Route::get('/times/{time}/stop', 'TimesController@stop')->name('times.stop');
+
+Route::get('/reports', 'ReportsController@index')->name('reports.index');
 Route::get('/projects', 'ProjectsController@index')->name('projects.index');
 Route::get('/activities', 'ActivitiesController@index')->name('activities.index');
 Route::get('/users', 'UsersController@index')->name('users.index');
