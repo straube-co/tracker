@@ -42,3 +42,43 @@ body > .alert {
         }
     }
 }
+
+// Components
+
+.btn-stopwatch {
+    position: relative;
+    padding-left: 40px;
+
+    &::before,
+    &::after {
+        content: ' ';
+        position: absolute;
+        top: 50%;
+        left: 12px;
+    }
+
+    &::before {
+        border: 1px solid rgba($white,0.6);
+        border-radius: 50%;
+        height: 18px;
+        margin-top: -9px;
+        width: 18px;
+    }
+    &::after {
+        animation: rotate 1s linear infinite;
+        background: url(../images/stopwatch.svg) no-repeat center center;
+        background-size: contain;
+        height: 16px;
+        margin: -8px 0 0 1px;
+        width: 16px;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

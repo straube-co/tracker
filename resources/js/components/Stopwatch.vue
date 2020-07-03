@@ -1,6 +1,6 @@
 <template>
     <span>
-        {{ hours }}{{ blink ? ':' : ' ' }}{{ minutes }}
+        {{ hours }}:{{ minutes }}
     </span>
 </template>
 
@@ -12,7 +12,6 @@
         data() {
             return {
                 interval: null,
-                blink: true,
                 seconds: parseInt(this.time, 10),
             }
         },
@@ -33,9 +32,6 @@
             const now = Date.now();
             this.interval = window.setInterval(() => {
                 this.seconds = Math.round(parseInt(this.time, 10) + (Date.now() - now) / 1000);
-                window.requestAnimationFrame(() => {
-                    this.blink = !this.blink;
-                });
             }, 1000);
         },
         beforeDestroyed() {

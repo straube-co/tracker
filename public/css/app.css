@@ -10961,3 +10961,54 @@ body > .alert {
   margin: auto 0;
 }
 
+.btn-stopwatch {
+  position: relative;
+  padding-left: 40px;
+}
+
+.btn-stopwatch::before,
+.btn-stopwatch::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 12px;
+}
+
+.btn-stopwatch::before {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  height: 18px;
+  margin-top: -9px;
+  width: 18px;
+}
+
+.btn-stopwatch::after {
+  -webkit-animation: rotate 1s linear infinite;
+          animation: rotate 1s linear infinite;
+  background: url(/images/stopwatch.svg?56381325fc5587dcc359c33287cca508) no-repeat center center;
+  background-size: contain;
+  height: 16px;
+  margin: -8px 0 0 1px;
+  width: 16px;
+}
+
+@-webkit-keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+

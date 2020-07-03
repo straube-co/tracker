@@ -121,9 +121,9 @@
                                 @else
                                     <h6 title="{{ __('Started at :time', [ 'time' => $time->started ]) }}">
                                         <samp>
-                                            <timer time="{{ \Carbon\Carbon::now()->diffInSeconds($time->started) }}">
+                                            <stopwatch time="{{ \Carbon\Carbon::now()->diffInSeconds($time->started) }}">
                                                 {{ \App\Support\Formatter::timeDiff($time->started) }}
-                                            </timer>
+                                            </stopwatch>
                                         </samp>
                                     </h6>
                                 @endif
@@ -137,7 +137,7 @@
                                         @if ($time->finished)
                                             <a href="#" class="btn btn-link">Edit</a>
                                         @else
-                                            <a href="#" class="btn btn-danger">Stop</a>
+                                            <a href="#" class="btn btn-danger btn-stopwatch">Stop</a>
                                         @endif
                                     @endif
                                 </td>
