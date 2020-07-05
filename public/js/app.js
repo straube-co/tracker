@@ -2350,7 +2350,26 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     format: function format(value) {
-      return value.replace(/\D+/g, '').substring(0, 8).replace(/^(\d{4})(\d{2})?(\d*)$/, '$1-$2-$3');
+      value = value.replace(/\D+/g, '').substring(0, 8);
+      var parts = value.match(/\d{1,2}/g);
+
+      if (!parts) {
+        return '';
+      }
+
+      var format = '';
+
+      while (parts.length > 0) {
+        var separator = parts.length > 1 && format.length > 0 ? '-' : '';
+        format = parts.pop() + separator + format;
+      }
+
+      return format;
+    },
+    onKey: function onKey(event) {
+      if (!event.key.match(/^\d$/) || this.$refs.input.value.length > 9) {
+        event.preventDefault();
+      }
     },
     onInput: function onInput() {
       this.date = this.format(this.$refs.input.value);
@@ -2436,6 +2455,11 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     format: function format(value) {
       return value.replace(/\D+/g, '').substring(0, 4).replace(/^(\d{2})(\d*)$/, '$1:$2');
+    },
+    onKey: function onKey(event) {
+      if (!event.key.match(/^\d$/) || this.$refs.input.value.length > 4) {
+        event.preventDefault();
+      }
     },
     onInput: function onInput() {
       this.time = this.format(this.$refs.input.value);
@@ -40207,7 +40231,7 @@ var render = function() {
     ref: "input",
     attrs: { type: "text", placeholder: "YYYY-MM-DD" },
     domProps: { value: _vm.date },
-    on: { input: _vm.onInput }
+    on: { keypress: _vm.onKey, input: _vm.onInput }
   })
 }
 var staticRenderFns = []
@@ -40262,7 +40286,7 @@ var render = function() {
     ref: "input",
     attrs: { type: "text", placeholder: "HH:MM" },
     domProps: { value: _vm.time },
-    on: { input: _vm.onInput }
+    on: { keypress: _vm.onKey, input: _vm.onInput }
   })
 }
 var staticRenderFns = []

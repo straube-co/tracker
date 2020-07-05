@@ -1,5 +1,5 @@
 <template>
-    <input type="text" ref="input" :value="date" @input="onInput" placeholder="YYYY-MM-DD" />
+    <input type="text" ref="input" :value="date" @keypress="onKey" @input="onInput" placeholder="YYYY-MM-DD" />
 </template>
 
 <script>
@@ -14,7 +14,22 @@
         },
         methods: {
             format(value) {
-                return value.replace(/\D+/g, '').substring(0, 8).replace(/^(\d{4})(\d{2})?(\d*)$/, '$1-$2-$3');
+                value = value.replace(/\D+/g, '').substring(0, 8);
+                const parts = value.match(/\d{1,2}/g);
+                if (!parts) {
+                    return '';
+                }
+                let format = '';
+                while (parts.length > 0) {
+                    const separator = parts.length > 1 && format.length > 0 ? '-' : '';
+                    format = parts.pop() + separator + format;
+                }
+                return format;
+            },
+            onKey(event) {
+                if (!event.key.match(/^\d$/) || this.$refs.input.value.length > 9) {
+                    event.preventDefault();
+                }
             },
             onInput() {
                 this.date = this.format(this.$refs.input.value);
