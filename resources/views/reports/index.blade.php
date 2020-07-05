@@ -70,7 +70,42 @@
             </div>
         </div>
 
-        <h2 class="pt-4 mb-4">{{ $report->name }}</h2>
+        <div class="row align-items-baseline">
+            <div class="col">
+                <h2 class="pt-4 mb-4">{{ $report->name }}</h2>
+            </div>
+            @if ($report->code)
+                <div class="col-auto ml-auto">
+                    <div class="btn-group mb-4">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Share report
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="px-4 py-3" style="min-width:320px;">
+                                <div class="form-group">
+                                    <label for="share-report-csv">CSV</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control" id="share-report-csv" value="{{ route('reports.shared.show', [ $report->code, 'csv' ]) }}">
+                                        <div class="input-group-append">
+                                            <a href="{{ route('reports.shared.show', [ $report->code, 'csv' ]) }}" target="_blank" class="btn btn-outline-secondary">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label for="share-report-html">HTML</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control" id="share-report-html" value="{{ route('reports.shared.show', [ $report->code, 'html' ]) }}">
+                                        <div class="input-group-append">
+                                            <a href="{{ route('reports.shared.show', [ $report->code, 'html' ]) }}" target="_blank" class="btn btn-outline-secondary">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
 
         @if (count($times) === 0)
             <div class="card">

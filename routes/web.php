@@ -23,6 +23,10 @@ Route::get('/times', 'TimesController@index')->name('times.index');
 Route::get('/times/{time}/stop', 'TimesController@stop')->name('times.stop');
 
 Route::get('/reports', 'ReportsController@index')->name('reports.index');
+Route::get('/reports/{code}/shared/{format?}', 'SharedReportController@show')
+    ->name('reports.shared.show')
+    ->where('format', '^(html|csv)$');
+
 Route::get('/projects', 'ProjectsController@index')->name('projects.index');
 Route::get('/activities', 'ActivitiesController@index')->name('activities.index');
 Route::get('/users', 'UsersController@index')->name('users.index');
