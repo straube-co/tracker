@@ -2182,7 +2182,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       project_id: null,
       activity_id: null,
       description: '',
-      isPreviousTime: false,
+      previous: false,
       date: this.formatDate(new Date()),
       started: '',
       finished: ''
@@ -2204,7 +2204,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.project_id = null;
       this.activity_id = null;
       this.description = '';
-      this.isPreviousTime = false;
+      this.previous = false;
       this.date = this.formatDate(new Date());
       this.started = '';
       this.finished = '';
@@ -2239,10 +2239,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 data = {
                   project_id: _this.project_id,
                   activity_id: _this.activity_id,
-                  description: _this.description
+                  description: _this.description,
+                  previous: _this.previous
                 };
 
-                if (_this.isPreviousTime) {
+                if (_this.previous) {
                   Object.assign(data, {
                     date: _this.date,
                     started: _this.started,
@@ -39971,38 +39972,61 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              !_vm.isPreviousTime
-                ? _c("div", { staticClass: "form-row" }, [
-                    _c("div", { staticClass: "form-group col" }, [
-                      _c(
-                        "div",
-                        { staticClass: "custom-control custom-checkbox" },
-                        [
-                          _c("input", {
-                            staticClass: "custom-control-input",
-                            attrs: { type: "checkbox", id: "is-previous-time" },
-                            on: {
-                              change: function($event) {
-                                _vm.isPreviousTime = true
-                              }
+              _c("div", { staticClass: "form-row" }, [
+                _c("div", { staticClass: "form-group col" }, [
+                  _c("div", { staticClass: "custom-control custom-checkbox" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.previous,
+                          expression: "previous"
+                        }
+                      ],
+                      staticClass: "custom-control-input",
+                      attrs: { type: "checkbox", id: "is-previous-time" },
+                      domProps: {
+                        checked: Array.isArray(_vm.previous)
+                          ? _vm._i(_vm.previous, null) > -1
+                          : _vm.previous
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.previous,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 && (_vm.previous = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.previous = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
                             }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            {
-                              staticClass: "custom-control-label",
-                              attrs: { for: "is-previous-time" }
-                            },
-                            [_vm._v("Record previous time")]
-                          )
-                        ]
-                      )
-                    ])
+                          } else {
+                            _vm.previous = $$c
+                          }
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "custom-control-label",
+                        attrs: { for: "is-previous-time" }
+                      },
+                      [_vm._v("Record previous time")]
+                    )
                   ])
-                : _vm._e(),
+                ])
+              ]),
               _vm._v(" "),
-              _vm.isPreviousTime
+              _vm.previous
                 ? _c("div", [
                     _c("div", { staticClass: "form-row" }, [
                       _c(
@@ -40167,7 +40191,7 @@ var render = function() {
                 [
                   _vm._v(
                     "\n                    " +
-                      _vm._s(_vm.isPreviousTime ? "Save" : "Start timer") +
+                      _vm._s(_vm.previous ? "Save" : "Start timer") +
                       "\n                "
                   )
                 ]

@@ -40,18 +40,22 @@ class TimeRequest extends FormRequest
                 'string',
                 'max:255',
             ],
+            'previous' => [
+                'nullable',
+                'boolean',
+            ],
             'date' => [
-                'required_with:started,finished',
+                'required_if:previous,true',
                 'string',
                 'date_format:Y-m-d',
             ],
             'started' => [
-                'required_with:date,finished',
+                'required_if:previous,true',
                 'string',
                 'date_format:H:i',
             ],
             'finished' => [
-                'required_with:date,started',
+                'required_if:previous,true',
                 'string',
                 'date_format:H:i',
                 'after:started',
@@ -68,7 +72,7 @@ class TimeRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            if (empty($this->started) && $this->user()->hasTimerRunning()) {
+            if (!$this->previous && $this->user()->hasTimerRunning()) {
                 $validator->errors()->add('error', 'It seems you already have a timer running.');
             }
         });

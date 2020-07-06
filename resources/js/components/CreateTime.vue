@@ -42,15 +42,15 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-row" v-if="!isPreviousTime">
+                    <div class="form-row">
                         <div class="form-group col">
                             <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" id="is-previous-time" @change="isPreviousTime = true" />
+                                <input class="custom-control-input" type="checkbox" id="is-previous-time" v-model="previous" />
                                 <label class="custom-control-label" for="is-previous-time">Record previous time</label>
                             </div>
                         </div>
                     </div>
-                    <div v-if="isPreviousTime">
+                    <div v-if="previous">
                         <div class="form-row">
                             <div class="form-group col">
                                 <label>Date</label>
@@ -84,7 +84,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" :disabled="isSubmitting">
-                        {{ isPreviousTime ? 'Save' : 'Start timer' }}
+                        {{ previous ? 'Save' : 'Start timer' }}
                     </button>
                 </div>
             </form>
@@ -105,7 +105,7 @@
                 project_id: null,
                 activity_id: null,
                 description: '',
-                isPreviousTime: false,
+                previous: false,
                 date: this.formatDate(new Date()),
                 started: '',
                 finished: '',
@@ -128,7 +128,7 @@
                 this.project_id = null;
                 this.activity_id = null;
                 this.description = '';
-                this.isPreviousTime = false;
+                this.previous = false;
                 this.date = this.formatDate(new Date());
                 this.started = '';
                 this.finished = '';
@@ -154,8 +154,9 @@
                             project_id: this.project_id,
                             activity_id: this.activity_id,
                             description: this.description,
+                            previous: this.previous,
                         };
-                        if (this.isPreviousTime) {
+                        if (this.previous) {
                             Object.assign(data, {
                                 date: this.date,
                                 started: this.started,
