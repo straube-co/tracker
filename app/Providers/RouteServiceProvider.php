@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Project;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::bind('project', function ($value) {
+            if (Route::currentRouteName() === 'projects.restore') {
+                return Project::withTrashed()->find($value);
+            }
+            return Project::find($value);
+        });
 
         parent::boot();
     }

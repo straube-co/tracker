@@ -26,6 +26,9 @@ Route::get('/reports', 'ReportsController@index')->name('reports.index');
 Route::get('/reports/{code}/shared', 'SharedReportsController@show')->name('reports.shared.show');
 Route::get('/reports/{code}/shared/csv', 'SharedReportsController@export')->name('reports.shared.export');
 
-Route::get('/projects', 'ProjectsController@index')->name('projects.index');
+Route::get('/projects/{status?}', 'ProjectsController@index')->name('projects.index')->where('status', 'archived');
+Route::delete('/projects/{project}', 'ProjectsController@archive')->name('projects.archive');
+Route::patch('/projects/{project}', 'ProjectsController@restore')->name('projects.restore');
+
 Route::get('/activities', 'ActivitiesController@index')->name('activities.index');
 Route::get('/users', 'UsersController@index')->name('users.index');

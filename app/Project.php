@@ -6,6 +6,7 @@ use App\Support\Formatter;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\DB;
  */
 class Project extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *

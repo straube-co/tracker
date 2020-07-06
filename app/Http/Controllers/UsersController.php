@@ -20,10 +20,10 @@ class UsersController extends Controller
     public function index(): Renderable
     {
         $users = User::orderBy('name')->get();
+
         $data = [
             'users' => $users,
         ];
-
         return view('users.index', $data);
     }
 }

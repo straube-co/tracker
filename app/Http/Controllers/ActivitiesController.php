@@ -20,10 +20,10 @@ class ActivitiesController extends Controller
     public function index(): Renderable
     {
         $activities = Activity::orderBy('name')->get();
+
         $data = [
             'activities' => $activities,
         ];
-
         return view('activities.index', $data);
     }
 }
