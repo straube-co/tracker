@@ -18,5 +18,6 @@ Route::get('/projects', 'ProjectsController@index')->name('projects.index');
 Route::post('/projects', 'ProjectsController@store')->name('projects.store');
 
 Route::get('/activities', 'ActivitiesController@index')->name('activities.index');
+Route::post('/activities', 'ActivitiesController@store')->name('activities.store');
 
 Route::post('/times', 'TimesController@store')->name('times.store');

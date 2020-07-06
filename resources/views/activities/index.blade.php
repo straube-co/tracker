@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="mb-4">
-            <button class="btn btn-primary">{{ __('New activity') }}</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#create-activity">{{ __('New activity') }}</button>
         </div>
 
         <h2 class="pt-4 mb-4">{{ __('Activities') }}</h2>
@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ __('No activity types created yet') }}</h5>
                     <p class="card-text">
-                        {!! __('Go ahead and <a :attributes >create the first activity type</a>. Some examples are <strong>Design</strong>, <strong>Programming</strong>, or <strong>Business Development</strong>.', [ 'attributes' => 'href="#"' ]) !!}
+                        {!! __('Go ahead and <a :attributes >create the first activity type</a>. Some examples are <strong>Design</strong>, <strong>Programming</strong>, or <strong>Business Development</strong>.', [ 'attributes' => 'href="javascript:return false" data-toggle="modal" data-target="#create-activity"' ]) !!}
                     </p>
                 </div>
             </div>
@@ -31,3 +31,7 @@
         @endif
     </div>
 @endsection
+
+@push('modals')
+    <create-activity />
+@endpush
