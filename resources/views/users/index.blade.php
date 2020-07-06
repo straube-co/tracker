@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="mb-4">
-            <button class="btn btn-primary">{{ __('New user') }}</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#create-user">{{ __('New user') }}</button>
         </div>
 
         <h2 class="pt-4 mb-4">{{ __('Users') }}</h2>
@@ -21,3 +21,7 @@
         </div>
     </div>
 @endsection
+
+@push('modals')
+    <create-user />
+@endpush
