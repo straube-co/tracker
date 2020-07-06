@@ -2,7 +2,9 @@
 
 @section('content')
     <div class="container">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#create-time">{{ __('New time entry') }}</button>
+        <div class="mb-4">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#create-time">{{ __('New time entry') }}</button>
+        </div>
 
         <h2 class="pt-4 mb-4">{{ $report->name }}</h2>
 
