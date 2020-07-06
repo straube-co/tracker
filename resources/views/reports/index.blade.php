@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="container">
-        <div class="card" id="report-options">
-            <div class="card-body">
-                <div class="row">
-                    <form class="col-md-8" action="{{ route('reports.index') }}" method="get">
+        <div class="row">
+            <div class="col-md-8" action="{{ route('reports.index') }}" method="get">
+                <div class="card" id="report-options">
+                    <form class="card-body" action="{{ route('reports.index') }}" method="get">
                         <h5>{{ __('Custom filter') }}</h5>
                         <div class="form-row">
                             <div class="form-group col">
@@ -49,14 +49,21 @@
                                 <input class="form-control" type="text" name="filter[finished]" id="report-finished" value="{{ request('filter.finished') }}" placeholder="YYYY-MM-DD" />
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-secondary">{{ __('Apply') }}</button>
-                        <button type="button" class="btn btn-secondary">{{ __('Apply & Save') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Apply') }}</button>
+                        <button type="button" class="btn btn-primary">{{ __('Apply & Save') }}</button>
                     </form>
-                    <form class="col-md-4" action="{{ route('reports.index') }}" method="get">
-                        <h5>{{ __('Load report') }}</h5>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" id="report-options">
+                    <form class="card-body" action="{{ route('reports.index') }}" method="get">
+                        <h5>{{ __('Open report') }}</h5>
                         <div class="form-group">
                             <label id="report_id">{{ __('Name') }}</label>
                             <select class="custom-select" name="report_id" id="report_id" onchange="this.form.submit();">
+                                @if (request('filter'))
+                                    <option value="">{{ __('Select') }}</option>
+                                @endif
                                 <option value="">{{ __('My week') }}</option>
                                 <option value="" disabled>--</option>
                                 <option value="" disabled>{{ __('Saved reports') }}</option>
@@ -65,47 +72,22 @@
                                 @endforeach
                             </select>
                         </div>
+                        @if ($report->code)
+                            <hr>
+                            <p>Use the links below to share this report with clients and other people outside the organisation.</p>
+                            <dl class="mb-0">
+                                <dt>Web page</dt>
+                                <dd><a href="{{ route('reports.shared.show', $report->code) }}" target="_blank">{{ route('reports.shared.show', $report->code) }}</a></dd>
+                                <dt>CSV file</dt>
+                                <dd><a href="{{ route('reports.shared.export', $report->code) }}" target="_blank">{{ route('reports.shared.export', $report->code) }}</a></dd>
+                            </dl>
+                        @endif
                     </form>
                 </div>
             </div>
         </div>
 
-        <div class="row align-items-baseline">
-            <div class="col">
-                <h2 class="pt-4 mb-4">{{ $report->name }}</h2>
-            </div>
-            @if ($report->code)
-                <div class="col-auto ml-auto">
-                    <div class="btn-group mb-4">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Share report
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="px-4 py-3" style="min-width:320px;">
-                                <div class="form-group">
-                                    <label for="share-report-csv">CSV</label>
-                                    <div class="input-group input-group-sm">
-                                        <input type="text" class="form-control" id="share-report-csv" value="{{ route('reports.shared.show', [ $report->code, 'csv' ]) }}">
-                                        <div class="input-group-append">
-                                            <a href="{{ route('reports.shared.show', [ $report->code, 'csv' ]) }}" target="_blank" class="btn btn-outline-secondary">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group mb-0">
-                                    <label for="share-report-html">HTML</label>
-                                    <div class="input-group input-group-sm">
-                                        <input type="text" class="form-control" id="share-report-html" value="{{ route('reports.shared.show', [ $report->code, 'html' ]) }}">
-                                        <div class="input-group-append">
-                                            <a href="{{ route('reports.shared.show', [ $report->code, 'html' ]) }}" target="_blank" class="btn btn-outline-secondary">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
+        <h2 class="pt-4 mb-4">{{ $report->name }}</h2>
 
         @if (count($times) === 0)
             <div class="card">
