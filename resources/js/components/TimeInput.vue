@@ -7,10 +7,10 @@
         props: [
             'value'
         ],
-        data() {
-            return {
-                time: this.format(this.value),
-            };
+        computed: {
+            time() {
+                return this.format(this.value);
+            },
         },
         methods: {
             format(value) {
@@ -22,8 +22,7 @@
                 }
             },
             onInput() {
-                this.time = this.format(this.$refs.input.value);
-                this.$emit('input', this.time);
+                this.$emit('input', this.format(this.$refs.input.value));
             },
         },
     }

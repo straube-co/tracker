@@ -24,6 +24,8 @@ class TimeRequest extends FormRequest
      */
     public function rules()
     {
+        $edit = $this->has('time');
+
         return [
             'project_id' => [
                 'required',
@@ -45,17 +47,17 @@ class TimeRequest extends FormRequest
                 'boolean',
             ],
             'date' => [
-                'required_if:previous,true',
+                $edit ? 'required' : 'required_if:previous,true',
                 'string',
                 'date_format:Y-m-d',
             ],
             'started' => [
-                'required_if:previous,true',
+                $edit ? 'required' : 'required_if:previous,true',
                 'string',
                 'date_format:H:i',
             ],
             'finished' => [
-                'required_if:previous,true',
+                $edit ? 'required' : 'required_if:previous,true',
                 'string',
                 'date_format:H:i',
                 'after:started',
@@ -71,6 +73,11 @@ class TimeRequest extends FormRequest
      */
     public function withValidator($validator)
     {
+        $edit = $this->has('time');
+        if ($edit) {
+            return;
+        }
+
         $validator->after(function ($validator) {
             if (!$this->previous && $this->user()->hasTimerRunning()) {
                 $validator->errors()->add('error', 'It seems you already have a timer running.');
@@ -85,8 +92,12 @@ class TimeRequest extends FormRequest
      */
     public function validated()
     {
+        $edit = $this->has('time');
         $data = parent::validated();
-        $data['user_id'] = $this->user()->id;
+
+        if (!$edit) {
+            $data['user_id'] = $this->user()->id;
+        }
 
         // Convert started/finished into date with time
         if (empty($data['started'])) {

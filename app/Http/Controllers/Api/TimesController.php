@@ -23,4 +23,10 @@ class TimesController extends Controller
     {
         return Time::create($request->validated());
     }
+
+    public function update(TimeRequest $request, Time $time): Time
+    {
+        $time->update($request->validated());
+        return $time;
+    }
 }

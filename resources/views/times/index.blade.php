@@ -66,7 +66,9 @@
                                 <td class="align-middle text-right">
                                     @if ($time->user_id === auth()->user()->id)
                                         @if ($time->finished)
-                                            <a href="#" class="btn btn-link">Edit</a>
+                                            <a href="#"
+                                                onclick="event.preventDefault();app.$emit('time-edit', {{ json_encode($time->attributesToArray()) }})"
+                                                class="btn btn-link">Edit</a>
                                         @else
                                             <a href="{{ route('times.stop', $time) }}" class="btn btn-danger btn-stopwatch">Stop</a>
                                         @endif
@@ -84,5 +86,6 @@
 @endsection
 
 @push('modals')
-    <create-time />
+    <create-time></create-time>
+    <edit-time></edit-time>
 @endpush
