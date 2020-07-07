@@ -40412,7 +40412,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-row" }, [
                 _c("div", { staticClass: "form-group col" }, [
-                  _c("div", { staticClass: "custom-control custom-checkbox" }, [
+                  _c("div", { staticClass: "custom-control custom-switch" }, [
                     _c("input", {
                       directives: [
                         {

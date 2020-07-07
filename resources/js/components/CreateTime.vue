@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col">
-                            <div class="custom-control custom-checkbox">
+                            <div class="custom-control custom-switch">
                                 <input class="custom-control-input" type="checkbox" id="is-previous-time" v-model="previous" />
                                 <label class="custom-control-label" for="is-previous-time">Record previous time</label>
                             </div>
