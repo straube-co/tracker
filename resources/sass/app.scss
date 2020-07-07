@@ -26,20 +26,32 @@ body > .alert {
     }
 }
 
+.auth-photo-thanks {
+    display: none;
+}
+
 // Auth pages
 .page-auth {
     body {
-        background: linear-gradient(to bottom, #ece9e6, #ffffff);
+        background: #ece9e6 no-repeat center bottom;
+        background-image: url(../images/background.jpg), linear-gradient(to bottom, #ece9e6, #ffffff);
+        background-size: cover;
     }
 
     #app {
         display: flex;
         flex-grow: 1;
         flex-flow: column;
+    }
 
-        > main {
-            margin: auto 0;
-        }
+    .footer {
+        background: rgba($white,0.75);
+        border-radius: $border-radius $border-radius 0 0;
+        padding-top: $spacer;
+    }
+
+    .auth-photo-thanks {
+        display: inline;
     }
 }
 

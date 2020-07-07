@@ -97,8 +97,16 @@
         @stack('modals')
     </div>
 
-    <footer class="container mt-auto">
-        <p class="text-muted">&copy; 2019-{{ date('Y') }} Straube.</p>
+    <footer class="footer container mt-auto">
+        <p class="text-muted">
+            &copy; 2019-{{ date('Y') }} Straube.
+            <span class="auth-photo-thanks">
+                Photo by
+                <a class="text-dark" href="https://unsplash.com/@benchaccounting?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Bench Accounting</a>
+                on
+                <a class="text-dark" href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a>
+            </span>
+        </p>
     </footer>
 
     <!-- Scripts -->

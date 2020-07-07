@@ -10947,8 +10947,14 @@ body > .alert {
   padding-right: 0.25rem;
 }
 
+.auth-photo-thanks {
+  display: none;
+}
+
 .page-auth body {
-  background: linear-gradient(to bottom, #ece9e6, #ffffff);
+  background: #ece9e6 no-repeat center bottom;
+  background-image: url(/images/background.jpg?0a30d0b46d14e6456b0bc463ffb41c9c), linear-gradient(to bottom, #ece9e6, #ffffff);
+  background-size: cover;
 }
 
 .page-auth #app {
@@ -10957,8 +10963,14 @@ body > .alert {
   flex-flow: column;
 }
 
-.page-auth #app > main {
-  margin: auto 0;
+.page-auth .footer {
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 0.25rem 0.25rem 0 0;
+  padding-top: 1rem;
+}
+
+.page-auth .auth-photo-thanks {
+  display: inline;
 }
 
 .btn-stopwatch {
