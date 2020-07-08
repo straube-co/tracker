@@ -27,19 +27,6 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label>Timezone</label>
-                            <select :class="{ 'custom-select': true, 'is-invalid': error('timezone') }" v-model="timezone">
-                                <option :value="null">Select</option>
-                                <option disabled>--</option>
-                                <option v-for="timezone in timezones" :value="timezone">{{ timezone.replace(/_/g, ' ') }}</option>
-                            </select>
-                            <span v-if="error('timezone')" class="invalid-feedback" role="alert">
-                                {{ error('timezone') }}
-                            </span>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
@@ -56,12 +43,10 @@
             return {
                 isSubmitting: false,
                 errors: {},
-                timezones: [],
 
                 // Form
                 name: '',
                 email: '',
-                timezone: '',
             }
         },
         methods: {
@@ -71,7 +56,6 @@
 
                 this.name = '';
                 this.email = '';
-                this.timezone = '';
             },
             error(name) {
                 if (!this.errors || !this.errors[name]) {
@@ -93,7 +77,6 @@
                         const data = {
                             name: this.name,
                             email: this.email,
-                            timezone: this.timezone,
                         };
                         await axios.post(this.$root.route('api.users.store'), data);
                         this.isSubmitting = false;
@@ -110,12 +93,8 @@
                 })();
             },
         },
-        async created() {
+        created() {
             jQuery(document).on('hidden.bs.modal', this.reset);
-            const timezones = await axios.get(this.$root.route('api.timezones.index'));
-            if (timezones.data) {
-                this.timezones = timezones.data;
-            }
         },
         beforeDestroyed() {
             jQuery(document).off('hidden.bs.modal', this.reset);

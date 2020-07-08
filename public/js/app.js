@@ -2518,29 +2518,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       isSubmitting: false,
       errors: {},
-      timezones: [],
       // Form
       name: '',
-      email: '',
-      timezone: ''
+      email: ''
     };
   },
   methods: {
@@ -2549,7 +2534,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.errors = {};
       this.name = '';
       this.email = '';
-      this.timezone = '';
     },
     error: function error(name) {
       if (!this.errors || !this.errors[name]) {
@@ -2580,8 +2564,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.prev = 0;
                 data = {
                   name: _this.name,
-                  email: _this.email,
-                  timezone: _this.timezone
+                  email: _this.email
                 };
                 _context.next = 4;
                 return axios.post(_this.$root.route('api.users.store'), data);
@@ -2619,32 +2602,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
-    var _this2 = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-      var timezones;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              jQuery(document).on('hidden.bs.modal', _this2.reset);
-              _context2.next = 3;
-              return axios.get(_this2.$root.route('api.timezones.index'));
-
-            case 3:
-              timezones = _context2.sent;
-
-              if (timezones.data) {
-                _this2.timezones = timezones.data;
-              }
-
-            case 5:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }))();
+    jQuery(document).on('hidden.bs.modal', this.reset);
   },
   beforeDestroyed: function beforeDestroyed() {
     jQuery(document).off('hidden.bs.modal', this.reset);
@@ -46911,76 +46869,6 @@ var render = function() {
                       )
                     : _vm._e()
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-row" }, [
-                _c("div", { staticClass: "form-group col" }, [
-                  _c("label", [_vm._v("Timezone")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.timezone,
-                          expression: "timezone"
-                        }
-                      ],
-                      class: {
-                        "custom-select": true,
-                        "is-invalid": _vm.error("timezone")
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.timezone = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { domProps: { value: null } }, [
-                        _vm._v("Select")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { disabled: "" } }, [_vm._v("--")]),
-                      _vm._v(" "),
-                      _vm._l(_vm.timezones, function(timezone) {
-                        return _c("option", { domProps: { value: timezone } }, [
-                          _vm._v(_vm._s(timezone.replace(/_/g, " ")))
-                        ])
-                      })
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _vm.error("timezone")
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "invalid-feedback",
-                          attrs: { role: "alert" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(_vm.error("timezone")) +
-                              "\n                        "
-                          )
-                        ]
-                      )
-                    : _vm._e()
-                ])
               ])
             ]),
             _vm._v(" "),
@@ -60495,11 +60383,6 @@ var Ziggy = {
     "api.users.store": {
       "uri": "api\/users",
       "methods": ["POST"],
-      "domain": null
-    },
-    "api.timezones.index": {
-      "uri": "api\/timezones",
-      "methods": ["GET", "HEAD"],
       "domain": null
     }
   },
