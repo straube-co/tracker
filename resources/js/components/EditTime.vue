@@ -72,6 +72,7 @@
                     </span>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger mr-auto" :disabled="isSubmitting" @click="onDelete">Delete</button>
                     <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" :disabled="isSubmitting">Save</button>
                 </div>
@@ -178,6 +179,23 @@
                             return;
                         }
                         this.$root.alert('Something went wrong while saving the time entry. Please check the info you provided and try again.');
+                    }
+                })();
+            },
+            onDelete() {
+                if (!window.confirm('Do you really want to delete this time entry. This action cannot be undone.')) {
+                    return;
+                }
+                this.isSubmitting = true;
+                (async () => {
+                    try {
+                        await axios.delete(this.$root.route('api.times.destroy', this.id));
+                        this.isSubmitting = false;
+                        jQuery(this.$refs.modal).modal('hide');
+                        location.reload();
+                    } catch (e) {
+                        this.isSubmitting = false;
+                        this.$root.alert('Something went wrong while deleting the time entry. Please try again.');
                     }
                 })();
             },

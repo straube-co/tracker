@@ -2819,6 +2819,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2943,45 +2944,85 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee, null, [[0, 9]]);
       }))();
+    },
+    onDelete: function onDelete() {
+      var _this2 = this;
+
+      if (!window.confirm('Do you really want to delete this time entry. This action cannot be undone.')) {
+        return;
+      }
+
+      this.isSubmitting = true;
+
+      _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios["delete"](_this2.$root.route('api.times.destroy', _this2.id));
+
+              case 3:
+                _this2.isSubmitting = false;
+                jQuery(_this2.$refs.modal).modal('hide');
+                location.reload();
+                _context2.next = 12;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                _this2.isSubmitting = false;
+
+                _this2.$root.alert('Something went wrong while deleting the time entry. Please try again.');
+
+              case 12:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8]]);
+      }))();
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
       var _yield$Promise$all, _yield$Promise$all2, projects, activities;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              jQuery(document).on('hidden.bs.modal', _this2.onModalHide);
+              jQuery(document).on('hidden.bs.modal', _this3.onModalHide);
 
-              _this2.$root.$on('time-edit', _this2.onEdit);
+              _this3.$root.$on('time-edit', _this3.onEdit);
 
-              _context2.next = 4;
-              return Promise.all([axios.get(_this2.$root.route('api.projects.index')), axios.get(_this2.$root.route('api.activities.index'))]);
+              _context3.next = 4;
+              return Promise.all([axios.get(_this3.$root.route('api.projects.index')), axios.get(_this3.$root.route('api.activities.index'))]);
 
             case 4:
-              _yield$Promise$all = _context2.sent;
+              _yield$Promise$all = _context3.sent;
               _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
               projects = _yield$Promise$all2[0];
               activities = _yield$Promise$all2[1];
 
               if (projects.data) {
-                _this2.projects = projects.data;
+                _this3.projects = projects.data;
               }
 
               if (activities.data) {
-                _this2.activities = activities.data;
+                _this3.activities = activities.data;
               }
 
             case 10:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }))();
   },
   beforeDestroyed: function beforeDestroyed() {
@@ -41693,6 +41734,16 @@ var render = function() {
               _c(
                 "button",
                 {
+                  staticClass: "btn btn-danger mr-auto",
+                  attrs: { type: "button", disabled: _vm.isSubmitting },
+                  on: { click: _vm.onDelete }
+                },
+                [_vm._v("Delete")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
                   staticClass: "btn btn-link",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
@@ -54700,6 +54751,11 @@ var Ziggy = {
     "api.times.update": {
       "uri": "api\/times\/{time}",
       "methods": ["POST"],
+      "domain": null
+    },
+    "api.times.destroy": {
+      "uri": "api\/times\/{time}",
+      "methods": ["DELETE"],
       "domain": null
     },
     "api.users.store": {

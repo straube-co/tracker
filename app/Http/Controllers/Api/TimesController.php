@@ -29,4 +29,10 @@ class TimesController extends Controller
         $time->update($request->validated());
         return $time;
     }
+
+    public function destroy(Time $time)
+    {
+        $time->delete();
+        return null;
+    }
 }
