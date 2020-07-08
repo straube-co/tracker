@@ -32,3 +32,8 @@ Route::patch('/projects/{project}', 'ProjectsController@restore')->name('project
 
 Route::get('/activities', 'ActivitiesController@index')->name('activities.index');
 Route::get('/users', 'UsersController@index')->name('users.index');
+
+// Legacy report routes (v1)
+// These redirects are here to keep old shared links workings
+Route::get('/report/{code}', function (string $code) { return redirect(null, 301)->route('reports.shared.show', $code); });
+Route::get('/report/{code}/csv', function (string $code) { return redirect(null, 301)->route('reports.shared.export', $code); });
