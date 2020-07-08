@@ -25,3 +25,5 @@ Route::post('/times/{time}', 'TimesController@update')->name('times.update');
 Route::delete('/times/{time}', 'TimesController@destroy')->name('times.destroy');
 
 Route::post('/users', 'UsersController@store')->name('users.store');
+
+Route::get('/timezones', 'TimezonesController@index')->name('timezones.index');

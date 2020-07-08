@@ -3,9 +3,11 @@
 namespace App\Http\Requests;
 
 use App\User;
+use DateTimeZone;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -26,6 +28,8 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+        $timezones = DateTimeZone::listIdentifiers();
+
         return [
             'name' => [
                 'required',
@@ -36,7 +40,12 @@ class UserRequest extends FormRequest
                 'required',
                 'string',
                 'email',
-                'unique:' . User::class . ',email'
+                Rule::unique(User::class, 'email'),
+            ],
+            'timezone' => [
+                'required',
+                'string',
+                Rule::in($timezones),
             ],
         ];
     }
