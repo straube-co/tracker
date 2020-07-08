@@ -67,7 +67,7 @@
                                     @if ($time->user_id === auth()->user()->id)
                                         @if ($time->finished)
                                             <a href="#"
-                                                onclick="event.preventDefault();app.$emit('time-edit', {{ json_encode($time->attributesToArray()) }})"
+                                                onclick="event.preventDefault();app.$emit('time-edit',{{ json_encode($time->attributesToArray()) }})"
                                                 class="btn btn-link">Edit</a>
                                         @else
                                             <a href="{{ route('times.stop', $time) }}" class="btn btn-danger btn-stopwatch">Stop</a>

@@ -132,7 +132,9 @@
                             @if ($hasMyTime)
                                 <td class="align-middle text-right">
                                     @if ($time->user_id === auth()->user()->id && $time->finished)
-                                        <a href="#" class="btn btn-link">Edit</a>
+                                        <a href="#"
+                                            onclick="event.preventDefault();app.$emit('time-edit',{{ json_encode($time->attributesToArray()) }})"
+                                            class="btn btn-link">Edit</a>
                                     @endif
                                 </td>
                             @endif
@@ -145,3 +147,7 @@
         @endif
     </div>
 @endsection
+
+@push('modals')
+    <edit-time></edit-time>
+@endpush
