@@ -82,6 +82,8 @@
 </template>
 
 <script>
+    const moment = require('moment');
+
     export default {
         data() {
             return {
@@ -95,7 +97,7 @@
                 project_id: null,
                 activity_id: null,
                 description: '',
-                date: this.formatDate(new Date()),
+                date: moment().format('YYYY-MM-DD'),
                 started: '',
                 finished: '',
             }
@@ -103,17 +105,6 @@
         methods: {
             filterDescription() {
                 this.description = this.description.replace(/[\r\n]+/g, ' ');
-            },
-            formatDate(date) {
-                const year = date.getFullYear().toString();
-                const month = (date.getMonth() + 101).toString().substring(1);
-                const day = (date.getDate() + 100).toString().substring(1);
-                return year + '-' + month + '-' + day;
-            },
-            formatTime(date) {
-                const hour = (date.getHours() + 100).toString().substring(1);
-                const minute = (date.getMinutes() + 100).toString().substring(1);
-                return hour + ':' + minute;
             },
             reset() {
                 this.isSubmitting = false;
@@ -123,7 +114,7 @@
                 this.project_id = null;
                 this.activity_id = null;
                 this.description = '';
-                this.date = this.formatDate(new Date());
+                this.date = moment().format('YYYY-MM-DD');
                 this.started = '';
                 this.finished = '';
             },
@@ -143,9 +134,9 @@
                 this.project_id = time.project_id;
                 this.activity_id = time.activity_id;
                 this.description = time.description;
-                this.date = this.formatDate(started);
-                this.started = this.formatTime(started);
-                this.finished = this.formatTime(finished);
+                this.date = moment.utc(started).format('YYYY-MM-DD');
+                this.started = moment.utc(started).format('HH:mm');
+                this.finished = moment.utc(finished).format('HH:mm');
 
                 jQuery(this.$refs.modal).modal('show');
             },

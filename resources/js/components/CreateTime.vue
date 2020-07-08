@@ -93,6 +93,8 @@
 </template>
 
 <script>
+    const moment = require('moment');
+
     export default {
         data() {
             return {
@@ -106,7 +108,7 @@
                 activity_id: null,
                 description: '',
                 previous: false,
-                date: this.formatDate(new Date()),
+                date: moment().format('YYYY-MM-DD'),
                 started: '',
                 finished: '',
             }
@@ -114,12 +116,6 @@
         methods: {
             filterDescription() {
                 this.description = this.description.replace(/[\r\n]+/g, ' ');
-            },
-            formatDate(date) {
-                const year = date.getFullYear().toString();
-                const month = (date.getMonth() + 101).toString().substring(1);
-                const day = (date.getDate() + 100).toString().substring(1);
-                return year + '-' + month + '-' + day;
             },
             reset() {
                 this.isSubmitting = false;
@@ -129,7 +125,7 @@
                 this.activity_id = null;
                 this.description = '';
                 this.previous = false;
-                this.date = this.formatDate(new Date());
+                this.date = moment().format('YYYY-MM-DD');
                 this.started = '';
                 this.finished = '';
             },

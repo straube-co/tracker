@@ -1,5 +1,6 @@
 const mix = require('laravel-mix');
 const path = require('path');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,13 +13,16 @@ const path = require('path');
  |
  */
 
- mix.webpackConfig({
-     resolve: {
-         alias: {
-             ziggy: path.resolve('vendor/tightenco/ziggy/src/js/route.js'),
-         },
-     },
- });
+mix.webpackConfig({
+    resolve: {
+        alias: {
+            ziggy: path.resolve('vendor/tightenco/ziggy/src/js/route.js'),
+        },
+    },
+    plugins: [
+        new MomentLocalesPlugin(),
+    ],
+});
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
