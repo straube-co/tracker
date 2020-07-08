@@ -96,19 +96,21 @@ class TimeRequest extends FormRequest
      */
     public function validated()
     {
+        $user = $this->user();
         $edit = $this->has('time');
         $data = parent::validated();
 
         if (!$edit) {
-            $data['user_id'] = $this->user()->id;
+            $data['user_id'] = $user->id;
         }
 
         // Convert started/finished into date with time
         if (empty($data['started'])) {
-            $data['started'] = Carbon::now()->format('Y-m-d H:i');
+            $data['started'] = Carbon::now();
         } else {
-            $data['started'] = $data['date'] . ' ' . $data['started'];
-            $data['finished'] = $data['date'] . ' ' . $data['finished'];
+            $timezone = $user->timezone;
+            $data['started'] = Carbon::createFromFormat('Y-m-d H:i', $data['date'] . ' ' . $data['started'], $timezone)->tz('UTC');
+            $data['finished'] = Carbon::createFromFormat('Y-m-d H:i', $data['date'] . ' ' . $data['finished'], $timezone)->tz('UTC');
         }
         unset($data['date']);
 

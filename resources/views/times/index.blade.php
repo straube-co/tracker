@@ -46,11 +46,11 @@
                             <td class="align-middle">{{ $time->user->getFirstName() }}</td>
                             <td class="align-middle text-nowrap text-right">
                                 @if ($time->finished)
-                                    <h6 title="{{ $time->started }} - {{ $time->finished }}">
+                                    <h6 title="{{ $time->started->tz(auth()->user()->timezone) }} - {{ $time->finished->tz(auth()->user()->timezone) }}">
                                         <samp>{{ $time->getTrackedTime() ?: '-' }}</samp>
                                     </h6>
                                 @else
-                                    <h6 title="{{ __('Started at :time', [ 'time' => $time->started ]) }}">
+                                    <h6 title="{{ __('Started at :time', [ 'time' => $time->started->tz(auth()->user()->timezone) ]) }}">
                                         <samp>
                                             <stopwatch time="{{ \Carbon\Carbon::now()->diffInSeconds($time->started) }}">
                                                 {{ \App\Support\Formatter::timeDiff($time->started) }}
@@ -59,7 +59,7 @@
                                     </h6>
                                 @endif
                                 <small class="text-muted">
-                                    <samp>{{ $time->started->format('Y-m-d') }}</samp>
+                                    <samp>{{ $time->started->tz(auth()->user()->timezone)->format('Y-m-d') }}</samp>
                                 </small>
                             </td>
                             @if ($hasMyTime)

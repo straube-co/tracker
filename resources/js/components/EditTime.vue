@@ -134,9 +134,9 @@
                 this.project_id = time.project_id;
                 this.activity_id = time.activity_id;
                 this.description = time.description;
-                this.date = moment.utc(started).format('YYYY-MM-DD');
-                this.started = moment.utc(started).format('HH:mm');
-                this.finished = moment.utc(finished).format('HH:mm');
+                this.date = moment(started).format('YYYY-MM-DD');
+                this.started = moment(started).format('HH:mm');
+                this.finished = moment(finished).format('HH:mm');
 
                 jQuery(this.$refs.modal).modal('show');
             },
