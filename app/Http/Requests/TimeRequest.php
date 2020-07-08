@@ -14,6 +14,10 @@ class TimeRequest extends FormRequest
      */
     public function authorize()
     {
+        if ($this->has('time')) {
+            return $this->time->user_id === $this->user()->id;
+        }
+
         return true;
     }
 
