@@ -15,6 +15,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link rel="icon" href="{{ asset('images/favicon.svg') }}" sizes="any" type="image/svg+xml">
 </head>
 <body class="d-flex flex-column">
     <div id="app" class="flex-shrink-0">
