@@ -34,4 +34,10 @@ class ActivitiesController extends Controller
     {
         return Activity::create($request->validated());
     }
+
+    public function update(ActivityRequest $request, Activity $activity): Activity
+    {
+        $activity->update($request->validated());
+        return $activity;
+    }
 }

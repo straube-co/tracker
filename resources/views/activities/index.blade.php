@@ -23,7 +23,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $activity->name }}</h5>
-                            <a class="card-link" href="#">{{ __('Edit') }}</a>
+                            <a href="#"
+                                onclick="event.preventDefault();app.$emit('activity-edit',{{ json_encode($activity->attributesToArray()) }})"
+                                class="card-link">Edit</a>
                         </div>
                     </div>
                 @endforeach
@@ -33,5 +35,6 @@
 @endsection
 
 @push('modals')
-    <create-activity />
+    <create-activity></create-activity>
+    <edit-activity></edit-activity>
 @endpush

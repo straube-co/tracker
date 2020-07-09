@@ -20,6 +20,7 @@ Route::put('/projects/{project}', 'ProjectsController@update')->name('projects.u
 
 Route::get('/activities', 'ActivitiesController@index')->name('activities.index');
 Route::post('/activities', 'ActivitiesController@store')->name('activities.store');
+Route::put('/activities/{activity}', 'ActivitiesController@update')->name('activities.update');
 
 Route::post('/times', 'TimesController@store')->name('times.store');
 Route::put('/times/{time}', 'TimesController@update')->name('times.update');
