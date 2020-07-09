@@ -121,7 +121,7 @@
                 this.timezones = timezones.data;
             }
             if (ip.data) {
-                this.timezoneFromIp = ip.data.timezone || '';
+                this.timezoneFromIp = ip.data || '';
                 this.timezone = this.timezoneFromIp;
             }
         },
