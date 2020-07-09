@@ -34,4 +34,10 @@ class ProjectsController extends Controller
     {
         return Project::create($request->validated());
     }
+
+    public function update(ProjectRequest $request, Project $project): Project
+    {
+        $project->update($request->validated());
+        return $project;
+    }
 }

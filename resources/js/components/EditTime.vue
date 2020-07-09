@@ -159,7 +159,7 @@
                             started: this.started,
                             finished: this.finished,
                         }
-                        await axios.post(this.$root.route('api.times.update', this.id), data);
+                        await axios.put(this.$root.route('api.times.update', this.id), data);
                         this.isSubmitting = false;
                         jQuery(this.$refs.modal).modal('hide');
                         location.reload();

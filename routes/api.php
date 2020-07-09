@@ -16,12 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/projects', 'ProjectsController@index')->name('projects.index');
 Route::post('/projects', 'ProjectsController@store')->name('projects.store');
+Route::put('/projects/{project}', 'ProjectsController@update')->name('projects.update');
 
 Route::get('/activities', 'ActivitiesController@index')->name('activities.index');
 Route::post('/activities', 'ActivitiesController@store')->name('activities.store');
 
 Route::post('/times', 'TimesController@store')->name('times.store');
-Route::post('/times/{time}', 'TimesController@update')->name('times.update');
+Route::put('/times/{time}', 'TimesController@update')->name('times.update');
 Route::delete('/times/{time}', 'TimesController@destroy')->name('times.destroy');
 
 Route::post('/users', 'UsersController@store')->name('users.store');

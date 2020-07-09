@@ -40,7 +40,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $project->name }}</h5>
                             <p class="card-text"><samp>{{ $project->getTrackedTime() ?: '00:00:00' }}</samp></p>
-                            <a class="card-link" href="#">{{ __('Edit') }}</a>
+                            <a href="#"
+                                onclick="event.preventDefault();app.$emit('project-edit',{{ json_encode($project->attributesToArray()) }})"
+                                class="card-link">Edit</a>
                             @if ($project->trashed())
                                 <a
                                     class="card-link"
@@ -75,5 +77,6 @@
 @endsection
 
 @push('modals')
-    <create-project />
+    <create-project></create-project>
+    <edit-project></edit-project>
 @endpush
