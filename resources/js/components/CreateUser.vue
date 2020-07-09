@@ -57,6 +57,7 @@
                 isSubmitting: false,
                 errors: {},
                 timezones: [],
+                timezoneFromIp: '',
 
                 // Form
                 name: '',
@@ -71,7 +72,7 @@
 
                 this.name = '';
                 this.email = '';
-                this.timezone = '';
+                this.timezone = this.timezoneFromIp;
             },
             error(name) {
                 if (!this.errors || !this.errors[name]) {
@@ -112,9 +113,16 @@
         },
         async created() {
             jQuery(document).on('hidden.bs.modal', this.reset);
-            const timezones = await axios.get(this.$root.route('api.timezones.index'));
+            const [ timezones, ip ] = await Promise.all([
+                axios.get(this.$root.route('api.timezones.index')),
+                axios.get('http://ip-api.com/json/'),
+            ]);
             if (timezones.data) {
                 this.timezones = timezones.data;
+            }
+            if (ip.data) {
+                this.timezoneFromIp = ip.data.timezone || '';
+                this.timezone = this.timezoneFromIp;
             }
         },
         beforeDestroyed() {
