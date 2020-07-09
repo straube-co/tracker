@@ -14,7 +14,9 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $user->name }}</h5>
                         <p class="card-text">{{ $user->email }}</p>
-                        <a class="card-link" href="#">{{ __('Edit') }}</a>
+                        <a href="#"
+                            onclick="event.preventDefault();app.$emit('user-edit',{{ json_encode($user->attributesToArray()) }})"
+                            class="card-link">Edit</a>
                     </div>
                 </div>
             @endforeach
@@ -23,5 +25,6 @@
 @endsection
 
 @push('modals')
-    <create-user />
+    <create-user></create-user>
+    <edit-user></edit-user>
 @endpush

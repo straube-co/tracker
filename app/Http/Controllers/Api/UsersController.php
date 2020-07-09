@@ -35,4 +35,10 @@ class UsersController extends Controller
 
         return $user;
     }
+
+    public function update(UserRequest $request, User $user): User
+    {
+        $user->update($request->validated());
+        return $user;
+    }
 }

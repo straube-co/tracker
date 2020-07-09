@@ -46,7 +46,9 @@ class UserRequest extends FormRequest
                 'required',
                 'string',
                 'email',
-                Rule::unique(User::class, 'email'),
+                $this->user
+                    ? Rule::unique(User::class, 'email')->ignore($this->user->id)
+                    : Rule::unique(User::class, 'email'),
             ],
             'timezone' => [
                 'required',
@@ -64,7 +66,10 @@ class UserRequest extends FormRequest
     public function validated()
     {
         $data = parent::validated();
-        $data['password'] = Hash::make(Str::random(8));
+
+        if (!$this->has('user')) {
+            $data['password'] = Hash::make(Str::random(8));
+        }
 
         return $data;
     }

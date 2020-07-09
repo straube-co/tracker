@@ -20,7 +20,7 @@ class TimeRequest extends FormRequest
      */
     public function authorize()
     {
-        if ($this->has('time')) {
+        if ($this->time) {
             return $this->time->user_id === $this->user()->id;
         }
 
@@ -34,7 +34,7 @@ class TimeRequest extends FormRequest
      */
     public function rules()
     {
-        $edit = $this->has('time');
+        $edit = $this->time !== null;
 
         return [
             'project_id' => [
@@ -83,8 +83,7 @@ class TimeRequest extends FormRequest
      */
     public function withValidator($validator)
     {
-        $edit = $this->has('time');
-        if ($edit) {
+        if ($this->time) {
             return;
         }
 
@@ -103,10 +102,9 @@ class TimeRequest extends FormRequest
     public function validated()
     {
         $user = $this->user();
-        $edit = $this->has('time');
         $data = parent::validated();
 
-        if (!$edit) {
+        if (!$this->time) {
             $data['user_id'] = $user->id;
         }
 
