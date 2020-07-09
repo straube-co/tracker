@@ -1,7 +1,7 @@
 # Tracker
 
-This is the time tracker app used internally by Straube. It's built with PHP
-using Laravel framework.
+Time tracker app used internally at Straube. It's built with PHP using Laravel 
+framework.
 
 ## Installation
 
