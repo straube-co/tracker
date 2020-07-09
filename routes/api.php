@@ -30,3 +30,4 @@ Route::post('/users', 'UsersController@store')->name('users.store');
 Route::put('/users/{user}', 'UsersController@update')->name('users.update');
 
 Route::get('/timezones', 'TimezonesController@index')->name('timezones.index');
+Route::get('/timezones/search', 'TimezonesController@search')->name('timezones.search');

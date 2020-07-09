@@ -2643,7 +2643,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               jQuery(document).on('hidden.bs.modal', _this2.reset);
               _context2.next = 3;
-              return Promise.all([axios.get(_this2.$root.route('api.timezones.index')), axios.get('http://ip-api.com/json/')]);
+              return Promise.all([axios.get(_this2.$root.route('api.timezones.index')), axios.get(_this2.$root.route('api.timezones.search'))]);
 
             case 3:
               _yield$Promise$all = _context2.sent;
@@ -61816,6 +61816,11 @@ var Ziggy = {
     },
     "api.timezones.index": {
       "uri": "api\/timezones",
+      "methods": ["GET", "HEAD"],
+      "domain": null
+    },
+    "api.timezones.search": {
+      "uri": "api\/timezones\/search",
       "methods": ["GET", "HEAD"],
       "domain": null
     }

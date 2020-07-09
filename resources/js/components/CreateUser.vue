@@ -115,7 +115,7 @@
             jQuery(document).on('hidden.bs.modal', this.reset);
             const [ timezones, ip ] = await Promise.all([
                 axios.get(this.$root.route('api.timezones.index')),
-                axios.get('http://ip-api.com/json/'),
+                axios.get(this.$root.route('api.timezones.search')),
             ]);
             if (timezones.data) {
                 this.timezones = timezones.data;
