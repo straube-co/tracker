@@ -5,6 +5,13 @@ namespace App\Support;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 
+/**
+ * Formatter support class.
+ *
+ * @version 2.0.0
+ * @author  Lucas Cardoso <lucas@straube.co>
+ * @author  Gustavo Straube <gustavo@straube.co>
+ */
 class Formatter
 {
 

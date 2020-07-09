@@ -9,6 +9,13 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
+/**
+ * Times controller.
+ *
+ * @version 2.0.0
+ * @author  Lucas Cardoso <lucas@straube.co>
+ * @author  Gustavo Straube <gustavo@straube.co>
+ */
 class TimesController extends Controller
 {
     /**

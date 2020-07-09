@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Contracts\Support\Renderable;
 
+/**
+ * Users controller.
+ *
+ * @version 2.0.0
+ * @author  Lucas Cardoso <lucas@straube.co>
+ * @author  Gustavo Straube <gustavo@straube.co>
+ */
 class UsersController extends Controller
 {
     /**

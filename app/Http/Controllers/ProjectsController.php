@@ -6,6 +6,13 @@ use App\Project;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 
+/**
+ * Projects controller.
+ *
+ * @version 2.0.0
+ * @author  Lucas Cardoso <lucas@straube.co>
+ * @author  Gustavo Straube <gustavo@straube.co>
+ */
 class ProjectsController extends Controller
 {
     /**

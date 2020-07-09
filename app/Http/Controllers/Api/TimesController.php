@@ -7,6 +7,12 @@ use App\Http\Requests\TimeRequest;
 use App\Time;
 use Illuminate\Support\Collection;
 
+/**
+ * Times API controller.
+ *
+ * @version 2.0.0
+ * @author  Gustavo Straube <gustavo@straube.co>
+ */
 class TimesController extends Controller
 {
     /**

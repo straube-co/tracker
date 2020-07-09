@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
+/**
+ * User request.
+ *
+ * @version 2.0.0
+ * @author  Gustavo Straube <gustavo@straube.co>
+ */
 class UserRequest extends FormRequest
 {
     /**

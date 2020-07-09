@@ -7,6 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ActivityRequest;
 use Illuminate\Support\Collection;
 
+/**
+ * Activites API controller.
+ *
+ * @version 2.0.0
+ * @author  Gustavo Straube <gustavo@straube.co>
+ */
 class ActivitiesController extends Controller
 {
     /**

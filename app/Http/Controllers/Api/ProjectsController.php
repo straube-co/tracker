@@ -7,6 +7,12 @@ use App\Http\Requests\ProjectRequest;
 use App\Project;
 use Illuminate\Support\Collection;
 
+/**
+ * Projects API controller.
+ *
+ * @version 2.0.0
+ * @author  Gustavo Straube <gustavo@straube.co>
+ */
 class ProjectsController extends Controller
 {
     /**

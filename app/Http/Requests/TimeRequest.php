@@ -5,6 +5,12 @@ namespace App\Http\Requests;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Time request.
+ *
+ * @version 2.0.0
+ * @author  Gustavo Straube <gustavo@straube.co>
+ */
 class TimeRequest extends FormRequest
 {
     /**

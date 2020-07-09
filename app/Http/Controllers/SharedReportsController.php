@@ -10,6 +10,12 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
 
+/**
+ * Shared reports controller.
+ *
+ * @version 2.0.0
+ * @author  Gustavo Straube <gustavo@straube.co>
+ */
 class SharedReportsController extends Controller
 {
 

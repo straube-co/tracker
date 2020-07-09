@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use App\Activity;
 use Illuminate\Contracts\Support\Renderable;
 
+/**
+ * Activites controller.
+ *
+ * @version 2.0.0
+ * @author  Lucas Cardoso <lucas@straube.co>
+ * @author  Gustavo Straube <gustavo@straube.co>
+ */
 class ActivitiesController extends Controller
 {
     /**

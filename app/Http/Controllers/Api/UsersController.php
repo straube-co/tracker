@@ -7,6 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Password;
 
+/**
+ * Users API controller.
+ *
+ * @version 2.0.0
+ * @author  Gustavo Straube <gustavo@straube.co>
+ */
 class UsersController extends Controller
 {
     /**
