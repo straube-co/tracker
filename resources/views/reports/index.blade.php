@@ -5,63 +5,7 @@
         <div class="row">
             <div class="col-md-8" action="{{ route('reports.index') }}" method="get">
                 <div class="card" id="report-options">
-                    <!--
-                        TODO: Move this form to a Vue component
-                        The Save button must be hidden when the filter changes
-                        to force users to Apply the filters before saving.
-                    -->
-                    <form class="card-body" action="{{ route('reports.index') }}" method="get" ref="filter">
-                        <h5>{{ __('Custom filter') }}</h5>
-                        <div class="form-row">
-                            <div class="form-group col">
-                                <label for="report-project_id">{{ __('Project') }}</label>
-                                <select class="custom-select" name="filter[project_id]" id="report-project_id">
-                                    <option value="">{{ __('Select') }}</option>
-                                    <option disabled>--</option>
-                                    @foreach ($projects as $project)
-                                        <option value="{{ $project->id }}" @if ($project->id == request('filter.project_id')) selected @endif>{{ $project->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label for="report-activity_id">{{ __('Activity') }}</label>
-                                <select class="custom-select" name="filter[activity_id]" id="report-activity_id">
-                                    <option value="">{{ __('Select') }}</option>
-                                    <option disabled>--</option>
-                                    @foreach ($activities as $activity)
-                                        <option value="{{ $activity->id }}" @if ($activity->id == request('filter.activity_id')) selected @endif>{{ $activity->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col">
-                                <label for="report-user_id">{{ __('User') }}</label>
-                                <select class="custom-select" name="filter[user_id]" id="report-user_id">
-                                    <option value="">{{ __('Select') }}</option>
-                                    <option disabled>--</option>
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}" @if ($user->id == request('filter.user_id')) selected @endif>{{ $user->getFirstName() }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col">
-                                <label for="report-started">{{ __('From') }}</label>
-                                <date-input class="form-control" value="{{ request('filter.started') }}" name="filter[started]" id="report-started" />
-                            </div>
-                            <div class="form-group col">
-                                <label for="form-finished">{{ __('To') }}</label>
-                                <date-input class="form-control" value="{{ request('filter.finished') }}" name="filter[finished]" id="report-finished" />
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            @if (request('filter'))
-                                <a href="{{ route('reports.index') }}" class="btn btn-link">{{ __('Reset') }}</a>
-                                <button type="button" class="btn btn-primary" @click.prevent="$emit('create-report',$refs.filter)">{{ __('Save') }}</button>
-                            @endif
-                            <button type="submit" class="btn btn-primary ml-auto">{{ __('Apply') }}</button>
-                        </div>
-                    </form>
+                    <filter-report :filter="{{ json_encode(request('filter')) }}"></filter-report>
                 </div>
             </div>
             <div class="col-md-4">

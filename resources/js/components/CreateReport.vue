@@ -67,20 +67,8 @@
                 });
                 return errors;
             },
-            fieldsToObject(form) {
-                return Array.from(form.elements).reduce((data, element) => {
-                    if (!element.value) {
-                        return data;
-                    }
-                    const name = element.name.replace(/^.*\[(.+)\]$/, '$1');
-                    return Object.assign(data, { [name] : element.value });
-                }, {});
-            },
-            onCreate(form) {
-                this.reset();
-
-                this.filters = this.fieldsToObject(form);
-
+            onCreate(filters) {
+                this.filters = filters;
                 jQuery(this.$refs.modal).modal('show');
             },
             onModalHide(event) {

@@ -26,6 +26,7 @@ Route::post('/times', 'TimesController@store')->name('times.store');
 Route::put('/times/{time}', 'TimesController@update')->name('times.update');
 Route::delete('/times/{time}', 'TimesController@destroy')->name('times.destroy');
 
+Route::get('/users', 'UsersController@index')->name('users.index');
 Route::post('/users', 'UsersController@store')->name('users.store');
 Route::put('/users/{user}', 'UsersController@update')->name('users.update');
 

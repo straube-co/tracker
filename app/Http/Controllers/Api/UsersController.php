@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Password;
 
 /**
@@ -23,6 +24,11 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function index(): Collection
+    {
+        return User::orderBy('name')->get();
     }
 
     public function store(UserRequest $request): User
