@@ -1,11 +1,14 @@
 # Tracker
 
-Time tracker app used internally at Straube. It's built with PHP using Laravel 
-framework.
+Time tracker app used internally at [Straube](https://straube.co/). It's built with
+PHP using [Laravel](https://laravel.com/) framework.
 
 ## Installation
 
-To install all dependencies (back and front-end) run the following commands:
+Installing all dependencies (back and front-end) requires
+[Composer](https://getcomposer.org/) and NPM — which can be installed with
+[Node.js](https://nodejs.org/). In case those tools are already available, run
+the following commands to install the deps:
 
 ```
 $ composer install
@@ -40,8 +43,9 @@ name, email, and secure password.
 
 ## Running
 
-The easiest way to run this project is using Valet. It's also possible to run it
-on PHP built-in web server, through an Artisan command:
+The easiest way to run this project is using
+[Valet](https://laravel.com/docs/valet/). It's also possible to run it on PHP
+built-in web server, through the respective Artisan command:
 
 ```
 $ php artisan serve
@@ -49,9 +53,10 @@ $ php artisan serve
 
 ### Named routes
 
-This project uses Ziggy to access Laravel named routes on Javascript. The
-current configuration makes only API routes to be exported. When new API routes
-are added to the application, the routes file must be re-generated:
+This project uses [Ziggy](https://github.com/tightenco/ziggy) to access Laravel
+named routes in Javascript. The current configuration makes only API routes to
+be exported. When new API routes are added to the application, the routes file
+must be re-generated:
 
 ```
 $ php artisan ziggy:generate resources/js/ziggy.js
@@ -77,4 +82,6 @@ Then build the assets for that env:
 $ npm run prod
 ```
 
-The steps above must be executed when merging code into `master` branch.
+When using the `deploy.sh` script on the server, there is no need to manually
+run the steps above in the local/dev env before deploying changes involving
+Javascript assets.
