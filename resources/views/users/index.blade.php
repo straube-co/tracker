@@ -14,9 +14,9 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $user->name }}</h5>
                         <p class="card-text">{{ $user->email }}</p>
-                        <a href="#"
-                            onclick="event.preventDefault();app.$emit('user-edit',{{ json_encode($user->attributesToArray()) }})"
-                            class="card-link">Edit</a>
+                        <a class="card-link" href="#" @click.prevent="$emit('user-edit',{{ json_encode($user->attributesToArray()) }})">
+                            {{ __('Edit') }}
+                        </a>
                     </div>
                 </div>
             @endforeach

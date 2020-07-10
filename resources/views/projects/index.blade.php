@@ -40,9 +40,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $project->name }}</h5>
                             <p class="card-text"><samp>{{ $project->getTrackedTime() ?: '00:00:00' }}</samp></p>
-                            <a href="#"
-                                onclick="event.preventDefault();app.$emit('project-edit',{{ json_encode($project->attributesToArray()) }})"
-                                class="card-link">Edit</a>
+                            <a class="card-link" href="#" @click.prevent="$emit('project-edit',{{ json_encode($project->attributesToArray()) }})">
+                                {{ __('Edit') }}
+                            </a>
                             @if ($project->trashed())
                                 <a
                                     class="card-link"

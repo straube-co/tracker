@@ -66,11 +66,11 @@
                                 <td class="align-middle text-right">
                                     @if ($time->user_id === auth()->user()->id)
                                         @if ($time->finished)
-                                            <a href="#"
-                                                onclick="event.preventDefault();app.$emit('time-edit',{{ json_encode($time->attributesToArray()) }})"
-                                                class="btn btn-link">Edit</a>
+                                            <button class="btn btn-link" @click.prevent="$emit('time-edit',{{ json_encode($time->attributesToArray()) }})">
+                                                {{ __('Edit') }}
+                                            </button>
                                         @else
-                                            <a href="{{ route('times.stop', $time) }}" class="btn btn-danger btn-stopwatch">Stop</a>
+                                            <a href="{{ route('times.stop', $time) }}" class="btn btn-danger btn-stopwatch">{{ __('Stop') }}</a>
                                         @endif
                                     @endif
                                 </td>

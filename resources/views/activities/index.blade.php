@@ -23,9 +23,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $activity->name }}</h5>
-                            <a href="#"
-                                onclick="event.preventDefault();app.$emit('activity-edit',{{ json_encode($activity->attributesToArray()) }})"
-                                class="card-link">Edit</a>
+                            <a class="card-link" href="#" @click.prevent="$emit('activity-edit',{{ json_encode($activity->attributesToArray()) }})">
+                                {{ __('Edit') }}
+                            </a>
                         </div>
                     </div>
                 @endforeach
