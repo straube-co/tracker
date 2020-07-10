@@ -1,5 +1,5 @@
 <template>
-    <input type="text" ref="input" :value="date" @keypress="onKey" @input="onInput" placeholder="YYYY-MM-DD" />
+    <input type="text" ref="input" :value="date_ !== null ? date_ : date" @keypress="onKey" @input="onInput" placeholder="YYYY-MM-DD" />
 </template>
 
 <script>
@@ -7,6 +7,11 @@
         props: [
             'value'
         ],
+        data() {
+            return {
+                date_: null,
+            };
+        },
         computed: {
             date() {
                 return this.format(this.value);
@@ -14,6 +19,9 @@
         },
         methods: {
             format(value) {
+                if (!value) {
+                    return '';
+                }
                 value = value.replace(/\D+/g, '').substring(0, 8);
                 const parts = value.match(/\d{1,2}/g);
                 if (!parts) {
@@ -32,7 +40,13 @@
                 }
             },
             onInput() {
-                this.$emit('input', this.format(this.$refs.input.value));
+                const value = this.format(this.$refs.input.value);
+                // It's likely using v-model
+                if (this.$listeners.input) {
+                    this.$emit('input', value);
+                    return;
+                }
+                this.date_ = value;
             },
         },
     }

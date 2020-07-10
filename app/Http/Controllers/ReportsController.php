@@ -73,6 +73,7 @@ class ReportsController extends Controller
 
         $filter = $request->filter;
         if (!empty($filter)) {
+            // TODO: Validate filters
             return new Report([ 'name' => __('Custom filter'), 'filter' => $filter ]);
         }
 

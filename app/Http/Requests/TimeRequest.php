@@ -39,12 +39,12 @@ class TimeRequest extends FormRequest
         return [
             'project_id' => [
                 'required',
-                'numeric',
+                'integer',
                 'exists:projects,id',
             ],
             'activity_id' => [
                 'required',
-                'numeric',
+                'integer',
                 'exists:activities,id',
             ],
             'description' => [

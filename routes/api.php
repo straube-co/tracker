@@ -31,3 +31,5 @@ Route::put('/users/{user}', 'UsersController@update')->name('users.update');
 
 Route::get('/timezones', 'TimezonesController@index')->name('timezones.index');
 Route::get('/timezones/search', 'TimezonesController@search')->name('timezones.search');
+
+Route::post('/reports', 'ReportsController@store')->name('reports.store');

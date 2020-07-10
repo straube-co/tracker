@@ -5,7 +5,12 @@
         <div class="row">
             <div class="col-md-8" action="{{ route('reports.index') }}" method="get">
                 <div class="card" id="report-options">
-                    <form class="card-body" action="{{ route('reports.index') }}" method="get">
+                    <!--
+                        TODO: Move this form to a Vue component
+                        The Save button must be hidden when the filter changes
+                        to force users to Apply the filters before saving.
+                    -->
+                    <form class="card-body" action="{{ route('reports.index') }}" method="get" ref="filter">
                         <h5>{{ __('Custom filter') }}</h5>
                         <div class="form-row">
                             <div class="form-group col">
@@ -42,15 +47,20 @@
                             </div>
                             <div class="form-group col">
                                 <label for="report-started">{{ __('From') }}</label>
-                                <input class="form-control" type="text" name="filter[started]" id="report-started" value="{{ request('filter.started') }}" placeholder="YYYY-MM-DD" />
+                                <date-input class="form-control" value="{{ request('filter.started') }}" name="filter[started]" id="report-started" />
                             </div>
                             <div class="form-group col">
                                 <label for="form-finished">{{ __('To') }}</label>
-                                <input class="form-control" type="text" name="filter[finished]" id="report-finished" value="{{ request('filter.finished') }}" placeholder="YYYY-MM-DD" />
+                                <date-input class="form-control" value="{{ request('filter.finished') }}" name="filter[finished]" id="report-finished" />
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">{{ __('Apply') }}</button>
-                        <button type="button" class="btn btn-primary">{{ __('Apply & Save') }}</button>
+                        <div class="text-right">
+                            @if (request('filter'))
+                                <a href="{{ route('reports.index') }}" class="btn btn-link">{{ __('Reset') }}</a>
+                                <button type="button" class="btn btn-primary" @click.prevent="$emit('create-report',$refs.filter)">{{ __('Save') }}</button>
+                            @endif
+                            <button type="submit" class="btn btn-primary ml-auto">{{ __('Apply') }}</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -155,5 +165,6 @@
 @endsection
 
 @push('modals')
+    <create-report></create-report>
     <edit-time></edit-time>
 @endpush
