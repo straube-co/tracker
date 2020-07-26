@@ -43,18 +43,10 @@ class ReportsController extends Controller
         $report = $this->getReportFromRequest($request);
         $times = Time::fromReport($report)->with('project', 'activity', 'user')->paginate(50);
 
-        // Report filters
-        $projects = Project::select('id', 'name')->orderBy('name')->get();
-        $activities = Activity::select('id', 'name')->orderBy('name')->get();
-        $users = User::select('id', 'name')->orderBy('name')->get();
-
         $data = [
             'reports' => $reports,
             'report' => $report,
             'times' => $times,
-            'projects' => $projects,
-            'activities' => $activities,
-            'users' => $users,
         ];
         return view('reports.index', $data);
     }
