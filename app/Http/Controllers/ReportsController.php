@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Activity;
 use App\Project;
 use App\Report;
+use App\Support\Formatter;
 use App\Time;
 use App\User;
 use Carbon\Carbon;
@@ -41,12 +42,21 @@ class ReportsController extends Controller
     {
         $reports = Report::select('id', 'name')->orderBy('name')->pluck('name', 'id');
         $report = $this->getReportFromRequest($request);
-        $times = Time::fromReport($report)->with('project', 'activity', 'user')->paginate(50);
+        $query = Time::fromReport($report);
+        $times = (clone $query)->with('project', 'activity', 'user')->paginate(50);
+        $grandTotal = 0;
+        $totals = (clone $query)->selectActivityTotals()->pluck('total', 'name')->map(function ($total) use (&$grandTotal) {
+            $grandTotal += $total;
+            return Formatter::intervalFromSeconds($total);
+        });
+        $grandTotal = Formatter::intervalFromSeconds($grandTotal);
 
         $data = [
             'reports' => $reports,
             'report' => $report,
             'times' => $times,
+            'totals' => $totals,
+            'grandTotal' => $grandTotal,
         ];
         return view('reports.index', $data);
     }

@@ -5,6 +5,7 @@ namespace App;
 use App\Support\Formatter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Time model.
@@ -99,5 +100,16 @@ class Time extends Model
         }
 
         return $query;
+    }
+
+    public function scopeSelectActivityTotals(Builder $query): Builder
+    {
+        return $query->select([
+            'activities.id',
+            'activities.name',
+            DB::raw('SUM(TIMESTAMPDIFF(SECOND, times.started, IFNULL(times.finished, CURRENT_TIMESTAMP))) AS total'),
+        ])
+            ->join('activities', 'times.activity_id', '=', 'activities.id')
+            ->groupBy('activities.id', 'activities.name');
     }
 }

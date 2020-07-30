@@ -41,7 +41,16 @@
             </div>
         </div>
 
-        <h2 class="pt-4 mb-4">{{ $report->name }}</h2>
+        <div class="row align-items-center">
+            <div class="col">
+                <h2 class="pt-4 mb-4">{{ $report->name }}</h2>
+            </div>
+            @if (count($totals) > 0)
+                <div class="col-auto ml-auto">
+                    <button class="btn btn-link" data-toggle="modal" data-target="#report-totals">View totals</button>
+                </div>
+            @endif
+        </div>
 
         @if (count($times) === 0)
             <div class="card">
@@ -56,12 +65,13 @@
             @php
                 $hasMyTime = $times->where('user_id', auth()->user()->id)->count() > 0;
             @endphp
+
             <table class="table">
                 <thead class="sr-only">
                     <tr>
                         <th class="align-top">{{ __('Task') }}</th>
                         <th class="align-top">{{ __('User') }}</th>
-                        <th class="align-top">{{ __('Tracked time') }}</th>
+                        <th class="align-top text-right">{{ __('Tracked time') }}</th>
                         @if ($hasMyTime)
                             <th></th>
                         @endif
@@ -109,6 +119,51 @@
 @endsection
 
 @push('modals')
+    @if (count($totals) > 0)
+        <div class="modal fade" ref="modal" id="report-totals" tabindex="-1" role="dialog" aria-labelledby="report-total-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="report-totals-label">Totals for {{ $report->name }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body pt-0 pb-0">
+                        <table class="table mb-0">
+                            <thead class="sr-only">
+                                <tr>
+                                    <th class="align-top">{{ __('Activity') }}</th>
+                                    <th class="align-top text-right">{{ __('Tracked time') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($totals as $name => $total)
+                                    <tr>
+                                        <td class="align-middle @if ($loop->first) border-top-0 @endif">{{ $name }}</td>
+                                        <td class="align-middle text-right @if ($loop->first) border-top-0 @endif">
+                                            <samp>{{ $total }}</samp>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="align-middle">{{ __('Total') }}</th>
+                                    <th class="align-middle text-right">
+                                        <samp>{{ $grandTotal }}</samp>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endif
     <create-report></create-report>
     <edit-time></edit-time>
 @endpush
