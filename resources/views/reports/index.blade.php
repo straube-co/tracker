@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8" action="{{ route('reports.index') }}" method="get">
+            <div class="col-md-8">
                 <div class="card" id="report-options">
                     <filter-report :filter="{{ json_encode(request('filter')) }}"></filter-report>
                 </div>
@@ -160,7 +160,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     @endif
