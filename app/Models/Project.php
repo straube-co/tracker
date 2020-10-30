@@ -36,7 +36,7 @@ class Project extends Model
         }
 
         $interval = CarbonInterval::seconds((int) $this->tracked_seconds)->cascade();
-        return Formatter::timeInterval($interval);
+        return Formatter::interval($interval);
     }
 
     public function scopeSelectTrackedTime(Builder $query): Builder

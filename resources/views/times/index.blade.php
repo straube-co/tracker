@@ -53,7 +53,7 @@
                                     <h6 title="{{ __('Started at :time', [ 'time' => $time->started->tz(auth()->user()->timezone) ]) }}">
                                         <samp>
                                             <stopwatch time="{{ \Carbon\Carbon::now()->diffInSeconds($time->started) }}">
-                                                {{ \App\Support\Formatter::timeDiff($time->started) }}
+                                                {{ \App\Support\Formatter::intervalFromDates($time->started) }}
                                             </stopwatch>
                                         </samp>
                                     </h6>

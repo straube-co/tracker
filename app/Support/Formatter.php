@@ -15,8 +15,7 @@ use Carbon\CarbonInterval;
 class Formatter
 {
 
-    // TODO: Rename to just `interval`
-    public static function timeInterval(CarbonInterval $interval, bool $seconds = false)
+    public static function interval(CarbonInterval $interval, bool $seconds = false)
     {
         $format = '%I';
         if ($seconds) {
@@ -25,17 +24,16 @@ class Formatter
         return str_pad((int) $interval->totalHours, 2, '0', STR_PAD_LEFT) . ':' . $interval->format($format);
     }
 
-    // TODO: Rename to `intervalFromDates`
-    public static function timeDiff(Carbon $from, Carbon $to = null, bool $seconds = false)
+    public static function intervalFromDates(Carbon $from, Carbon $to = null, bool $seconds = false)
     {
         if ($to === null) {
             $to = Carbon::now();
         }
-        return self::timeInterval($to->diffAsCarbonInterval($from), $seconds);
+        return self::interval($to->diffAsCarbonInterval($from), $seconds);
     }
 
     public static function intervalFromSeconds(int $interval, bool $seconds = false)
     {
-        return self::timeInterval(CarbonInterval::seconds($interval)->cascade(), $seconds);
+        return self::interval(CarbonInterval::seconds($interval)->cascade(), $seconds);
     }
 }
