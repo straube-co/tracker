@@ -61,7 +61,7 @@ class Time extends Model
             return null;
         }
 
-        return Formatter::timeDiff($this->started, $this->finished);
+        return Formatter::intervalFromDates($this->started, $this->finished);
     }
 
     /**
