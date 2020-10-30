@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReportRequest;
-use App\Report;
+use App\Models\Report;
 
 /**
  * Reports API controller.

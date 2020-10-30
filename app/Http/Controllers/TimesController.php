@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Report;
-use App\Time;
+use App\Models\Report;
+use App\Models\Time;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;

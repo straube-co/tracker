@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -37,8 +37,8 @@ class Report extends Model
     /**
      * Get the default report for a given user.
      *
-     * @param  \App\User $user
-     * @return \App\Report
+     * @param  \App\Models\User $user
+     * @return \App\Models\Report
      */
     public static function getDefaultReport(User $user): Report
     {

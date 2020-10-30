@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Support\Formatter;
 use Illuminate\Database\Eloquent\Builder;
@@ -68,7 +68,7 @@ class Time extends Model
      * Scope a query to apply reporting filters.
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  \App\Report $report
+     * @param  \App\Models\Report $report
      * @return \Illuminate\Database\Eloquent\Builder
      *
      * @throws \RuntimeException
