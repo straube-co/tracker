@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Report;
+use App\Models\Report;
+use App\Models\Time;
 use App\Support\Formatter;
-use App\Time;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;

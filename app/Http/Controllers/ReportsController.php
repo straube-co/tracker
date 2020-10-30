@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Activity;
-use App\Project;
-use App\Report;
+use App\Models\Activity;
+use App\Models\Project;
+use App\Models\Report;
+use App\Models\Time;
+use App\Models\User;
 use App\Support\Formatter;
-use App\Time;
-use App\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Password;
 

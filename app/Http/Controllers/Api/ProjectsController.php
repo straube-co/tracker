@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
-use App\Project;
+use App\Models\Project;
 use Illuminate\Support\Collection;
 
 /**
