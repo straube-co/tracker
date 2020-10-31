@@ -46,7 +46,7 @@ class ReportRequest extends FormRequest
                 'string',
                 'date_format:Y-m-d',
             ],
-            'filter.end' => [
+            'filter.finished' => [
                 'nullable',
                 'string',
                 'date_format:Y-m-d',
