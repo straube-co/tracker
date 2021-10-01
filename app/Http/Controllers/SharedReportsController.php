@@ -53,7 +53,7 @@ class SharedReportsController extends Controller
         foreach ($times as $time) {
             $ellapsed = null;
             if ($time->finished) {
-                $ellapsed = Formatter::intervalFromDates($time->started, $time->finished, true);
+                $ellapsed = config('settings.time_decimal', false) ? Formatter::decimalIntervalFromDates($time->started, $time->finished): Formatter::decimalIntervalFromDates($time->started, $time->finished, true);
             }
             $rows[] = [
                 $time->project->name,
