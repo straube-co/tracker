@@ -47,9 +47,9 @@ class ReportsController extends Controller
         $grandTotal = 0;
         $totals = (clone $query)->selectActivityTotals()->pluck('total', 'name')->map(function ($total) use (&$grandTotal) {
             $grandTotal += $total;
-            return Formatter::intervalFromSeconds($total);
+            return config('tracker.time_decimal', false) ? Formatter::decimalIntervalFromSeconds($total) : Formatter::intervalFromSeconds($total);
         });
-        $grandTotal = Formatter::intervalFromSeconds($grandTotal);
+        $grandTotal = config('tracker.time_decimal', false) ? Formatter::decimalIntervalFromSeconds($grandTotal) : Formatter::intervalFromSeconds($grandTotal);
 
         $data = [
             'reports' => $reports,
