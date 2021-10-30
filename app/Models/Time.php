@@ -61,7 +61,7 @@ class Time extends Model
             return null;
         }
 
-        return Formatter::intervalFromDates($this->started, $this->finished);
+        return config('tracker.time_decimal', false) ? Formatter::decimalIntervalFromDates($this->started, $this->finished) : Formatter::intervalFromDates($this->started, $this->finished);
     }
 
     /**

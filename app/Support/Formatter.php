@@ -36,4 +36,17 @@ class Formatter
     {
         return self::interval(CarbonInterval::seconds($interval)->cascade(), $seconds);
     }
+
+    public static function decimalIntervalFromDates(Carbon $from, Carbon $to = null, int $precision = 2)
+    {
+        if ($to === null) {
+            $to = Carbon::now();
+        }
+        return round($to->diffAsCarbonInterval($from)->totalHours, $precision);
+    }
+
+    public static function decimalIntervalFromSeconds(int $interval, int $precision = 2)
+    {
+        return round(CarbonInterval::seconds($interval)->cascade()->totalHours, $precision);
+    }
 }
