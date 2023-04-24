@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReportRequest;
 use App\Models\Activity;
 use App\Models\Project;
 use App\Models\Report;
@@ -76,7 +77,11 @@ class ReportsController extends Controller
         $filter = $request->filter;
         if (!empty($filter)) {
             // TODO: Validate filters
-            return new Report([ 'name' => __('Custom filter'), 'filter' => $filter ]);
+            // return new Report([ 'name' => __('Custom filter'), 'filter' => $filter ]);
+            $request->merge([ 'name' => __('Custom filter') ]);
+            $request = app(ReportRequest::class);
+            $data = $request->validated();
+            return new Report($data);
         }
 
         return Report::getDefaultReport($request->user());
